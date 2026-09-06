@@ -304,12 +304,24 @@ const UNITS = [
       { q:"¿Cómo se llama la mujer?", opts:["Anna","Marco","Deutschland"], correct:0 },
       { q:"¿De dónde viene Marco?", opts:["Deutschland","Spanien","Österreich"], correct:1 }
     ],
+    hoerenText2:"Hallo! Ich heiße Laura. Wie heißt du? — Ich heiße David. Woher kommst du? — Ich komme aus Österreich. Und du? — Ich komme aus Mexiko.",
+    hoerenQ2:[{ q:"¿Cómo se llama el hombre?", opts:["Laura","David","Österreich"], correct:1 }, { q:"¿De dónde viene Laura?", opts:["Österreich","Mexiko","Spanien"], correct:1 }],
+    hoerenText3:"Hallo! Ich heiße Sara. Wie heißt du? — Ich heiße Tim. Woher kommst du? — Ich komme aus Kolumbien. Und du? — Ich komme aus Frankreich.",
+    hoerenQ3:[{ q:"¿Cómo se llama la mujer?", opts:["Sara","Tim","Kolumbien"], correct:0 }, { q:"¿De dónde viene Tim?", opts:["Frankreich","Kolumbien","Deutschland"], correct:0 }],
+    hoerenText4:"Hallo! Ich heiße Nina. Wie heißt du? — Ich heiße Ben. Woher kommst du? — Ich komme aus Italien. Und du? — Ich komme aus Portugal.",
+    hoerenQ4:[{ q:"¿Cómo se llama el hombre?", opts:["Nina","Ben","Italien"], correct:1 }, { q:"¿De dónde viene Nina?", opts:["Italien","Portugal","Spanien"], correct:1 }],
     lesenText:"Hallo! Ich heiße Lukas. Ich bin 24 Jahre alt und ich komme aus Deutschland. Ich spreche Deutsch und ein bisschen Englisch.",
     lesenQ:[
       { q:"Lukas kommt aus Deutschland.", opts:["Richtig","Falsch"], correct:0 },
       { q:"Lukas spricht nur Deutsch.", opts:["Richtig","Falsch"], correct:1 },
       { q:"Lukas ist 24 Jahre alt.", opts:["Richtig","Falsch"], correct:0 }
     ],
+    lesenText2:"Hallo! Ich heiße Mia. Ich bin 19 Jahre alt und ich komme aus Frankreich. Ich spreche Französisch und ein bisschen Deutsch.",
+    lesenQ2:[{ q:"Mia kommt aus Frankreich.", opts:["Richtig","Falsch"], correct:0 }, { q:"Mia spricht nur Französisch.", opts:["Richtig","Falsch"], correct:1 }, { q:"Mia ist 19 Jahre alt.", opts:["Richtig","Falsch"], correct:0 }],
+    lesenText3:"Hallo! Ich heiße Paula. Ich bin 21 Jahre alt und ich komme aus Peru. Ich spreche Spanisch und ein bisschen Deutsch.",
+    lesenQ3:[{ q:"Paula kommt aus Peru.", opts:["Richtig","Falsch"], correct:0 }, { q:"Paula spricht nur Deutsch.", opts:["Richtig","Falsch"], correct:1 }, { q:"Paula ist 21 Jahre alt.", opts:["Richtig","Falsch"], correct:0 }],
+    lesenText4:"Hallo! Ich heiße Erik. Ich bin 35 Jahre alt und ich komme aus Schweden. Ich spreche Schwedisch und Englisch.",
+    lesenQ4:[{ q:"Erik kommt aus Schweden.", opts:["Richtig","Falsch"], correct:0 }, { q:"Erik spricht kein Englisch.", opts:["Richtig","Falsch"], correct:1 }, { q:"Erik ist 35 Jahre alt.", opts:["Richtig","Falsch"], correct:0 }],
     schreibenPracticeBullets:["Tu nombre (Ich heiße...)","Tu edad (Ich bin ... Jahre alt)","De dónde eres (Ich komme aus...)","Qué idioma(s) hablas (Ich spreche...)"],
     schreibenTeil1Fields:[ {id:"f_vorname",label:"Vorname",placeholder:"Nombre"}, {id:"f_nachname",label:"Nachname",placeholder:"Apellido"}, {id:"f_land",label:"Land",placeholder:"País (ej. Kolumbien)"}, {id:"f_sprache",label:"Sprache",placeholder:"Idioma (ej. Spanisch)"} ],
     schreibenTeil2Bullets:["Cómo te llamas","De dónde eres","Qué idioma hablas"],
@@ -382,12 +394,24 @@ const UNITS = [
       { q:"¿Cuántos años tiene la persona?", opts:["15","25","55"], correct:1 },
       { q:"¿Qué le preguntan al final?", opts:["Su nombre","Su número de teléfono","Su país"], correct:1 }
     ],
+    hoerenText2:"Wie alt bist du? — Ich bin achtunddreißig Jahre alt. Und wie ist deine Telefonnummer? — Meine Telefonnummer ist null-eins-fünf-zwei.",
+    hoerenQ2:[{ q:"¿Cuántos años tiene la persona?", opts:["28","38","48"], correct:1 }, { q:"¿Qué le preguntan al final?", opts:["Su nombre","Su número de teléfono","Su país"], correct:1 }],
+    hoerenText3:"Wie alt bist du? — Ich bin zweiundvierzig Jahre alt. Und wie ist deine Telefonnummer? — Meine Telefonnummer ist null-eins-sieben-neun.",
+    hoerenQ3:[{ q:"¿Cuántos años tiene la persona?", opts:["32","42","52"], correct:1 }, { q:"¿Qué le preguntan al final?", opts:["Su nombre","Su número de teléfono","Su país"], correct:1 }],
+    hoerenText4:"Wie alt bist du? — Ich bin neunzehn Jahre alt. Und wie ist deine Telefonnummer? — Meine Telefonnummer ist null-eins-sechs-drei.",
+    hoerenQ4:[{ q:"¿Cuántos años tiene la persona?", opts:["19","29","39"], correct:0 }, { q:"¿Qué le preguntan al final?", opts:["Su nombre","Su número de teléfono","Su país"], correct:1 }],
     lesenText:"Ich heiße Petra. Ich bin einunddreißig Jahre alt. Meine Telefonnummer ist 0176 998877. Heute ist Montag und es ist halb zehn.",
     lesenQ:[
       { q:"Petra ist 31 Jahre alt.", opts:["Richtig","Falsch"], correct:0 },
       { q:"Heute ist Sonntag.", opts:["Richtig","Falsch"], correct:1 },
       { q:"Es ist 9:30 Uhr.", opts:["Richtig","Falsch"], correct:0 }
     ],
+    lesenText2:"Ich heiße Frank. Ich bin vierundzwanzig Jahre alt. Meine Telefonnummer ist 0176 112233. Heute ist Freitag und es ist Viertel nach drei.",
+    lesenQ2:[{ q:"Frank ist 24 Jahre alt.", opts:["Richtig","Falsch"], correct:0 }, { q:"Heute ist Sonntag.", opts:["Richtig","Falsch"], correct:1 }, { q:"Es ist 15:15 Uhr.", opts:["Richtig","Falsch"], correct:0 }],
+    lesenText3:"Ich heiße Sandra. Ich bin vierzig Jahre alt. Meine Telefonnummer ist 0176 334455. Heute ist Mittwoch und es ist Viertel vor acht.",
+    lesenQ3:[{ q:"Sandra ist 40 Jahre alt.", opts:["Richtig","Falsch"], correct:0 }, { q:"Heute ist Montag.", opts:["Richtig","Falsch"], correct:1 }, { q:"Es ist 7:45 Uhr.", opts:["Richtig","Falsch"], correct:0 }],
+    lesenText4:"Ich heiße Oliver. Ich bin neunundzwanzig Jahre alt. Meine Telefonnummer ist 0176 667788. Heute ist Samstag und es ist halb sechs.",
+    lesenQ4:[{ q:"Oliver ist 29 Jahre alt.", opts:["Richtig","Falsch"], correct:0 }, { q:"Heute ist Dienstag.", opts:["Richtig","Falsch"], correct:1 }, { q:"Es ist 5:30 Uhr.", opts:["Richtig","Falsch"], correct:0 }],
     schreibenPracticeBullets:["Tu edad (Ich bin ... Jahre alt)","Tu número de teléfono","Qué día es hoy"],
     schreibenTeil1Fields:[ {id:"f_alter",label:"Alter",placeholder:"Edad (ej. 28)"}, {id:"f_tel",label:"Telefonnummer",placeholder:"Número de teléfono"}, {id:"f_tag",label:"Wochentag",placeholder:"Día de la semana (ej. Montag)"}, {id:"f_email",label:"E-Mail-Adresse",placeholder:"Correo electrónico"} ],
     schreibenTeil2Bullets:["Tu edad","Tu número de teléfono","Qué día es hoy"],
@@ -441,11 +465,23 @@ const UNITS = [
       { q:"¿Qué tiene la persona?", opts:["Una hermana","Un hermano","Dos hermanos"], correct:1 },
       { q:"¿Cuál es la profesión del padre?", opts:["Arzt","Lehrer","Student"], correct:1 }
     ],
+    hoerenText2:"Hast du Geschwister? — Ja, ich habe eine Schwester. Sie heißt Anna. Was ist deine Mutter von Beruf? — Meine Mutter ist Ärztin.",
+    hoerenQ2:[{ q:"¿Qué tiene la persona?", opts:["Una hermana","Un hermano","Dos hermanos"], correct:0 }, { q:"¿Cuál es la profesión de la madre?", opts:["Lehrerin","Ärztin","Studentin"], correct:1 }],
+    hoerenText3:"Hast du Geschwister? — Ja, ich habe zwei Brüder. Sie heißen Paul und Jan. Was ist dein Vater von Beruf? — Mein Vater ist Student.",
+    hoerenQ3:[{ q:"¿Qué tiene la persona?", opts:["Dos hermanas","Dos hermanos","Un hermano"], correct:1 }, { q:"¿Cuál es la profesión del padre?", opts:["Arzt","Student","Lehrer"], correct:1 }],
+    hoerenText4:"Hast du Geschwister? — Nein, ich habe keine Geschwister. Was ist deine Mutter von Beruf? — Meine Mutter ist Lehrerin.",
+    hoerenQ4:[{ q:"¿Tiene hermanos?", opts:["Sí","No","No dice"], correct:1 }, { q:"¿Cuál es la profesión de la madre?", opts:["Ärztin","Lehrerin","Studentin"], correct:1 }],
     lesenText:"Das ist meine Familie. Mein Vater heißt Peter, er ist Arzt. Meine Mutter heißt Sabine, sie ist Lehrerin. Ich habe eine Schwester, sie heißt Julia.",
     lesenQ:[
       { q:"Der Vater ist Lehrer.", opts:["Richtig","Falsch"], correct:1 },
       { q:"Die Person hat eine Schwester.", opts:["Richtig","Falsch"], correct:0 }
     ],
+    lesenText2:"Das ist meine Familie. Mein Vater heißt Thomas, er ist Lehrer. Meine Mutter heißt Nora, sie ist Ärztin. Ich habe einen Bruder, er heißt Felix.",
+    lesenQ2:[{ q:"Der Vater ist Lehrer.", opts:["Richtig","Falsch"], correct:0 }, { q:"Die Person hat eine Schwester.", opts:["Richtig","Falsch"], correct:1 }],
+    lesenText3:"Das ist meine Familie. Mein Vater heißt Klaus, er ist Student. Meine Mutter heißt Petra, sie ist Ärztin. Ich habe zwei Schwestern.",
+    lesenQ3:[{ q:"Der Vater ist Student.", opts:["Richtig","Falsch"], correct:0 }, { q:"Die Person hat einen Bruder.", opts:["Richtig","Falsch"], correct:1 }],
+    lesenText4:"Das ist meine Familie. Mein Vater heißt Hans, er ist Arzt. Meine Mutter heißt Uta, sie ist Studentin. Ich habe keine Geschwister.",
+    lesenQ4:[{ q:"Die Mutter ist Studentin.", opts:["Richtig","Falsch"], correct:0 }, { q:"Die Person hat Geschwister.", opts:["Richtig","Falsch"], correct:1 }],
     schreibenPracticeBullets:["Cuántos hermanos tienes","Cómo se llaman","Qué profesión tienen tus padres"],
     schreibenTeil1Fields:[ {id:"f_vater",label:"Vater (Beruf)",placeholder:"Profesión de tu padre"}, {id:"f_mutter",label:"Mutter (Beruf)",placeholder:"Profesión de tu madre"}, {id:"f_geschwister",label:"Geschwister",placeholder:"¿Cuántos hermanos tienes?"}, {id:"f_name",label:"Dein Name",placeholder:"Tu nombre"} ],
     schreibenTeil2Bullets:["Cuántos hermanos tienes","Cómo se llaman","Profesión de uno de tus padres"],
@@ -499,11 +535,23 @@ const UNITS = [
       { q:"¿De dónde viene la persona?", opts:["Spanien","Frankreich","Mexiko"], correct:0 },
       { q:"¿Qué idiomas habla?", opts:["Solo español","Inglés y español","Solo inglés"], correct:1 }
     ],
+    hoerenText2:"Woher kommst du? — Ich komme aus Italien. Sprichst du Französisch? — Nein, ich spreche kein Französisch.",
+    hoerenQ2:[{ q:"¿De dónde viene la persona?", opts:["Italien","Spanien","Mexiko"], correct:0 }, { q:"¿Habla francés?", opts:["Sí","No","No dice"], correct:1 }],
+    hoerenText3:"Woher kommst du? — Ich komme aus Mexiko. Sprichst du Deutsch? — Ja, ich spreche ein bisschen Deutsch.",
+    hoerenQ3:[{ q:"¿De dónde viene la persona?", opts:["Mexiko","Spanien","Italien"], correct:0 }, { q:"¿Habla alemán?", opts:["Sí, un poco","No","No dice"], correct:0 }],
+    hoerenText4:"Woher kommst du? — Ich komme aus Portugal. Sprichst du Englisch? — Nein, ich spreche kein Englisch.",
+    hoerenQ4:[{ q:"¿De dónde viene la persona?", opts:["Portugal","Italien","Frankreich"], correct:0 }, { q:"¿Habla inglés?", opts:["Sí","No","No dice"], correct:1 }],
     lesenText:"Ich heiße Marco. Ich komme aus Italien. Ich spreche Italienisch und ein bisschen Deutsch. Ich spreche kein Französisch.",
     lesenQ:[
       { q:"Marco kommt aus Italien.", opts:["Richtig","Falsch"], correct:0 },
       { q:"Marco spricht Französisch.", opts:["Richtig","Falsch"], correct:1 }
     ],
+    lesenText2:"Ich heiße Sophie. Ich komme aus Frankreich. Ich spreche Französisch und ein bisschen Englisch. Ich spreche kein Deutsch.",
+    lesenQ2:[{ q:"Sophie kommt aus Frankreich.", opts:["Richtig","Falsch"], correct:0 }, { q:"Sophie spricht Deutsch.", opts:["Richtig","Falsch"], correct:1 }],
+    lesenText3:"Ich heiße Ana. Ich komme aus Portugal. Ich spreche Portugiesisch und Spanisch. Ich spreche kein Deutsch.",
+    lesenQ3:[{ q:"Ana kommt aus Portugal.", opts:["Richtig","Falsch"], correct:0 }, { q:"Ana spricht Deutsch.", opts:["Richtig","Falsch"], correct:1 }],
+    lesenText4:"Ich heiße Luca. Ich komme aus Italien. Ich spreche Italienisch und ein bisschen Englisch. Ich spreche kein Französisch.",
+    lesenQ4:[{ q:"Luca kommt aus Italien.", opts:["Richtig","Falsch"], correct:0 }, { q:"Luca spricht Französisch.", opts:["Richtig","Falsch"], correct:1 }],
     schreibenPracticeBullets:["De qué país eres","Qué idiomas hablas","Qué idioma no hablas"],
     schreibenTeil1Fields:[ {id:"f_land2",label:"Land",placeholder:"Tu país"}, {id:"f_sprache2",label:"Muttersprache",placeholder:"Tu idioma materno"}, {id:"f_sprache3",label:"Andere Sprache",placeholder:"Otro idioma que hablas"}, {id:"f_name2",label:"Name",placeholder:"Tu nombre"} ],
     schreibenTeil2Bullets:["De dónde eres","Qué idiomas hablas","Un idioma que no hablas"],
@@ -556,11 +604,23 @@ const UNITS = [
       { q:"¿Qué NO tiene la persona?", opts:["Un lápiz","Un libro","Una llave"], correct:0 },
       { q:"¿Qué SÍ tiene?", opts:["Un lápiz","Un libro","Una bolsa"], correct:1 }
     ],
+    hoerenText2:"Hast du eine Tasche? — Nein, ich habe keine Tasche. Hast du einen Schlüssel? — Ja, ich habe einen Schlüssel.",
+    hoerenQ2:[{ q:"¿Qué NO tiene la persona?", opts:["Una bolsa","Un libro","Una llave"], correct:0 }, { q:"¿Qué SÍ tiene?", opts:["Un lápiz","Una llave","Un libro"], correct:1 }],
+    hoerenText3:"Hast du ein Handy? — Ja, ich habe ein Handy. Hast du einen Stuhl? — Nein, ich habe keinen Stuhl.",
+    hoerenQ3:[{ q:"¿Qué SÍ tiene?", opts:["Celular","Silla","Libro"], correct:0 }, { q:"¿Qué NO tiene?", opts:["Celular","Silla","Mesa"], correct:1 }],
+    hoerenText4:"Hast du ein Buch? — Nein, ich habe kein Buch. Hast du einen Tisch? — Ja, ich habe einen Tisch.",
+    hoerenQ4:[{ q:"¿Qué NO tiene?", opts:["Libro","Mesa","Silla"], correct:0 }, { q:"¿Qué SÍ tiene?", opts:["Libro","Mesa","Llave"], correct:1 }],
     lesenText:"Ich habe eine Tasche, aber ich habe keinen Schlüssel. Ich habe ein Handy und ein Buch. Ich habe keinen Stift.",
     lesenQ:[
       { q:"Die Person hat einen Schlüssel.", opts:["Richtig","Falsch"], correct:1 },
       { q:"Die Person hat ein Handy.", opts:["Richtig","Falsch"], correct:0 }
     ],
+    lesenText2:"Ich habe einen Stift, aber ich habe kein Buch. Ich habe eine Tasche und einen Schlüssel. Ich habe kein Handy.",
+    lesenQ2:[{ q:"Die Person hat ein Handy.", opts:["Richtig","Falsch"], correct:1 }, { q:"Die Person hat einen Schlüssel.", opts:["Richtig","Falsch"], correct:0 }],
+    lesenText3:"Ich habe einen Tisch, aber ich habe keinen Stuhl. Ich habe ein Handy und einen Schlüssel. Ich habe kein Buch.",
+    lesenQ3:[{ q:"Die Person hat einen Stuhl.", opts:["Richtig","Falsch"], correct:1 }, { q:"Die Person hat ein Handy.", opts:["Richtig","Falsch"], correct:0 }],
+    lesenText4:"Ich habe ein Buch, aber ich habe kein Handy. Ich habe einen Stift und eine Tasche. Ich habe keinen Tisch.",
+    lesenQ4:[{ q:"Die Person hat ein Handy.", opts:["Richtig","Falsch"], correct:1 }, { q:"Die Person hat einen Stift.", opts:["Richtig","Falsch"], correct:0 }],
     schreibenPracticeBullets:["Qué objetos tienes contigo","Qué objeto NO tienes"],
     schreibenTeil1Fields:[ {id:"f_obj1",label:"Objekt 1",placeholder:"Un objeto que tienes"}, {id:"f_obj2",label:"Objekt 2",placeholder:"Otro objeto que tienes"}, {id:"f_notobj",label:"Was du nicht hast",placeholder:"Algo que no tienes"}, {id:"f_name3",label:"Name",placeholder:"Tu nombre"} ],
     schreibenTeil2Bullets:["Qué objetos tienes en tu bolsa/mochila","Qué objeto no tienes"],
@@ -613,11 +673,23 @@ const UNITS = [
       { q:"¿Qué le gusta hacer a la persona?", opts:["Nadar","Bailar","Cocinar"], correct:0 },
       { q:"¿Le gusta la pizza?", opts:["Sí","No","No dice"], correct:1 }
     ],
+    hoerenText2:"Was machst du gern? — Ich tanze gern. Kochst du gern? — Ja, ich koche sehr gern.",
+    hoerenQ2:[{ q:"¿Qué le gusta hacer?", opts:["Nadar","Bailar","Cocinar"], correct:1 }, { q:"¿Le gusta cocinar?", opts:["Sí","No","No dice"], correct:0 }],
+    hoerenText3:"Was machst du gern? — Ich lese gern Bücher. Spielst du gern Fußball? — Nein, ich spiele nicht gern Fußball.",
+    hoerenQ3:[{ q:"¿Qué le gusta hacer?", opts:["Leer","Nadar","Cocinar"], correct:0 }, { q:"¿Le gusta el fútbol?", opts:["Sí","No","No dice"], correct:1 }],
+    hoerenText4:"Was machst du gern? — Ich höre gern Musik. Kochst du gern? — Nein, ich koche nicht gern.",
+    hoerenQ4:[{ q:"¿Qué le gusta hacer?", opts:["Escuchar música","Cocinar","Bailar"], correct:0 }, { q:"¿Le gusta cocinar?", opts:["Sí","No","No dice"], correct:1 }],
     lesenText:"Ich heiße Tom. Ich spiele gern Fußball und ich höre gern Musik. Ich koche nicht gern.",
     lesenQ:[
       { q:"Tom spielt gern Fußball.", opts:["Richtig","Falsch"], correct:0 },
       { q:"Tom kocht gern.", opts:["Richtig","Falsch"], correct:1 }
     ],
+    lesenText2:"Ich heiße Julia. Ich lese gern Bücher und ich tanze gern. Ich schwimme nicht gern.",
+    lesenQ2:[{ q:"Julia liest gern.", opts:["Richtig","Falsch"], correct:0 }, { q:"Julia schwimmt gern.", opts:["Richtig","Falsch"], correct:1 }],
+    lesenText3:"Ich heiße Peter. Ich schwimme gern und ich höre gern Musik. Ich lese nicht gern.",
+    lesenQ3:[{ q:"Peter schwimmt gern.", opts:["Richtig","Falsch"], correct:0 }, { q:"Peter liest gern.", opts:["Richtig","Falsch"], correct:1 }],
+    lesenText4:"Ich heiße Laura. Ich koche gern und ich tanze gern. Ich spiele nicht gern Fußball.",
+    lesenQ4:[{ q:"Laura kocht gern.", opts:["Richtig","Falsch"], correct:0 }, { q:"Laura spielt gern Fußball.", opts:["Richtig","Falsch"], correct:1 }],
     schreibenPracticeBullets:["Qué actividad te gusta","Qué actividad no te gusta"],
     schreibenTeil1Fields:[ {id:"f_gern1",label:"Ich ... gern",placeholder:"Actividad que te gusta"}, {id:"f_gern2",label:"Ich ... nicht gern",placeholder:"Actividad que no te gusta"}, {id:"f_name4",label:"Name",placeholder:"Tu nombre"}, {id:"f_alter2",label:"Alter",placeholder:"Tu edad"} ],
     schreibenTeil2Bullets:["Qué te gusta hacer en tu tiempo libre","Qué no te gusta hacer"],
@@ -668,11 +740,23 @@ const UNITS = [
       { q:"¿Dónde vive la persona?", opts:["Berlin","München","Hamburg"], correct:1 },
       { q:"¿Por qué aprende alemán?", opts:["Para viajar","Es importante para su trabajo","No dice"], correct:1 }
     ],
+    hoerenText2:"Wo wohnst du? — Ich wohne in Hamburg. Warum lernst du Deutsch? — Ich möchte nach Deutschland reisen.",
+    hoerenQ2:[{ q:"¿Dónde vive la persona?", opts:["Berlin","Hamburg","München"], correct:1 }, { q:"¿Por qué aprende alemán?", opts:["Para su trabajo","Para viajar","No dice"], correct:1 }],
+    hoerenText3:"Wo wohnst du? — Ich wohne in Frankfurt. Warum lernst du Deutsch? — Ich habe deutsche Freunde.",
+    hoerenQ3:[{ q:"¿Dónde vive la persona?", opts:["Berlin","Frankfurt","München"], correct:1 }, { q:"¿Por qué aprende alemán?", opts:["Trabajo","Tiene amigos alemanes","Viajar"], correct:1 }],
+    hoerenText4:"Wo wohnst du? — Ich wohne in Köln. Warum lernst du Deutsch? — Ich studiere in Deutschland.",
+    hoerenQ4:[{ q:"¿Dónde vive la persona?", opts:["Köln","Hamburg","Berlin"], correct:0 }, { q:"¿Por qué aprende alemán?", opts:["Estudia en Alemania","Trabajo","Viajar"], correct:0 }],
     lesenText:"Wer bin ich? Ich heiße Jonas. Wie alt bin ich? Ich bin 22 Jahre alt. Wo wohne ich? Ich wohne in Köln.",
     lesenQ:[
       { q:"Jonas ist 22 Jahre alt.", opts:["Richtig","Falsch"], correct:0 },
       { q:"Jonas wohnt in Berlin.", opts:["Richtig","Falsch"], correct:1 }
     ],
+    lesenText2:"Wer bin ich? Ich heiße Clara. Wie alt bin ich? Ich bin 27 Jahre alt. Wo wohne ich? Ich wohne in Leipzig.",
+    lesenQ2:[{ q:"Clara ist 27 Jahre alt.", opts:["Richtig","Falsch"], correct:0 }, { q:"Clara wohnt in Berlin.", opts:["Richtig","Falsch"], correct:1 }],
+    lesenText3:"Wer bin ich? Ich heiße Marta. Wie alt bin ich? Ich bin 33 Jahre alt. Wo wohne ich? Ich wohne in Frankfurt.",
+    lesenQ3:[{ q:"Marta ist 33 Jahre alt.", opts:["Richtig","Falsch"], correct:0 }, { q:"Marta wohnt in Berlin.", opts:["Richtig","Falsch"], correct:1 }],
+    lesenText4:"Wer bin ich? Ich heiße Felix. Wie alt bin ich? Ich bin 19 Jahre alt. Wo wohne ich? Ich wohne in Bonn.",
+    lesenQ4:[{ q:"Felix ist 19 Jahre alt.", opts:["Richtig","Falsch"], correct:0 }, { q:"Felix wohnt in München.", opts:["Richtig","Falsch"], correct:1 }],
     schreibenPracticeBullets:["Escribe 3 preguntas W- distintas","Respóndelas tú mismo"],
     schreibenTeil1Fields:[ {id:"f_wohnort2",label:"Wo wohnst du?",placeholder:"Tu ciudad"}, {id:"f_warum",label:"Warum lernst du Deutsch?",placeholder:"Tu razón"}, {id:"f_name5",label:"Name",placeholder:"Tu nombre"}, {id:"f_alter3",label:"Alter",placeholder:"Tu edad"} ],
     schreibenTeil2Bullets:["Dónde vives","Por qué aprendes alemán","Qué te gusta hacer"],
@@ -717,12 +801,24 @@ const UNITS = [
       { q:"¿De dónde es Nina?", opts:["España","Kolumbien","México"], correct:1 },
       { q:"¿Qué le gusta hacer?", opts:["Cocinar y bailar","Fútbol y leer","Nadar y cantar"], correct:1 }
     ],
+    hoerenText2:"Hallo! Ich heiße Carlos, ich bin 34 Jahre alt und ich komme aus Mexiko. Ich habe eine Schwester. Ich koche gern und ich tanze gern.",
+    hoerenQ2:[{ q:"¿De dónde es Carlos?", opts:["España","Mexiko","Deutschland"], correct:1 }, { q:"¿Qué le gusta hacer?", opts:["Fútbol y leer","Cocinar y bailar","Nadar y cantar"], correct:1 }],
+    hoerenText3:"Hallo! Ich heiße Sofia, ich bin 22 Jahre alt und ich komme aus Peru. Ich habe zwei Schwestern. Ich lese gern und ich schwimme gern.",
+    hoerenQ3:[{ q:"¿De dónde es Sofia?", opts:["Peru","Kolumbien","Chile"], correct:0 }, { q:"¿Qué le gusta?", opts:["Leer y nadar","Cocinar","Bailar"], correct:0 }],
+    hoerenText4:"Hallo! Ich heiße Tom, ich bin 40 Jahre alt und ich komme aus Kanada. Ich habe einen Bruder. Ich spiele gern Tennis und ich höre gern Musik.",
+    hoerenQ4:[{ q:"¿De dónde es Tom?", opts:["Kanada","USA","England"], correct:0 }, { q:"¿Qué tiene?", opts:["Una hermana","Un hermano","Dos hermanos"], correct:1 }],
     lesenText:"Ich heiße Paul. Ich bin 31 Jahre alt und komme aus Deutschland. Ich habe eine Schwester, sie ist Ärztin. Ich spiele nicht gern Fußball, aber ich koche gern.",
     lesenQ:[
       { q:"Paul kommt aus Deutschland.", opts:["Richtig","Falsch"], correct:0 },
       { q:"Paul spielt gern Fußball.", opts:["Richtig","Falsch"], correct:1 },
       { q:"Pauls Schwester ist Ärztin.", opts:["Richtig","Falsch"], correct:0 }
     ],
+    lesenText2:"Ich heiße Mara. Ich bin 26 Jahre alt und komme aus Österreich. Ich habe einen Bruder, er ist Lehrer. Ich spiele gern Tennis, aber ich lese nicht gern.",
+    lesenQ2:[{ q:"Mara kommt aus Österreich.", opts:["Richtig","Falsch"], correct:0 }, { q:"Mara spielt nicht gern Tennis.", opts:["Richtig","Falsch"], correct:1 }, { q:"Maras Bruder ist Lehrer.", opts:["Richtig","Falsch"], correct:0 }],
+    lesenText3:"Ich heiße Diego. Ich bin 27 Jahre alt und komme aus Argentinien. Ich habe einen Bruder, er ist Student. Ich spiele gern Fußball und ich koche gern.",
+    lesenQ3:[{ q:"Diego kommt aus Argentinien.", opts:["Richtig","Falsch"], correct:0 }, { q:"Diego spielt nicht gern Fußball.", opts:["Richtig","Falsch"], correct:1 }, { q:"Diegos Bruder ist Student.", opts:["Richtig","Falsch"], correct:0 }],
+    lesenText4:"Ich heiße Anja. Ich bin 35 Jahre alt und komme aus Deutschland. Ich habe eine Schwester, sie ist Lehrerin. Ich lese gern, aber ich tanze nicht gern.",
+    lesenQ4:[{ q:"Anja kommt aus Deutschland.", opts:["Richtig","Falsch"], correct:0 }, { q:"Anja tanzt gern.", opts:["Richtig","Falsch"], correct:1 }, { q:"Anjas Schwester ist Lehrerin.", opts:["Richtig","Falsch"], correct:0 }],
     schreibenPracticeBullets:["Preséntate completo: nombre, edad, país, familia, un gusto"],
     schreibenTeil1Fields:[ {id:"f_final_name",label:"Name",placeholder:"Tu nombre"}, {id:"f_final_alter",label:"Alter",placeholder:"Tu edad"}, {id:"f_final_land",label:"Land",placeholder:"Tu país"}, {id:"f_final_gern",label:"Ich ... gern",placeholder:"Algo que te gusta hacer"} ],
     schreibenTeil2Bullets:["Nombre, edad y país","Un dato de tu familia","Algo que te gusta hacer"],
@@ -771,11 +867,23 @@ const UNITS = [
       { q:"¿A qué hora se levanta la persona?", opts:["6 Uhr","7 Uhr","9 Uhr"], correct:1 },
       { q:"¿A qué hora empieza el trabajo?", opts:["7 Uhr","8 Uhr","9 Uhr"], correct:2 }
     ],
+    hoerenText2:"Wann stehst du auf? — Ich stehe um sechs Uhr auf. Wann fängt deine Arbeit an? — Meine Arbeit fängt um acht Uhr an.",
+    hoerenQ2:[{ q:"¿A qué hora se levanta la persona?", opts:["6 Uhr","7 Uhr","9 Uhr"], correct:0 }, { q:"¿A qué hora empieza el trabajo?", opts:["7 Uhr","8 Uhr","9 Uhr"], correct:1 }],
+    hoerenText3:"Wann stehst du auf? — Ich stehe um acht Uhr auf. Wann fängt deine Arbeit an? — Meine Arbeit fängt um zehn Uhr an.",
+    hoerenQ3:[{ q:"¿A qué hora se levanta?", opts:["7 Uhr","8 Uhr","9 Uhr"], correct:1 }, { q:"¿A qué hora empieza el trabajo?", opts:["9 Uhr","10 Uhr","11 Uhr"], correct:1 }],
+    hoerenText4:"Wann stehst du auf? — Ich stehe um fünf Uhr auf. Wann fängt deine Arbeit an? — Meine Arbeit fängt um sieben Uhr an.",
+    hoerenQ4:[{ q:"¿A qué hora se levanta?", opts:["5 Uhr","6 Uhr","7 Uhr"], correct:0 }, { q:"¿A qué hora empieza el trabajo?", opts:["6 Uhr","7 Uhr","8 Uhr"], correct:1 }],
     lesenText:"Ich stehe um sechs Uhr auf. Ich dusche und frühstücke. Meine Arbeit fängt um acht Uhr an. Abends sehe ich fern.",
     lesenQ:[
       { q:"Die Person steht um sechs Uhr auf.", opts:["Richtig","Falsch"], correct:0 },
       { q:"Die Arbeit fängt um neun Uhr an.", opts:["Richtig","Falsch"], correct:1 }
     ],
+    lesenText2:"Ich stehe um sieben Uhr auf. Ich frühstücke und dusche. Meine Arbeit fängt um neun Uhr an. Abends lese ich.",
+    lesenQ2:[{ q:"Die Person steht um sieben Uhr auf.", opts:["Richtig","Falsch"], correct:0 }, { q:"Die Arbeit fängt um acht Uhr an.", opts:["Richtig","Falsch"], correct:1 }],
+    lesenText3:"Ich stehe um acht Uhr auf. Ich frühstücke und arbeite. Meine Arbeit fängt um zehn Uhr an. Abends koche ich.",
+    lesenQ3:[{ q:"Die Person steht um acht Uhr auf.", opts:["Richtig","Falsch"], correct:0 }, { q:"Die Arbeit fängt um neun Uhr an.", opts:["Richtig","Falsch"], correct:1 }],
+    lesenText4:"Ich stehe um fünf Uhr auf. Ich dusche und gehe arbeiten. Meine Arbeit fängt um sieben Uhr an. Abends schlafe ich früh.",
+    lesenQ4:[{ q:"Die Person steht um fünf Uhr auf.", opts:["Richtig","Falsch"], correct:0 }, { q:"Die Arbeit fängt um acht Uhr an.", opts:["Richtig","Falsch"], correct:1 }],
     schreibenPracticeBullets:["A qué hora te levantas","A qué hora empieza tu trabajo/estudio","Qué haces por la noche"],
     schreibenTeil1Fields:[ {id:"f_aufstehen",label:"Ich stehe um ... auf",placeholder:"Hora en que te levantas"}, {id:"f_arbeit_an",label:"Arbeit fängt um ... an",placeholder:"Hora en que empiezas a trabajar/estudiar"}, {id:"f_abends",label:"Abends...",placeholder:"Qué haces por la noche"}, {id:"f_name6",label:"Name",placeholder:"Tu nombre"} ],
     schreibenTeil2Bullets:["A qué hora te levantas","A qué hora empieza tu trabajo","Qué haces por la noche"],
@@ -831,11 +939,23 @@ const UNITS = [
       { q:"¿Qué pide de comer?", opts:["Sopa","Ensalada","Pan"], correct:1 },
       { q:"¿Qué pide de tomar?", opts:["Agua","Café","Nada"], correct:1 }
     ],
+    hoerenText2:"Was möchten Sie? — Ich möchte eine Suppe und ein Brot, bitte. Und zum Trinken? — Ein Wasser, bitte.",
+    hoerenQ2:[{ q:"¿Qué pide de comer?", opts:["Sopa y pan","Ensalada y agua","Solo pan"], correct:0 }, { q:"¿Qué pide de tomar?", opts:["Agua","Café","Té"], correct:0 }],
+    hoerenText3:"Was möchten Sie? — Ich möchte einen Kaffee und ein Brot, bitte. Und sonst noch etwas? — Nein, danke, das ist alles.",
+    hoerenQ3:[{ q:"¿Qué pide?", opts:["Café y pan","Té y pastel","Agua y fruta"], correct:0 }, { q:"¿Pide algo más?", opts:["Sí","No","No dice"], correct:1 }],
+    hoerenText4:"Was möchten Sie? — Ich möchte ein Wasser und einen Salat, bitte. Und zum Nachtisch? — Nichts, danke.",
+    hoerenQ4:[{ q:"¿Qué pide?", opts:["Agua y ensalada","Café y sopa","Té y pan"], correct:0 }, { q:"¿Pide postre?", opts:["Sí","No","No dice"], correct:1 }],
     lesenText:"Ich gehe ins Restaurant. Ich möchte eine Suppe und ein Brot. Zum Trinken möchte ich ein Wasser. Die Rechnung ist zehn Euro.",
     lesenQ:[
       { q:"Die Person möchte eine Suppe.", opts:["Richtig","Falsch"], correct:0 },
       { q:"Die Rechnung ist zwanzig Euro.", opts:["Richtig","Falsch"], correct:1 }
     ],
+    lesenText2:"Ich gehe ins Restaurant. Ich möchte einen Salat und Käse. Zum Trinken möchte ich einen Kaffee. Die Rechnung ist fünfzehn Euro.",
+    lesenQ2:[{ q:"Die Person möchte einen Salat.", opts:["Richtig","Falsch"], correct:0 }, { q:"Die Rechnung ist zehn Euro.", opts:["Richtig","Falsch"], correct:1 }],
+    lesenText3:"Ich gehe ins Restaurant. Ich möchte einen Kaffee und ein Brot. Zum Nachtisch möchte ich nichts. Die Rechnung ist acht Euro.",
+    lesenQ3:[{ q:"Die Person möchte einen Kaffee.", opts:["Richtig","Falsch"], correct:0 }, { q:"Die Rechnung ist zwanzig Euro.", opts:["Richtig","Falsch"], correct:1 }],
+    lesenText4:"Ich gehe ins Restaurant. Ich möchte ein Wasser und Fleisch. Zum Nachtisch möchte ich einen Kuchen. Die Rechnung ist zwölf Euro.",
+    lesenQ4:[{ q:"Die Person möchte Fleisch.", opts:["Richtig","Falsch"], correct:0 }, { q:"Die Person möchte keinen Nachtisch.", opts:["Richtig","Falsch"], correct:1 }],
     schreibenPracticeBullets:["Qué comida pedirías","Qué bebida pedirías","Pide la cuenta"],
     schreibenTeil1Fields:[ {id:"f_comida1",label:"Ich möchte (Essen)",placeholder:"Comida que pedirías"}, {id:"f_bebida1",label:"Ich möchte (Getränk)",placeholder:"Bebida que pedirías"}, {id:"f_name7",label:"Name",placeholder:"Tu nombre"}, {id:"f_restaurant",label:"Restaurant",placeholder:"Nombre de un restaurante"} ],
     schreibenTeil2Bullets:["Qué comida y bebida pides","Pide la cuenta al final"],
@@ -884,11 +1004,23 @@ const UNITS = [
       { q:"¿Qué busca la persona?", opts:["Una farmacia","La estación","Un banco"], correct:1 },
       { q:"¿Hacia dónde debe girar después de seguir derecho?", opts:["Derecha","Izquierda","Sigue derecho"], correct:1 }
     ],
+    hoerenText2:"Entschuldigung, wo ist die Apotheke? — Gehen Sie geradeaus, dann rechts. Die Apotheke ist neben der Bank.",
+    hoerenQ2:[{ q:"¿Qué busca la persona?", opts:["La estación","La farmacia","El banco"], correct:1 }, { q:"¿Hacia dónde debe girar?", opts:["Derecha","Izquierda","Sigue derecho"], correct:0 }],
+    hoerenText3:"Entschuldigung, wo ist das Museum? — Gehen Sie geradeaus, dann links. Das Museum ist an der Ecke.",
+    hoerenQ3:[{ q:"¿Qué busca la persona?", opts:["Banco","Museo","Farmacia"], correct:1 }, { q:"¿Hacia dónde debe girar?", opts:["Derecha","Izquierda","Recto"], correct:1 }],
+    hoerenText4:"Entschuldigung, wie komme ich zur Post? — Gehen Sie geradeaus, dann rechts. Die Post ist neben dem Supermarkt.",
+    hoerenQ4:[{ q:"¿Qué busca la persona?", opts:["Correos","Banco","Estación"], correct:0 }, { q:"¿Hacia dónde debe girar?", opts:["Derecha","Izquierda","Recto"], correct:0 }],
     lesenText:"Die Apotheke ist nicht weit. Gehen Sie geradeaus und dann rechts. Die Apotheke ist neben der Bank.",
     lesenQ:[
       { q:"Man muss rechts gehen.", opts:["Richtig","Falsch"], correct:0 },
       { q:"Die Apotheke ist weit weg.", opts:["Richtig","Falsch"], correct:1 }
     ],
+    lesenText2:"Der Bahnhof ist nicht weit. Gehen Sie geradeaus und dann links. Der Bahnhof ist neben dem Museum.",
+    lesenQ2:[{ q:"Man muss links gehen.", opts:["Richtig","Falsch"], correct:0 }, { q:"Der Bahnhof ist weit weg.", opts:["Richtig","Falsch"], correct:1 }],
+    lesenText3:"Das Museum ist nicht weit. Gehen Sie geradeaus und dann links. Das Museum ist an der Ecke.",
+    lesenQ3:[{ q:"Man muss links gehen.", opts:["Richtig","Falsch"], correct:0 }, { q:"Das Museum ist weit weg.", opts:["Richtig","Falsch"], correct:1 }],
+    lesenText4:"Die Post ist nicht weit. Gehen Sie geradeaus und dann rechts. Die Post ist neben der Bank.",
+    lesenQ4:[{ q:"Man muss rechts gehen.", opts:["Richtig","Falsch"], correct:0 }, { q:"Die Post ist weit weg.", opts:["Richtig","Falsch"], correct:1 }],
     schreibenPracticeBullets:["Pregunta cómo llegar a un lugar","Da direcciones simples (geradeaus, links, rechts)"],
     schreibenTeil1Fields:[ {id:"f_lugar",label:"Ich suche...",placeholder:"Un lugar (ej. den Bahnhof)"}, {id:"f_direccion1",label:"Erste Richtung",placeholder:"geradeaus/links/rechts"}, {id:"f_direccion2",label:"Zweite Richtung",placeholder:"geradeaus/links/rechts"}, {id:"f_name8",label:"Name",placeholder:"Tu nombre"} ],
     schreibenTeil2Bullets:["Qué lugar buscas","Las indicaciones para llegar"],
@@ -936,11 +1068,23 @@ const UNITS = [
       { q:"¿Por qué no puede venir mañana?", opts:["Está enfermo","Tiene que trabajar","No quiere"], correct:1 },
       { q:"¿Qué le piden prestado?", opts:["Un libro","El celular","Dinero"], correct:1 }
     ],
+    hoerenText2:"Kannst du heute kommen? — Nein, ich will zu Hause bleiben. Darf ich dein Buch lesen? — Ja, natürlich!",
+    hoerenQ2:[{ q:"¿Por qué no puede venir?", opts:["Está enfermo","Quiere quedarse en casa","Tiene que trabajar"], correct:1 }, { q:"¿Qué le piden prestado?", opts:["El celular","Un libro","Dinero"], correct:1 }],
+    hoerenText3:"Kannst du am Wochenende kommen? — Ja, ich kann kommen. Musst du am Montag arbeiten? — Ja, ich muss arbeiten.",
+    hoerenQ3:[{ q:"¿Puede venir el fin de semana?", opts:["Sí","No","No dice"], correct:0 }, { q:"¿Debe trabajar el lunes?", opts:["Sí","No","No dice"], correct:0 }],
+    hoerenText4:"Willst du Kaffee trinken? — Nein, ich will Tee trinken. Darfst du hier rauchen? — Nein, hier darf man nicht rauchen.",
+    hoerenQ4:[{ q:"¿Qué quiere tomar?", opts:["Café","Té","Agua"], correct:1 }, { q:"¿Se puede fumar aquí?", opts:["Sí","No","No dice"], correct:1 }],
     lesenText:"Ich kann gut kochen, aber ich muss heute arbeiten. Ich will am Wochenende ein Restaurant besuchen.",
     lesenQ:[
       { q:"Die Person kann gut kochen.", opts:["Richtig","Falsch"], correct:0 },
       { q:"Die Person muss heute nicht arbeiten.", opts:["Richtig","Falsch"], correct:1 }
     ],
+    lesenText2:"Ich kann gut schwimmen, aber ich muss heute lernen. Ich will am Wochenende Fußball spielen.",
+    lesenQ2:[{ q:"Die Person kann gut schwimmen.", opts:["Richtig","Falsch"], correct:0 }, { q:"Die Person muss heute nicht lernen.", opts:["Richtig","Falsch"], correct:1 }],
+    lesenText3:"Ich kann gut Deutsch sprechen, aber ich muss noch üben. Ich will nächstes Jahr nach Deutschland reisen.",
+    lesenQ3:[{ q:"Die Person kann Deutsch sprechen.", opts:["Richtig","Falsch"], correct:0 }, { q:"Die Person will nicht nach Deutschland reisen.", opts:["Richtig","Falsch"], correct:1 }],
+    lesenText4:"Ich muss heute einkaufen, aber ich will auch Sport machen. Ich kann leider nicht beides machen.",
+    lesenQ4:[{ q:"Die Person muss einkaufen.", opts:["Richtig","Falsch"], correct:0 }, { q:"Die Person kann beides machen.", opts:["Richtig","Falsch"], correct:1 }],
     schreibenPracticeBullets:["Algo que puedes hacer bien","Algo que tienes que hacer hoy","Algo que quieres hacer el fin de semana"],
     schreibenTeil1Fields:[ {id:"f_kann",label:"Ich kann...",placeholder:"Algo que sabes hacer"}, {id:"f_muss",label:"Ich muss...",placeholder:"Algo que tienes que hacer"}, {id:"f_will",label:"Ich will...",placeholder:"Algo que quieres hacer"}, {id:"f_name9",label:"Name",placeholder:"Tu nombre"} ],
     schreibenTeil2Bullets:["Algo que sabes hacer bien","Algo que tienes que hacer hoy","Algo que quieres hacer pronto"],
@@ -989,11 +1133,23 @@ const UNITS = [
       { q:"¿Qué hizo ayer la persona?", opts:["Cocinó","Jugó fútbol","Leyó"], correct:1 },
       { q:"¿Fue al cine?", opts:["Sí","No, se quedó en casa","No dice"], correct:1 }
     ],
+    hoerenText2:"Was hast du gestern gemacht? — Ich habe ein Buch gelesen. Bist du einkaufen gegangen? — Ja, ich bin einkaufen gegangen.",
+    hoerenQ2:[{ q:"¿Qué hizo ayer?", opts:["Cocinó","Leyó un libro","Jugó fútbol"], correct:1 }, { q:"¿Fue de compras?", opts:["Sí","No","No dice"], correct:0 }],
+    hoerenText3:"Was hast du gestern gemacht? — Ich habe eingekauft und ich habe gekocht. Bist du zu Hause geblieben? — Nein, ich bin spazieren gegangen.",
+    hoerenQ3:[{ q:"¿Qué hizo ayer?", opts:["Compró y cocinó","Leyó","Trabajó"], correct:0 }, { q:"¿Se quedó en casa?", opts:["Sí","No","No dice"], correct:1 }],
+    hoerenText4:"Was hast du gestern gemacht? — Ich habe Musik gehört und ich habe getanzt. Bist du ins Restaurant gegangen? — Ja, ich bin ins Restaurant gegangen.",
+    hoerenQ4:[{ q:"¿Qué hizo ayer?", opts:["Escuchó música y bailó","Cocinó","Durmió"], correct:0 }, { q:"¿Fue al restaurante?", opts:["Sí","No","No dice"], correct:0 }],
     lesenText:"Gestern habe ich viel gemacht. Ich habe gekocht und ich habe ein Buch gelesen. Ich bin nicht ausgegangen.",
     lesenQ:[
       { q:"Die Person hat gekocht.", opts:["Richtig","Falsch"], correct:0 },
       { q:"Die Person ist ausgegangen.", opts:["Richtig","Falsch"], correct:1 }
     ],
+    lesenText2:"Gestern habe ich viel gemacht. Ich habe Musik gehört und ich bin spazieren gegangen. Ich habe nicht gekocht.",
+    lesenQ2:[{ q:"Die Person ist spazieren gegangen.", opts:["Richtig","Falsch"], correct:0 }, { q:"Die Person hat gekocht.", opts:["Richtig","Falsch"], correct:1 }],
+    lesenText3:"Gestern habe ich eingekauft und ich habe gekocht. Ich bin nicht spazieren gegangen.",
+    lesenQ3:[{ q:"Die Person hat eingekauft.", opts:["Richtig","Falsch"], correct:0 }, { q:"Die Person ist spazieren gegangen.", opts:["Richtig","Falsch"], correct:1 }],
+    lesenText4:"Gestern habe ich Musik gehört und ich bin ins Kino gegangen. Ich habe nicht gearbeitet.",
+    lesenQ4:[{ q:"Die Person ist ins Kino gegangen.", opts:["Richtig","Falsch"], correct:0 }, { q:"Die Person hat gearbeitet.", opts:["Richtig","Falsch"], correct:1 }],
     schreibenPracticeBullets:["Qué hiciste ayer (usa Perfekt)","Menciona 2 actividades distintas"],
     schreibenTeil1Fields:[ {id:"f_gestern1",label:"Gestern habe ich...",placeholder:"Algo que hiciste ayer"}, {id:"f_gestern2",label:"Ich bin...",placeholder:"Un lugar al que fuiste (opcional)"}, {id:"f_name10",label:"Name",placeholder:"Tu nombre"}, {id:"f_datum",label:"Datum",placeholder:"Fecha de hoy"} ],
     schreibenTeil2Bullets:["Qué hiciste ayer","Si fuiste a algún lugar"],
@@ -1042,11 +1198,23 @@ const UNITS = [
       { q:"¿Qué le duele a la persona?", opts:["El estómago","La cabeza","La espalda"], correct:1 },
       { q:"¿Qué consejo le dan?", opts:["Dormir mucho","Tomar una pastilla y beber agua","Ir al médico"], correct:1 }
     ],
+    hoerenText2:"Was ist los? — Mir tut der Bauch weh und ich bin krank. — Geh zum Arzt und trink Tee!",
+    hoerenQ2:[{ q:"¿Qué le duele?", opts:["El estómago","La cabeza","La espalda"], correct:0 }, { q:"¿Qué consejo le dan?", opts:["Ir al médico y tomar té","Tomar pastilla y agua","Dormir mucho"], correct:0 }],
+    hoerenText3:"Was ist los? — Mir tut der Rücken weh, aber ich habe kein Fieber. — Ruh dich aus und nimm eine Tablette!",
+    hoerenQ3:[{ q:"¿Qué le duele?", opts:["Espalda","Cabeza","Estómago"], correct:0 }, { q:"¿Tiene fiebre?", opts:["Sí","No","No dice"], correct:1 }],
+    hoerenText4:"Was ist los? — Mir tut der Hals weh und ich habe Fieber. — Trink Tee und geh zum Arzt!",
+    hoerenQ4:[{ q:"¿Qué le duele?", opts:["Garganta","Pierna","Brazo"], correct:0 }, { q:"¿Qué consejo le dan?", opts:["Tomar té e ir al médico","Dormir","Nada"], correct:0 }],
     lesenText:"Ich bin krank. Mein Hals tut weh und ich habe Fieber. Der Arzt sagt: Trinken Sie viel Wasser und nehmen Sie eine Tablette.",
     lesenQ:[
       { q:"Die Person ist gesund.", opts:["Richtig","Falsch"], correct:1 },
       { q:"Der Hals tut weh.", opts:["Richtig","Falsch"], correct:0 }
     ],
+    lesenText2:"Ich bin krank. Mein Bauch tut weh und ich habe kein Fieber. Der Arzt sagt: Essen Sie wenig und trinken Sie Tee.",
+    lesenQ2:[{ q:"Die Person ist gesund.", opts:["Richtig","Falsch"], correct:1 }, { q:"Der Bauch tut weh.", opts:["Richtig","Falsch"], correct:0 }],
+    lesenText3:"Ich bin krank. Mein Rücken tut weh, aber ich habe kein Fieber. Der Arzt sagt: Ruhen Sie sich aus.",
+    lesenQ3:[{ q:"Die Person hat Fieber.", opts:["Richtig","Falsch"], correct:1 }, { q:"Der Rücken tut weh.", opts:["Richtig","Falsch"], correct:0 }],
+    lesenText4:"Ich bin krank. Mein Hals tut weh und ich habe Fieber. Der Arzt sagt: Trinken Sie Tee.",
+    lesenQ4:[{ q:"Die Person hat kein Fieber.", opts:["Richtig","Falsch"], correct:1 }, { q:"Der Hals tut weh.", opts:["Richtig","Falsch"], correct:0 }],
     schreibenPracticeBullets:["Qué te duele","Un consejo de salud (usa imperativo)"],
     schreibenTeil1Fields:[ {id:"f_duele",label:"Was tut weh?",placeholder:"Qué te duele"}, {id:"f_consejo",label:"Ein Rat (Imperativ)",placeholder:"Un consejo, ej. Trink Wasser!"}, {id:"f_name11",label:"Name",placeholder:"Tu nombre"}, {id:"f_krank",label:"Krank oder gesund?",placeholder:"krank / gesund"} ],
     schreibenTeil2Bullets:["Qué síntoma tienes","Un consejo que te dan"],
@@ -1095,11 +1263,23 @@ const UNITS = [
       { q:"¿Cuánto cuesta el abrigo primero?", opts:["18 Euro","80 Euro","8 Euro"], correct:1 },
       { q:"¿Qué pide la persona?", opts:["Uno más caro","Uno más barato","Otro color"], correct:1 }
     ],
+    hoerenText2:"Wie viel kosten diese Schuhe? — Sie kosten fünfzig Euro. Haben Sie eine billigere Hose? — Ja, diese hier ist billiger.",
+    hoerenQ2:[{ q:"¿Cuánto cuestan los zapatos?", opts:["15 Euro","50 Euro","80 Euro"], correct:1 }, { q:"¿Qué pide la persona?", opts:["Unos zapatos más caros","Una hose más barata","Otro color"], correct:1 }],
+    hoerenText3:"Wie viel kostet dieses Kleid? — Es kostet sechzig Euro. Haben Sie es in Größe S? — Ja, hier ist es.",
+    hoerenQ3:[{ q:"¿Cuánto cuesta el vestido?", opts:["16 Euro","60 Euro","100 Euro"], correct:1 }, { q:"¿Qué pide?", opts:["Talla S","Color rojo","Otro modelo"], correct:0 }],
+    hoerenText4:"Wie viel kostet der Mantel? — Er kostet neunzig Euro. Haben Sie einen billigeren? — Nein, das ist der günstigste.",
+    hoerenQ4:[{ q:"¿Cuánto cuesta el abrigo?", opts:["19 Euro","90 Euro","190 Euro"], correct:1 }, { q:"¿Hay uno más barato?", opts:["Sí","No","No dice"], correct:1 }],
     lesenText:"Ich möchte eine Hose kaufen. Diese Hose kostet 40 Euro, aber die andere ist billiger — nur 25 Euro.",
     lesenQ:[
       { q:"Die erste Hose kostet 40 Euro.", opts:["Richtig","Falsch"], correct:0 },
       { q:"Die andere Hose ist teurer.", opts:["Richtig","Falsch"], correct:1 }
     ],
+    lesenText2:"Ich möchte ein Hemd kaufen. Dieses Hemd kostet 30 Euro, aber das andere ist teurer — 45 Euro.",
+    lesenQ2:[{ q:"Das erste Hemd kostet 30 Euro.", opts:["Richtig","Falsch"], correct:0 }, { q:"Das andere Hemd ist billiger.", opts:["Richtig","Falsch"], correct:1 }],
+    lesenText3:"Ich möchte ein Kleid kaufen. Dieses Kleid kostet 60 Euro, das andere kostet 45 Euro.",
+    lesenQ3:[{ q:"Das erste Kleid kostet 60 Euro.", opts:["Richtig","Falsch"], correct:0 }, { q:"Das andere Kleid ist teurer.", opts:["Richtig","Falsch"], correct:1 }],
+    lesenText4:"Ich möchte einen Mantel kaufen. Dieser Mantel kostet 90 Euro, der andere kostet 120 Euro.",
+    lesenQ4:[{ q:"Der erste Mantel kostet 90 Euro.", opts:["Richtig","Falsch"], correct:0 }, { q:"Der andere Mantel ist billiger.", opts:["Richtig","Falsch"], correct:1 }],
     schreibenPracticeBullets:["Qué ropa quieres comprar","Pregunta el precio","Compara con algo más barato"],
     schreibenTeil1Fields:[ {id:"f_ropa1",label:"Ich möchte (Kleidung)",placeholder:"Prenda que quieres comprar"}, {id:"f_precio",label:"Preis",placeholder:"Precio (ej. 50 Euro)"}, {id:"f_talla",label:"Größe",placeholder:"Talla (ej. M)"}, {id:"f_name12",label:"Name",placeholder:"Tu nombre"} ],
     schreibenTeil2Bullets:["Qué ropa quieres comprar","Pregunta el precio y la talla"],
@@ -1145,12 +1325,24 @@ const UNITS = [
       { q:"¿Qué compró la persona?", opts:["Un abrigo","Una hose","Zapatos"], correct:1 },
       { q:"¿Dónde comió?", opts:["En casa","En un restaurante","En el trabajo"], correct:1 }
     ],
+    hoerenText2:"Gestern habe ich einen Mantel gekauft. Danach bin ich zum Arzt gegangen, weil mir der Kopf weh tat.",
+    hoerenQ2:[{ q:"¿Qué compró?", opts:["Un abrigo","Una hose","Zapatos"], correct:0 }, { q:"¿A dónde fue después?", opts:["Al restaurante","Al médico","A casa"], correct:1 }],
+    hoerenText3:"Gestern bin ich schwimmen gegangen. Ich habe ein Kleid gekauft. Danach habe ich zu Hause gekocht.",
+    hoerenQ3:[{ q:"¿Qué compró?", opts:["Vestido","Zapatos","Camisa"], correct:0 }, { q:"¿Qué hizo después?", opts:["Cocinó","Durmió","Trabajó"], correct:0 }],
+    hoerenText4:"Gestern habe ich gearbeitet. Ich musste einkaufen gehen, aber ich wollte lieber schlafen. Ich bin zum Arzt gegangen, weil mir der Rücken weh tat.",
+    hoerenQ4:[{ q:"¿Por qué fue al médico?", opts:["Dolor de espalda","Fiebre","Dolor de cabeza"], correct:0 }, { q:"¿Qué tuvo que hacer?", opts:["Ir de compras","Trabajar más","Dormir"], correct:0 }],
     lesenText:"Ich stehe um sieben Uhr auf. Ich muss um neun Uhr arbeiten. Gestern bin ich zum Arzt gegangen, weil mir der Kopf weh tat.",
     lesenQ:[
       { q:"Die Person steht um sieben Uhr auf.", opts:["Richtig","Falsch"], correct:0 },
       { q:"Die Person ist gestern zum Arzt gegangen.", opts:["Richtig","Falsch"], correct:0 },
       { q:"Die Arbeit fängt um sieben Uhr an.", opts:["Richtig","Falsch"], correct:1 }
     ],
+    lesenText2:"Ich stehe um acht Uhr auf. Ich muss um zehn Uhr arbeiten. Gestern habe ich eine Hose gekauft, weil meine alte kaputt war.",
+    lesenQ2:[{ q:"Die Person steht um acht Uhr auf.", opts:["Richtig","Falsch"], correct:0 }, { q:"Die Person hat gestern eine Hose gekauft.", opts:["Richtig","Falsch"], correct:0 }, { q:"Die Arbeit fängt um neun Uhr an.", opts:["Richtig","Falsch"], correct:1 }],
+    lesenText3:"Ich stehe um sechs Uhr auf. Ich muss um acht Uhr arbeiten. Gestern habe ich ein Kleid gekauft.",
+    lesenQ3:[{ q:"Die Person steht um sechs Uhr auf.", opts:["Richtig","Falsch"], correct:0 }, { q:"Die Person hat gestern Schuhe gekauft.", opts:["Richtig","Falsch"], correct:1 }, { q:"Die Arbeit fängt um acht Uhr an.", opts:["Richtig","Falsch"], correct:0 }],
+    lesenText4:"Ich stehe um neun Uhr auf. Ich muss um elf Uhr arbeiten. Gestern bin ich zum Arzt gegangen, weil mir der Bauch weh tat.",
+    lesenQ4:[{ q:"Die Person steht um neun Uhr auf.", opts:["Richtig","Falsch"], correct:0 }, { q:"Die Person hatte Kopfschmerzen.", opts:["Richtig","Falsch"], correct:1 }, { q:"Die Arbeit fängt um elf Uhr an.", opts:["Richtig","Falsch"], correct:0 }],
     schreibenPracticeBullets:["Tu rutina, algo que pediste, y algo que hiciste ayer — todo integrado"],
     schreibenTeil1Fields:[ {id:"f_final2_name",label:"Name",placeholder:"Tu nombre"}, {id:"f_final2_aufstehen",label:"Ich stehe um ... auf",placeholder:"Hora"}, {id:"f_final2_gestern",label:"Gestern habe ich...",placeholder:"Algo que hiciste ayer"}, {id:"f_final2_moechte",label:"Ich möchte...",placeholder:"Algo que quieres"} ],
     schreibenTeil2Bullets:["Tu rutina diaria","Algo que hiciste ayer","Algo que quieres o necesitas"],
@@ -1176,14 +1368,96 @@ function unitProgress(id){
   if(!progress.units[id]) progress.units[id] = { leccion:false, hoeren:false, lesen:false, schreiben:false, sprechen:false, examPassed:false, examScore:0 };
   return progress.units[id];
 }
+const LEVEL_FINAL_EXAMS = {
+  a1_1: {
+    id:"final:a1_1", title:"Examen final de A1.1",
+    hoerenText:"Hallo! Ich heiße Elena. Ich bin 26 Jahre alt und komme aus Argentinien. Meine Telefonnummer ist 0176 445566. Ich habe zwei Brüder und ich spiele gern Tennis.",
+    hoerenQ:[
+      { q:"¿De dónde es Elena?", opts:["Kolumbien","Argentinien","Spanien"], correct:1 },
+      { q:"¿Cuántos hermanos tiene?", opts:["Uno","Dos","Ninguno"], correct:1 },
+      { q:"¿Qué le gusta hacer?", opts:["Nadar","Jugar tenis","Cocinar"], correct:1 }
+    ],
+    hoerenText2:"Hallo! Ich heiße Diego. Ich bin 33 Jahre alt und komme aus Chile. Meine Telefonnummer ist 0176 778899. Ich habe eine Schwester und ich lese gern Bücher.",
+    hoerenQ2:[{ q:"¿De dónde es Diego?", opts:["Chile","Argentinien","Peru"], correct:0 }, { q:"¿Qué tiene?", opts:["Un hermano","Una hermana","Dos hermanos"], correct:1 }, { q:"¿Qué le gusta?", opts:["Nadar","Leer","Cocinar"], correct:1 }],
+    hoerenText3:"Hallo! Ich heiße Marta. Ich bin 24 Jahre alt und komme aus Peru. Meine Telefonnummer ist 0176 223344. Ich habe einen Bruder und ich spiele gern Volleyball.",
+    hoerenQ3:[{ q:"¿De dónde es Marta?", opts:["Peru","Chile","Bolivien"], correct:0 }, { q:"¿Qué tiene?", opts:["Una hermana","Un hermano","Dos hermanos"], correct:1 }, { q:"¿Qué le gusta?", opts:["Nadar","Volleyball","Leer"], correct:1 }],
+    hoerenText4:"Hallo! Ich heiße Leon. Ich bin 29 Jahre alt und komme aus Kolumbien. Meine Telefonnummer ist 0176 998811. Ich habe zwei Schwestern und ich koche gern.",
+    hoerenQ4:[{ q:"¿De dónde es Leon?", opts:["Kolumbien","Venezuela","Ecuador"], correct:0 }, { q:"¿Cuántas hermanas tiene?", opts:["Una","Dos","Ninguna"], correct:1 }, { q:"¿Qué le gusta?", opts:["Cocinar","Bailar","Nadar"], correct:0 }],
+    lesenText:"Ich heiße Jonas. Ich bin 30 Jahre alt. Mein Vater ist Arzt und meine Mutter ist Lehrerin. Ich habe kein Auto, aber ich habe ein Fahrrad. Ich lese gern Bücher, aber ich spiele nicht gern Fußball.",
+    lesenQ:[
+      { q:"Jonas' Vater ist Arzt.", opts:["Richtig","Falsch"], correct:0 },
+      { q:"Jonas hat ein Auto.", opts:["Richtig","Falsch"], correct:1 },
+      { q:"Jonas spielt gern Fußball.", opts:["Richtig","Falsch"], correct:1 }
+    ],
+    lesenText2:"Ich heiße Valentina. Ich bin 28 Jahre alt. Mein Vater ist Lehrer und meine Mutter ist Ärztin. Ich habe ein Fahrrad, aber kein Auto. Ich spiele gern Volleyball, aber ich lese nicht gern.",
+    lesenQ2:[{ q:"Valentinas Vater ist Lehrer.", opts:["Richtig","Falsch"], correct:0 }, { q:"Valentina hat ein Auto.", opts:["Richtig","Falsch"], correct:1 }, { q:"Valentina liest gern.", opts:["Richtig","Falsch"], correct:1 }],
+    lesenText3:"Ich heiße Camila. Ich bin 25 Jahre alt. Mein Vater ist Student und meine Mutter ist Ärztin. Ich habe ein Auto und ein Fahrrad. Ich spiele gern Tennis.",
+    lesenQ3:[{ q:"Camilas Vater ist Student.", opts:["Richtig","Falsch"], correct:0 }, { q:"Camila hat kein Auto.", opts:["Richtig","Falsch"], correct:1 }, { q:"Camila spielt gern Tennis.", opts:["Richtig","Falsch"], correct:0 }],
+    lesenText4:"Ich heiße Max. Ich bin 31 Jahre alt. Mein Vater ist Arzt und meine Mutter ist Studentin. Ich habe kein Fahrrad. Ich lese nicht gern, aber ich koche gern.",
+    lesenQ4:[{ q:"Max' Mutter ist Studentin.", opts:["Richtig","Falsch"], correct:0 }, { q:"Max hat ein Fahrrad.", opts:["Richtig","Falsch"], correct:1 }, { q:"Max liest gern.", opts:["Richtig","Falsch"], correct:1 }],
+    schreibenTeil1Fields:[ {id:"ff_name",label:"Name",placeholder:"Tu nombre"}, {id:"ff_alter",label:"Alter",placeholder:"Tu edad"}, {id:"ff_land",label:"Land",placeholder:"Tu país"}, {id:"ff_geschwister",label:"Geschwister",placeholder:"¿Cuántos hermanos tienes?"} ],
+    schreibenTeil2Bullets:["Tu nombre, edad y país","Un dato de tu familia","Algo que te gusta hacer"],
+    sprechenExamParts:[
+      { label:"SPRECHEN · Teil 1", instruction:"Preséntate completo: nombre, edad, país, idioma y familia.", time:50 },
+      { label:"SPRECHEN · Teil 2", instruction:"Tarjeta de tema: \"Familie\". Formula una pregunta y respóndela tú mismo.", time:40 },
+      { label:"SPRECHEN · Teil 3", instruction:"Petición simple: pide prestado un objeto (\"Kannst du mir bitte dein Buch geben?\").", time:30 }
+    ]
+  },
+  a1_2: {
+    id:"final:a1_2", title:"Examen final de A1.2",
+    hoerenText:"Ich stehe um sieben Uhr auf. Ich möchte einen Kaffee bestellen. Wie komme ich zum Bahnhof? Gestern habe ich Pizza gegessen und ich bin ins Kino gegangen.",
+    hoerenQ:[
+      { q:"¿A qué hora se levanta?", opts:["6 Uhr","7 Uhr","8 Uhr"], correct:1 },
+      { q:"¿Qué pide?", opts:["Un té","Un café","Agua"], correct:1 },
+      { q:"¿Qué hizo ayer?", opts:["Cocinó y durmió","Comió pizza y fue al cine","Trabajó todo el día"], correct:1 }
+    ],
+    hoerenText2:"Ich stehe um acht Uhr auf. Ich möchte ein Wasser bestellen. Wo ist die Apotheke? Gestern habe ich einen Mantel gekauft und ich bin zum Arzt gegangen.",
+    hoerenQ2:[{ q:"¿A qué hora se levanta?", opts:["7 Uhr","8 Uhr","9 Uhr"], correct:1 }, { q:"¿Qué pide?", opts:["Café","Agua","Té"], correct:1 }, { q:"¿Qué hizo ayer?", opts:["Compró ropa y fue al médico","Comió pizza","Trabajó"], correct:0 }],
+    hoerenText3:"Ich stehe um sieben Uhr auf. Ich möchte einen Tee bestellen. Wie komme ich zur Post? Gestern habe ich Schuhe gekauft und ich bin schwimmen gegangen.",
+    hoerenQ3:[{ q:"¿A qué hora se levanta?", opts:["6 Uhr","7 Uhr","8 Uhr"], correct:1 }, { q:"¿Qué pide?", opts:["Café","Té","Agua"], correct:1 }, { q:"¿Qué hizo ayer?", opts:["Compró zapatos y nadó","Trabajó","Cocinó"], correct:0 }],
+    hoerenText4:"Ich stehe um neun Uhr auf. Ich möchte eine Suppe bestellen. Wo ist die Bank? Gestern bin ich zum Arzt gegangen, weil mir der Rücken weh tat.",
+    hoerenQ4:[{ q:"¿A qué hora se levanta?", opts:["8 Uhr","9 Uhr","10 Uhr"], correct:1 }, { q:"¿Qué pide?", opts:["Sopa","Ensalada","Pan"], correct:0 }, { q:"¿Por qué fue al médico?", opts:["Dolor de espalda","Fiebre","Dolor de cabeza"], correct:0 }],
+    lesenText:"Ich muss heute arbeiten, aber ich will danach einkaufen gehen. Ich möchte eine Hose kaufen — meine ist zu alt. Mir tut der Kopf weh, also nehme ich eine Tablette.",
+    lesenQ:[
+      { q:"Die Person muss heute arbeiten.", opts:["Richtig","Falsch"], correct:0 },
+      { q:"Die Person möchte Schuhe kaufen.", opts:["Richtig","Falsch"], correct:1 },
+      { q:"Der Kopf tut weh.", opts:["Richtig","Falsch"], correct:0 }
+    ],
+    lesenText2:"Ich muss heute einkaufen gehen, aber ich will danach schwimmen. Ich möchte einen Mantel kaufen — meiner ist zu klein. Mir tut der Rücken weh, also nehme ich eine Tablette.",
+    lesenQ2:[{ q:"Die Person muss heute einkaufen gehen.", opts:["Richtig","Falsch"], correct:0 }, { q:"Die Person möchte Schuhe kaufen.", opts:["Richtig","Falsch"], correct:1 }, { q:"Der Rücken tut weh.", opts:["Richtig","Falsch"], correct:0 }],
+    lesenText3:"Ich muss heute lernen, aber ich will danach tanzen gehen. Ich möchte ein Kleid kaufen — meins ist zu alt. Mir tut der Hals weh, also trinke ich Tee.",
+    lesenQ3:[{ q:"Die Person muss heute lernen.", opts:["Richtig","Falsch"], correct:0 }, { q:"Die Person möchte einen Mantel kaufen.", opts:["Richtig","Falsch"], correct:1 }, { q:"Der Hals tut weh.", opts:["Richtig","Falsch"], correct:0 }],
+    lesenText4:"Ich muss heute arbeiten, aber ich will danach kochen. Ich möchte Schuhe kaufen — meine sind kaputt. Mir tut das Bein weh, also nehme ich eine Tablette.",
+    lesenQ4:[{ q:"Die Person muss heute arbeiten.", opts:["Richtig","Falsch"], correct:0 }, { q:"Die Person möchte ein Hemd kaufen.", opts:["Richtig","Falsch"], correct:1 }, { q:"Das Bein tut weh.", opts:["Richtig","Falsch"], correct:0 }],
+    schreibenTeil1Fields:[ {id:"ff2_name",label:"Name",placeholder:"Tu nombre"}, {id:"ff2_aufstehen",label:"Ich stehe um ... auf",placeholder:"Hora"}, {id:"ff2_gestern",label:"Gestern habe ich...",placeholder:"Algo que hiciste ayer"}, {id:"ff2_moechte",label:"Ich möchte...",placeholder:"Algo que quieres o necesitas"} ],
+    schreibenTeil2Bullets:["Tu rutina diaria","Algo que hiciste ayer","Algo que necesitas comprar"],
+    sprechenExamParts:[
+      { label:"SPRECHEN · Teil 1", instruction:"Cuenta tu rutina diaria y algo que hiciste ayer (usa el Perfekt).", time:50 },
+      { label:"SPRECHEN · Teil 2", instruction:"Tarjeta de tema: \"Einkaufen\" (compras). Formula una pregunta y respóndela.", time:40 },
+      { label:"SPRECHEN · Teil 3", instruction:"Petición simple: pide direcciones a un lugar de la ciudad.", time:30 }
+    ]
+  }
+};
+
 function markDone(unitId, skill){ unitProgress(unitId)[skill] = true; saveProgress(); }
-function getUnit(id){ return UNITS.find(u => u.id === id); }
+function getUnit(id){
+  if(id.startsWith("final:")) return LEVEL_FINAL_EXAMS[id.slice(6)];
+  return UNITS.find(u => u.id === id);
+}
 function unitsForLevel(levelId){ return UNITS.filter(u => u.level === levelId).sort((a,b)=>a.number-b.number); }
-function isLevelComplete(levelId){
+function levelFinalStatus(levelId){
+  if(!progress.levelFinal) progress.levelFinal = {};
+  if(!progress.levelFinal[levelId]) progress.levelFinal[levelId] = { passed:false, score:0 };
+  return progress.levelFinal[levelId];
+}
+function isLevelFinalUnlocked(levelId){
   if(progress.reviewMode) return true;
   const built = unitsForLevel(levelId);
-  if(built.length < TOTAL_UNITS_PER_LEVEL) return false;
-  return built.every(u => unitProgress(u.id).examPassed);
+  return built.length >= TOTAL_UNITS_PER_LEVEL && built.every(u => unitProgress(u.id).examPassed);
+}
+function isLevelComplete(levelId){
+  if(progress.reviewMode) return true;
+  return levelFinalStatus(levelId).passed;
 }
 function isUnitUnlocked(unit){
   if(progress.reviewMode) return true;
@@ -1282,6 +1556,18 @@ function renderLevelView(levelId){
       </div>`;
     }
   }
+  const finalStatus = levelFinalStatus(levelId);
+  const finalUnlocked = isLevelFinalUnlocked(levelId);
+  const finalCls = "unit-row" + (finalStatus.passed ? " done" : "") + (finalUnlocked ? "" : " locked");
+  const finalOnclick = finalUnlocked ? `onclick="startExam('final:${levelId}')"` : "";
+  const finalStatusText = finalStatus.passed ? "✓ Aprobado (" + finalStatus.score + "/100)" : (finalUnlocked ? "Disponible" : "🔒 Completa las 8 unidades");
+  html += `<div style="margin-top:16px; padding-top:14px; border-top:1px dashed rgba(243,233,210,0.2);">
+    <div class="${finalCls}" ${finalOnclick}>
+      <div class="unit-num">🏆</div>
+      <div class="unit-body"><div class="unit-title">Examen final de ${level.label}</div><div class="unit-desc">Integra todo el nivel — al aprobarlo, desbloqueas el siguiente</div></div>
+      <div class="unit-status">${finalStatusText}</div>
+    </div>
+  </div>`;
   app.innerHTML = html;
 }
 
@@ -1413,19 +1699,22 @@ function playAudio(text){
   speechSynthesis.cancel(); speechSynthesis.speak(u);
 }
 function renderHoerenPractice(unit, header, nudge){
+  const v = pickVariant(unit, unit.hoerenText, unit.hoerenQ, unit.hoerenText2, unit.hoerenQ2, unit.hoerenText3, unit.hoerenQ3, unit.hoerenText4, unit.hoerenQ4);
   app.innerHTML = header + `<div class="card">${nudge}<p>Escucha el diálogo. Puedes repetirlo las veces que quieras.</p>
-    <button class="play-btn" onclick="playAudio(${JSON.stringify(unit.hoerenText)})">▶ Reproducir diálogo</button>
+    <button class="play-btn" onclick="playAudio(${JSON.stringify(v.text)})">▶ Reproducir diálogo</button>
     <div id="qBlock"></div></div>`;
-  renderQuestions(unit.hoerenQ, "qBlock", () => markDone(unit.id,"hoeren"));
+  renderQuestions(v.questions, "qBlock", () => markDone(unit.id,"hoeren"));
 }
 function renderLesenPractice(unit, header, nudge){
-  app.innerHTML = header + `<div class="card">${nudge}<p class="de-line">${unit.lesenText}</p><div id="qBlock"></div></div>`;
-  renderQuestions(unit.lesenQ, "qBlock", () => markDone(unit.id,"lesen"));
+  const v = pickVariant(unit, unit.lesenText, unit.lesenQ, unit.lesenText2, unit.lesenQ2, unit.lesenText3, unit.lesenQ3, unit.lesenText4, unit.lesenQ4);
+  app.innerHTML = header + `<div class="card">${nudge}<p class="de-line">${v.text}</p><div id="qBlock"></div></div>`;
+  renderQuestions(v.questions, "qBlock", () => markDone(unit.id,"lesen"));
 }
 function renderQuestions(questions, containerId, onAllCorrect){
   const el = document.getElementById(containerId);
   let answeredCorrectly = 0;
-  questions.forEach(item => {
+  const shuffled = questions.map(shuffleQuestionOptions);
+  shuffled.forEach(item => {
     const block = document.createElement("div");
     block.style.marginTop = "18px";
     block.innerHTML = `<p style="font-weight:600;">${item.q}</p>`;
@@ -1569,7 +1858,11 @@ function runExamTimer(seconds, onTick, onExpire){
 }
 function fmtTime(s){ return Math.floor(s/60) + ":" + String(s%60).padStart(2,"0"); }
 function examShell(partLabel, timerHtml, bodyHtml){ return `<div class="exam-topbar"><span class="exam-part-label">${partLabel}</span>${timerHtml}</div>${bodyHtml}`; }
-function examExitBtn(){ return `<button class="primary-btn secondary-btn" onclick="stopExamTimer(); go('unit',{unitId:exam.unitId});">Cancelar simulacro</button>`; }
+function isExamFinal(){ return exam.unitId && exam.unitId.startsWith("final:"); }
+function examBackTarget(){
+  return isExamFinal() ? `go('level',{levelId:'${exam.unitId.slice(6)}'})` : `go('unit',{unitId:'${exam.unitId}'})`;
+}
+function examExitBtn(){ return `<button class="primary-btn secondary-btn" onclick="stopExamTimer(); ${examBackTarget()};">Cancelar simulacro</button>`; }
 
 function renderExamIntro(){
   app.innerHTML = `<div class="card">
@@ -1579,13 +1872,27 @@ function renderExamIntro(){
     ${examExitBtn()}
   </div>`;
 }
+function shuffleArr(arr){ const a=[...arr]; for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
+function shuffleQuestionOptions(item){
+  const order = shuffleArr(item.opts.map((_,i)=>i));
+  return { q:item.q, opts:order.map(i=>item.opts[i]), correct:order.indexOf(item.correct) };
+}
+function pickVariant(unit, baseText, baseQ, altText, altQ, altText3, altQ3, altText4, altQ4){
+  const pool = [ {text:baseText, questions:baseQ} ];
+  if(altText) pool.push({text:altText, questions:altQ});
+  if(altText3) pool.push({text:altText3, questions:altQ3});
+  if(altText4) pool.push({text:altText4, questions:altQ4});
+  const picked = pool[Math.floor(Math.random() * pool.length)];
+  return { text:picked.text, questions:picked.questions.map(shuffleQuestionOptions) };
+}
 function renderExamHoeren(){
   const unit = getUnit(exam.unitId);
+  exam.activeHoeren = pickVariant(unit, unit.hoerenText, unit.hoerenQ, unit.hoerenText2, unit.hoerenQ2, unit.hoerenText3, unit.hoerenQ3, unit.hoerenText4, unit.hoerenQ4);
   app.innerHTML = examShell("HÖREN · Teil 1", '<span class="exam-timer" id="examTimer">3:00</span>',
     `<div class="card"><p>Escucha el diálogo y responde. Solo puedes reproducirlo <strong>2 veces</strong>.</p>
     <button class="play-btn" id="examPlayBtn" onclick="examPlayHoeren()">▶ Reproducir (2 disponibles)</button>
     <div id="examHoerenQ"></div></div>`);
-  unit.hoerenQ.forEach((item, qi) => {
+  exam.activeHoeren.questions.forEach((item, qi) => {
     const block = document.createElement("div"); block.style.marginTop="18px"; block.dataset.qi = qi;
     block.innerHTML = `<p style="font-weight:600;">${item.q}</p>`;
     item.opts.forEach((opt, oi) => {
@@ -1602,7 +1909,7 @@ function renderExamHoeren(){
 function examPlayHoeren(){
   if(exam.hoerenPlays >= 2) return;
   exam.hoerenPlays++;
-  playAudio(getUnit(exam.unitId).hoerenText);
+  playAudio(exam.activeHoeren.text);
   const btn = document.getElementById("examPlayBtn");
   const remaining = 2 - exam.hoerenPlays;
   btn.textContent = "▶ Reproducir (" + remaining + " disponibles)";
@@ -1610,17 +1917,17 @@ function examPlayHoeren(){
 }
 function finishExamHoeren(){
   stopExamTimer();
-  const unit = getUnit(exam.unitId);
   let correct = 0;
-  document.querySelectorAll("#examHoerenQ > div[data-qi]").forEach(block => { if(parseInt(block.dataset.selected) === unit.hoerenQ[parseInt(block.dataset.qi)].correct) correct++; });
-  exam.scores.hoeren = Math.round((correct / unit.hoerenQ.length) * 25);
+  document.querySelectorAll("#examHoerenQ > div[data-qi]").forEach(block => { if(parseInt(block.dataset.selected) === exam.activeHoeren.questions[parseInt(block.dataset.qi)].correct) correct++; });
+  exam.scores.hoeren = Math.round((correct / exam.activeHoeren.questions.length) * 25);
   renderExamLesen();
 }
 function renderExamLesen(){
   const unit = getUnit(exam.unitId);
+  exam.activeLesen = pickVariant(unit, unit.lesenText, unit.lesenQ, unit.lesenText2, unit.lesenQ2, unit.lesenText3, unit.lesenQ3, unit.lesenText4, unit.lesenQ4);
   app.innerHTML = examShell("LESEN · Teil 1", '<span class="exam-timer" id="examTimer">3:00</span>',
-    `<div class="card"><p class="de-line">${unit.lesenText}</p><div id="examLesenQ"></div></div>`);
-  unit.lesenQ.forEach((item, qi) => {
+    `<div class="card"><p class="de-line">${exam.activeLesen.text}</p><div id="examLesenQ"></div></div>`);
+  exam.activeLesen.questions.forEach((item, qi) => {
     const block = document.createElement("div"); block.style.marginTop="18px"; block.dataset.qi = qi;
     block.innerHTML = `<p style="font-weight:600;">${item.q}</p>`;
     item.opts.forEach((opt, oi) => {
@@ -1636,10 +1943,9 @@ function renderExamLesen(){
 }
 function finishExamLesen(){
   stopExamTimer();
-  const unit = getUnit(exam.unitId);
   let correct = 0;
-  document.querySelectorAll("#examLesenQ > div[data-qi]").forEach(block => { if(parseInt(block.dataset.selected) === unit.lesenQ[parseInt(block.dataset.qi)].correct) correct++; });
-  exam.scores.lesen = Math.round((correct / unit.lesenQ.length) * 25);
+  document.querySelectorAll("#examLesenQ > div[data-qi]").forEach(block => { if(parseInt(block.dataset.selected) === exam.activeLesen.questions[parseInt(block.dataset.qi)].correct) correct++; });
+  exam.scores.lesen = Math.round((correct / exam.activeLesen.questions.length) * 25);
   renderExamSchreibenTeil1();
 }
 function renderExamSchreibenTeil1(){
@@ -1742,9 +2048,11 @@ function renderExamResults(){
   const s = exam.scores;
   const total = s.hoeren + s.lesen + s.schreiben + s.sprechen;
   const passed = total >= 60;
+  const isFinal = isExamFinal();
   app.innerHTML = `<div class="card">
+    ${isFinal ? '<p style="font-family:var(--display); font-weight:700; font-size:16px;">'+getUnit(exam.unitId).title+'</p>' : ''}
     <div class="result-score"><div class="result-number">${total}</div><div style="font-size:12px; color:rgba(20,20,20,0.5);">de 100 puntos</div>
-    <div class="result-status ${passed?'pass':'fail'}">${passed ? '✓ Aprobado' : 'No aprobado — se necesitan 60'}</div></div>
+    <div class="result-status ${passed?'pass':'fail'}">${passed ? (isFinal ? '✓ Aprobado — ¡nivel completo!' : '✓ Aprobado') : 'No aprobado — se necesitan 60'}</div></div>
     <div style="margin-top:18px;">
       <div class="breakdown-row"><span>Hören</span><span>${s.hoeren} / 25</span></div>
       <div class="breakdown-row"><span>Lesen</span><span>${s.lesen} / 25</span></div>
@@ -1753,11 +2061,18 @@ function renderExamResults(){
     </div>
     ${exam.schreibenFeedback ? '<div class="feedback-box" style="margin-top:16px;"><strong>Schreiben:</strong> '+exam.schreibenFeedback+'</div>' : ''}
     ${exam.sprechenFeedback ? '<div class="feedback-box"><strong>Sprechen:</strong> '+exam.sprechenFeedback+'</div>' : ''}
-    <button class="primary-btn" onclick="go('unit',{unitId:exam.unitId})">Volver a la unidad</button>
+    <button class="primary-btn" onclick="${examBackTarget()}">${isFinal ? 'Volver al nivel' : 'Volver a la unidad'}</button>
   </div>`;
-  const up = unitProgress(exam.unitId);
-  up.examScore = total;
-  if(passed){ up.leccion=true; up.hoeren=true; up.lesen=true; up.schreiben=true; up.sprechen=true; up.examPassed = true; }
+  if(isFinal){
+    const levelId = exam.unitId.slice(6);
+    const fs = levelFinalStatus(levelId);
+    fs.score = total;
+    if(passed) fs.passed = true;
+  } else {
+    const up = unitProgress(exam.unitId);
+    up.examScore = total;
+    if(passed){ up.leccion=true; up.hoeren=true; up.lesen=true; up.schreiben=true; up.sprechen=true; up.examPassed = true; }
+  }
   saveProgress();
 }
 
