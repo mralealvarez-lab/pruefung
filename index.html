@@ -1,0 +1,1769 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prüfung A1 — Preparación de examen</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,600;0,700;1,600&family=Work+Sans:wght@400;500;600;700&display=swap');
+
+  :root{
+    --ink:#141414; --ink-deep:#0A0A0A;
+    --paper:#F3E9D2; --paper-hi:#FBF4E3; --paper-shadow:#DCCBA0;
+    --amber:#E8A33D; --amber-deep:#C9832F;
+    --green:#4E9F63; --coral:#E85D4E;
+    --display: "Fraunces", serif; --body: "Work Sans", sans-serif;
+    --r-sm: 10px; --r-md: 14px; --r-lg: 20px;
+    --shadow-card: 0 1px 2px rgba(0,0,0,0.18), 0 10px 22px -6px rgba(0,0,0,0.32);
+  }
+  *{ box-sizing:border-box; }
+  html{ background: var(--ink); }
+  body{
+    margin:0; min-height:100vh;
+    background: radial-gradient(1200px 600px at 50% -10%, #1c1c1c 0%, transparent 60%), linear-gradient(180deg, var(--ink) 0%, var(--ink-deep) 100%);
+    font-family: var(--body); color: var(--paper); -webkit-font-smoothing: antialiased;
+  }
+  .wrap{ max-width: 480px; margin: 0 auto; padding: 22px 16px 60px; }
+
+  .eyebrow{
+    display:inline-block; font-family: var(--display); font-style:italic; font-weight:600;
+    font-size:12.5px; letter-spacing: 0.02em; color: var(--ink); background: var(--amber);
+    padding: 3px 10px; border-radius: 999px; margin-bottom: 12px;
+  }
+  h1{ font-family: var(--display); font-weight:700; font-size: 30px; margin: 0; color: var(--paper); letter-spacing: -0.01em; }
+  .sub{ font-size:13.5px; color: rgba(243,233,210,0.62); margin-top:6px; line-height:1.5; }
+
+  .back-btn{
+    background: rgba(243,233,210,0.08); border: 1px solid rgba(243,233,210,0.2); color: var(--paper);
+    width: 34px; height:34px; border-radius: 10px; font-size:16px; cursor:pointer; flex-shrink:0;
+  }
+  .view-header{ display:flex; align-items:center; gap:10px; margin-bottom: 18px; }
+  .view-title{ font-family: var(--display); font-weight:700; font-size: 19px; }
+
+  /* --- Tarjetas de nivel (Home) --- */
+  .level-card{
+    display:block; width:100%; text-align:left; padding: 22px; border-radius: var(--r-lg); margin-bottom: 14px;
+    background: linear-gradient(160deg, var(--paper-hi) 0%, var(--paper) 55%); color: var(--ink);
+    box-shadow: var(--shadow-card); border:none; cursor:pointer;
+  }
+  .level-card.locked{ background: rgba(243,233,210,0.06); color: var(--paper); box-shadow:none; border: 1px solid rgba(243,233,210,0.14); cursor:default; }
+  .level-badge{ display:inline-block; font-family:var(--display); font-weight:700; font-size:13px; background: var(--ink); color: var(--paper-hi); padding: 3px 10px; border-radius: 999px; margin-bottom:10px; }
+  .level-card.locked .level-badge{ background: rgba(243,233,210,0.15); color: rgba(243,233,210,0.7); }
+  .level-title{ font-family: var(--display); font-weight:700; font-size: 21px; }
+  .level-desc{ font-size:13px; margin-top:6px; line-height:1.5; opacity:0.75; }
+  .level-progress{ margin-top:14px; font-size:12px; font-weight:600; }
+  .level-lock-msg{ margin-top:14px; font-size:12px; color: rgba(243,233,210,0.55); display:flex; align-items:center; gap:6px; }
+
+  /* --- Lista de unidades (Level view) --- */
+  .unit-row{
+    display:flex; align-items:center; gap: 14px; padding: 15px 16px; border-radius: var(--r-md); margin-bottom:10px;
+    background: rgba(243,233,210,0.06); border: 1px solid rgba(243,233,210,0.14); cursor:pointer;
+  }
+  .unit-row.locked{ opacity:0.45; cursor:default; }
+  .unit-row.done{ border-color: rgba(78,159,99,0.55); background: rgba(78,159,99,0.09); }
+  .unit-num{
+    width:38px; height:38px; flex-shrink:0; border-radius:10px; background: var(--paper); color:var(--ink);
+    display:flex; align-items:center; justify-content:center; font-family:var(--display); font-weight:700; font-size:15px;
+  }
+  .unit-row.done .unit-num{ background: var(--green); color: var(--paper-hi); }
+  .unit-body{ flex:1; }
+  .unit-title{ font-family: var(--display); font-weight:700; font-size:15.5px; }
+  .unit-desc{ font-size:11.5px; color: rgba(243,233,210,0.55); margin-top:2px; }
+  .unit-status{ font-size:11px; font-weight:600; color: var(--amber); white-space:nowrap; }
+  .unit-row.done .unit-status{ color: var(--green); }
+  .unit-row.locked .unit-status{ color: rgba(243,233,210,0.4); }
+
+  /* --- Estaciones dentro de una unidad --- */
+  .stations{ margin-top: 20px; display:flex; flex-direction:column; gap: 12px; }
+  .station{
+    display:flex; align-items:center; gap: 14px; padding: 16px; border-radius: var(--r-md);
+    background: rgba(243,233,210,0.06); border: 1px solid rgba(243,233,210,0.14);
+    cursor:pointer; transition: transform .15s ease; text-align:left; width:100%;
+  }
+  .station:active{ transform: scale(0.98); }
+  .station.done{ border-color: rgba(78,159,99,0.55); background: rgba(78,159,99,0.09); }
+  .station-icon{
+    width: 46px; height:46px; flex-shrink:0; border-radius: 12px; display:flex; align-items:center; justify-content:center;
+    background: var(--paper); color: var(--ink); font-size:20px;
+  }
+  .station.done .station-icon{ background: var(--green); color: var(--paper-hi); }
+  .station-body{ flex:1; }
+  .station-title{ font-family: var(--display); font-weight:700; font-size:16px; color: var(--paper); }
+  .station-desc{ font-size:12px; color: rgba(243,233,210,0.55); margin-top:2px; }
+  .station-status{ font-size: 11px; font-weight:600; color: var(--amber); white-space:nowrap; }
+  .station.done .station-status{ color: var(--green); }
+
+  .progress-meta{ display:flex; justify-content:space-between; font-size: 12px; color: rgba(243,233,210,0.6); margin: 20px 0 6px; }
+  .progress-bar{ height: 7px; border-radius: 999px; background: rgba(243,233,210,0.1); overflow:hidden; }
+  .progress-fill{ height:100%; background: linear-gradient(90deg, var(--green), #67B87E); border-radius:999px; transition: width .35s ease; }
+
+  .vokab-link{
+    margin-top: 18px; display:flex; align-items:center; justify-content:space-between; gap:10px;
+    padding: 12px 14px; border-radius: var(--r-sm); border: 1px dashed rgba(243,233,210,0.25);
+    font-size: 12.5px; color: rgba(243,233,210,0.65);
+  }
+  .vokab-link a{ color: var(--amber); text-decoration:none; font-weight:600; white-space:nowrap; }
+  .vokab-inline{
+    display:inline-block; margin-top:6px; font-size:12px; font-weight:600; color: var(--amber-deep);
+    text-decoration:none; border-bottom: 1px dashed var(--amber-deep); padding-bottom:1px;
+  }
+
+  .exam-cta{
+    width:100%; margin-top: 14px; padding: 16px; border-radius: var(--r-md); text-align:left;
+    background: linear-gradient(135deg, rgba(232,163,61,0.16), rgba(232,163,61,0.05));
+    border: 1px solid rgba(232,163,61,0.4); cursor:pointer;
+  }
+  .exam-cta-title{ font-family: var(--display); font-weight:700; font-size:15.5px; color: var(--paper); }
+  .exam-cta-desc{ font-size:11.5px; color: rgba(243,233,210,0.6); margin-top:4px; line-height:1.4; }
+
+  .card{
+    background: linear-gradient(160deg, var(--paper-hi) 0%, var(--paper) 55%); color: var(--ink);
+    border-radius: var(--r-lg); padding: 20px; box-shadow: var(--shadow-card); margin-bottom: 16px;
+  }
+  .card p{ line-height:1.55; font-size:14.5px; margin: 0 0 10px; }
+  .card p:last-child{ margin-bottom:0; }
+  .de-line{ font-family: var(--display); font-weight:600; font-size: 16px; }
+
+  .play-btn{
+    display:flex; align-items:center; gap:10px; background: var(--ink); color: var(--paper-hi);
+    border:none; border-radius: 999px; padding: 12px 20px; font-family: var(--body); font-weight:600;
+    font-size:14px; cursor:pointer; margin-bottom: 16px;
+  }
+  .play-btn:active{ transform: scale(0.97); }
+
+  .opt{
+    display:block; width:100%; text-align:left; padding: 13px 14px; margin-bottom:9px; border-radius: var(--r-sm);
+    background: rgba(20,20,20,0.05); border: 1px solid rgba(20,20,20,0.18); color: var(--ink);
+    font-family: var(--body); font-size: 14px; cursor:pointer;
+  }
+  .opt.correct{ border-color: var(--green); background: rgba(78,159,99,0.18); color: var(--ink); }
+  .opt.wrong{ border-color: var(--coral); background: rgba(232,93,78,0.18); color: var(--ink); }
+  .opt:disabled{ cursor:default; }
+
+  textarea, input[type=text]{
+    width:100%; box-sizing:border-box; padding: 12px 14px; border-radius: var(--r-sm);
+    border: 1px solid rgba(20,20,20,0.2); background: rgba(20,20,20,0.05);
+    color: var(--ink); font-family: var(--body); font-size: 14px; outline:none; resize: vertical;
+  }
+  textarea:focus, input[type=text]:focus{ border-color: var(--amber-deep); }
+  textarea::placeholder, input::placeholder{ color: rgba(20,20,20,0.4); }
+
+  .primary-btn{
+    width:100%; padding: 14px; border-radius: var(--r-sm); border:none; background: var(--amber);
+    color: var(--ink); font-family: var(--body); font-weight:700; font-size:14.5px; cursor:pointer; margin-top: 12px;
+  }
+  .primary-btn:disabled{ opacity:0.5; cursor:default; }
+  .primary-btn.recording{ background: var(--coral); color: var(--paper-hi); }
+  .secondary-btn{ background:transparent; border:1px solid rgba(20,20,20,0.2); color:var(--ink); }
+
+  .prompt-list{ list-style:none; padding:0; margin: 0 0 14px; }
+  .prompt-list li{ font-size: 13.5px; padding: 7px 0 7px 20px; position:relative; color: rgba(20,20,20,0.75); }
+  .prompt-list li:before{ content:"—"; position:absolute; left:0; color: var(--amber-deep); }
+
+  .feedback-box{
+    background: rgba(232,163,61,0.1); border: 1px solid rgba(232,163,61,0.3); border-radius: var(--r-md);
+    padding: 16px; margin-top: 14px; font-size: 13.5px; line-height:1.6; color: var(--paper); white-space: pre-wrap;
+  }
+  .transcript-box{
+    background: rgba(243,233,210,0.06); border: 1px solid rgba(243,233,210,0.18); border-radius: var(--r-sm);
+    padding: 12px 14px; margin-top: 12px; font-size: 13.5px; color: rgba(243,233,210,0.85); min-height: 20px;
+  }
+  .loading{ font-size:13px; color: rgba(243,233,210,0.55); font-style:italic; }
+  .leccion-nudge{ background:rgba(232,163,61,0.15); border:1px solid rgba(232,163,61,0.4); border-radius:10px; padding:10px 12px; margin-bottom:14px; font-size:12.5px; display:flex; justify-content:space-between; align-items:center; gap:10px; }
+  .leccion-nudge button{ background:var(--ink); color:var(--paper-hi); border:none; border-radius:8px; padding:6px 10px; font-size:11.5px; font-weight:600; cursor:pointer; white-space:nowrap; }
+
+  .exam-topbar{ display:flex; align-items:center; justify-content:space-between; margin-bottom:16px; }
+  .exam-part-label{ font-size:11px; letter-spacing:0.03em; color: rgba(243,233,210,0.55); }
+  .exam-timer{ font-family: var(--display); font-weight:700; font-size: 17px; color: var(--amber); background: rgba(232,163,61,0.12); padding: 4px 12px; border-radius: 999px; }
+  .exam-timer.low{ color: var(--coral); background: rgba(232,93,78,0.12); }
+  .form-field{ margin-bottom: 12px; }
+  .form-field label{ display:block; font-size:12px; color: rgba(20,20,20,0.6); margin-bottom:4px; font-weight:600; }
+  .result-score{ text-align:center; padding: 10px 0 4px; }
+  .result-number{ font-family: var(--display); font-weight:700; font-size: 52px; color: var(--ink); line-height:1; }
+  .result-status{ font-size:14px; font-weight:700; margin-top:6px; }
+  .result-status.pass{ color: var(--green); }
+  .result-status.fail{ color: var(--coral); }
+  .breakdown-row{ display:flex; justify-content:space-between; padding: 9px 0; border-bottom: 1px solid rgba(20,20,20,0.1); font-size:13.5px; }
+  .breakdown-row:last-child{ border-bottom:none; }
+
+  .modal-backdrop{ position:fixed; inset:0; background: rgba(0,0,0,0.6); display:flex; align-items:center; justify-content:center; padding: 20px; z-index: 50; }
+  .modal{ background: var(--paper-hi); color: var(--ink); border-radius: var(--r-lg); padding: 24px; max-width: 380px; box-shadow: var(--shadow-card); }
+  .modal h2{ font-family: var(--display); font-size: 19px; margin: 0 0 10px; }
+  .modal p{ font-size: 13px; line-height:1.55; color: rgba(20,20,20,0.7); margin: 0 0 14px; }
+  .modal a{ color: var(--amber-deep); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div id="apiModal" class="modal-backdrop" style="display:none;">
+    <div class="modal">
+      <h2>Tu clave de Anthropic</h2>
+      <p>Se guarda solo en este navegador (localStorage) para poder evaluar tus respuestas de Schreiben y Sprechen. Nunca se sube al repositorio. Consíguela en <a href="https://console.anthropic.com/settings/keys" target="_blank">console.anthropic.com</a>.</p>
+      <input type="text" id="apiKeyInput" placeholder="sk-ant-...">
+      <button class="primary-btn" onclick="saveApiKey()">Guardar y continuar</button>
+    </div>
+  </div>
+
+  <div id="welcomeModal" class="modal-backdrop" style="display:none;">
+    <div class="modal">
+      <h2>Cómo funciona Prüfung A1</h2>
+      <p><strong>1.</strong> Hay 2 niveles: A1.1 y A1.2. Empiezas en A1.1; A1.2 se desbloquea al aprobar las 8 unidades de A1.1.</p>
+      <p><strong>2.</strong> Cada nivel tiene 8 unidades, y se desbloquean en orden — necesitas aprobar el examen de una para pasar a la siguiente.</p>
+      <p><strong>3.</strong> Cada unidad tiene 5 partes: <strong>Lección</strong> (aprendes la gramática), luego <strong>Hören, Lesen, Schreiben, Sprechen</strong> (practicas sin presión), y al final un <strong>simulacro de examen</strong> real con tiempo limitado.</p>
+      <p><strong>4.</strong> Tu progreso se guarda solo, en este navegador. Si quieres explorar todo sin restricciones, usa "Modo revisión" en la pantalla de inicio.</p>
+      <button class="primary-btn" onclick="closeWelcome()">Entendido, empezar</button>
+    </div>
+  </div>
+
+  <div id="app"></div>
+</div>
+
+<script>
+/* ================================================================
+   DATOS: niveles y unidades
+   ================================================================ */
+const TOTAL_UNITS_PER_LEVEL = 8;
+
+const LEVELS = [
+  { id:"a1_1", label:"A1.1", title:"Fundamentos", desc:"Presentarte, preguntar lo básico y manejarte en situaciones simples del día a día.",
+    intro:"En A1.1 construyes las bases: cómo presentarte, hablar de tu familia, decir de dónde eres, pedir objetos, hablar de tus gustos y manejar la hora y las fechas. Al terminar las 8 unidades, un simulacro final integra todo lo aprendido." },
+  { id:"a1_2", label:"A1.2", title:"Consolidación", desc:"Rutinas, pasado, verbos modales — construir fluidez sobre lo aprendido en A1.1.",
+    intro:"En A1.2 usas las bases de A1.1 en situaciones más completas: tu rutina diaria, pedir comida, dar direcciones, hablar del pasado y expresar obligación o deseo con verbos modales." }
+];
+
+const UNITS = [
+  {
+    id:"u1", level:"a1_1", number:1, title:"Begrüßung", subtitle:"Saludos y presentarse. Verbo sein, pronombres, orden básico.",
+    vokabCategory: null,
+    lessonCards: [
+      { title:"1. Saludos según el momento del día",
+        html:`<p><span class="de-line">Guten Morgen</span> — Buenos días (hasta ~10-11am)</p>
+              <p><span class="de-line">Guten Tag</span> — Buenos días/tardes (el más usado y formal)</p>
+              <p><span class="de-line">Guten Abend</span> — Buenas noches (al llegar, por la tarde-noche)</p>
+              <p><span class="de-line">Gute Nacht</span> — Buenas noches (solo para despedirte antes de dormir)</p>
+              <p><span class="de-line">Hallo</span> — Hola, a cualquier hora, informal</p>
+              <p style="margin-top:8px;">Despedidas: <span class="de-line">Tschüss</span> (informal), <span class="de-line">Auf Wiedersehen</span> (formal), <span class="de-line">Bis bald</span> (hasta pronto).</p>`,
+        audio:"Guten Morgen. Guten Tag. Guten Abend. Gute Nacht. Hallo. Tschüss. Auf Wiedersehen." },
+      { title:"2. Du vs. Sie — el detalle que más se olvida",
+        html:`<p>El alemán distingue el trato informal del formal, y cambia la conjugación del verbo:</p>
+              <p><span class="de-line">du</span> — amigos, familia, gente de tu edad. Ej: <span class="de-line">Wie heißt du?</span></p>
+              <p><span class="de-line">Sie</span> (mayúscula siempre) — desconocidos, contextos formales. Ej: <span class="de-line">Wie heißen Sie?</span></p>
+              <p style="margin-top:8px; font-style:italic; color:rgba(20,20,20,0.6);">En el examen, Sprechen suele ser formal (Sie); los textos de Hören/Lesen suelen ser informales (du).</p>` },
+      { title:"3. Pronombres personales completos",
+        html:`<table style="width:100%; border-collapse:collapse; font-size:13.5px;">
+              <tr><td style="padding:4px 0;"><span class="de-line">ich</span></td><td>yo</td><td style="padding:4px 0;"><span class="de-line">wir</span></td><td>nosotros</td></tr>
+              <tr><td style="padding:4px 0;"><span class="de-line">du</span></td><td>tú</td><td style="padding:4px 0;"><span class="de-line">ihr</span></td><td>vosotros</td></tr>
+              <tr><td style="padding:4px 0;"><span class="de-line">er/sie/es</span></td><td>él/ella/eso</td><td style="padding:4px 0;"><span class="de-line">sie</span></td><td>ellos</td></tr>
+              <tr><td style="padding:4px 0;"><span class="de-line">Sie</span></td><td>usted (formal)</td><td></td><td></td></tr>
+              </table>` },
+      { title:"4. El verbo sein — conjugación completa",
+        html:`<p>Irregular, se memoriza tal cual:</p>
+              <table style="width:100%; border-collapse:collapse; font-size:13.5px;">
+              <tr><td style="padding:4px 0;"><span class="de-line">ich bin</span></td><td style="padding:4px 0;"><span class="de-line">wir sind</span></td></tr>
+              <tr><td style="padding:4px 0;"><span class="de-line">du bist</span></td><td style="padding:4px 0;"><span class="de-line">ihr seid</span></td></tr>
+              <tr><td style="padding:4px 0;"><span class="de-line">er/sie/es ist</span></td><td style="padding:4px 0;"><span class="de-line">sie/Sie sind</span></td></tr>
+              </table>
+              <p style="margin-top:10px; font-style:italic; color:rgba(20,20,20,0.6);">"Ich bin Alex." · "Wir sind aus Kolumbien." · "Bist du Student?"</p>` },
+      { title:"5. Los 3 verbos para presentarte",
+        html:`<p><span class="de-line">heißen</span>: ich heiße · du heißt · er/sie/es heißt · wir heißen · ihr heißt · sie/Sie heißen</p>
+              <p style="margin-top:10px;"><span class="de-line">kommen</span> (+aus): ich komme · du kommst · er/sie/es kommt · wir kommen · ihr kommt · sie/Sie kommen</p>
+              <p style="margin-top:10px;"><span class="de-line">sprechen</span> — ¡cambia la vocal!: ich spreche · <strong>du sprichst · er/sie/es spricht</strong> · wir sprechen · ihr sprecht · sie/Sie sprechen</p>` },
+      { title:"6. Números 0-20 (para tu edad)",
+        html:`<p style="font-size:13.5px; line-height:1.8;">0 null · 1 eins · 2 zwei · 3 drei · 4 vier · 5 fünf · 6 sechs · 7 sieben · 8 acht · 9 neun · 10 zehn · 11 elf · 12 zwölf · 13 dreizehn · 14 vierzehn · 15 fünfzehn · 16 sechzehn · 17 siebzehn · 18 achtzehn · 19 neunzehn · 20 zwanzig</p>
+              <p style="margin-top:8px;">Edad: <span class="de-line">Ich bin 28 Jahre alt.</span> (se usa "sein", no "haben" como en español)</p>`,
+        audio:"eins, zwei, drei, vier, fünf, sechs, sieben, acht, neun, zehn", vokabCategory:"numeros" },
+      { title:"7. Preguntas: sí/no vs. W-Fragen",
+        html:`<p><strong>Sí/no</strong> — verbo primero: <span class="de-line">Bist du</span> aus Kolumbien?</p>
+              <p style="margin-top:8px;"><strong>W-Fragen</strong> — palabra W- primero, verbo después:</p>
+              <p style="font-size:13.5px;"><span class="de-line">wer</span> quién · <span class="de-line">was</span> qué · <span class="de-line">wo</span> dónde · <span class="de-line">woher</span> de dónde · <span class="de-line">wie</span> cómo · <span class="de-line">wann</span> cuándo</p>
+              <p><span class="de-line">Woher kommst du?</span> · <span class="de-line">Wie heißt du?</span> · <span class="de-line">Wie alt bist du?</span></p>` },
+      { title:"8. Vocabulario esencial",
+        html:`<p style="font-size:13.5px; line-height:1.9;"><span class="de-line">der Name</span> nombre · <span class="de-line">das Land</span> país · <span class="de-line">die Sprache</span> idioma · <span class="de-line">Kolumbien</span> Colombia · <span class="de-line">Deutschland</span> Alemania · <span class="de-line">Spanisch</span> español · <span class="de-line">Deutsch</span> alemán · <span class="de-line">ein bisschen</span> un poco</p>` },
+      { title:"9. Diálogo modelo completo",
+        html:`<p class="de-line">— Hallo! Wie heißt du?</p><p class="de-line">— Ich heiße Sofía. Und du?</p>
+              <p class="de-line">— Ich heiße Tom. Woher kommst du?</p>
+              <p class="de-line">— Ich komme aus Kolumbien. Ich spreche Spanisch und ein bisschen Deutsch. Und du?</p>
+              <p class="de-line">— Ich komme aus Deutschland. Wie alt bist du?</p>
+              <p class="de-line">— Ich bin 27 Jahre alt.</p>
+              <p style="margin-top:12px; font-size:12.5px; color:rgba(20,20,20,0.55);">Traducción: "¡Hola! ¿Cómo te llamas? — Me llamo Sofía. ¿Y tú? — Me llamo Tom. ¿De dónde vienes? — Vengo de Colombia, hablo español y un poco de alemán. ¿Y tú? — Vengo de Alemania. ¿Cuántos años tienes? — Tengo 27 años."</p>`,
+        audio:"Hallo! Wie heißt du? Ich heiße Sofía. Und du? Ich heiße Tom. Woher kommst du? Ich komme aus Kolumbien. Ich spreche Spanisch und ein bisschen Deutsch. Und du? Ich komme aus Deutschland. Wie alt bist du? Ich bin 27 Jahre alt." }
+    ],
+    leccionChecks: [
+      { q:"¿Cómo se dice \"yo soy\" en alemán?", opts:["du bist","ich bin","er ist"], correct:1 },
+      { q:"Completa: \"Ich ___ Anna.\" (llamarse)", opts:["heiße","heißt","heißen"], correct:0 },
+      { q:"¿Cuál es la pregunta correcta para \"¿de dónde vienes?\"?", opts:["Wie kommst du?","Woher kommst du?","Was kommst du?"], correct:1 },
+      { q:"¿Dónde va el verbo en \"Wie heißt du?\"?", opts:["Al final","Justo después de la palabra W-","No lleva verbo"], correct:1 },
+      { q:"Estás en una entrevista formal. ¿Cómo preguntas el nombre?", opts:["Wie heißt du?","Wie heißen Sie?","Wie heißen wir?"], correct:1 },
+      { q:"\"sprechen\" cambia de vocal con \"du\". ¿Cuál es correcta?", opts:["du sprechst","du sprichst","du spreche"], correct:1 },
+      { q:"¿Cómo dices \"tengo 20 años\"?", opts:["Ich habe 20 Jahre alt","Ich bin 20 Jahre alt","Ich bin zwanzig"], correct:1 },
+      { q:"Vas a dormir y te despides. ¿Qué dices?", opts:["Guten Tag","Gute Nacht","Guten Morgen"], correct:1 }
+    ],
+    leccionWrite: { prompt:"Escribe en alemán: \"Yo hablo español.\"", placeholder:"Ich...", valid:["ich spreche spanisch"] },
+    hoerenText:"Hallo! Ich heiße Anna. Wie heißt du? — Ich heiße Marco. Woher kommst du? — Ich komme aus Spanien. Und du? — Ich komme aus Deutschland.",
+    hoerenQ:[
+      { q:"¿Cómo se llama la mujer?", opts:["Anna","Marco","Deutschland"], correct:0 },
+      { q:"¿De dónde viene Marco?", opts:["Deutschland","Spanien","Österreich"], correct:1 }
+    ],
+    lesenText:"Hallo! Ich heiße Lukas. Ich bin 24 Jahre alt und ich komme aus Deutschland. Ich spreche Deutsch und ein bisschen Englisch.",
+    lesenQ:[
+      { q:"Lukas kommt aus Deutschland.", opts:["Richtig","Falsch"], correct:0 },
+      { q:"Lukas spricht nur Deutsch.", opts:["Richtig","Falsch"], correct:1 },
+      { q:"Lukas ist 24 Jahre alt.", opts:["Richtig","Falsch"], correct:0 }
+    ],
+    schreibenPracticeBullets:["Tu nombre (Ich heiße...)","Tu edad (Ich bin ... Jahre alt)","De dónde eres (Ich komme aus...)","Qué idioma(s) hablas (Ich spreche...)"],
+    schreibenTeil1Fields:[ {id:"f_vorname",label:"Vorname",placeholder:"Nombre"}, {id:"f_nachname",label:"Nachname",placeholder:"Apellido"}, {id:"f_land",label:"Land",placeholder:"País (ej. Kolumbien)"}, {id:"f_sprache",label:"Sprache",placeholder:"Idioma (ej. Spanisch)"} ],
+    schreibenTeil2Bullets:["Cómo te llamas","De dónde eres","Qué idioma hablas"],
+    sprechenPracticeBullets:["Tu nombre","Tu edad","De dónde eres","Qué idioma hablas"],
+    sprechenExamParts:[
+      { label:"SPRECHEN · Teil 1", instruction:"Preséntate: nombre, edad, país, idioma.", time:40 },
+      { label:"SPRECHEN · Teil 2", instruction:"Tarjeta de tema: \"Wohnort\" (lugar donde vives). Formula una pregunta con esa palabra y respóndela tú mismo.", time:40 },
+      { label:"SPRECHEN · Teil 3", instruction:"Haz una petición simple, ej. pidiendo un vaso de agua (\"Können Sie mir bitte... geben?\").", time:30 }
+    ]
+  },
+  {
+    id:"u2", level:"a1_1", number:2, title:"Zahlen, Alter, Kontakt", subtitle:"Números, edad, verbo haben, dar y pedir datos de contacto.",
+    vokabCategory:"numeros",
+    lessonCards: [
+      { title:"1. El verbo haben (tener) — conjugación completa",
+        html:`<p>Junto con sein, es el verbo más usado del idioma:</p>
+              <table style="width:100%; border-collapse:collapse; font-size:13.5px;">
+              <tr><td style="padding:4px 0;"><span class="de-line">ich habe</span></td><td style="padding:4px 0;"><span class="de-line">wir haben</span></td></tr>
+              <tr><td style="padding:4px 0;"><span class="de-line">du hast</span></td><td style="padding:4px 0;"><span class="de-line">ihr habt</span></td></tr>
+              <tr><td style="padding:4px 0;"><span class="de-line">er/sie/es hat</span></td><td style="padding:4px 0;"><span class="de-line">sie/Sie haben</span></td></tr>
+              </table>
+              <p style="margin-top:10px; font-style:italic; color:rgba(20,20,20,0.6);">"Ich habe eine Frage." (Tengo una pregunta) · "Hast du Zeit?" (¿Tienes tiempo?)</p>
+              <p style="margin-top:8px;">Ojo: para la edad NO se usa haben, se usa sein — "Ich bin 20 Jahre alt", no "Ich habe 20 Jahre".</p>` },
+      { title:"2. Números 21-100",
+        html:`<p>Del 21 en adelante, en alemán se dice la unidad ANTES que la decena, unidas con "und" (como "veintiuno" al revés): <span class="de-line">einundzwanzig</span> = uno-y-veinte = 21.</p>
+              <p style="margin-top:8px; font-size:13.5px; line-height:1.8;">20 zwanzig · 21 einundzwanzig · 22 zweiundzwanzig · 30 dreißig · 40 vierzig · 50 fünfzig · 60 sechzig · 70 siebzig · 80 achtzig · 90 neunzig · 100 hundert</p>`,
+        audio:"zwanzig, einundzwanzig, dreißig, vierzig, fünfzig, hundert", vokabCategory:"numeros" },
+      { title:"3. Pedir y dar un número de teléfono",
+        html:`<p><span class="de-line">Wie ist deine Telefonnummer?</span> (¿Cuál es tu número?, informal)</p>
+              <p><span class="de-line">Wie ist Ihre Telefonnummer?</span> (formal)</p>
+              <p style="margin-top:8px;"><span class="de-line">Meine Telefonnummer ist null-eins-sieben-sechs...</span> — los números de teléfono se leen dígito por dígito, no como números completos.</p>` },
+      { title:"4. Repaso: preguntar y dar la edad",
+        html:`<p><span class="de-line">Wie alt bist du?</span> / <span class="de-line">Wie alt sind Sie?</span> (formal)</p>
+              <p><span class="de-line">Ich bin dreißig Jahre alt.</span> (Tengo 30 años — recuerda: sein, no haben)</p>` },
+      { title:"5. Vocabulario esencial",
+        html:`<p style="font-size:13.5px; line-height:1.9;"><span class="de-line">die Telefonnummer</span> número de teléfono · <span class="de-line">die Adresse</span> dirección · <span class="de-line">die E-Mail-Adresse</span> correo electrónico · <span class="de-line">der Wohnort</span> lugar de residencia · <span class="de-line">geboren</span> nacido · <span class="de-line">das Geburtsjahr</span> año de nacimiento</p>` },
+      { title:"6. La hora (die Uhrzeit)",
+        html:`<p>Para preguntar la hora: <span class="de-line">Wie spät ist es?</span> o <span class="de-line">Wie viel Uhr ist es?</span></p>
+              <p style="margin-top:8px;">Para responder, se usa <span class="de-line">Es ist ... Uhr</span>:</p>
+              <p style="font-size:13.5px; line-height:1.8;"><span class="de-line">Es ist ein Uhr.</span> (Es la 1:00) · <span class="de-line">Es ist drei Uhr.</span> (3:00) · <span class="de-line">Es ist halb vier.</span> (3:30 — literalmente "media hacia las 4") · <span class="de-line">Es ist Viertel nach zwei.</span> (2:15) · <span class="de-line">Es ist Viertel vor fünf.</span> (4:45)</p>
+              <p style="margin-top:10px; background:rgba(232,163,61,0.15); border-radius:8px; padding:10px 12px; font-size:13px;">🧒 En palabras simples: "halb vier" NO es las 3:30 en el sentido de "media pasada las 3" como en español — en alemán se piensa hacia adelante: "halb vier" = "camino a las 4, ya vamos por la mitad" = 3:30. Es de las cosas que más confunde, tómate tu tiempo.</p>`,
+        audio:"Wie spät ist es? Es ist ein Uhr. Es ist drei Uhr. Es ist halb vier. Es ist Viertel nach zwei. Es ist Viertel vor fünf." },
+      { title:"7. Días de la semana y meses",
+        html:`<p style="font-size:13.5px; line-height:1.8;"><span class="de-line">Montag</span> lunes · <span class="de-line">Dienstag</span> martes · <span class="de-line">Mittwoch</span> miércoles · <span class="de-line">Donnerstag</span> jueves · <span class="de-line">Freitag</span> viernes · <span class="de-line">Samstag</span> sábado · <span class="de-line">Sonntag</span> domingo</p>
+              <p style="margin-top:8px;">Preguntar la fecha: <span class="de-line">Welcher Tag ist heute?</span> (¿Qué día es hoy?) → <span class="de-line">Heute ist Montag.</span></p>
+              <p style="margin-top:8px; font-size:13px;">Meses: <span class="de-line">Januar, Februar, März, April, Mai, Juni, Juli, August, September, Oktober, November, Dezember</span> — casi idénticos al español, fáciles de reconocer.</p>`,
+        audio:"Montag, Dienstag, Mittwoch, Donnerstag, Freitag, Samstag, Sonntag" },
+      { title:"8. Diálogo modelo completo",
+        html:`<p class="de-line">— Wie alt bist du?</p><p class="de-line">— Ich bin fünfundzwanzig Jahre alt. Und du?</p>
+              <p class="de-line">— Ich bin dreißig. Wie ist deine Telefonnummer?</p>
+              <p class="de-line">— Meine Telefonnummer ist null-eins-sieben-sechs, eins-zwei-drei-vier-fünf.</p>
+              <p class="de-line">— Danke! Und wie ist deine E-Mail-Adresse?</p>
+              <p style="margin-top:12px; font-size:12.5px; color:rgba(20,20,20,0.55);">Traducción: "¿Cuántos años tienes? — Tengo 25 años. ¿Y tú? — Tengo 30. ¿Cuál es tu número? — Mi número es 0176 12345. — ¡Gracias! ¿Y tu correo?"</p>`,
+        audio:"Wie alt bist du? Ich bin fünfundzwanzig Jahre alt. Und du? Ich bin dreißig. Wie ist deine Telefonnummer? Meine Telefonnummer ist null eins sieben sechs, eins zwei drei vier fünf." }
+    ],
+    leccionChecks:[
+      { q:"¿Cómo se dice \"tengo\" en alemán (yo)?", opts:["ich bin","ich habe","ich hast"], correct:1 },
+      { q:"¿Cómo se dice 21 en alemán?", opts:["zwanzigeins","einundzwanzig","eins-zwanzig"], correct:1 },
+      { q:"Para decir tu edad, ¿qué verbo usas?", opts:["haben","sein","kommen"], correct:1 },
+      { q:"¿Cómo preguntas el número de teléfono de forma formal?", opts:["Wie ist deine Telefonnummer?","Wie ist Ihre Telefonnummer?","Wie hast du Telefonnummer?"], correct:1 },
+      { q:"Conjuga \"haben\" con \"du\":", opts:["du habt","du hast","du habe"], correct:1 },
+      { q:"¿Cómo se dice 100?", opts:["hundert","zehnzig","hunderteins"], correct:0 },
+      { q:"¿Qué hora es \"halb vier\"?", opts:["4:30","3:30","3:15"], correct:1 },
+      { q:"¿Cómo preguntas qué hora es?", opts:["Wie spät ist es?","Wie viel ist es?","Wie alt ist es?"], correct:0 },
+      { q:"¿Cuál es el primer día de la semana en alemán?", opts:["Sonntag","Montag","Samstag"], correct:1 }
+    ],
+    leccionWrite: { prompt:"Escribe en alemán: \"Tengo treinta años.\"", placeholder:"Ich...", valid:["ich bin dreißig jahre alt","ich bin 30 jahre alt"] },
+    hoerenText:"Wie alt bist du? — Ich bin fünfundzwanzig Jahre alt. Und wie ist deine Telefonnummer? — Meine Telefonnummer ist null-eins-sieben-sechs.",
+    hoerenQ:[
+      { q:"¿Cuántos años tiene la persona?", opts:["15","25","55"], correct:1 },
+      { q:"¿Qué le preguntan al final?", opts:["Su nombre","Su número de teléfono","Su país"], correct:1 }
+    ],
+    lesenText:"Ich heiße Petra. Ich bin einunddreißig Jahre alt. Meine Telefonnummer ist 0176 998877. Heute ist Montag und es ist halb zehn.",
+    lesenQ:[
+      { q:"Petra ist 31 Jahre alt.", opts:["Richtig","Falsch"], correct:0 },
+      { q:"Heute ist Sonntag.", opts:["Richtig","Falsch"], correct:1 },
+      { q:"Es ist 9:30 Uhr.", opts:["Richtig","Falsch"], correct:0 }
+    ],
+    schreibenPracticeBullets:["Tu edad (Ich bin ... Jahre alt)","Tu número de teléfono","Qué día es hoy"],
+    schreibenTeil1Fields:[ {id:"f_alter",label:"Alter",placeholder:"Edad (ej. 28)"}, {id:"f_tel",label:"Telefonnummer",placeholder:"Número de teléfono"}, {id:"f_tag",label:"Wochentag",placeholder:"Día de la semana (ej. Montag)"}, {id:"f_email",label:"E-Mail-Adresse",placeholder:"Correo electrónico"} ],
+    schreibenTeil2Bullets:["Tu edad","Tu número de teléfono","Qué día es hoy"],
+    sprechenPracticeBullets:["Tu edad","Qué día es hoy y qué hora es (aproximada)"],
+    sprechenExamParts:[
+      { label:"SPRECHEN · Teil 1", instruction:"Di tu edad y qué día es hoy.", time:40 },
+      { label:"SPRECHEN · Teil 2", instruction:"Tarjeta de tema: \"Uhrzeit\". Formula una pregunta con esa palabra y respóndela tú mismo.", time:40 },
+      { label:"SPRECHEN · Teil 3", instruction:"Pide a alguien que repita algo: \"Können Sie das bitte wiederholen?\"", time:30 }
+    ]
+  },
+  {
+    id:"u3", level:"a1_1", number:3, title:"Familie", subtitle:"Familia, posesivos (mein/dein), plural de sustantivos, profesiones.",
+    vokabCategory:"familia",
+    lessonCards: [
+      { title:"1. Posesivos básicos (mein, dein, sein, ihr)",
+        html:`<p>Funcionan como "der/das/die" pero indican de quién es algo:</p>
+              <p><span class="de-line">mein</span> mi · <span class="de-line">dein</span> tu · <span class="de-line">sein</span> su (de él) · <span class="de-line">ihr</span> su (de ella) · <span class="de-line">unser</span> nuestro</p>
+              <p style="margin-top:8px; font-style:italic; color:rgba(20,20,20,0.6);">"Mein Vater ist Lehrer." · "Deine Mutter ist nett." · "Ihre Schwester heißt Lea."</p>
+              <p style="margin-top:10px; background:rgba(232,163,61,0.15); border-radius:8px; padding:10px 12px; font-size:13px;">🧒 En palabras simples: es como decir "MI mochila" en vez de "LA mochila". Solo cambia una palabra chiquita antes del sustantivo.</p>` },
+      { title:"2. Vocabulario: la familia",
+        html:`<p style="font-size:13.5px; line-height:1.9;"><span class="de-line">der Vater</span> padre · <span class="de-line">die Mutter</span> madre · <span class="de-line">der Bruder</span> hermano · <span class="de-line">die Schwester</span> hermana · <span class="de-line">der Sohn</span> hijo · <span class="de-line">die Tochter</span> hija · <span class="de-line">die Eltern</span> padres · <span class="de-line">die Geschwister</span> hermanos(as)</p>`,
+        audio:"der Vater, die Mutter, der Bruder, die Schwester, die Eltern, die Geschwister", vokabCategory:"familia" },
+      { title:"3. Plural de sustantivos — patrones comunes",
+        html:`<p>No hay una sola regla, pero hay patrones frecuentes:</p>
+              <p><span class="de-line">-e</span>: der Bruder → die Brüder (a veces con Umlaut)</p>
+              <p><span class="de-line">-n/-en</span>: die Schwester → die Schwestern</p>
+              <p><span class="de-line">-er</span>: das Kind → die Kinder</p>
+              <p><span class="de-line">-s</span>: das Auto → die Autos (extranjerismos)</p>
+              <p style="margin-top:8px; font-style:italic; color:rgba(20,20,20,0.6);">Consejo: memoriza el plural junto con cada sustantivo nuevo, no hay atajo.</p>` },
+      { title:"4. Profesiones",
+        html:`<p>La forma femenina casi siempre agrega <span class="de-line">-in</span>:</p>
+              <p><span class="de-line">der Lehrer / die Lehrerin</span> (profesor/a) · <span class="de-line">der Arzt / die Ärztin</span> (médico/a) · <span class="de-line">der Student / die Studentin</span> (estudiante)</p>
+              <p style="margin-top:8px;">Se usa sin artículo: <span class="de-line">Er ist Lehrer.</span> (no "ein Lehrer")</p>`, vokabCategory:"oficios" },
+      { title:"5. Diálogo modelo",
+        html:`<p class="de-line">— Hast du Geschwister?</p><p class="de-line">— Ja, ich habe eine Schwester. Sie heißt Lea.</p>
+              <p class="de-line">— Was ist dein Vater von Beruf?</p><p class="de-line">— Mein Vater ist Arzt. Meine Mutter ist Lehrerin.</p>
+              <p style="margin-top:12px; font-size:12.5px; color:rgba(20,20,20,0.55);">Traducción: "¿Tienes hermanos? — Sí, tengo una hermana, se llama Lea. — ¿Qué profesión tiene tu padre? — Mi padre es médico. Mi madre es profesora."</p>`,
+        audio:"Hast du Geschwister? Ja, ich habe eine Schwester. Sie heißt Lea. Was ist dein Vater von Beruf? Mein Vater ist Arzt. Meine Mutter ist Lehrerin." }
+    ],
+    leccionChecks:[
+      { q:"¿Cómo se dice \"mi padre\"?", opts:["dein Vater","mein Vater","ihr Vater"], correct:1 },
+      { q:"¿Cuál es el plural de \"das Kind\" (niño)?", opts:["die Kinder","die Kinds","die Kinden"], correct:0 },
+      { q:"¿Cómo se dice \"profesora\" (femenino)?", opts:["die Lehrer","die Lehrerin","die Lehrerinnen"], correct:1 },
+      { q:"\"Er ist ___ Lehrer.\" ¿Qué va en el espacio?", opts:["ein","kein artículo","der"], correct:1 },
+      { q:"¿Cómo se dice \"hermanos\" (en general)?", opts:["die Brüder","die Geschwister","die Familien"], correct:1 },
+      { q:"¿Cómo se dice \"su hermana\" (de ella)?", opts:["sein Schwester","ihre Schwester","dein Schwester"], correct:1 }
+    ],
+    leccionWrite:{ prompt:"Escribe en alemán: \"Mi madre es médica.\"", placeholder:"Meine...", valid:["meine mutter ist ärztin","meine mutter ist arztin"] },
+    hoerenText:"Hast du Geschwister? — Ja, ich habe einen Bruder. Er heißt Max. Was ist dein Vater von Beruf? — Mein Vater ist Lehrer.",
+    hoerenQ:[
+      { q:"¿Qué tiene la persona?", opts:["Una hermana","Un hermano","Dos hermanos"], correct:1 },
+      { q:"¿Cuál es la profesión del padre?", opts:["Arzt","Lehrer","Student"], correct:1 }
+    ],
+    lesenText:"Das ist meine Familie. Mein Vater heißt Peter, er ist Arzt. Meine Mutter heißt Sabine, sie ist Lehrerin. Ich habe eine Schwester, sie heißt Julia.",
+    lesenQ:[
+      { q:"Der Vater ist Lehrer.", opts:["Richtig","Falsch"], correct:1 },
+      { q:"Die Person hat eine Schwester.", opts:["Richtig","Falsch"], correct:0 }
+    ],
+    schreibenPracticeBullets:["Cuántos hermanos tienes","Cómo se llaman","Qué profesión tienen tus padres"],
+    schreibenTeil1Fields:[ {id:"f_vater",label:"Vater (Beruf)",placeholder:"Profesión de tu padre"}, {id:"f_mutter",label:"Mutter (Beruf)",placeholder:"Profesión de tu madre"}, {id:"f_geschwister",label:"Geschwister",placeholder:"¿Cuántos hermanos tienes?"}, {id:"f_name",label:"Dein Name",placeholder:"Tu nombre"} ],
+    schreibenTeil2Bullets:["Cuántos hermanos tienes","Cómo se llaman","Profesión de uno de tus padres"],
+    sprechenPracticeBullets:["Describe a tu familia","Menciona la profesión de alguien"],
+    sprechenExamParts:[
+      { label:"SPRECHEN · Teil 1", instruction:"Describe a tu familia: cuántos hermanos tienes y sus nombres.", time:40 },
+      { label:"SPRECHEN · Teil 2", instruction:"Tarjeta de tema: \"Beruf\" (profesión). Formula una pregunta y respóndela tú mismo.", time:40 },
+      { label:"SPRECHEN · Teil 3", instruction:"Petición simple: pide a alguien que te muestre una foto de su familia (\"Kannst du mir bitte ein Foto zeigen?\").", time:30 }
+    ]
+  },
+  {
+    id:"u4", level:"a1_1", number:4, title:"Länder und Sprachen", subtitle:"Países, idiomas, artículos definidos e indefinidos.",
+    vokabCategory:null,
+    lessonCards: [
+      { title:"1. Artículos definidos: der, die, das",
+        html:`<p>Cada sustantivo alemán tiene un género que hay que memorizar junto con la palabra:</p>
+              <p><span class="de-line">der</span> (masculino): der Mann, der Tisch</p>
+              <p><span class="de-line">die</span> (femenino): die Frau, die Sprache</p>
+              <p><span class="de-line">das</span> (neutro): das Land, das Kind</p>
+              <p style="margin-top:8px; font-style:italic; color:rgba(20,20,20,0.6);">No hay una regla fija de género — se aprende con cada palabra nueva.</p>
+              <p style="margin-top:10px; background:rgba(232,163,61,0.15); border-radius:8px; padding:10px 12px; font-size:13px;">🧒 En palabras simples: en español decimos "EL perro" o "LA mesa". En alemán hay 3 en vez de 2: der, die, das. No intentes adivinar la lógica — simplemente apréndete cada palabra junto con su "etiqueta".</p>` },
+      { title:"2. Artículos indefinidos: ein, eine",
+        html:`<p><span class="de-line">ein</span> (masculino/neutro): ein Mann, ein Land</p>
+              <p><span class="de-line">eine</span> (femenino): eine Frau, eine Sprache</p>
+              <p style="margin-top:8px;">Equivalen a "un/una". No existe forma plural de "ein" (en plural simplemente se omite el artículo).</p>
+              <p style="margin-top:10px; background:rgba(232,163,61,0.15); border-radius:8px; padding:10px 12px; font-size:13px;">🧒 En palabras simples: "ein/eine" es igual que "un/una" en español — solo cambia según si la palabra es der/das (ein) o die (eine).</p>` },
+      { title:"3. Países y nacionalidades",
+        html:`<p>El adjetivo de nacionalidad casi siempre termina en <span class="de-line">-isch</span>:</p>
+              <p><span class="de-line">Kolumbien</span> → <span class="de-line">kolumbianisch</span> · <span class="de-line">Deutschland</span> → <span class="de-line">deutsch</span> · <span class="de-line">Spanien</span> → <span class="de-line">spanisch</span> · <span class="de-line">Frankreich</span> → <span class="de-line">französisch</span> (excepción de ortografía)</p>
+              <p style="margin-top:8px;"><span class="de-line">Ich komme aus Kolumbien. Ich bin Kolumbianer/Kolumbianerin.</span></p>` },
+      { title:"4. Vocabulario: países e idiomas",
+        html:`<p style="font-size:13.5px; line-height:1.9;"><span class="de-line">Mexiko</span> México · <span class="de-line">die USA</span> Estados Unidos · <span class="de-line">Italien</span> Italia · <span class="de-line">Portugiesisch</span> portugués · <span class="de-line">Französisch</span> francés · <span class="de-line">Italienisch</span> italiano</p>`,
+        audio:"Kolumbien, Deutschland, Spanien, Frankreich, Mexiko, Italien" },
+      { title:"5. Diálogo modelo",
+        html:`<p class="de-line">— Woher kommst du?</p><p class="de-line">— Ich komme aus Kolumbien. Und du?</p>
+              <p class="de-line">— Ich komme aus Frankreich. Sprichst du Französisch?</p>
+              <p class="de-line">— Nein, ich spreche kein Französisch. Ich spreche Spanisch und ein bisschen Deutsch.</p>
+              <p style="margin-top:12px; font-size:12.5px; color:rgba(20,20,20,0.55);">Traducción: "¿De dónde eres? — Soy de Colombia. ¿Y tú? — Soy de Francia. ¿Hablas francés? — No, no hablo francés. Hablo español y un poco de alemán."</p>`,
+        audio:"Woher kommst du? Ich komme aus Kolumbien. Und du? Ich komme aus Frankreich. Sprichst du Französisch? Nein, ich spreche kein Französisch. Ich spreche Spanisch und ein bisschen Deutsch." }
+    ],
+    leccionChecks:[
+      { q:"¿Qué artículo lleva \"Land\" (país)?", opts:["der Land","die Land","das Land"], correct:2 },
+      { q:"¿Cómo se dice \"un país\" (indefinido)?", opts:["ein Land","eine Land","einen Land"], correct:0 },
+      { q:"¿Cómo se dice \"alemán\" como idioma/adjetivo?", opts:["Deutschland","deutsch","Deutscher"], correct:1 },
+      { q:"¿Qué artículo lleva \"Sprache\" (idioma)?", opts:["der Sprache","die Sprache","das Sprache"], correct:1 },
+      { q:"¿Cómo se dice \"No hablo francés\"?", opts:["Ich spreche kein Französisch","Ich spreche nicht Französisch","Ich habe kein Französisch"], correct:0 }
+    ],
+    leccionWrite:{ prompt:"Escribe en alemán: \"Vengo de México.\"", placeholder:"Ich...", valid:["ich komme aus mexiko"] },
+    hoerenText:"Woher kommst du? — Ich komme aus Spanien. Sprichst du Englisch? — Ja, ich spreche Englisch und Spanisch.",
+    hoerenQ:[
+      { q:"¿De dónde viene la persona?", opts:["Spanien","Frankreich","Mexiko"], correct:0 },
+      { q:"¿Qué idiomas habla?", opts:["Solo español","Inglés y español","Solo inglés"], correct:1 }
+    ],
+    lesenText:"Ich heiße Marco. Ich komme aus Italien. Ich spreche Italienisch und ein bisschen Deutsch. Ich spreche kein Französisch.",
+    lesenQ:[
+      { q:"Marco kommt aus Italien.", opts:["Richtig","Falsch"], correct:0 },
+      { q:"Marco spricht Französisch.", opts:["Richtig","Falsch"], correct:1 }
+    ],
+    schreibenPracticeBullets:["De qué país eres","Qué idiomas hablas","Qué idioma no hablas"],
+    schreibenTeil1Fields:[ {id:"f_land2",label:"Land",placeholder:"Tu país"}, {id:"f_sprache2",label:"Muttersprache",placeholder:"Tu idioma materno"}, {id:"f_sprache3",label:"Andere Sprache",placeholder:"Otro idioma que hablas"}, {id:"f_name2",label:"Name",placeholder:"Tu nombre"} ],
+    schreibenTeil2Bullets:["De dónde eres","Qué idiomas hablas","Un idioma que no hablas"],
+    sprechenPracticeBullets:["De qué país eres","Qué idiomas hablas y cuáles no"],
+    sprechenExamParts:[
+      { label:"SPRECHEN · Teil 1", instruction:"Di de dónde eres y qué idiomas hablas.", time:40 },
+      { label:"SPRECHEN · Teil 2", instruction:"Tarjeta de tema: \"Sprache\" (idioma). Formula una pregunta y respóndela tú mismo.", time:40 },
+      { label:"SPRECHEN · Teil 3", instruction:"Petición simple: pregunta si alguien habla inglés (\"Sprechen Sie Englisch?\") y pide que te ayude.", time:30 }
+    ]
+  },
+  {
+    id:"u5", level:"a1_1", number:5, title:"Alltagsgegenstände", subtitle:"Objetos cotidianos, Akkusativ básico, negación nicht/kein.",
+    vokabCategory:"casa",
+    lessonCards: [
+      { title:"1. Akkusativ — el caso del objeto directo",
+        html:`<p>Cuando el sustantivo es el objeto directo de la frase (lo que recibe la acción), el artículo masculino cambia:</p>
+              <p><span class="de-line">der</span> → <span class="de-line">den</span> · <span class="de-line">ein</span> → <span class="de-line">einen</span></p>
+              <p>Femenino, neutro y plural NO cambian (die/das/ein/eine se quedan igual).</p>
+              <p style="margin-top:8px; font-style:italic; color:rgba(20,20,20,0.6);">"Ich habe einen Stift." (tengo un lápiz) · "Ich habe ein Buch." (sin cambio, es neutro)</p>
+              <p style="margin-top:10px; background:rgba(232,163,61,0.15); border-radius:8px; padding:10px 12px; font-size:13px;">🧒 En palabras simples: cuando "tienes" o "quieres" algo masculino (der), esa palabrita "der/ein" se transforma en "den/einen". Con "die" y "das" no cambia nada — solo hay que recordar el caso masculino.</p>` },
+      { title:"2. nicht vs. kein — cómo negar",
+        html:`<p><span class="de-line">kein/keine</span> niega un sustantivo con artículo indefinido o sin artículo:</p>
+              <p><span class="de-line">Ich habe kein Handy.</span> (No tengo celular)</p>
+              <p style="margin-top:8px;"><span class="de-line">nicht</span> niega verbos, adjetivos, o sustantivos con artículo definido:</p>
+              <p><span class="de-line">Das ist nicht mein Buch.</span> · <span class="de-line">Ich spreche nicht gut Deutsch.</span></p>
+              <p style="margin-top:10px; background:rgba(232,163,61,0.15); border-radius:8px; padding:10px 12px; font-size:13px;">🧒 En palabras simples: si estás negando una COSA (un objeto que "no tienes"), usa kein. Si estás negando cualquier otra cosa (una acción, un lugar), usa nicht.</p>` },
+      { title:"3. Vocabulario: objetos cotidianos",
+        html:`<p style="font-size:13.5px; line-height:1.9;"><span class="de-line">das Handy</span> celular · <span class="de-line">der Stift</span> lápiz/bolígrafo · <span class="de-line">das Buch</span> libro · <span class="de-line">die Tasche</span> bolsa/mochila · <span class="de-line">der Schlüssel</span> llave · <span class="de-line">der Stuhl</span> silla · <span class="de-line">der Tisch</span> mesa</p>`,
+        audio:"das Handy, der Stift, das Buch, die Tasche, der Schlüssel", vokabCategory:"casa" },
+      { title:"4. Pedir objetos",
+        html:`<p><span class="de-line">Hast du einen Stift?</span> (¿Tienes un lápiz? — Akkusativ porque Stift es masculino)</p>
+              <p><span class="de-line">Ich brauche ein Buch.</span> (Necesito un libro)</p>
+              <p><span class="de-line">Kannst du mir bitte die Tasche geben?</span> (¿Me puedes dar la bolsa?)</p>` },
+      { title:"5. Diálogo modelo",
+        html:`<p class="de-line">— Hast du einen Stift?</p><p class="de-line">— Nein, ich habe keinen Stift. Aber ich habe ein Buch.</p>
+              <p class="de-line">— Kannst du mir bitte deine Tasche geben?</p><p class="de-line">— Ja, hier ist die Tasche.</p>
+              <p style="margin-top:12px; font-size:12.5px; color:rgba(20,20,20,0.55);">Traducción: "¿Tienes un lápiz? — No, no tengo lápiz. Pero tengo un libro. — ¿Me puedes dar tu bolsa, por favor? — Sí, aquí está la bolsa."</p>`,
+        audio:"Hast du einen Stift? Nein, ich habe keinen Stift. Aber ich habe ein Buch. Kannst du mir bitte deine Tasche geben? Ja, hier ist die Tasche." }
+    ],
+    leccionChecks:[
+      { q:"\"der Stift\" en Akkusativ (después de \"haben\") es:", opts:["der Stift","den Stift","dem Stift"], correct:1 },
+      { q:"¿Cómo niegas \"Ich habe ein Handy\"?", opts:["Ich habe nicht ein Handy","Ich habe kein Handy","Ich habe keine Handy"], correct:1 },
+      { q:"¿Cómo niegas \"Das ist mein Buch\"?", opts:["Das ist kein mein Buch","Das ist nicht mein Buch","Das ist nichts mein Buch"], correct:1 },
+      { q:"¿Qué artículo indefinido lleva \"Tasche\" (femenino)?", opts:["ein","eine","einen"], correct:1 },
+      { q:"¿Cómo se dice \"Necesito un libro\"?", opts:["Ich brauche ein Buch","Ich brauche einen Buch","Ich habe ein Buch"], correct:0 }
+    ],
+    leccionWrite:{ prompt:"Escribe en alemán: \"No tengo llave.\"", placeholder:"Ich...", valid:["ich habe keinen schlüssel","ich habe keinen schlussel"] },
+    hoerenText:"Hast du einen Stift? — Nein, ich habe keinen Stift. Hast du ein Buch? — Ja, ich habe ein Buch.",
+    hoerenQ:[
+      { q:"¿Qué NO tiene la persona?", opts:["Un lápiz","Un libro","Una llave"], correct:0 },
+      { q:"¿Qué SÍ tiene?", opts:["Un lápiz","Un libro","Una bolsa"], correct:1 }
+    ],
+    lesenText:"Ich habe eine Tasche, aber ich habe keinen Schlüssel. Ich habe ein Handy und ein Buch. Ich habe keinen Stift.",
+    lesenQ:[
+      { q:"Die Person hat einen Schlüssel.", opts:["Richtig","Falsch"], correct:1 },
+      { q:"Die Person hat ein Handy.", opts:["Richtig","Falsch"], correct:0 }
+    ],
+    schreibenPracticeBullets:["Qué objetos tienes contigo","Qué objeto NO tienes"],
+    schreibenTeil1Fields:[ {id:"f_obj1",label:"Objekt 1",placeholder:"Un objeto que tienes"}, {id:"f_obj2",label:"Objekt 2",placeholder:"Otro objeto que tienes"}, {id:"f_notobj",label:"Was du nicht hast",placeholder:"Algo que no tienes"}, {id:"f_name3",label:"Name",placeholder:"Tu nombre"} ],
+    schreibenTeil2Bullets:["Qué objetos tienes en tu bolsa/mochila","Qué objeto no tienes"],
+    sprechenPracticeBullets:["Menciona 2 objetos que tienes","Menciona uno que no tienes (usa kein)"],
+    sprechenExamParts:[
+      { label:"SPRECHEN · Teil 1", instruction:"Di qué objetos tienes contigo ahora mismo (usa haben).", time:40 },
+      { label:"SPRECHEN · Teil 2", instruction:"Tarjeta de tema: \"Handy\". Formula una pregunta y respóndela tú mismo.", time:40 },
+      { label:"SPRECHEN · Teil 3", instruction:"Petición simple: pide prestado un lápiz (\"Kannst du mir bitte einen Stift geben?\").", time:30 }
+    ]
+  },
+  {
+    id:"u6", level:"a1_1", number:6, title:"Verben und Vorlieben", subtitle:"Presente regular, verbos con cambio vocálico, gustos con gern.",
+    vokabCategory:"deportes",
+    lessonCards: [
+      { title:"1. Presente regular — repaso del patrón",
+        html:`<p>Todos los verbos regulares siguen el mismo patrón de terminaciones:</p>
+              <p><span class="de-line">spielen</span> (jugar): ich spiele · du spielst · er/sie/es spielt · wir spielen · ihr spielt · sie/Sie spielen</p>
+              <p style="margin-top:8px;">Terminaciones: -e, -st, -t, -en, -t, -en — se aplican a casi todos los verbos nuevos.</p>` },
+      { title:"2. Verbos con cambio vocálico (irregulares en du/er)",
+        html:`<p>Algunos verbos comunes cambian la vocal SOLO en "du" y "er/sie/es":</p>
+              <p><span class="de-line">fahren</span> (viajar/conducir): ich fahre · <strong>du fährst · er fährt</strong> · wir fahren</p>
+              <p><span class="de-line">essen</span> (comer): ich esse · <strong>du isst · er isst</strong> · wir essen</p>
+              <p><span class="de-line">sehen</span> (ver): ich sehe · <strong>du siehst · er sieht</strong> · wir sehen</p>
+              <p><span class="de-line">lesen</span> (leer): ich lese · <strong>du liest · er liest</strong> · wir lesen</p>` },
+      { title:"3. Expresar gustos con gern",
+        html:`<p>Alemán no tiene un verbo como "gustar" — se agrega <span class="de-line">gern</span> (con gusto) después del verbo:</p>
+              <p><span class="de-line">Ich spiele gern Fußball.</span> (Me gusta jugar fútbol)</p>
+              <p><span class="de-line">Ich lese nicht gern.</span> (No me gusta leer)</p>
+              <p><span class="de-line">Ich schwimme lieber.</span> (Prefiero nadar — lieber = comparativo de gern)</p>` },
+      { title:"4. Vocabulario: actividades",
+        html:`<p style="font-size:13.5px; line-height:1.9;"><span class="de-line">schwimmen</span> nadar · <span class="de-line">kochen</span> cocinar · <span class="de-line">tanzen</span> bailar · <span class="de-line">Fußball spielen</span> jugar fútbol · <span class="de-line">Musik hören</span> escuchar música · <span class="de-line">fernsehen</span> ver televisión</p>`,
+        audio:"schwimmen, kochen, tanzen, Fußball spielen, Musik hören", vokabCategory:"deportes" },
+      { title:"5. Diálogo modelo",
+        html:`<p class="de-line">— Was machst du gern?</p><p class="de-line">— Ich spiele gern Fußball. Und du?</p>
+              <p class="de-line">— Ich lese gern Bücher. Isst du gern Pizza?</p>
+              <p class="de-line">— Ja, ich esse sehr gern Pizza!</p>
+              <p style="margin-top:12px; font-size:12.5px; color:rgba(20,20,20,0.55);">Traducción: "¿Qué te gusta hacer? — Me gusta jugar fútbol. ¿Y a ti? — Me gusta leer libros. ¿Te gusta la pizza? — ¡Sí, me gusta mucho la pizza!"</p>`,
+        audio:"Was machst du gern? Ich spiele gern Fußball. Und du? Ich lese gern Bücher. Isst du gern Pizza? Ja, ich esse sehr gern Pizza!" }
+    ],
+    leccionChecks:[
+      { q:"Conjuga \"essen\" con \"du\":", opts:["du essst","du isst","du esse"], correct:1 },
+      { q:"¿Cómo dices \"Me gusta bailar\"?", opts:["Ich tanze gern","Ich bin gern tanzen","Ich habe gern tanzen"], correct:0 },
+      { q:"Conjuga \"lesen\" con \"er\":", opts:["er lest","er liest","er lese"], correct:1 },
+      { q:"¿Cómo dices \"No me gusta cocinar\"?", opts:["Ich koche kein gern","Ich koche nicht gern","Ich bin nicht gern kochen"], correct:1 },
+      { q:"Conjuga \"fahren\" con \"du\":", opts:["du fahrst","du fährst","du fahre"], correct:1 }
+    ],
+    leccionWrite:{ prompt:"Escribe en alemán: \"Me gusta nadar.\"", placeholder:"Ich...", valid:["ich schwimme gern"] },
+    hoerenText:"Was machst du gern? — Ich schwimme gern. Isst du gern Pizza? — Nein, ich esse nicht gern Pizza.",
+    hoerenQ:[
+      { q:"¿Qué le gusta hacer a la persona?", opts:["Nadar","Bailar","Cocinar"], correct:0 },
+      { q:"¿Le gusta la pizza?", opts:["Sí","No","No dice"], correct:1 }
+    ],
+    lesenText:"Ich heiße Tom. Ich spiele gern Fußball und ich höre gern Musik. Ich koche nicht gern.",
+    lesenQ:[
+      { q:"Tom spielt gern Fußball.", opts:["Richtig","Falsch"], correct:0 },
+      { q:"Tom kocht gern.", opts:["Richtig","Falsch"], correct:1 }
+    ],
+    schreibenPracticeBullets:["Qué actividad te gusta","Qué actividad no te gusta"],
+    schreibenTeil1Fields:[ {id:"f_gern1",label:"Ich ... gern",placeholder:"Actividad que te gusta"}, {id:"f_gern2",label:"Ich ... nicht gern",placeholder:"Actividad que no te gusta"}, {id:"f_name4",label:"Name",placeholder:"Tu nombre"}, {id:"f_alter2",label:"Alter",placeholder:"Tu edad"} ],
+    schreibenTeil2Bullets:["Qué te gusta hacer en tu tiempo libre","Qué no te gusta hacer"],
+    sprechenPracticeBullets:["Di 2 actividades que te gustan","Di una que no te gusta"],
+    sprechenExamParts:[
+      { label:"SPRECHEN · Teil 1", instruction:"Cuenta qué te gusta hacer en tu tiempo libre.", time:40 },
+      { label:"SPRECHEN · Teil 2", instruction:"Tarjeta de tema: \"Hobby\". Formula una pregunta y respóndela tú mismo.", time:40 },
+      { label:"SPRECHEN · Teil 3", instruction:"Petición simple: invita a alguien a hacer una actividad contigo (\"Möchtest du mit mir schwimmen?\").", time:30 }
+    ]
+  },
+  {
+    id:"u7", level:"a1_1", number:7, title:"W-Fragen vertiefen", subtitle:"Repaso y expansión de preguntas abiertas con todos los verbos vistos.",
+    vokabCategory:null,
+    lessonCards: [
+      { title:"1. Todas las palabras W- juntas",
+        html:`<p style="font-size:13.5px; line-height:1.9;"><span class="de-line">wer</span> quién · <span class="de-line">was</span> qué · <span class="de-line">wo</span> dónde (ubicación) · <span class="de-line">wohin</span> a dónde (movimiento) · <span class="de-line">woher</span> de dónde · <span class="de-line">wann</span> cuándo · <span class="de-line">wie</span> cómo · <span class="de-line">warum</span> por qué · <span class="de-line">wie viel</span> cuánto · <span class="de-line">welche/r/s</span> cuál</p>` },
+      { title:"2. La estructura nunca cambia",
+        html:`<p>Palabra W- + verbo conjugado + sujeto + resto:</p>
+              <p><span class="de-line">Wo</span> <span class="de-line" style="color:var(--amber-deep);">wohnst</span> du?</p>
+              <p><span class="de-line">Was</span> <span class="de-line" style="color:var(--amber-deep);">isst</span> du gern?</p>
+              <p><span class="de-line">Warum</span> <span class="de-line" style="color:var(--amber-deep);">lernst</span> du Deutsch?</p>
+              <p style="margin-top:8px; font-style:italic; color:rgba(20,20,20,0.6);">Sirve con cualquier verbo que ya conoces: sein, haben, heißen, kommen, sprechen, spielen, essen...</p>
+              <p style="margin-top:10px; background:rgba(232,163,61,0.15); border-radius:8px; padding:10px 12px; font-size:13px;">🧒 En palabras simples: es como una receta de 3 pasos siempre igual — 1) palabra de pregunta, 2) el verbo, 3) quién hace la acción. Nunca cambia el orden.</p>` },
+      { title:"3. wie viel vs. welche",
+        html:`<p><span class="de-line">Wie viel(e)</span> pregunta cantidad: <span class="de-line">Wie viele Geschwister hast du?</span></p>
+              <p><span class="de-line">Welche/r/s</span> pregunta "cuál de varios": <span class="de-line">Welche Sprache sprichst du?</span></p>` },
+      { title:"4. Sí/no vs. W-Frage — contraste rápido",
+        html:`<p>Compara la misma idea en las 2 formas:</p>
+              <p><span class="de-line">Kommst du aus Spanien?</span> (Sí/No) vs. <span class="de-line">Woher kommst du?</span> (abierta)</p>
+              <p><span class="de-line">Isst du gern Pizza?</span> (Sí/No) vs. <span class="de-line">Was isst du gern?</span> (abierta)</p>` },
+      { title:"5. Diálogo modelo con preguntas variadas",
+        html:`<p class="de-line">— Wer bist du?</p><p class="de-line">— Ich bin Laura. — Wie alt bist du?</p>
+              <p class="de-line">— Ich bin 24. — Wo wohnst du?</p><p class="de-line">— Ich wohne in Berlin. — Warum lernst du Deutsch?</p>
+              <p class="de-line">— Deutsch ist wichtig für meine Arbeit.</p>
+              <p style="margin-top:12px; font-size:12.5px; color:rgba(20,20,20,0.55);">Traducción: "¿Quién eres? — Soy Laura. — ¿Cuántos años tienes? — Tengo 24. — ¿Dónde vives? — Vivo en Berlín. — ¿Por qué aprendes alemán? — El alemán es importante para mi trabajo."</p>`,
+        audio:"Wer bist du? Ich bin Laura. Wie alt bist du? Ich bin vierundzwanzig. Wo wohnst du? Ich wohne in Berlin. Warum lernst du Deutsch? Deutsch ist wichtig für meine Arbeit." }
+    ],
+    leccionChecks:[
+      { q:"¿Qué palabra usas para preguntar \"a dónde vas\"?", opts:["wo","wohin","woher"], correct:1 },
+      { q:"¿Qué palabra usas para preguntar cantidad?", opts:["welche","wie viel","was"], correct:1 },
+      { q:"Ordena: \"du / wohnst / wo\" en pregunta correcta:", opts:["Wo wohnst du?","Wohnst wo du?","Du wo wohnst?"], correct:0 },
+      { q:"¿Cuál pregunta \"cuál de varios idiomas\"?", opts:["Wie viel Sprache?","Welche Sprache?","Wo Sprache?"], correct:1 },
+      { q:"¿Cuál es la versión W- de \"Isst du gern Pizza?\"?", opts:["Was isst du gern?","Wer isst du gern?","Wann isst du gern?"], correct:0 }
+    ],
+    leccionWrite:{ prompt:"Escribe en alemán: \"¿Dónde vives?\"", placeholder:"Wo...", valid:["wo wohnst du"] },
+    hoerenText:"Wo wohnst du? — Ich wohne in München. Warum lernst du Deutsch? — Deutsch ist wichtig für meine Arbeit.",
+    hoerenQ:[
+      { q:"¿Dónde vive la persona?", opts:["Berlin","München","Hamburg"], correct:1 },
+      { q:"¿Por qué aprende alemán?", opts:["Para viajar","Es importante para su trabajo","No dice"], correct:1 }
+    ],
+    lesenText:"Wer bin ich? Ich heiße Jonas. Wie alt bin ich? Ich bin 22 Jahre alt. Wo wohne ich? Ich wohne in Köln.",
+    lesenQ:[
+      { q:"Jonas ist 22 Jahre alt.", opts:["Richtig","Falsch"], correct:0 },
+      { q:"Jonas wohnt in Berlin.", opts:["Richtig","Falsch"], correct:1 }
+    ],
+    schreibenPracticeBullets:["Escribe 3 preguntas W- distintas","Respóndelas tú mismo"],
+    schreibenTeil1Fields:[ {id:"f_wohnort2",label:"Wo wohnst du?",placeholder:"Tu ciudad"}, {id:"f_warum",label:"Warum lernst du Deutsch?",placeholder:"Tu razón"}, {id:"f_name5",label:"Name",placeholder:"Tu nombre"}, {id:"f_alter3",label:"Alter",placeholder:"Tu edad"} ],
+    schreibenTeil2Bullets:["Dónde vives","Por qué aprendes alemán","Qué te gusta hacer"],
+    sprechenPracticeBullets:["Formula 3 preguntas W- distintas","Respóndelas en voz alta"],
+    sprechenExamParts:[
+      { label:"SPRECHEN · Teil 1", instruction:"Responde: ¿quién eres, dónde vives y por qué aprendes alemán?", time:40 },
+      { label:"SPRECHEN · Teil 2", instruction:"Tarjeta de tema: \"Warum\" (por qué). Formula una pregunta con \"warum\" y respóndela.", time:40 },
+      { label:"SPRECHEN · Teil 3", instruction:"Petición simple: pregunta la hora (\"Wie viel Uhr ist es?\") y agradece.", time:30 }
+    ]
+  },
+  {
+    id:"u8", level:"a1_1", number:8, title:"Wiederholung A1.1", subtitle:"Repaso integrador de toda A1.1 — el simulacro aquí equivale al examen real completo.",
+    vokabCategory:null,
+    lessonCards: [
+      { title:"Repaso — lo esencial de A1.1",
+        html:`<p>Antes del examen final de A1.1, repasa mentalmente estos 5 pilares:</p>
+              <p><strong>1. Verbos irregulares clave:</strong> sein (ich bin...), haben (ich habe...), y los de cambio vocálico (du sprichst, du isst, du fährst, du liest, du siehst).</p>
+              <p><strong>2. Artículos y casos:</strong> der/die/das en Nominativ, ein/eine, y el cambio a "den/einen" en Akkusativ masculino.</p>
+              <p><strong>3. Posesivos y negación:</strong> mein/dein/sein/ihr, y la diferencia entre kein (sustantivos) y nicht (todo lo demás).</p>
+              <p><strong>4. Preguntas:</strong> verbo-primero para sí/no, palabra W- + verbo para preguntas abiertas.</p>
+              <p><strong>5. Vocabulario funcional:</strong> presentarte, familia, países/idiomas, objetos, actividades, números.</p>` },
+      { title:"Frases que debes poder decir sin pensar",
+        html:`<p class="de-line">Ich heiße... Ich bin ... Jahre alt. Ich komme aus...</p>
+              <p class="de-line">Ich spreche... Ich habe eine Schwester/einen Bruder.</p>
+              <p class="de-line">Mein Vater/Meine Mutter ist... von Beruf.</p>
+              <p class="de-line">Ich spiele/lese/koche gern...</p>
+              <p class="de-line">Wie heißt du? Woher kommst du? Wie alt bist du? Wo wohnst du?</p>` },
+      { title:"El simulacro de esta unidad es distinto",
+        html:`<p>El examen de esta unidad mezcla contenido de las 7 unidades anteriores (presentarte, familia, países, objetos, gustos, preguntas) — tal como el examen A1 real no se limita a un solo tema. Es tu mejor indicador de si ya estás listo para A1.2.</p>` }
+    ],
+    leccionChecks:[
+      { q:"¿Qué verbo usas para la edad?", opts:["haben","sein","kommen"], correct:1 },
+      { q:"¿Cuál es la forma \"du\" de \"sprechen\"?", opts:["du sprechst","du sprichst","du spreche"], correct:1 },
+      { q:"¿Cómo niegas un sustantivo indefinido (\"Handy\")?", opts:["nicht Handy","kein Handy","keine Handy"], correct:1 },
+      { q:"¿Cuál es la pregunta abierta para \"de dónde eres\"?", opts:["Bist du aus...?","Woher kommst du?","Was kommst du?"], correct:1 },
+      { q:"¿Cómo se dice \"mi hermana\"?", opts:["mein Schwester","meine Schwester","meiner Schwester"], correct:1 },
+      { q:"¿Cómo se dice \"me gusta bailar\"?", opts:["Ich tanze gern","Ich bin gern tanzen","Ich tanze gerne nicht"], correct:0 }
+    ],
+    leccionWrite:{ prompt:"Escribe en alemán una presentación breve: nombre + país + una cosa que te gusta hacer.", placeholder:"Ich heiße...", valid:["ich heiße"] },
+    hoerenText:"Hallo! Ich heiße Nina, ich bin 29 Jahre alt und ich komme aus Kolumbien. Ich habe einen Bruder. Ich spiele gern Fußball und ich lese gern.",
+    hoerenQ:[
+      { q:"¿De dónde es Nina?", opts:["España","Kolumbien","México"], correct:1 },
+      { q:"¿Qué le gusta hacer?", opts:["Cocinar y bailar","Fútbol y leer","Nadar y cantar"], correct:1 }
+    ],
+    lesenText:"Ich heiße Paul. Ich bin 31 Jahre alt und komme aus Deutschland. Ich habe eine Schwester, sie ist Ärztin. Ich spiele nicht gern Fußball, aber ich koche gern.",
+    lesenQ:[
+      { q:"Paul kommt aus Deutschland.", opts:["Richtig","Falsch"], correct:0 },
+      { q:"Paul spielt gern Fußball.", opts:["Richtig","Falsch"], correct:1 },
+      { q:"Pauls Schwester ist Ärztin.", opts:["Richtig","Falsch"], correct:0 }
+    ],
+    schreibenPracticeBullets:["Preséntate completo: nombre, edad, país, familia, un gusto"],
+    schreibenTeil1Fields:[ {id:"f_final_name",label:"Name",placeholder:"Tu nombre"}, {id:"f_final_alter",label:"Alter",placeholder:"Tu edad"}, {id:"f_final_land",label:"Land",placeholder:"Tu país"}, {id:"f_final_gern",label:"Ich ... gern",placeholder:"Algo que te gusta hacer"} ],
+    schreibenTeil2Bullets:["Nombre, edad y país","Un dato de tu familia","Algo que te gusta hacer"],
+    sprechenPracticeBullets:["Preséntate completo integrando todo lo aprendido en A1.1"],
+    sprechenExamParts:[
+      { label:"SPRECHEN · Teil 1", instruction:"Preséntate completo: nombre, edad, país, idioma, familia y un gusto.", time:50 },
+      { label:"SPRECHEN · Teil 2", instruction:"Tarjeta de tema: \"Familie\". Formula una pregunta y respóndela tú mismo.", time:40 },
+      { label:"SPRECHEN · Teil 3", instruction:"Petición simple: invita a alguien a hacer algo contigo usando lo aprendido.", time:30 }
+    ]
+  },
+  {
+    id:"u9", level:"a1_2", number:1, title:"Tagesablauf", subtitle:"Rutina diaria, verbos separables, expresiones de tiempo.",
+    vokabCategory:"tiempo",
+    lessonCards: [
+      { title:"1. Verbos separables (trennbare Verben)",
+        html:`<p>Algunos verbos alemanes tienen un prefijo que se "separa" y va al final de la frase:</p>
+              <p><span class="de-line">aufstehen</span> (levantarse): <span class="de-line">Ich stehe um sieben Uhr auf.</span></p>
+              <p><span class="de-line">anfangen</span> (empezar): <span class="de-line">Die Arbeit fängt um acht Uhr an.</span></p>
+              <p style="margin-top:10px; background:rgba(232,163,61,0.15); border-radius:8px; padding:10px 12px; font-size:13px;">🧒 En palabras simples: imagina que el verbo se "parte en dos" — la primera parte se queda donde va el verbo normalmente, y el pedacito extra (auf, an...) se va caminando hasta el final de la frase.</p>` },
+      { title:"2. Más verbos separables comunes",
+        html:`<p><span class="de-line">aufhören</span> (terminar/dejar de): <span class="de-line">Ich höre um 18 Uhr auf.</span></p>
+              <p><span class="de-line">einkaufen</span> (hacer compras): <span class="de-line">Wir kaufen am Samstag ein.</span></p>
+              <p><span class="de-line">fernsehen</span> (ver tele): <span class="de-line">Ich sehe abends fern.</span></p>` },
+      { title:"3. Usar \"um\" + hora, y momentos del día",
+        html:`<p><span class="de-line">um sieben Uhr</span> (a las 7) — ya viste cómo decir la hora en A1.1, ahora la usamos en frases completas.</p>
+              <p style="margin-top:8px;"><span class="de-line">morgens</span> por la mañana · <span class="de-line">mittags</span> al mediodía · <span class="de-line">nachmittags</span> por la tarde · <span class="de-line">abends</span> por la noche · <span class="de-line">nachts</span> de madrugada</p>` },
+      { title:"4. Vocabulario: la rutina",
+        html:`<p style="font-size:13.5px; line-height:1.9;"><span class="de-line">aufwachen</span> despertarse · <span class="de-line">frühstücken</span> desayunar · <span class="de-line">duschen</span> ducharse · <span class="de-line">arbeiten</span> trabajar · <span class="de-line">schlafen gehen</span> ir a dormir</p>`,
+        audio:"aufwachen, frühstücken, duschen, arbeiten, schlafen gehen" },
+      { title:"5. Diálogo modelo",
+        html:`<p class="de-line">— Wann stehst du auf?</p><p class="de-line">— Ich stehe um sieben Uhr auf. Dann frühstücke ich.</p>
+              <p class="de-line">— Wann fängt deine Arbeit an?</p><p class="de-line">— Meine Arbeit fängt um neun Uhr an und hört um 18 Uhr auf.</p>
+              <p style="margin-top:12px; font-size:12.5px; color:rgba(20,20,20,0.55);">Traducción: "¿A qué hora te levantas? — Me levanto a las 7. Luego desayuno. — ¿A qué hora empieza tu trabajo? — Mi trabajo empieza a las 9 y termina a las 18."</p>`,
+        audio:"Wann stehst du auf? Ich stehe um sieben Uhr auf. Dann frühstücke ich. Wann fängt deine Arbeit an? Meine Arbeit fängt um neun Uhr an und hört um achtzehn Uhr auf." }
+    ],
+    leccionChecks:[
+      { q:"¿Dónde va el prefijo de un verbo separable?", opts:["Al principio","Al final de la frase","No cambia de lugar"], correct:1 },
+      { q:"\"Ich stehe um sieben Uhr ___.\" ¿Qué falta?", opts:["auf","an","aus"], correct:0 },
+      { q:"¿Cómo se dice \"por la noche\"?", opts:["morgens","abends","mittags"], correct:1 },
+      { q:"¿Cómo se dice \"hacer compras\"?", opts:["einkaufen","aufkaufen","kaufeneinen"], correct:0 },
+      { q:"¿Cómo se dice \"ducharse\"?", opts:["duschen","waschen","baden"], correct:0 }
+    ],
+    leccionWrite:{ prompt:"Escribe en alemán: \"Me levanto a las ocho.\"", placeholder:"Ich...", valid:["ich stehe um acht uhr auf","ich stehe um 8 uhr auf"] },
+    hoerenText:"Wann stehst du auf? — Ich stehe um sieben Uhr auf. Wann fängt deine Arbeit an? — Meine Arbeit fängt um neun Uhr an.",
+    hoerenQ:[
+      { q:"¿A qué hora se levanta la persona?", opts:["6 Uhr","7 Uhr","9 Uhr"], correct:1 },
+      { q:"¿A qué hora empieza el trabajo?", opts:["7 Uhr","8 Uhr","9 Uhr"], correct:2 }
+    ],
+    lesenText:"Ich stehe um sechs Uhr auf. Ich dusche und frühstücke. Meine Arbeit fängt um acht Uhr an. Abends sehe ich fern.",
+    lesenQ:[
+      { q:"Die Person steht um sechs Uhr auf.", opts:["Richtig","Falsch"], correct:0 },
+      { q:"Die Arbeit fängt um neun Uhr an.", opts:["Richtig","Falsch"], correct:1 }
+    ],
+    schreibenPracticeBullets:["A qué hora te levantas","A qué hora empieza tu trabajo/estudio","Qué haces por la noche"],
+    schreibenTeil1Fields:[ {id:"f_aufstehen",label:"Ich stehe um ... auf",placeholder:"Hora en que te levantas"}, {id:"f_arbeit_an",label:"Arbeit fängt um ... an",placeholder:"Hora en que empiezas a trabajar/estudiar"}, {id:"f_abends",label:"Abends...",placeholder:"Qué haces por la noche"}, {id:"f_name6",label:"Name",placeholder:"Tu nombre"} ],
+    schreibenTeil2Bullets:["A qué hora te levantas","A qué hora empieza tu trabajo","Qué haces por la noche"],
+    sprechenPracticeBullets:["Describe tu rutina diaria con 3 momentos del día"],
+    sprechenExamParts:[
+      { label:"SPRECHEN · Teil 1", instruction:"Describe tu rutina: a qué hora te levantas, empiezas a trabajar/estudiar, y qué haces por la noche.", time:50 },
+      { label:"SPRECHEN · Teil 2", instruction:"Tarjeta de tema: \"Tagesablauf\" (rutina diaria). Formula una pregunta y respóndela.", time:40 },
+      { label:"SPRECHEN · Teil 3", instruction:"Petición simple: pregunta a alguien a qué hora empieza algo (\"Wann fängt der Film an?\").", time:30 }
+    ]
+  },
+  {
+    id:"u10", level:"a1_2", number:2, title:"Essen gehen", subtitle:"Comida y restaurante, Akkusativ completo, el verbo möchten.",
+    vokabCategory:"comida",
+    lessonCards: [
+      { title:"1. El verbo möchten (querer, forma educada)",
+        html:`<table style="width:100%; border-collapse:collapse; font-size:13.5px;">
+              <tr><td style="padding:4px 0;"><span class="de-line">ich möchte</span></td><td style="padding:4px 0;"><span class="de-line">wir möchten</span></td></tr>
+              <tr><td style="padding:4px 0;"><span class="de-line">du möchtest</span></td><td style="padding:4px 0;"><span class="de-line">ihr möchtet</span></td></tr>
+              <tr><td style="padding:4px 0;"><span class="de-line">er/sie/es möchte</span></td><td style="padding:4px 0;"><span class="de-line">sie/Sie möchten</span></td></tr>
+              </table>
+              <p style="margin-top:10px; font-style:italic; color:rgba(20,20,20,0.6);">"Ich möchte einen Kaffee, bitte." — es más educado que "Ich will" (quiero, más directo).</p>` },
+      { title:"2. Akkusativ con comida (repaso aplicado)",
+        html:`<p>Recuerda: masculino cambia de "ein" a "einen":</p>
+              <p><span class="de-line">Ich möchte einen Kaffee.</span> (der Kaffee → einen Kaffee)</p>
+              <p><span class="de-line">Ich möchte eine Suppe.</span> (die Suppe, sin cambio)</p>
+              <p><span class="de-line">Ich möchte ein Wasser.</span> (das Wasser, sin cambio)</p>
+              <p style="margin-top:10px; background:rgba(232,163,61,0.15); border-radius:8px; padding:10px 12px; font-size:13px;">🧒 En palabras simples: solo revisa si la comida es "der" — ahí es donde cambia a "einen". Todo lo demás se queda igual.</p>` },
+      { title:"3. Vocabulario: comida y bebida",
+        html:`<p style="font-size:13.5px; line-height:1.9;"><span class="de-line">das Brot</span> pan · <span class="de-line">der Kaffee</span> café · <span class="de-line">das Wasser</span> agua · <span class="de-line">die Suppe</span> sopa · <span class="de-line">der Salat</span> ensalada · <span class="de-line">das Fleisch</span> carne · <span class="de-line">der Käse</span> queso</p>`,
+        audio:"das Brot, der Kaffee, das Wasser, die Suppe, der Salat", vokabCategory:"comida" },
+      { title:"4. Frases del restaurante",
+        html:`<p><span class="de-line">die Speisekarte, bitte.</span> (el menú, por favor)</p>
+              <p><span class="de-line">Ich möchte bestellen.</span> (Quiero pedir)</p>
+              <p><span class="de-line">Die Rechnung, bitte.</span> (La cuenta, por favor)</p>
+              <p><span class="de-line">Das schmeckt gut!</span> (¡Sabe bien!)</p>`, vokabCategory:"restaurante" },
+      { title:"5. Diálogo modelo en el restaurante",
+        html:`<p class="de-line">— Was möchten Sie?</p><p class="de-line">— Ich möchte einen Salat und ein Wasser, bitte.</p>
+              <p class="de-line">— Und zum Trinken?</p><p class="de-line">— Einen Kaffee, bitte.</p>
+              <p class="de-line">— Die Rechnung, bitte.</p>
+              <p style="margin-top:12px; font-size:12.5px; color:rgba(20,20,20,0.55);">Traducción: "¿Qué desea? — Quiero una ensalada y un agua, por favor. — ¿Y para beber? — Un café, por favor. — La cuenta, por favor."</p>`,
+        audio:"Was möchten Sie? Ich möchte einen Salat und ein Wasser, bitte. Und zum Trinken? Einen Kaffee, bitte. Die Rechnung, bitte." }
+    ],
+    leccionChecks:[
+      { q:"Conjuga \"möchten\" con \"du\":", opts:["du möchte","du möchtest","du möchten"], correct:1 },
+      { q:"\"der Kaffee\" en Akkusativ (después de möchte):", opts:["der Kaffee","den Kaffee","einen Kaffee"], correct:2 },
+      { q:"¿Cómo pides el menú?", opts:["Die Speisekarte, bitte.","Die Rechnung, bitte.","Das Wasser, bitte."], correct:0 },
+      { q:"¿Cómo pides la cuenta?", opts:["Die Speisekarte, bitte.","Die Rechnung, bitte.","Der Kaffee, bitte."], correct:1 },
+      { q:"¿Cuál es más educado?", opts:["Ich will einen Kaffee.","Ich möchte einen Kaffee.","Ich habe einen Kaffee."], correct:1 }
+    ],
+    leccionWrite:{ prompt:"Escribe en alemán: \"Quiero una sopa, por favor.\"", placeholder:"Ich möchte...", valid:["ich möchte eine suppe, bitte","ich möchte eine suppe bitte"] },
+    hoerenText:"Was möchten Sie? — Ich möchte einen Salat und ein Wasser, bitte. Und zum Trinken? — Einen Kaffee, bitte.",
+    hoerenQ:[
+      { q:"¿Qué pide de comer?", opts:["Sopa","Ensalada","Pan"], correct:1 },
+      { q:"¿Qué pide de tomar?", opts:["Agua","Café","Nada"], correct:1 }
+    ],
+    lesenText:"Ich gehe ins Restaurant. Ich möchte eine Suppe und ein Brot. Zum Trinken möchte ich ein Wasser. Die Rechnung ist zehn Euro.",
+    lesenQ:[
+      { q:"Die Person möchte eine Suppe.", opts:["Richtig","Falsch"], correct:0 },
+      { q:"Die Rechnung ist zwanzig Euro.", opts:["Richtig","Falsch"], correct:1 }
+    ],
+    schreibenPracticeBullets:["Qué comida pedirías","Qué bebida pedirías","Pide la cuenta"],
+    schreibenTeil1Fields:[ {id:"f_comida1",label:"Ich möchte (Essen)",placeholder:"Comida que pedirías"}, {id:"f_bebida1",label:"Ich möchte (Getränk)",placeholder:"Bebida que pedirías"}, {id:"f_name7",label:"Name",placeholder:"Tu nombre"}, {id:"f_restaurant",label:"Restaurant",placeholder:"Nombre de un restaurante"} ],
+    schreibenTeil2Bullets:["Qué comida y bebida pides","Pide la cuenta al final"],
+    sprechenPracticeBullets:["Pide comida y bebida como en un restaurante","Pide la cuenta"],
+    sprechenExamParts:[
+      { label:"SPRECHEN · Teil 1", instruction:"Pide comida y bebida en un restaurante usando möchten.", time:40 },
+      { label:"SPRECHEN · Teil 2", instruction:"Tarjeta de tema: \"Restaurant\". Formula una pregunta y respóndela.", time:40 },
+      { label:"SPRECHEN · Teil 3", instruction:"Petición simple: pide la cuenta (\"Die Rechnung, bitte.\").", time:30 }
+    ]
+  },
+  {
+    id:"u11", level:"a1_2", number:3, title:"Wegbeschreibung", subtitle:"Direcciones y lugares de la ciudad, preposiciones de lugar.",
+    vokabCategory:"ciudad",
+    lessonCards: [
+      { title:"1. Preposiciones de lugar (in, an, auf)",
+        html:`<p>Para decir DÓNDE está algo (sin movimiento), estas preposiciones usan el caso Dativ, que cambia un poco el artículo:</p>
+              <p><span class="de-line">der</span> → <span class="de-line">dem</span> · <span class="de-line">die</span> → <span class="de-line">der</span> · <span class="de-line">das</span> → <span class="de-line">dem</span></p>
+              <p style="margin-top:8px;"><span class="de-line">in der Stadt</span> (en la ciudad) · <span class="de-line">an der Ecke</span> (en la esquina) · <span class="de-line">auf der Straße</span> (en la calle)</p>
+              <p style="margin-top:10px; background:rgba(232,163,61,0.15); border-radius:8px; padding:10px 12px; font-size:13px;">🧒 En palabras simples: no memorices la regla completa todavía — solo aprende cada frase como un bloque fijo ("in der Stadt", "an der Ecke"). El detalle técnico lo perfeccionas más adelante.</p>` },
+      { title:"2. Vocabulario: lugares de la ciudad",
+        html:`<p style="font-size:13.5px; line-height:1.9;"><span class="de-line">der Bahnhof</span> estación de tren · <span class="de-line">die Apotheke</span> farmacia · <span class="de-line">das Museum</span> museo · <span class="de-line">die Bank</span> banco · <span class="de-line">der Supermarkt</span> supermercado · <span class="de-line">die Post</span> correos</p>`,
+        audio:"der Bahnhof, die Apotheke, das Museum, die Bank, der Supermarkt", vokabCategory:"ciudad" },
+      { title:"3. Pedir direcciones",
+        html:`<p><span class="de-line">Wie komme ich zum Bahnhof?</span> (¿Cómo llego a la estación?)</p>
+              <p><span class="de-line">Entschuldigung, wo ist die Apotheke?</span> (Disculpe, ¿dónde está la farmacia?)</p>` },
+      { title:"4. Dar direcciones",
+        html:`<p style="font-size:13.5px; line-height:1.9;"><span class="de-line">geradeaus</span> derecho · <span class="de-line">links</span> a la izquierda · <span class="de-line">rechts</span> a la derecha · <span class="de-line">die Ecke</span> la esquina</p>
+              <p style="margin-top:8px;"><span class="de-line">Gehen Sie geradeaus, dann links.</span> (Vaya derecho, luego a la izquierda.)</p>` },
+      { title:"5. Diálogo modelo",
+        html:`<p class="de-line">— Entschuldigung, wie komme ich zum Bahnhof?</p>
+              <p class="de-line">— Gehen Sie geradeaus, dann rechts. Der Bahnhof ist an der Ecke.</p>
+              <p class="de-line">— Danke schön!</p>
+              <p style="margin-top:12px; font-size:12.5px; color:rgba(20,20,20,0.55);">Traducción: "Disculpe, ¿cómo llego a la estación? — Vaya derecho, luego a la derecha. La estación está en la esquina. — ¡Muchas gracias!"</p>`,
+        audio:"Entschuldigung, wie komme ich zum Bahnhof? Gehen Sie geradeaus, dann rechts. Der Bahnhof ist an der Ecke. Danke schön!" }
+    ],
+    leccionChecks:[
+      { q:"¿Cómo preguntas cómo llegar a un lugar?", opts:["Wo ist das?","Wie komme ich zum...?","Was ist das?"], correct:1 },
+      { q:"¿Cómo se dice \"a la izquierda\"?", opts:["rechts","links","geradeaus"], correct:1 },
+      { q:"¿Cómo se dice \"derecho\" (seguir recto)?", opts:["geradeaus","rechts","an der Ecke"], correct:0 },
+      { q:"¿Qué lugar es \"die Apotheke\"?", opts:["Banco","Farmacia","Museo"], correct:1 },
+      { q:"¿Cómo se dice \"en la esquina\"?", opts:["an der Ecke","auf der Ecke","in der Ecke"], correct:0 }
+    ],
+    leccionWrite:{ prompt:"Escribe en alemán: \"¿Dónde está el banco?\"", placeholder:"Wo...", valid:["wo ist die bank"] },
+    hoerenText:"Entschuldigung, wie komme ich zum Bahnhof? — Gehen Sie geradeaus, dann links. Der Bahnhof ist an der Ecke.",
+    hoerenQ:[
+      { q:"¿Qué busca la persona?", opts:["Una farmacia","La estación","Un banco"], correct:1 },
+      { q:"¿Hacia dónde debe girar después de seguir derecho?", opts:["Derecha","Izquierda","Sigue derecho"], correct:1 }
+    ],
+    lesenText:"Die Apotheke ist nicht weit. Gehen Sie geradeaus und dann rechts. Die Apotheke ist neben der Bank.",
+    lesenQ:[
+      { q:"Man muss rechts gehen.", opts:["Richtig","Falsch"], correct:0 },
+      { q:"Die Apotheke ist weit weg.", opts:["Richtig","Falsch"], correct:1 }
+    ],
+    schreibenPracticeBullets:["Pregunta cómo llegar a un lugar","Da direcciones simples (geradeaus, links, rechts)"],
+    schreibenTeil1Fields:[ {id:"f_lugar",label:"Ich suche...",placeholder:"Un lugar (ej. den Bahnhof)"}, {id:"f_direccion1",label:"Erste Richtung",placeholder:"geradeaus/links/rechts"}, {id:"f_direccion2",label:"Zweite Richtung",placeholder:"geradeaus/links/rechts"}, {id:"f_name8",label:"Name",placeholder:"Tu nombre"} ],
+    schreibenTeil2Bullets:["Qué lugar buscas","Las indicaciones para llegar"],
+    sprechenPracticeBullets:["Pregunta cómo llegar a un lugar de la ciudad","Da direcciones simples"],
+    sprechenExamParts:[
+      { label:"SPRECHEN · Teil 1", instruction:"Pregunta cómo llegar a un lugar de la ciudad (ej. la estación).", time:40 },
+      { label:"SPRECHEN · Teil 2", instruction:"Tarjeta de tema: \"Stadt\" (ciudad). Formula una pregunta y respóndela.", time:40 },
+      { label:"SPRECHEN · Teil 3", instruction:"Petición simple: pide que te repitan la dirección (\"Können Sie das bitte wiederholen?\").", time:30 }
+    ]
+  },
+  {
+    id:"u12", level:"a1_2", number:4, title:"Modalverben", subtitle:"Verbos modales: können, müssen, wollen, dürfen.",
+    vokabCategory:null,
+    lessonCards: [
+      { title:"1. La estructura de los verbos modales",
+        html:`<p>Un verbo modal se conjuga, pero el verbo principal va SIN conjugar (infinitivo) al final:</p>
+              <p><span class="de-line">Ich</span> <span class="de-line" style="color:var(--amber-deep);">kann</span> gut Deutsch <span class="de-line" style="color:var(--amber-deep);">sprechen</span>.</p>
+              <p style="margin-top:10px; background:rgba(232,163,61,0.15); border-radius:8px; padding:10px 12px; font-size:13px;">🧒 En palabras simples: el verbo modal es como el "jefe" de la oración (va en 2ª posición, se conjuga), y el verbo de acción real se va calladito al final sin cambiar.</p>` },
+      { title:"2. können (poder / saber hacer)",
+        html:`<p>ich kann · du kannst · er/sie/es kann · wir können · ihr könnt · sie/Sie können</p>
+              <p style="margin-top:8px; font-style:italic; color:rgba(20,20,20,0.6);">"Ich kann schwimmen." (Sé nadar / Puedo nadar)</p>` },
+      { title:"3. müssen (deber / tener que)",
+        html:`<p>ich muss · du musst · er/sie/es muss · wir müssen · ihr müsst · sie/Sie müssen</p>
+              <p style="margin-top:8px; font-style:italic; color:rgba(20,20,20,0.6);">"Ich muss arbeiten." (Tengo que trabajar)</p>` },
+      { title:"4. wollen (querer) y dürfen (tener permiso)",
+        html:`<p><span class="de-line">wollen</span>: ich will · du willst · er/sie/es will · wir wollen · ihr wollt · sie/Sie wollen</p>
+              <p style="margin-top:8px;"><span class="de-line">dürfen</span>: ich darf · du darfst · er/sie/es darf · wir dürfen · ihr dürft · sie/Sie dürfen</p>
+              <p style="margin-top:8px; font-style:italic; color:rgba(20,20,20,0.6);">"Ich will nach Hause gehen." · "Hier darf man nicht rauchen." (Aquí no se puede/permite fumar)</p>` },
+      { title:"5. Diálogo modelo",
+        html:`<p class="de-line">— Kannst du morgen kommen?</p><p class="de-line">— Nein, ich muss arbeiten. Aber ich will am Wochenende kommen.</p>
+              <p class="de-line">— Darf ich dein Handy benutzen?</p><p class="de-line">— Ja, natürlich!</p>
+              <p style="margin-top:12px; font-size:12.5px; color:rgba(20,20,20,0.55);">Traducción: "¿Puedes venir mañana? — No, tengo que trabajar. Pero quiero venir el fin de semana. — ¿Puedo usar tu celular? — ¡Sí, claro!"</p>`,
+        audio:"Kannst du morgen kommen? Nein, ich muss arbeiten. Aber ich will am Wochenende kommen. Darf ich dein Handy benutzen? Ja, natürlich!" }
+    ],
+    leccionChecks:[
+      { q:"¿Dónde va el verbo principal con un modal?", opts:["Al principio","Al final, sin conjugar","No se usa"], correct:1 },
+      { q:"Conjuga \"können\" con \"du\":", opts:["du kannst","du könnt","du kann"], correct:0 },
+      { q:"¿Cómo se dice \"tengo que trabajar\"?", opts:["Ich will arbeiten","Ich muss arbeiten","Ich kann arbeiten"], correct:1 },
+      { q:"¿Cómo pides permiso educadamente?", opts:["Muss ich...?","Darf ich...?","Will ich...?"], correct:1 },
+      { q:"Conjuga \"wollen\" con \"ich\":", opts:["ich wolle","ich will","ich wollt"], correct:1 }
+    ],
+    leccionWrite:{ prompt:"Escribe en alemán: \"Puedo hablar alemán.\"", placeholder:"Ich...", valid:["ich kann deutsch sprechen"] },
+    hoerenText:"Kannst du morgen kommen? — Nein, ich muss arbeiten. Darf ich dein Handy benutzen? — Ja, natürlich!",
+    hoerenQ:[
+      { q:"¿Por qué no puede venir mañana?", opts:["Está enfermo","Tiene que trabajar","No quiere"], correct:1 },
+      { q:"¿Qué le piden prestado?", opts:["Un libro","El celular","Dinero"], correct:1 }
+    ],
+    lesenText:"Ich kann gut kochen, aber ich muss heute arbeiten. Ich will am Wochenende ein Restaurant besuchen.",
+    lesenQ:[
+      { q:"Die Person kann gut kochen.", opts:["Richtig","Falsch"], correct:0 },
+      { q:"Die Person muss heute nicht arbeiten.", opts:["Richtig","Falsch"], correct:1 }
+    ],
+    schreibenPracticeBullets:["Algo que puedes hacer bien","Algo que tienes que hacer hoy","Algo que quieres hacer el fin de semana"],
+    schreibenTeil1Fields:[ {id:"f_kann",label:"Ich kann...",placeholder:"Algo que sabes hacer"}, {id:"f_muss",label:"Ich muss...",placeholder:"Algo que tienes que hacer"}, {id:"f_will",label:"Ich will...",placeholder:"Algo que quieres hacer"}, {id:"f_name9",label:"Name",placeholder:"Tu nombre"} ],
+    schreibenTeil2Bullets:["Algo que sabes hacer bien","Algo que tienes que hacer hoy","Algo que quieres hacer pronto"],
+    sprechenPracticeBullets:["Di algo que puedes, algo que debes y algo que quieres hacer"],
+    sprechenExamParts:[
+      { label:"SPRECHEN · Teil 1", instruction:"Di algo que sabes hacer, algo que tienes que hacer y algo que quieres hacer.", time:50 },
+      { label:"SPRECHEN · Teil 2", instruction:"Tarjeta de tema: \"Können\". Formula una pregunta y respóndela.", time:40 },
+      { label:"SPRECHEN · Teil 3", instruction:"Petición simple: pide permiso para algo (\"Darf ich das Fenster öffnen?\").", time:30 }
+    ]
+  },
+  {
+    id:"u13", level:"a1_2", number:5, title:"Das Perfekt", subtitle:"Contar el pasado: formación del Perfekt con haben y sein.",
+    vokabCategory:null,
+    lessonCards: [
+      { title:"1. Cómo se forma el Perfekt",
+        html:`<p>El pasado más usado en alemán hablado se forma con 2 piezas:</p>
+              <p><span class="de-line">haben/sein</span> (conjugado, en 2ª posición) + <span class="de-line">Partizip II</span> (al final)</p>
+              <p style="margin-top:8px;"><span class="de-line">Ich</span> <span class="de-line" style="color:var(--amber-deep);">habe</span> Fußball <span class="de-line" style="color:var(--amber-deep);">gespielt</span>.</p>
+              <p style="margin-top:10px; background:rgba(232,163,61,0.15); border-radius:8px; padding:10px 12px; font-size:13px;">🧒 En palabras simples: es como un sándwich — "haben/sein" es el pan de arriba (va casi al principio), el verbo de acción es el relleno, pero en su forma especial de "participio", y siempre va hasta el final.</p>` },
+      { title:"2. Participios regulares",
+        html:`<p>Patrón: <span class="de-line">ge</span> + raíz del verbo + <span class="de-line">t</span></p>
+              <p><span class="de-line">spielen</span> → <span class="de-line">gespielt</span> · <span class="de-line">machen</span> → <span class="de-line">gemacht</span> · <span class="de-line">kochen</span> → <span class="de-line">gekocht</span> · <span class="de-line">arbeiten</span> → <span class="de-line">gearbeitet</span></p>` },
+      { title:"3. Participios irregulares comunes",
+        html:`<p>No siguen el patrón, hay que memorizarlos uno por uno:</p>
+              <p><span class="de-line">essen</span> → <span class="de-line">gegessen</span> · <span class="de-line">sehen</span> → <span class="de-line">gesehen</span> · <span class="de-line">lesen</span> → <span class="de-line">gelesen</span> · <span class="de-line">trinken</span> → <span class="de-line">getrunken</span></p>` },
+      { title:"4. Verbos que usan \"sein\" en vez de \"haben\"",
+        html:`<p>Verbos de movimiento o cambio de estado usan <span class="de-line">sein</span> como ayudante:</p>
+              <p><span class="de-line">gehen</span> → <span class="de-line">Ich bin gegangen.</span> · <span class="de-line">fahren</span> → <span class="de-line">Ich bin gefahren.</span> · <span class="de-line">sein</span> → <span class="de-line">Ich bin gewesen.</span></p>
+              <p style="margin-top:8px; font-style:italic; color:rgba(20,20,20,0.6);">La mayoría de verbos usan haben — sein es la excepción para movimiento/cambio.</p>` },
+      { title:"5. Diálogo modelo",
+        html:`<p class="de-line">— Was hast du gestern gemacht?</p><p class="de-line">— Ich habe Fußball gespielt und ich habe Pizza gegessen.</p>
+              <p class="de-line">— Bist du auch ins Kino gegangen?</p><p class="de-line">— Nein, ich bin zu Hause geblieben.</p>
+              <p style="margin-top:12px; font-size:12.5px; color:rgba(20,20,20,0.55);">Traducción: "¿Qué hiciste ayer? — Jugué fútbol y comí pizza. — ¿Fuiste también al cine? — No, me quedé en casa."</p>`,
+        audio:"Was hast du gestern gemacht? Ich habe Fußball gespielt und ich habe Pizza gegessen. Bist du auch ins Kino gegangen? Nein, ich bin zu Hause geblieben." }
+    ],
+    leccionChecks:[
+      { q:"¿Dónde va el Partizip II en el Perfekt?", opts:["Al principio","Al final","Después de haben inmediatamente"], correct:1 },
+      { q:"¿Cuál es el participio de \"spielen\"?", opts:["gespielt","spielt","gespielen"], correct:0 },
+      { q:"¿Cuál es el participio de \"essen\"?", opts:["geesst","gegessen","geessen"], correct:1 },
+      { q:"¿Qué verbo ayudante usa \"gehen\" en Perfekt?", opts:["haben","sein","werden"], correct:1 },
+      { q:"\"Ich ___ Fußball gespielt.\" ¿Qué falta?", opts:["habe","bin","hat"], correct:0 }
+    ],
+    leccionWrite:{ prompt:"Escribe en alemán: \"Comí pizza.\" (usa Perfekt)", placeholder:"Ich habe...", valid:["ich habe pizza gegessen"] },
+    hoerenText:"Was hast du gestern gemacht? — Ich habe Fußball gespielt. Bist du ins Kino gegangen? — Nein, ich bin zu Hause geblieben.",
+    hoerenQ:[
+      { q:"¿Qué hizo ayer la persona?", opts:["Cocinó","Jugó fútbol","Leyó"], correct:1 },
+      { q:"¿Fue al cine?", opts:["Sí","No, se quedó en casa","No dice"], correct:1 }
+    ],
+    lesenText:"Gestern habe ich viel gemacht. Ich habe gekocht und ich habe ein Buch gelesen. Ich bin nicht ausgegangen.",
+    lesenQ:[
+      { q:"Die Person hat gekocht.", opts:["Richtig","Falsch"], correct:0 },
+      { q:"Die Person ist ausgegangen.", opts:["Richtig","Falsch"], correct:1 }
+    ],
+    schreibenPracticeBullets:["Qué hiciste ayer (usa Perfekt)","Menciona 2 actividades distintas"],
+    schreibenTeil1Fields:[ {id:"f_gestern1",label:"Gestern habe ich...",placeholder:"Algo que hiciste ayer"}, {id:"f_gestern2",label:"Ich bin...",placeholder:"Un lugar al que fuiste (opcional)"}, {id:"f_name10",label:"Name",placeholder:"Tu nombre"}, {id:"f_datum",label:"Datum",placeholder:"Fecha de hoy"} ],
+    schreibenTeil2Bullets:["Qué hiciste ayer","Si fuiste a algún lugar"],
+    sprechenPracticeBullets:["Cuenta qué hiciste ayer usando el Perfekt"],
+    sprechenExamParts:[
+      { label:"SPRECHEN · Teil 1", instruction:"Cuenta qué hiciste ayer (usa el Perfekt: habe/bin + participio).", time:50 },
+      { label:"SPRECHEN · Teil 2", instruction:"Tarjeta de tema: \"Gestern\" (ayer). Formula una pregunta y respóndela.", time:40 },
+      { label:"SPRECHEN · Teil 3", instruction:"Petición simple: pregunta qué hizo la otra persona ayer (\"Was hast du gestern gemacht?\").", time:30 }
+    ]
+  },
+  {
+    id:"u14", level:"a1_2", number:6, title:"Gesundheit", subtitle:"Salud y cuerpo, expresar dolor con Dativ, el imperativo.",
+    vokabCategory:"cuerpo",
+    lessonCards: [
+      { title:"1. Vocabulario: partes del cuerpo",
+        html:`<p style="font-size:13.5px; line-height:1.9;"><span class="de-line">der Kopf</span> cabeza · <span class="de-line">der Bauch</span> estómago/barriga · <span class="de-line">der Hals</span> garganta/cuello · <span class="de-line">der Rücken</span> espalda · <span class="de-line">das Bein</span> pierna · <span class="de-line">der Arm</span> brazo</p>`,
+        audio:"der Kopf, der Bauch, der Hals, der Rücken, das Bein, der Arm", vokabCategory:"cuerpo" },
+      { title:"2. Expresar dolor con \"weh tun\"",
+        html:`<p>La estructura es distinta al español, usa el Dativ (mir = a mí, dir = a ti):</p>
+              <p><span class="de-line">Mein Kopf tut weh.</span> (Me duele la cabeza — literal: "Mi cabeza duele")</p>
+              <p><span class="de-line">Mir tut der Bauch weh.</span> (Me duele el estómago)</p>
+              <p style="margin-top:10px; background:rgba(232,163,61,0.15); border-radius:8px; padding:10px 12px; font-size:13px;">🧒 En palabras simples: en vez de decir "YO tengo dolor", el alemán dice "A MÍ me duele" — por eso aparece "mir" (a mí) en vez de "ich" (yo).</p>` },
+      { title:"3. El imperativo — dar consejos/órdenes",
+        html:`<p>Forma <span class="de-line">du</span> (informal) — se quita el "-st" de la conjugación normal:</p>
+              <p><span class="de-line">Trink Wasser!</span> (¡Bebe agua!) · <span class="de-line">Iss Obst!</span> (¡Come fruta!)</p>
+              <p style="margin-top:8px;">Forma <span class="de-line">Sie</span> (formal) — igual que la conjugación normal, con "Sie" después:</p>
+              <p><span class="de-line">Trinken Sie Wasser!</span> · <span class="de-line">Nehmen Sie eine Tablette!</span></p>` },
+      { title:"4. Vocabulario: farmacia y salud",
+        html:`<p style="font-size:13.5px; line-height:1.9;"><span class="de-line">die Tablette</span> pastilla · <span class="de-line">der Arzt</span> médico · <span class="de-line">krank</span> enfermo · <span class="de-line">gesund</span> sano · <span class="de-line">das Fieber</span> fiebre</p>`, vokabCategory:"salud" },
+      { title:"5. Diálogo modelo",
+        html:`<p class="de-line">— Was ist los? Du siehst krank aus.</p><p class="de-line">— Mir tut der Kopf weh und ich habe Fieber.</p>
+              <p class="de-line">— Nimm eine Tablette und trink viel Wasser!</p>
+              <p style="margin-top:12px; font-size:12.5px; color:rgba(20,20,20,0.55);">Traducción: "¿Qué pasa? Te ves enfermo. — Me duele la cabeza y tengo fiebre. — ¡Toma una pastilla y bebe mucha agua!"</p>`,
+        audio:"Was ist los? Du siehst krank aus. Mir tut der Kopf weh und ich habe Fieber. Nimm eine Tablette und trink viel Wasser!" }
+    ],
+    leccionChecks:[
+      { q:"¿Cómo se dice \"me duele la cabeza\"?", opts:["Ich habe Kopf weh","Mein Kopf tut weh","Ich bin Kopf weh"], correct:1 },
+      { q:"¿Cómo se dice \"cabeza\"?", opts:["der Bauch","der Kopf","der Arm"], correct:1 },
+      { q:"Imperativo informal de \"trinken\" (beber):", opts:["Trink!","Trinkst!","Trinken!"], correct:0 },
+      { q:"Imperativo formal de \"nehmen\" (tomar):", opts:["Nimm Sie!","Nehmen Sie!","Nehmt Sie!"], correct:1 },
+      { q:"¿Cómo se dice \"estoy enfermo\"?", opts:["Ich bin krank","Ich habe krank","Ich bin gesund"], correct:0 }
+    ],
+    leccionWrite:{ prompt:"Escribe en alemán: \"Me duele el estómago.\"", placeholder:"Mein...", valid:["mein bauch tut weh","mir tut der bauch weh"] },
+    hoerenText:"Was ist los? — Mir tut der Kopf weh und ich habe Fieber. — Nimm eine Tablette und trink viel Wasser!",
+    hoerenQ:[
+      { q:"¿Qué le duele a la persona?", opts:["El estómago","La cabeza","La espalda"], correct:1 },
+      { q:"¿Qué consejo le dan?", opts:["Dormir mucho","Tomar una pastilla y beber agua","Ir al médico"], correct:1 }
+    ],
+    lesenText:"Ich bin krank. Mein Hals tut weh und ich habe Fieber. Der Arzt sagt: Trinken Sie viel Wasser und nehmen Sie eine Tablette.",
+    lesenQ:[
+      { q:"Die Person ist gesund.", opts:["Richtig","Falsch"], correct:1 },
+      { q:"Der Hals tut weh.", opts:["Richtig","Falsch"], correct:0 }
+    ],
+    schreibenPracticeBullets:["Qué te duele","Un consejo de salud (usa imperativo)"],
+    schreibenTeil1Fields:[ {id:"f_duele",label:"Was tut weh?",placeholder:"Qué te duele"}, {id:"f_consejo",label:"Ein Rat (Imperativ)",placeholder:"Un consejo, ej. Trink Wasser!"}, {id:"f_name11",label:"Name",placeholder:"Tu nombre"}, {id:"f_krank",label:"Krank oder gesund?",placeholder:"krank / gesund"} ],
+    schreibenTeil2Bullets:["Qué síntoma tienes","Un consejo que te dan"],
+    sprechenPracticeBullets:["Di qué te duele","Da un consejo de salud usando el imperativo"],
+    sprechenExamParts:[
+      { label:"SPRECHEN · Teil 1", instruction:"Di qué te duele y cómo te sientes.", time:40 },
+      { label:"SPRECHEN · Teil 2", instruction:"Tarjeta de tema: \"Gesundheit\" (salud). Formula una pregunta y respóndela.", time:40 },
+      { label:"SPRECHEN · Teil 3", instruction:"Petición simple: da un consejo de salud usando el imperativo (\"Trink Wasser!\").", time:30 }
+    ]
+  },
+  {
+    id:"u15", level:"a1_2", number:7, title:"Einkaufen und Kleidung", subtitle:"Compras y ropa, comparativos, posesivos en Akkusativ.",
+    vokabCategory:"ropa",
+    lessonCards: [
+      { title:"1. Vocabulario: la ropa",
+        html:`<p style="font-size:13.5px; line-height:1.9;"><span class="de-line">die Hose</span> pantalón · <span class="de-line">das Hemd</span> camisa · <span class="de-line">der Mantel</span> abrigo · <span class="de-line">die Schuhe</span> zapatos · <span class="de-line">das Kleid</span> vestido</p>`,
+        audio:"die Hose, das Hemd, der Mantel, die Schuhe, das Kleid", vokabCategory:"ropa" },
+      { title:"2. Comparativos simples",
+        html:`<p>Se agrega <span class="de-line">-er</span> al adjetivo, y se usa <span class="de-line">als</span> para comparar (como "que" en español):</p>
+              <p><span class="de-line">billig → billiger</span> (barato → más barato) · <span class="de-line">teuer → teurer</span> (caro → más caro)</p>
+              <p style="margin-top:8px;"><span class="de-line">Dieser Mantel ist billiger als der andere.</span> (Este abrigo es más barato que el otro.)</p>` },
+      { title:"3. Posesivos en Akkusativ (repaso aplicado)",
+        html:`<p>Recuerda: masculino cambia -ein a -einen, y lo mismo pasa con mein/dein:</p>
+              <p><span class="de-line">Ich möchte meinen Mantel kaufen.</span> (der Mantel → meinen Mantel)</p>
+              <p><span class="de-line">Ich möchte meine Hose anziehen.</span> (die Hose, sin cambio)</p>` },
+      { title:"4. Frases de compra",
+        html:`<p><span class="de-line">Wie viel kostet das?</span> (¿Cuánto cuesta?)</p>
+              <p><span class="de-line">Haben Sie das in Größe M?</span> (¿Lo tiene en talla M?)</p>
+              <p><span class="de-line">Kann ich das anprobieren?</span> (¿Puedo probármelo?)</p>` },
+      { title:"5. Diálogo modelo",
+        html:`<p class="de-line">— Wie viel kostet dieser Mantel?</p><p class="de-line">— Er kostet 80 Euro.</p>
+              <p class="de-line">— Haben Sie einen billigeren?</p><p class="de-line">— Ja, dieser hier ist billiger. Möchten Sie ihn anprobieren?</p>
+              <p style="margin-top:12px; font-size:12.5px; color:rgba(20,20,20,0.55);">Traducción: "¿Cuánto cuesta este abrigo? — Cuesta 80 euros. — ¿Tiene uno más barato? — Sí, este de aquí es más barato. ¿Quiere probárselo?"</p>`,
+        audio:"Wie viel kostet dieser Mantel? Er kostet achtzig Euro. Haben Sie einen billigeren? Ja, dieser hier ist billiger. Möchten Sie ihn anprobieren?" }
+    ],
+    leccionChecks:[
+      { q:"¿Cómo se dice \"más barato\"?", opts:["billig","billiger","billigst"], correct:1 },
+      { q:"¿Cómo preguntas el precio?", opts:["Wie viel kostet das?","Wie ist das?","Was kostet du?"], correct:0 },
+      { q:"¿Cómo se dice \"pantalón\"?", opts:["das Hemd","die Hose","der Mantel"], correct:1 },
+      { q:"\"Ich möchte ___ Mantel kaufen.\" (mi abrigo)", opts:["mein","meinen","meine"], correct:1 },
+      { q:"¿Cómo preguntas si puedes probarte algo?", opts:["Kann ich das anprobieren?","Muss ich das kaufen?","Will ich das essen?"], correct:0 }
+    ],
+    leccionWrite:{ prompt:"Escribe en alemán: \"¿Cuánto cuestan los zapatos?\"", placeholder:"Wie viel...", valid:["wie viel kosten die schuhe"] },
+    hoerenText:"Wie viel kostet dieser Mantel? — Er kostet achtzig Euro. Haben Sie einen billigeren? — Ja, dieser hier ist billiger.",
+    hoerenQ:[
+      { q:"¿Cuánto cuesta el abrigo primero?", opts:["18 Euro","80 Euro","8 Euro"], correct:1 },
+      { q:"¿Qué pide la persona?", opts:["Uno más caro","Uno más barato","Otro color"], correct:1 }
+    ],
+    lesenText:"Ich möchte eine Hose kaufen. Diese Hose kostet 40 Euro, aber die andere ist billiger — nur 25 Euro.",
+    lesenQ:[
+      { q:"Die erste Hose kostet 40 Euro.", opts:["Richtig","Falsch"], correct:0 },
+      { q:"Die andere Hose ist teurer.", opts:["Richtig","Falsch"], correct:1 }
+    ],
+    schreibenPracticeBullets:["Qué ropa quieres comprar","Pregunta el precio","Compara con algo más barato"],
+    schreibenTeil1Fields:[ {id:"f_ropa1",label:"Ich möchte (Kleidung)",placeholder:"Prenda que quieres comprar"}, {id:"f_precio",label:"Preis",placeholder:"Precio (ej. 50 Euro)"}, {id:"f_talla",label:"Größe",placeholder:"Talla (ej. M)"}, {id:"f_name12",label:"Name",placeholder:"Tu nombre"} ],
+    schreibenTeil2Bullets:["Qué ropa quieres comprar","Pregunta el precio y la talla"],
+    sprechenPracticeBullets:["Pregunta el precio de una prenda","Pide una más barata"],
+    sprechenExamParts:[
+      { label:"SPRECHEN · Teil 1", instruction:"Pregunta el precio de una prenda de ropa y pide una talla.", time:40 },
+      { label:"SPRECHEN · Teil 2", instruction:"Tarjeta de tema: \"Kleidung\" (ropa). Formula una pregunta y respóndela.", time:40 },
+      { label:"SPRECHEN · Teil 3", instruction:"Petición simple: pide probarte algo (\"Kann ich das anprobieren?\").", time:30 }
+    ]
+  },
+  {
+    id:"u16", level:"a1_2", number:8, title:"Wiederholung A1.2", subtitle:"Repaso integrador final — al aprobar, completas todo A1.",
+    vokabCategory:null,
+    lessonCards: [
+      { title:"Repaso — lo esencial de A1.2",
+        html:`<p>Antes del examen final, repasa estos 6 pilares de A1.2:</p>
+              <p><strong>1. Verbos separables:</strong> aufstehen, anfangen, einkaufen — el prefijo va al final.</p>
+              <p><strong>2. möchten:</strong> la forma educada de pedir algo (comida, objetos).</p>
+              <p><strong>3. Direcciones:</strong> geradeaus, links, rechts + preposiciones de lugar.</p>
+              <p><strong>4. Verbos modales:</strong> können, müssen, wollen, dürfen + infinitivo al final.</p>
+              <p><strong>5. El Perfekt:</strong> haben/sein + participio al final, para contar el pasado.</p>
+              <p><strong>6. Salud y compras:</strong> "tut weh" para dolor, el imperativo para consejos, comparativos para precios.</p>` },
+      { title:"Frases que debes poder decir sin pensar",
+        html:`<p class="de-line">Ich stehe um... auf. Ich möchte... bestellen/kaufen.</p>
+              <p class="de-line">Wie komme ich zum...? Gehen Sie geradeaus, dann links/rechts.</p>
+              <p class="de-line">Ich kann/muss/will/darf...</p>
+              <p class="de-line">Gestern habe ich... gemacht. Ich bin... gegangen.</p>
+              <p class="de-line">Mir tut... weh. Wie viel kostet das?</p>` },
+      { title:"Este es el cierre de todo A1",
+        html:`<p>El simulacro de esta unidad mezcla contenido de las 8 unidades de A1.2 — rutina, comida, direcciones, modales, pasado, salud y compras. Al aprobarlo, habrás completado el temario funcional de A1 completo (A1.1 + A1.2), la base sobre la que se construyen A2 y los niveles siguientes.</p>` }
+    ],
+    leccionChecks:[
+      { q:"¿Dónde va el prefijo separable?", opts:["Al final","Al principio","No se mueve"], correct:0 },
+      { q:"¿Cuál es la forma educada de pedir algo?", opts:["ich will","ich möchte","ich muss"], correct:1 },
+      { q:"¿Qué verbo ayudante usa \"gehen\" en Perfekt?", opts:["haben","sein","können"], correct:1 },
+      { q:"¿Cómo se dice \"me duele la cabeza\"?", opts:["Mein Kopf tut weh","Ich bin Kopf","Ich habe Kopf"], correct:0 },
+      { q:"¿Dónde va el infinitivo con un verbo modal?", opts:["Al final","Justo después del modal","Al principio"], correct:0 },
+      { q:"¿Cómo se dice \"más barato\"?", opts:["billig","billiger","billigst"], correct:1 }
+    ],
+    leccionWrite:{ prompt:"Escribe en alemán: cuenta algo que hiciste ayer usando el Perfekt.", placeholder:"Gestern habe ich...", valid:["gestern habe ich"] },
+    hoerenText:"Gestern bin ich einkaufen gegangen. Ich habe eine Hose gekauft. Danach habe ich im Restaurant gegessen und ich habe Wasser getrunken.",
+    hoerenQ:[
+      { q:"¿Qué compró la persona?", opts:["Un abrigo","Una hose","Zapatos"], correct:1 },
+      { q:"¿Dónde comió?", opts:["En casa","En un restaurante","En el trabajo"], correct:1 }
+    ],
+    lesenText:"Ich stehe um sieben Uhr auf. Ich muss um neun Uhr arbeiten. Gestern bin ich zum Arzt gegangen, weil mir der Kopf weh tat.",
+    lesenQ:[
+      { q:"Die Person steht um sieben Uhr auf.", opts:["Richtig","Falsch"], correct:0 },
+      { q:"Die Person ist gestern zum Arzt gegangen.", opts:["Richtig","Falsch"], correct:0 },
+      { q:"Die Arbeit fängt um sieben Uhr an.", opts:["Richtig","Falsch"], correct:1 }
+    ],
+    schreibenPracticeBullets:["Tu rutina, algo que pediste, y algo que hiciste ayer — todo integrado"],
+    schreibenTeil1Fields:[ {id:"f_final2_name",label:"Name",placeholder:"Tu nombre"}, {id:"f_final2_aufstehen",label:"Ich stehe um ... auf",placeholder:"Hora"}, {id:"f_final2_gestern",label:"Gestern habe ich...",placeholder:"Algo que hiciste ayer"}, {id:"f_final2_moechte",label:"Ich möchte...",placeholder:"Algo que quieres"} ],
+    schreibenTeil2Bullets:["Tu rutina diaria","Algo que hiciste ayer","Algo que quieres o necesitas"],
+    sprechenPracticeBullets:["Integra rutina, pasado y una petición en una sola respuesta"],
+    sprechenExamParts:[
+      { label:"SPRECHEN · Teil 1", instruction:"Cuenta tu rutina diaria y algo que hiciste ayer (Perfekt).", time:50 },
+      { label:"SPRECHEN · Teil 2", instruction:"Tarjeta de tema: \"Gesundheit oder Einkaufen\". Formula una pregunta y respóndela.", time:40 },
+      { label:"SPRECHEN · Teil 3", instruction:"Petición simple integrando lo aprendido en A1.2.", time:30 }
+    ]
+  }
+];
+
+/* ================================================================
+   ALMACENAMIENTO
+   ================================================================ */
+const PROGRESS_KEY = "pruefung-a1-progress-v2";
+const API_KEY_STORAGE = "pruefung-a1-anthropic-key";
+function loadProgress(){ try{ return JSON.parse(localStorage.getItem(PROGRESS_KEY)) || {units:{}}; }catch(e){ return {units:{}}; } }
+function saveProgress(){ localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress)); }
+let progress = loadProgress();
+if(!progress.units) progress.units = {};
+function unitProgress(id){
+  if(!progress.units[id]) progress.units[id] = { leccion:false, hoeren:false, lesen:false, schreiben:false, sprechen:false, examPassed:false, examScore:0 };
+  return progress.units[id];
+}
+function markDone(unitId, skill){ unitProgress(unitId)[skill] = true; saveProgress(); }
+function getUnit(id){ return UNITS.find(u => u.id === id); }
+function unitsForLevel(levelId){ return UNITS.filter(u => u.level === levelId).sort((a,b)=>a.number-b.number); }
+function isLevelComplete(levelId){
+  if(progress.reviewMode) return true;
+  const built = unitsForLevel(levelId);
+  if(built.length < TOTAL_UNITS_PER_LEVEL) return false;
+  return built.every(u => unitProgress(u.id).examPassed);
+}
+function isUnitUnlocked(unit){
+  if(progress.reviewMode) return true;
+  if(unit.number === 1) return true;
+  const prev = UNITS.find(u => u.level === unit.level && u.number === unit.number - 1);
+  return prev ? unitProgress(prev.id).examPassed : false;
+}
+function toggleReviewMode(){
+  progress.reviewMode = !progress.reviewMode;
+  saveProgress();
+  render();
+}
+
+/* ================================================================
+   NAVEGACIÓN (SPA de un solo contenedor)
+   ================================================================ */
+const app = document.getElementById("app");
+let nav = { view:"home", levelId:null, unitId:null };
+
+function go(view, extra){ nav = { view, ...extra }; render(); }
+
+function render(){
+  stopExamTimer();
+  if(nav.view === "home") return renderHome();
+  if(nav.view === "level") return renderLevelView(nav.levelId);
+  if(nav.view === "unit") return renderUnitView(nav.unitId);
+  if(nav.view === "exercise") return renderExerciseView(nav.unitId, nav.name);
+  if(nav.view === "exam") return; // el motor de examen controla su propio innerHTML
+}
+
+const WELCOME_KEY = "pruefung-a1-seen-welcome";
+function maybeShowWelcome(){
+  if(!localStorage.getItem(WELCOME_KEY)) document.getElementById("welcomeModal").style.display = "flex";
+}
+function closeWelcome(){
+  localStorage.setItem(WELCOME_KEY, "1");
+  document.getElementById("welcomeModal").style.display = "none";
+}
+function showWelcome(){ document.getElementById("welcomeModal").style.display = "flex"; }
+
+/* --- Home --- */
+function renderHome(){
+  maybeShowWelcome();
+  let html = `<span class="eyebrow">Prüfung A1</span><h1>Preparación de examen</h1><div class="sub">Elige el nivel en el que estás trabajando.</div><div style="margin-top:22px;">`;
+  LEVELS.forEach(level => {
+    const built = unitsForLevel(level.id);
+    const passedCount = built.filter(u => unitProgress(u.id).examPassed).length;
+    const unlocked = level.id === "a1_1" || isLevelComplete("a1_1");
+    if(unlocked){
+      html += `<button class="level-card" onclick="go('level',{levelId:'${level.id}'})">
+        <span class="level-badge">${level.label}</span>
+        <div class="level-title">${level.title}</div>
+        <div class="level-desc">${level.desc}</div>
+        <div class="level-progress">${passedCount} de ${TOTAL_UNITS_PER_LEVEL} unidades aprobadas</div>
+      </button>`;
+    } else {
+      html += `<div class="level-card locked">
+        <span class="level-badge">${level.label}</span>
+        <div class="level-title">${level.title}</div>
+        <div class="level-desc">${level.desc}</div>
+        <div class="level-lock-msg">🔒 Se desbloquea al aprobar las 8 unidades de A1.1</div>
+      </div>`;
+    }
+  });
+  html += `</div>`;
+  html += `<button class="primary-btn secondary-btn" style="margin-top:10px;" onclick="showWelcome()">❓ ¿Cómo funciona esta herramienta?</button>`;
+  html += `<button class="primary-btn secondary-btn" style="margin-top:10px;" onclick="toggleReviewMode()">${progress.reviewMode ? '🔒 Desactivar modo revisión' : '🔓 Modo revisión (desbloquear todo para revisar)'}</button>`;
+  app.innerHTML = html;
+}
+
+/* --- Level view: lista de unidades --- */
+function renderLevelView(levelId){
+  const level = LEVELS.find(l => l.id === levelId);
+  const built = unitsForLevel(levelId);
+  let html = `<div class="view-header"><button class="back-btn" onclick="go('home')">←</button><div><span class="eyebrow">${level.label}</span><div class="view-title">${level.title}</div></div></div>
+  <div class="card" style="margin-top:4px;"><p>${level.intro}</p></div>`;
+  for(let n = 1; n <= TOTAL_UNITS_PER_LEVEL; n++){
+    const unit = built.find(u => u.number === n);
+    if(unit){
+      const up = unitProgress(unit.id);
+      const unlocked = isUnitUnlocked(unit);
+      const cls = "unit-row" + (up.examPassed ? " done" : "") + (unlocked ? "" : " locked");
+      const status = up.examPassed ? "✓ Aprobada (" + up.examScore + "/100)" : (unlocked ? "Disponible" : "🔒 Bloqueada");
+      const onclick = unlocked ? `onclick="go('unit',{unitId:'${unit.id}'})"` : "";
+      html += `<div class="${cls}" ${onclick}>
+        <div class="unit-num">${n}</div>
+        <div class="unit-body"><div class="unit-title">${unit.title}</div><div class="unit-desc">${unit.subtitle}</div></div>
+        <div class="unit-status">${status}</div>
+      </div>`;
+    } else {
+      html += `<div class="unit-row locked">
+        <div class="unit-num">${n}</div>
+        <div class="unit-body"><div class="unit-title">Próximamente</div><div class="unit-desc">Aún no está construida</div></div>
+        <div class="unit-status">—</div>
+      </div>`;
+    }
+  }
+  app.innerHTML = html;
+}
+
+/* --- Unit view: mapa de 5 estaciones + examen --- */
+function renderUnitView(unitId){
+  const unit = getUnit(unitId);
+  const up = unitProgress(unitId);
+  const skills = ["leccion","hoeren","lesen","schreiben","sprechen"];
+  const doneCount = skills.filter(s => up[s]).length;
+  const icons = { leccion:"📘", hoeren:"🎧", lesen:"📖", schreiben:"✍️", sprechen:"🎙️" };
+  const labels = { leccion:"Lección", hoeren:"Hören", lesen:"Lesen", schreiben:"Schreiben", sprechen:"Sprechen" };
+  const descs = { leccion:"Aprende la gramática antes de practicar", hoeren:"Escucha y responde", lesen:"Lee y responde", schreiben:"Practica tu escritura", sprechen:"Practica hablando" };
+  let html = `<div class="view-header"><button class="back-btn" onclick="go('level',{levelId:'${unit.level}'})">←</button><div><span class="eyebrow">${LEVELS.find(l=>l.id===unit.level).label} · Einheit ${unit.number}</span><div class="view-title">${unit.title}</div></div></div>
+  <div class="sub">${unit.subtitle}</div>
+  <div class="progress-meta"><span>${doneCount} de 5 destrezas</span><span>${Math.round(doneCount/5*100)}%</span></div>
+  <div class="progress-bar"><div class="progress-fill" style="width:${doneCount/5*100}%"></div></div>
+  <div class="stations">`;
+  skills.forEach(s => {
+    html += `<button class="station ${up[s] ? 'done':''}" onclick="go('exercise',{unitId:'${unit.id}',name:'${s}'})">
+      <div class="station-icon">${icons[s]}</div>
+      <div class="station-body"><div class="station-title">${labels[s]}</div><div class="station-desc">${descs[s]}</div></div>
+      <div class="station-status">${up[s] ? '✓ Hecho' : 'Empezar'}</div>
+    </button>`;
+  });
+  html += `</div>`;
+  html += `<button class="exam-cta" onclick="startExam('${unit.id}')">
+    <div class="exam-cta-title">📋 Simular examen completo</div>
+    <div class="exam-cta-desc">Formato Start Deutsch A1 · tiempo limitado · sin volver atrás · puntaje sobre 100</div>
+  </button>`;
+  app.innerHTML = html;
+}
+
+/* --- Exercise view: dirige según nombre --- */
+function renderExerciseView(unitId, name){
+  const unit = getUnit(unitId);
+  const header = `<div class="view-header"><button class="back-btn" onclick="go('unit',{unitId:'${unitId}'})">←</button><div class="view-title">${ {leccion:"Lección",hoeren:"Hören",lesen:"Lesen",schreiben:"Schreiben",sprechen:"Sprechen"}[name] }</div></div>`;
+  const nudge = unitProgress(unitId).leccion || name === "leccion" ? "" :
+    `<div class="leccion-nudge"><span>Aún no has visto la Lección de esta unidad.</span><button onclick="go('exercise',{unitId:'${unitId}',name:'leccion'})">Ver lección</button></div>`;
+  if(name === "leccion") return renderLeccion(unit, header);
+  if(name === "hoeren") return renderHoerenPractice(unit, header, nudge);
+  if(name === "lesen") return renderLesenPractice(unit, header, nudge);
+  if(name === "schreiben") return renderSchreibenPractice(unit, header, nudge);
+  if(name === "sprechen") return renderSprechenPractice(unit, header, nudge);
+}
+
+/* ================================================================
+   LECCIÓN
+   ================================================================ */
+function vokabInlineLink(card){
+  if(card.vokabWord){
+    return `<a class="vokab-inline" href="https://mralealvarez-lab.github.io/vokabeln/?word=${encodeURIComponent(card.vokabWord)}" target="_blank">🔤 Ver "${card.vokabWord}" en Vokabeln →</a>`;
+  }
+  if(card.vokabCategory){
+    return `<a class="vokab-inline" href="https://mralealvarez-lab.github.io/vokabeln/?cat=${card.vokabCategory}" target="_blank">🔤 Practicar este vocabulario en Vokabeln →</a>`;
+  }
+  return "";
+}
+function renderLeccion(unit, header){
+  let html = header;
+  unit.lessonCards.forEach(card => {
+    html += `<div class="card"><p style="font-family:var(--display); font-weight:700; font-size:16px;">${card.title}</p>${card.html}`;
+    if(card.audio) html += `<button class="play-btn" onclick="playAudio(${JSON.stringify(card.audio)})">▶ Escuchar</button>`;
+    html += vokabInlineLink(card);
+    html += `</div>`;
+  });
+  html += `<div class="card"><p style="font-family:var(--display); font-weight:700; font-size:16px;">Comprueba lo que aprendiste</p><div id="leccionChecks"></div></div>`;
+  app.innerHTML = html;
+  renderLeccionChecks(unit);
+}
+function renderLeccionChecks(unit){
+  const el = document.getElementById("leccionChecks");
+  unit.leccionChecks.forEach((item, qi) => {
+    const block = document.createElement("div");
+    block.style.marginTop = "16px";
+    block.innerHTML = `<p style="font-weight:600;">${item.q}</p>`;
+    item.opts.forEach((opt, oi) => {
+      const btn = document.createElement("button");
+      btn.className = "opt"; btn.textContent = opt;
+      btn.onclick = () => {
+        const isCorrect = oi === item.correct;
+        btn.classList.add(isCorrect ? "correct" : "wrong");
+        if(!isCorrect){
+          block.querySelectorAll(".opt")[item.correct].classList.add("correct");
+          setTimeout(() => { block.querySelectorAll(".opt").forEach(b => { b.classList.remove("wrong"); b.classList.remove("correct"); b.disabled=false; }); }, 1400);
+        } else {
+          block.querySelectorAll(".opt").forEach(b => b.disabled = true);
+          checkLeccionComplete(unit);
+        }
+      };
+      block.appendChild(btn);
+    });
+    el.appendChild(block);
+  });
+  if(unit.leccionWrite){
+    const wb = document.createElement("div");
+    wb.style.marginTop = "20px";
+    wb.innerHTML = `<p style="font-weight:600;">${unit.leccionWrite.prompt}</p>
+      <input type="text" id="leccionWriteInput" placeholder="${unit.leccionWrite.placeholder}">
+      <button class="primary-btn" onclick="checkLeccionWrite(${JSON.stringify(unit.id)})">Comprobar</button>
+      <div id="leccionWriteResult" style="margin-top:8px; font-size:13px;"></div>`;
+    el.appendChild(wb);
+  }
+}
+function checkLeccionWrite(unitId){
+  const unit = getUnit(unitId);
+  const val = document.getElementById("leccionWriteInput").value.trim().toLowerCase().replace(/[.!]/g,"");
+  const result = document.getElementById("leccionWriteResult");
+  if(unit.leccionWrite.valid.includes(val)){
+    result.innerHTML = '<span style="color:var(--green); font-weight:600;">✓ Correcto</span>';
+    document.getElementById("leccionWriteInput").disabled = true;
+    checkLeccionComplete(unit);
+  } else {
+    result.innerHTML = '<span style="color:var(--coral);">Casi — intenta de nuevo.</span>';
+  }
+}
+function checkLeccionComplete(unit){
+  const allCorrect = document.querySelectorAll("#leccionChecks .opt.correct:disabled").length >= unit.leccionChecks.length;
+  const writeOk = !unit.leccionWrite || (document.getElementById("leccionWriteInput") && document.getElementById("leccionWriteInput").disabled);
+  if(allCorrect && writeOk) markDone(unit.id, "leccion");
+}
+
+/* ================================================================
+   HÖREN / LESEN (práctica libre)
+   ================================================================ */
+function playAudio(text){
+  if(!("speechSynthesis" in window)){ alert("Tu navegador no soporta síntesis de voz."); return; }
+  const u = new SpeechSynthesisUtterance(text.replace(/—/g,"."));
+  u.lang = "de-DE"; u.rate = 0.92;
+  speechSynthesis.cancel(); speechSynthesis.speak(u);
+}
+function renderHoerenPractice(unit, header, nudge){
+  app.innerHTML = header + `<div class="card">${nudge}<p>Escucha el diálogo. Puedes repetirlo las veces que quieras.</p>
+    <button class="play-btn" onclick="playAudio(${JSON.stringify(unit.hoerenText)})">▶ Reproducir diálogo</button>
+    <div id="qBlock"></div></div>`;
+  renderQuestions(unit.hoerenQ, "qBlock", () => markDone(unit.id,"hoeren"));
+}
+function renderLesenPractice(unit, header, nudge){
+  app.innerHTML = header + `<div class="card">${nudge}<p class="de-line">${unit.lesenText}</p><div id="qBlock"></div></div>`;
+  renderQuestions(unit.lesenQ, "qBlock", () => markDone(unit.id,"lesen"));
+}
+function renderQuestions(questions, containerId, onAllCorrect){
+  const el = document.getElementById(containerId);
+  let answeredCorrectly = 0;
+  questions.forEach(item => {
+    const block = document.createElement("div");
+    block.style.marginTop = "18px";
+    block.innerHTML = `<p style="font-weight:600;">${item.q}</p>`;
+    item.opts.forEach((opt, oi) => {
+      const btn = document.createElement("button");
+      btn.className = "opt"; btn.textContent = opt;
+      btn.onclick = () => {
+        block.querySelectorAll(".opt").forEach((b,i) => { b.disabled = true; if(i===item.correct) b.classList.add("correct"); else if(i===oi) b.classList.add("wrong"); });
+        answeredCorrectly++;
+        if(answeredCorrectly >= questions.length) onAllCorrect();
+      };
+      block.appendChild(btn);
+    });
+    el.appendChild(block);
+  });
+}
+
+/* ================================================================
+   SCHREIBEN (práctica libre)
+   ================================================================ */
+function renderSchreibenPractice(unit, header, nudge){
+  const bullets = unit.schreibenPracticeBullets.map(b => `<li>${b}</li>`).join("");
+  app.innerHTML = header + `<div class="card">${nudge}
+    <p>Escribe tu propia respuesta en alemán. Intenta incluir:</p>
+    <ul class="prompt-list">${bullets}</ul>
+    <textarea id="schreibenInput" rows="5" placeholder="Hallo!..."></textarea>
+    <button class="primary-btn" id="schreibenBtn" onclick="evaluateSchreiben('${unit.id}')">Evaluar mi texto</button>
+    <div id="schreibenFeedback"></div></div>`;
+}
+async function evaluateSchreiben(unitId){
+  if(!ensureApiKey(() => evaluateSchreiben(unitId))) return;
+  const text = document.getElementById("schreibenInput").value.trim();
+  if(!text) return;
+  const btn = document.getElementById("schreibenBtn");
+  const feedbackEl = document.getElementById("schreibenFeedback");
+  btn.disabled = true; feedbackEl.innerHTML = '<div class="loading">Evaluando tu texto...</div>';
+  try{
+    const system = "Eres un evaluador de alemán nivel A1 (examen de certificación). Da feedback breve en español: 1) 2-3 puntos de mejora concretos, 2) una versión modelo corregida en alemán. Máximo 120 palabras.";
+    const reply = await callClaude(system, text);
+    feedbackEl.innerHTML = '<div class="feedback-box"></div>';
+    feedbackEl.querySelector(".feedback-box").textContent = reply;
+    markDone(unitId, "schreiben");
+  }catch(err){ feedbackEl.innerHTML = '<div class="feedback-box">' + err.message + '</div>'; }
+  btn.disabled = false;
+}
+
+/* ================================================================
+   SPRECHEN (práctica libre)
+   ================================================================ */
+let recognizing = false, recognition = null, lastTranscript = "";
+function renderSprechenPractice(unit, header, nudge){
+  const bullets = unit.sprechenPracticeBullets.map(b => `<li>${b}</li>`).join("");
+  app.innerHTML = header + `<div class="card">${nudge}
+    <p>Responde en voz alta. Incluye:</p>
+    <ul class="prompt-list">${bullets}</ul>
+    <button class="primary-btn" id="recordBtn" onclick="toggleRecording()">🎙️ Grabar respuesta</button>
+    <div class="transcript-box" id="transcriptBox" style="display:none;"></div>
+    <button class="primary-btn" id="sprechenEvalBtn" style="display:none;" onclick="evaluateSprechen('${unit.id}')">Evaluar mi respuesta</button>
+    <div id="sprechenFeedback"></div></div>`;
+}
+function toggleRecording(){
+  const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
+  if(!SpeechRec){ alert("Tu navegador no soporta reconocimiento de voz. Prueba en Chrome."); return; }
+  const btn = document.getElementById("recordBtn"), box = document.getElementById("transcriptBox");
+  if(recognizing){ recognition.stop(); return; }
+  recognition = new SpeechRec(); recognition.lang = "de-DE"; recognition.interimResults = true; recognition.continuous = true;
+  recognition.onstart = () => { recognizing = true; btn.textContent = "⏹ Detener grabación"; btn.classList.add("recording"); box.style.display="block"; box.textContent="Escuchando..."; };
+  recognition.onresult = (event) => { let t=""; for(let i=0;i<event.results.length;i++) t += event.results[i][0].transcript; lastTranscript = t; box.textContent = t; };
+  recognition.onerror = (event) => { box.textContent = "Error de reconocimiento: " + event.error; };
+  recognition.onend = () => { recognizing = false; btn.textContent = "🎙️ Grabar de nuevo"; btn.classList.remove("recording"); if(lastTranscript.trim()) document.getElementById("sprechenEvalBtn").style.display = "block"; };
+  recognition.start();
+}
+async function evaluateSprechen(unitId){
+  if(!ensureApiKey(() => evaluateSprechen(unitId))) return;
+  if(!lastTranscript.trim()) return;
+  const btn = document.getElementById("sprechenEvalBtn");
+  const feedbackEl = document.getElementById("sprechenFeedback");
+  btn.disabled = true; feedbackEl.innerHTML = '<div class="loading">Evaluando tu respuesta...</div>';
+  try{
+    const system = "Eres un evaluador de alemán nivel A1 (examen oral). La transcripción viene de reconocimiento de voz automático (puede tener errores). Da feedback breve en español: 1) qué cubrió bien, 2) 2-3 puntos de mejora, 3) una versión modelo en alemán. Máximo 120 palabras.";
+    const reply = await callClaude(system, "Transcripción: " + lastTranscript);
+    feedbackEl.innerHTML = '<div class="feedback-box"></div>';
+    feedbackEl.querySelector(".feedback-box").textContent = reply;
+    markDone(unitId, "sprechen");
+  }catch(err){ feedbackEl.innerHTML = '<div class="feedback-box">' + err.message + '</div>'; }
+  btn.disabled = false;
+}
+
+/* ================================================================
+   API KEY
+   ================================================================ */
+function getApiKey(){ return localStorage.getItem(API_KEY_STORAGE); }
+function saveApiKey(){
+  const val = document.getElementById("apiKeyInput").value.trim();
+  if(!val) return;
+  localStorage.setItem(API_KEY_STORAGE, val);
+  document.getElementById("apiModal").style.display = "none";
+  if(pendingApiKeyCallback){
+    const cb = pendingApiKeyCallback;
+    pendingApiKeyCallback = null;
+    cb();
+  }
+}
+let pendingApiKeyCallback = null;
+function ensureApiKey(onReady){
+  if(!getApiKey()){
+    pendingApiKeyCallback = onReady || null;
+    document.getElementById("apiModal").style.display = "flex";
+    return false;
+  }
+  return true;
+}
+async function callClaude(systemPrompt, userMessage){
+  const key = getApiKey();
+  const res = await fetch("https://api.anthropic.com/v1/messages", {
+    method:"POST",
+    headers:{ "Content-Type":"application/json", "x-api-key":key, "anthropic-version":"2023-06-01", "anthropic-dangerous-direct-browser-access":"true" },
+    body: JSON.stringify({ model:"claude-sonnet-4-6", max_tokens:500, system:systemPrompt, messages:[{role:"user", content:userMessage}] })
+  });
+  if(!res.ok){ const errText = await res.text(); throw new Error("Error de API (" + res.status + "): " + errText.slice(0,200)); }
+  const data = await res.json();
+  return data.content.map(b => b.text || "").join("\n");
+}
+
+/* ================================================================
+   MODO EXAMEN (formato Start Deutsch A1) — genérico por unidad
+   ================================================================ */
+const exam = { unitId:null, scores:{hoeren:0,lesen:0,schreiben:0,sprechen:0}, hoerenPlays:0, sprechenTranscripts:[], timerId:null };
+
+function startExam(unitId){
+  nav = { view:"exam" };
+  exam.unitId = unitId;
+  exam.scores = { hoeren:0, lesen:0, schreiben:0, sprechen:0 };
+  exam.hoerenPlays = 0; exam.sprechenTranscripts = [];
+  renderExamIntro();
+}
+function stopExamTimer(){ if(exam.timerId){ clearInterval(exam.timerId); exam.timerId = null; } }
+function runExamTimer(seconds, onTick, onExpire){
+  stopExamTimer(); let left = seconds; onTick(left);
+  exam.timerId = setInterval(() => { left--; onTick(left); if(left<=0){ stopExamTimer(); onExpire(); } }, 1000);
+}
+function fmtTime(s){ return Math.floor(s/60) + ":" + String(s%60).padStart(2,"0"); }
+function examShell(partLabel, timerHtml, bodyHtml){ return `<div class="exam-topbar"><span class="exam-part-label">${partLabel}</span>${timerHtml}</div>${bodyHtml}`; }
+function examExitBtn(){ return `<button class="primary-btn secondary-btn" onclick="stopExamTimer(); go('unit',{unitId:exam.unitId});">Cancelar simulacro</button>`; }
+
+function renderExamIntro(){
+  app.innerHTML = `<div class="card">
+    <p style="font-family:var(--display); font-weight:700; font-size:18px;">Simulacro — ${getUnit(exam.unitId).title}</p>
+    <p>Formato Start Deutsch A1: 4 secciones, tiempo limitado, sin volver atrás una vez avanzas. El audio de Hören solo se reproduce 2 veces. Al final ves tu puntaje sobre 100 (se aprueba con 60).</p>
+    <button class="primary-btn" onclick="renderExamHoeren()">Comenzar simulacro</button>
+    ${examExitBtn()}
+  </div>`;
+}
+function renderExamHoeren(){
+  const unit = getUnit(exam.unitId);
+  app.innerHTML = examShell("HÖREN · Teil 1", '<span class="exam-timer" id="examTimer">3:00</span>',
+    `<div class="card"><p>Escucha el diálogo y responde. Solo puedes reproducirlo <strong>2 veces</strong>.</p>
+    <button class="play-btn" id="examPlayBtn" onclick="examPlayHoeren()">▶ Reproducir (2 disponibles)</button>
+    <div id="examHoerenQ"></div></div>`);
+  unit.hoerenQ.forEach((item, qi) => {
+    const block = document.createElement("div"); block.style.marginTop="18px"; block.dataset.qi = qi;
+    block.innerHTML = `<p style="font-weight:600;">${item.q}</p>`;
+    item.opts.forEach((opt, oi) => {
+      const btn = document.createElement("button"); btn.className="opt"; btn.textContent=opt;
+      btn.onclick = () => { block.dataset.selected = oi; block.querySelectorAll(".opt").forEach((b,i)=> b.style.outline = i===oi ? "2px solid var(--amber-deep)" : "none"); };
+      block.appendChild(btn);
+    });
+    document.getElementById("examHoerenQ").appendChild(block);
+  });
+  const doneBtn = document.createElement("button"); doneBtn.className="primary-btn"; doneBtn.textContent="Siguiente sección →"; doneBtn.onclick=finishExamHoeren;
+  document.getElementById("examHoerenQ").appendChild(doneBtn);
+  runExamTimer(180, left => { const t=document.getElementById("examTimer"); if(t){ t.textContent=fmtTime(left); t.classList.toggle("low", left<=20);} }, finishExamHoeren);
+}
+function examPlayHoeren(){
+  if(exam.hoerenPlays >= 2) return;
+  exam.hoerenPlays++;
+  playAudio(getUnit(exam.unitId).hoerenText);
+  const btn = document.getElementById("examPlayBtn");
+  const remaining = 2 - exam.hoerenPlays;
+  btn.textContent = "▶ Reproducir (" + remaining + " disponibles)";
+  if(remaining <= 0) btn.disabled = true;
+}
+function finishExamHoeren(){
+  stopExamTimer();
+  const unit = getUnit(exam.unitId);
+  let correct = 0;
+  document.querySelectorAll("#examHoerenQ > div[data-qi]").forEach(block => { if(parseInt(block.dataset.selected) === unit.hoerenQ[parseInt(block.dataset.qi)].correct) correct++; });
+  exam.scores.hoeren = Math.round((correct / unit.hoerenQ.length) * 25);
+  renderExamLesen();
+}
+function renderExamLesen(){
+  const unit = getUnit(exam.unitId);
+  app.innerHTML = examShell("LESEN · Teil 1", '<span class="exam-timer" id="examTimer">3:00</span>',
+    `<div class="card"><p class="de-line">${unit.lesenText}</p><div id="examLesenQ"></div></div>`);
+  unit.lesenQ.forEach((item, qi) => {
+    const block = document.createElement("div"); block.style.marginTop="18px"; block.dataset.qi = qi;
+    block.innerHTML = `<p style="font-weight:600;">${item.q}</p>`;
+    item.opts.forEach((opt, oi) => {
+      const btn = document.createElement("button"); btn.className="opt"; btn.textContent=opt;
+      btn.onclick = () => { block.dataset.selected = oi; block.querySelectorAll(".opt").forEach((b,i)=> b.style.outline = i===oi ? "2px solid var(--amber-deep)" : "none"); };
+      block.appendChild(btn);
+    });
+    document.getElementById("examLesenQ").appendChild(block);
+  });
+  const doneBtn = document.createElement("button"); doneBtn.className="primary-btn"; doneBtn.textContent="Siguiente sección →"; doneBtn.onclick=finishExamLesen;
+  document.getElementById("examLesenQ").appendChild(doneBtn);
+  runExamTimer(180, left => { const t=document.getElementById("examTimer"); if(t){ t.textContent=fmtTime(left); t.classList.toggle("low", left<=20);} }, finishExamLesen);
+}
+function finishExamLesen(){
+  stopExamTimer();
+  const unit = getUnit(exam.unitId);
+  let correct = 0;
+  document.querySelectorAll("#examLesenQ > div[data-qi]").forEach(block => { if(parseInt(block.dataset.selected) === unit.lesenQ[parseInt(block.dataset.qi)].correct) correct++; });
+  exam.scores.lesen = Math.round((correct / unit.lesenQ.length) * 25);
+  renderExamSchreibenTeil1();
+}
+function renderExamSchreibenTeil1(){
+  const unit = getUnit(exam.unitId);
+  const fields = unit.schreibenTeil1Fields.map(f => `<div class="form-field"><label>${f.label}</label><input type="text" id="${f.id}" placeholder="${f.placeholder}"></div>`).join("");
+  app.innerHTML = examShell("SCHREIBEN · Teil 1", '<span class="exam-timer" id="examTimer">1:30</span>',
+    `<div class="card"><p>Completa el formulario con tus datos.</p>${fields}<button class="primary-btn" onclick="finishExamSchreibenTeil1()">Siguiente parte →</button></div>`);
+  runExamTimer(90, left => { const t=document.getElementById("examTimer"); if(t){ t.textContent=fmtTime(left); t.classList.toggle("low", left<=15);} }, finishExamSchreibenTeil1);
+}
+function finishExamSchreibenTeil1(){
+  stopExamTimer();
+  const unit = getUnit(exam.unitId);
+  let filled = 0;
+  unit.schreibenTeil1Fields.forEach(f => { const el = document.getElementById(f.id); if(el && el.value.trim()) filled++; });
+  exam.schreibenTeil1Score = Math.round((filled / unit.schreibenTeil1Fields.length) * 8);
+  renderExamSchreibenTeil2();
+}
+function renderExamSchreibenTeil2(){
+  const unit = getUnit(exam.unitId);
+  const bullets = unit.schreibenTeil2Bullets.map(b => `<li>${b}</li>`).join("");
+  app.innerHTML = examShell("SCHREIBEN · Teil 2", '<span class="exam-timer" id="examTimer">4:00</span>',
+    `<div class="card"><p>Escribe un mensaje corto (25-35 palabras) a un amigo nuevo. Menciona:</p><ul class="prompt-list">${bullets}</ul>
+    <textarea id="examSchreibenText" rows="5" placeholder="Hallo!..."></textarea>
+    <button class="primary-btn" id="examSchreibenBtn" onclick="finishExamSchreiben()">Finalizar Schreiben →</button></div>`);
+  runExamTimer(240, left => { const t=document.getElementById("examTimer"); if(t){ t.textContent=fmtTime(left); t.classList.toggle("low", left<=20);} }, finishExamSchreiben);
+}
+async function finishExamSchreiben(){
+  stopExamTimer();
+  if(!ensureApiKey(() => finishExamSchreiben())) return;
+  const text = document.getElementById("examSchreibenText").value.trim();
+  const btn = document.getElementById("examSchreibenBtn");
+  if(btn){ btn.disabled = true; btn.textContent = "Evaluando..."; }
+  let teil2Score = 0;
+  if(text){
+    try{
+      const system = "Eres un evaluador oficial del examen Start Deutsch A1, sección Schreiben Teil 2. Responde SOLO con un JSON válido, sin texto adicional: {\"score\": <0-17>, \"feedback\": \"<máximo 60 palabras en español>\"}. El puntaje máximo es 17. Evalúa si cubrió los puntos pedidos, longitud apropiada (25-35 palabras) y corrección gramatical básica de A1.";
+      const reply = await callClaude(system, text);
+      const match = reply.match(/\{[\s\S]*\}/);
+      const parsed = JSON.parse(match ? match[0] : reply);
+      teil2Score = Math.max(0, Math.min(17, parsed.score || 0));
+      exam.schreibenFeedback = parsed.feedback || "";
+    }catch(e){ exam.schreibenFeedback = "No se pudo evaluar automáticamente (" + e.message + "). Puntaje parcial asignado."; teil2Score = 8; }
+  }
+  exam.scores.schreiben = (exam.schreibenTeil1Score || 0) + teil2Score;
+  renderExamSprechenIntro();
+}
+let sprechenPartIndex = 0;
+function renderExamSprechenIntro(){
+  sprechenPartIndex = 0; exam.sprechenTranscripts = [];
+  app.innerHTML = `<div class="card"><p style="font-family:var(--display); font-weight:700; font-size:17px;">Sprechen — 3 partes</p>
+    <p>Grabarás 3 respuestas cortas seguidas, como en el examen real.</p>
+    <button class="primary-btn" onclick="renderExamSprechenPart()">Comenzar Sprechen</button></div>`;
+}
+function renderExamSprechenPart(){
+  const unit = getUnit(exam.unitId);
+  const part = unit.sprechenExamParts[sprechenPartIndex];
+  app.innerHTML = examShell(part.label, '<span class="exam-timer" id="examTimer">' + fmtTime(part.time) + '</span>',
+    `<div class="card"><p>${part.instruction}</p>
+    <button class="primary-btn" id="examRecordBtn" onclick="examToggleRecording()">🎙️ Grabar</button>
+    <div class="transcript-box" id="examTranscriptBox" style="display:none;"></div></div>`);
+  runExamTimer(part.time, left => { const t=document.getElementById("examTimer"); if(t){ t.textContent=fmtTime(left); t.classList.toggle("low", left<=10);} }, examAdvanceSprechen);
+}
+let examRecognition = null, examRecognizing = false, examLastTranscript = "";
+function examToggleRecording(){
+  const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
+  if(!SpeechRec){ alert("Tu navegador no soporta reconocimiento de voz. Prueba en Chrome."); return; }
+  const btn = document.getElementById("examRecordBtn"), box = document.getElementById("examTranscriptBox");
+  if(examRecognizing){ examRecognition.stop(); return; }
+  examRecognition = new SpeechRec(); examRecognition.lang="de-DE"; examRecognition.interimResults=true; examRecognition.continuous=true;
+  examRecognition.onstart = () => { examRecognizing=true; btn.textContent="⏹ Detener"; btn.classList.add("recording"); box.style.display="block"; box.textContent="Escuchando..."; };
+  examRecognition.onresult = (event) => { let t=""; for(let i=0;i<event.results.length;i++) t+=event.results[i][0].transcript; examLastTranscript=t; box.textContent=t; };
+  examRecognition.onend = () => { examRecognizing=false; btn.textContent="🎙️ Grabar de nuevo"; btn.classList.remove("recording"); };
+  examRecognition.start();
+}
+function examAdvanceSprechen(){
+  stopExamTimer();
+  if(examRecognizing && examRecognition) examRecognition.stop();
+  exam.sprechenTranscripts.push(examLastTranscript || "(sin respuesta)");
+  examLastTranscript = "";
+  sprechenPartIndex++;
+  const unit = getUnit(exam.unitId);
+  if(sprechenPartIndex < unit.sprechenExamParts.length) renderExamSprechenPart();
+  else finishExamSprechen();
+}
+async function finishExamSprechen(){
+  app.innerHTML = '<div class="card"><p class="loading">Evaluando tus respuestas de Sprechen...</p></div>';
+  if(!ensureApiKey(() => finishExamSprechen())) return;
+  try{
+    const system = "Eres un evaluador oficial del examen oral Start Deutsch A1. Recibirás varias transcripciones generadas por reconocimiento de voz automático (pueden tener errores). Responde SOLO con JSON válido: {\"score\": <0-25>, \"feedback\": \"<máximo 80 palabras en español, con 2-3 puntos de mejora>\"}.";
+    const userMsg = exam.sprechenTranscripts.map((t,i) => "Teil " + (i+1) + ": " + t).join("\n");
+    const reply = await callClaude(system, userMsg);
+    const match = reply.match(/\{[\s\S]*\}/);
+    const parsed = JSON.parse(match ? match[0] : reply);
+    exam.scores.sprechen = Math.max(0, Math.min(25, parsed.score || 0));
+    exam.sprechenFeedback = parsed.feedback || "";
+  }catch(e){ exam.scores.sprechen = 10; exam.sprechenFeedback = "No se pudo evaluar automáticamente (" + e.message + ")."; }
+  renderExamResults();
+}
+function renderExamResults(){
+  const s = exam.scores;
+  const total = s.hoeren + s.lesen + s.schreiben + s.sprechen;
+  const passed = total >= 60;
+  app.innerHTML = `<div class="card">
+    <div class="result-score"><div class="result-number">${total}</div><div style="font-size:12px; color:rgba(20,20,20,0.5);">de 100 puntos</div>
+    <div class="result-status ${passed?'pass':'fail'}">${passed ? '✓ Aprobado' : 'No aprobado — se necesitan 60'}</div></div>
+    <div style="margin-top:18px;">
+      <div class="breakdown-row"><span>Hören</span><span>${s.hoeren} / 25</span></div>
+      <div class="breakdown-row"><span>Lesen</span><span>${s.lesen} / 25</span></div>
+      <div class="breakdown-row"><span>Schreiben</span><span>${s.schreiben} / 25</span></div>
+      <div class="breakdown-row"><span>Sprechen</span><span>${s.sprechen} / 25</span></div>
+    </div>
+    ${exam.schreibenFeedback ? '<div class="feedback-box" style="margin-top:16px;"><strong>Schreiben:</strong> '+exam.schreibenFeedback+'</div>' : ''}
+    ${exam.sprechenFeedback ? '<div class="feedback-box"><strong>Sprechen:</strong> '+exam.sprechenFeedback+'</div>' : ''}
+    <button class="primary-btn" onclick="go('unit',{unitId:exam.unitId})">Volver a la unidad</button>
+  </div>`;
+  const up = unitProgress(exam.unitId);
+  up.examScore = total;
+  if(passed){ up.leccion=true; up.hoeren=true; up.lesen=true; up.schreiben=true; up.sprechen=true; up.examPassed = true; }
+  saveProgress();
+}
+
+/* ================================================================
+   INICIO
+   ================================================================ */
+render();
+</script>
+</body>
+</html>
