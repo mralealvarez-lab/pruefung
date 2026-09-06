@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Prüfung A1 — Preparación de examen</title>
+<title>Prüfung — Preparación de examen de alemán</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,600;0,700;1,600&family=Work+Sans:wght@400;500;600;700&display=swap');
 
@@ -206,9 +206,9 @@
 
   <div id="welcomeModal" class="modal-backdrop" style="display:none;">
     <div class="modal">
-      <h2>Cómo funciona Prüfung A1</h2>
-      <p><strong>1.</strong> Hay 2 niveles: A1.1 y A1.2. Empiezas en A1.1; A1.2 se desbloquea al aprobar las 8 unidades de A1.1.</p>
-      <p><strong>2.</strong> Cada nivel tiene 8 unidades, y se desbloquean en orden — necesitas aprobar el examen de una para pasar a la siguiente.</p>
+      <h2>Cómo funciona Prüfung</h2>
+      <p><strong>1.</strong> Los niveles se desbloquean en orden: empiezas en A1.1, y cada nivel siguiente (A1.2, y más adelante A2, B1, B2...) se desbloquea al aprobar las 8 unidades del anterior.</p>
+      <p><strong>2.</strong> Cada nivel tiene 8 unidades, y también se desbloquean en orden dentro del nivel — necesitas aprobar el examen de una para pasar a la siguiente.</p>
       <p><strong>3.</strong> Cada unidad tiene 5 partes: <strong>Lección</strong> (aprendes la gramática), luego <strong>Hören, Lesen, Schreiben, Sprechen</strong> (practicas sin presión), y al final un <strong>simulacro de examen</strong> real con tiempo limitado.</p>
       <p><strong>4.</strong> Tu progreso se guarda solo, en este navegador. Si quieres explorar todo sin restricciones, usa "Modo revisión" en la pantalla de inicio.</p>
       <button class="primary-btn" onclick="closeWelcome()">Entendido, empezar</button>
@@ -1227,11 +1227,12 @@ function showWelcome(){ document.getElementById("welcomeModal").style.display = 
 /* --- Home --- */
 function renderHome(){
   maybeShowWelcome();
-  let html = `<span class="eyebrow">Prüfung A1</span><h1>Preparación de examen</h1><div class="sub">Elige el nivel en el que estás trabajando.</div><div style="margin-top:22px;">`;
-  LEVELS.forEach(level => {
+  let html = `<span class="eyebrow">Prüfung</span><h1>Preparación de examen</h1><div class="sub">Elige el nivel en el que estás trabajando.</div><div style="margin-top:22px;">`;
+  LEVELS.forEach((level, idx) => {
     const built = unitsForLevel(level.id);
     const passedCount = built.filter(u => unitProgress(u.id).examPassed).length;
-    const unlocked = level.id === "a1_1" || isLevelComplete("a1_1");
+    const prevLevel = idx > 0 ? LEVELS[idx - 1] : null;
+    const unlocked = !prevLevel || isLevelComplete(prevLevel.id);
     if(unlocked){
       html += `<button class="level-card" onclick="go('level',{levelId:'${level.id}'})">
         <span class="level-badge">${level.label}</span>
@@ -1244,7 +1245,7 @@ function renderHome(){
         <span class="level-badge">${level.label}</span>
         <div class="level-title">${level.title}</div>
         <div class="level-desc">${level.desc}</div>
-        <div class="level-lock-msg">🔒 Se desbloquea al aprobar las 8 unidades de A1.1</div>
+        <div class="level-lock-msg">🔒 Se desbloquea al aprobar las 8 unidades de ${prevLevel.label}</div>
       </div>`;
     }
   });
