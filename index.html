@@ -184,6 +184,7 @@
   .result-status.pass{ color: var(--green); }
   .result-status.fail{ color: var(--coral); }
   .breakdown-row{ display:flex; justify-content:space-between; padding: 9px 0; border-bottom: 1px solid rgba(20,20,20,0.1); font-size:13.5px; }
+  .breakdown-row.low-section{ color: var(--coral); font-weight:700; }
   .breakdown-row:last-child{ border-bottom:none; }
 
   .modal-backdrop{ position:fixed; inset:0; background: rgba(0,0,0,0.6); display:flex; align-items:center; justify-content:center; padding: 20px; z-index: 50; }
@@ -232,7 +233,11 @@ const LEVELS = [
   { id:"a2_1", label:"A2.1", title:"Vida cotidiana ampliada", desc:"Trabajo, comparaciones, Dativ, vivienda, viajes, clima y emociones.",
     intro:"En A2.1 tu alemán se vuelve más natural: hablas de tu trabajo o estudios, comparas cosas, usas más preposiciones (Dativ), describes tu vivienda, cuentas viajes y expresas cómo te sientes." },
   { id:"a2_2", label:"A2.2", title:"Consolidación A2", desc:"Futuro, correos formales, conectores, pasado de modales, y planear con otros.",
-    intro:"En A2.2 conectas ideas como un hablante real: hablas del futuro, escribes correos formales, usas weil/dass/deshalb/trotzdem, cuentas qué podías o debías hacer, y planeas actividades negociando con otros." }
+    intro:"En A2.2 conectas ideas como un hablante real: hablas del futuro, escribes correos formales, usas weil/dass/deshalb/trotzdem, cuentas qué podías o debías hacer, y planeas actividades negociando con otros." },
+  { id:"b1_1", label:"B1.1", title:"Independencia lingüística", desc:"Konjunktiv II, voz pasiva, cláusulas relativas, Genitiv, Plusquamperfekt.",
+    intro:"En B1.1 tu alemán da un salto: expresas cortesía e hipótesis (würde/hätte/wäre), usas la voz pasiva, describes con cláusulas relativas, conoces el Genitiv formal, cuentas un pasado más lejano (Plusquamperfekt), y conectas ideas complejas con obwohl/bevor/nachdem/seitdem." },
+  { id:"b1_2", label:"B1.2", title:"Consolidación B1", desc:"Discurso indirecto, conectores dobles, presentaciones, opinión escrita, negociación real.",
+    intro:"En B1.2 dominas las destrezas que definen el examen B1 real: cuentas lo que otros dijeron, usas conectores dobles (sowohl...als auch), estructuras una presentación completa, escribes una opinión argumentada, y negocias de verdad — proponiendo, cediendo y llegando a acuerdos." }
 ];
 
 const UNITS = [
@@ -2184,6 +2189,782 @@ schreibenPracticeBullets:["Integra: un plan futuro, una razón con weil, y una p
       { label:"SPRECHEN · Teil 2", instruction:"Habla de tus planes futuros y da razones (weil/dass).", time:50 },
       { label:"SPRECHEN · Teil 3", instruction:"Planea una actividad completa con un compañero: propone, negocia, y acuerden un plan.", time:50 }
     ]
+  },
+  {
+    id:"u33", level:"b1_1", number:1, title:"Höflich und hypothetisch", subtitle:"Konjunktiv II: würde, hätte, wäre — cortesía y situaciones hipotéticas.",
+    vokabCategory:null,
+    lessonCards: [
+      { title:"1. Qué es el Konjunktiv II",
+        html:`<p>Es el "modo" que usas para hablar de cosas irreales, hipotéticas, o para sonar más educado — como el condicional en español ("compraría", "sería").</p>` },
+      { title:"2. würde + infinitivo — el más usado",
+        html:`<p>ich würde · du würdest · er/sie/es würde · wir würden · ihr würdet · sie/Sie würden</p><p style="margin-top:8px;"><span class="de-line">Ich würde gern nach Deutschland reisen.</span> (Me encantaría viajar a Alemania — hipotético)</p><p><span class="de-line">Würden Sie mir bitte helfen?</span> (¿Podría ayudarme, por favor? — cortesía)</p>` },
+      { title:"3. hätte y wäre — los irregulares más comunes",
+        html:`<p><span class="de-line">hätte</span> (tendría, de haben): <span class="de-line">Ich hätte gern einen Kaffee.</span> (Quisiera un café — muy educado, típico en pedidos)</p><p style="margin-top:8px;"><span class="de-line">wäre</span> (sería/estaría, de sein): <span class="de-line">Das wäre toll!</span> (¡Eso sería genial!)</p><p style="margin-top:10px; background:rgba(232,163,61,0.15); border-radius:8px; padding:10px 12px; font-size:13px;">🧒 En palabras simples: "hätte gern" es la forma más educada de pedir algo — como decir "quisiera" en vez de "quiero" en español.</p>` },
+      { title:"4. Frases condicionales simples",
+        html:`<p><span class="de-line">Wenn ich Zeit hätte, würde ich mehr reisen.</span> (Si tuviera tiempo, viajaría más)</p><p><span class="de-line">Wenn ich reich wäre, würde ich ein Haus kaufen.</span> (Si fuera rico, compraría una casa)</p>` },
+      { title:"5. Diálogo modelo",
+        html:`<p class="de-line">— Was würdest du machen, wenn du frei wärst?</p><p class="de-line">— Ich würde viel reisen. Ich hätte gern mehr Zeit für meine Familie.</p><p class="de-line">— Das wäre schön!</p>`,
+        audio:"Was würdest du machen, wenn du frei wärst? Ich würde viel reisen. Ich hätte gern mehr Zeit für meine Familie. Das wäre schön!" }
+    ],
+    leccionChecks:[
+      { q:"¿Cómo se dice \"me gustaría\" (forma educada)?", opts:["Ich will", "Ich würde gern", "Ich habe gern"], correct:1 },
+      { q:"¿Cómo pides algo muy educadamente en un café?", opts:["Ich will einen Kaffee", "Ich hätte gern einen Kaffee", "Ich habe einen Kaffee"], correct:1 },
+      { q:"Conjuga \"würden\" con \"du\":", opts:["du würdest", "du würde", "du würdet"], correct:0 },
+      { q:"¿Qué significa \"Das wäre toll!\"?", opts:["Eso fue genial", "Eso sería genial", "Eso es genial"], correct:1 },
+      { q:"¿Cómo empiezas una condición hipotética?", opts:["Weil ich...", "Wenn ich...", "Dass ich..."], correct:1 }
+    ],
+    leccionWrite:{ prompt:"Escribe en alemán: \"Quisiera un café.\"", placeholder:"Ich hätte...", valid:["ich hätte gern einen kaffee"] },
+    hoerenText:"Was würdest du machen, wenn du mehr Geld hättest? — Ich würde ein Haus kaufen und viel reisen.",
+    hoerenQ:[{ q:"¿Qué haría con más dinero?", opts:["Trabajar más", "Comprar una casa y viajar", "Ahorrar todo"], correct:1 }, { q:"¿Qué modo verbal se usa?", opts:["Presente", "Konjunktiv II", "Perfekt"], correct:1 }],
+    hoerenText2:"Ich hätte gern einen Tee, bitte. Würden Sie mir auch die Speisekarte geben?",
+    hoerenQ2:[{ q:"¿Qué pide?", opts:["Café", "Té", "Agua"], correct:1 }, { q:"¿Qué más pide?", opts:["La cuenta", "El menú", "Un vaso"], correct:1 }],
+        hoerenText3:"Wenn ich fliegen könnte, würde ich sofort verreisen. Ich hätte gern mehr Abenteuer in meinem Leben.",
+    hoerenQ3:[{ q:"¿Qué haría si pudiera volar?", opts:["Viajaría de inmediato", "Se quedaría en casa", "Trabajaría"], correct:0 }, { q:"¿Qué le gustaría tener más?", opts:["Aventuras", "Dinero", "Tiempo"], correct:0 }],
+    hoerenText4:"Ich hätte gern ein Glas Wasser, bitte. Würden Sie mir auch helfen, den Koffer zu tragen?",
+    hoerenQ4:[{ q:"¿Qué pide?", opts:["Agua", "Café", "Jugo"], correct:0 }, { q:"¿Qué más pide?", opts:["Ayuda con la maleta", "Direcciones", "El menú"], correct:0 }],
+lesenText:"Wenn ich mehr Zeit hätte, würde ich ein Instrument lernen. Ich hätte gern Klavierstunden, aber ich bin sehr beschäftigt.",
+    lesenQ:[{ q:"Die Person würde ein Instrument lernen.", opts:["Richtig", "Falsch"], correct:0 }, { q:"Die Person hat viel freie Zeit.", opts:["Richtig", "Falsch"], correct:1 }],
+    lesenText2:"Wenn ich in einer anderen Stadt wohnen könnte, würde ich nach Hamburg ziehen. Das wäre ein großer Schritt, aber ich hätte gern ein neues Leben.",
+    lesenQ2:[{ q:"Die Person würde nach Hamburg ziehen.", opts:["Richtig", "Falsch"], correct:0 }, { q:"Die Person will nicht umziehen.", opts:["Richtig", "Falsch"], correct:1 }],
+        lesenText3:"Wenn ich könnte, würde ich jeden Tag am Strand leben. Ich hätte gern ein Haus am Meer, aber das ist nur ein Traum.",
+    lesenQ3:[{ q:"Die Person träumt davon, am Strand zu leben.", opts:["Richtig", "Falsch"], correct:0 }, { q:"Die Person hat schon ein Haus am Meer.", opts:["Richtig", "Falsch"], correct:1 }],
+    lesenText4:"Wäre es möglich, dass ich morgen frei nehme? Ich hätte gern einen Tag für mich selbst.",
+    lesenQ4:[{ q:"Die Person bittet um einen freien Tag.", opts:["Richtig", "Falsch"], correct:0 }, { q:"Die Person will mehr arbeiten.", opts:["Richtig", "Falsch"], correct:1 }],
+schreibenPracticeBullets:["Qué harías si tuvieras más tiempo o dinero", "Pide algo de forma muy educada (hätte gern)"],
+    schreibenTeil1Fields:[ {id:"b1_wuerde",label:"Ich würde...",placeholder:"Algo que harías hipotéticamente"}, {id:"b1_haette",label:"Ich hätte gern...",placeholder:"Algo que quisieras (educado)"}, {id:"b1_wenn",label:"Wenn ich..., würde ich...",placeholder:"Una condición completa"}, {id:"b1_name",label:"Name",placeholder:"Tu nombre"} ],
+    schreibenTeil2Bullets:["Qué harías si tuvieras más tiempo libre", "Algo que pedirías de forma educada", "Una condición hipotética completa (wenn...würde...)"],
+    sprechenPracticeBullets:["Habla de qué harías en una situación hipotética, usando würde/hätte/wäre"],
+    sprechenExamParts:[
+      { label:"SPRECHEN · Teil 1", instruction:"Tarjeta de tema: \"Wenn ich...\". Formula una pregunta hipotética y respóndela.", time:40 },
+      { label:"SPRECHEN · Teil 2", instruction:"Habla de qué harías si tuvieras más tiempo, dinero, o libertad — usa würde/hätte/wäre.", time:60 },
+      { label:"SPRECHEN · Teil 3", instruction:"Responde: ¿qué pedirías educadamente en un restaurante formal?", time:30 }
+    ]
+  },
+  {
+    id:"u34", level:"b1_1", number:2, title:"Das Passiv", subtitle:"La voz pasiva: werden + Partizip II — cuando la acción importa más que quién la hace.",
+    vokabCategory:null,
+    lessonCards: [
+      { title:"1. Activa vs. pasiva",
+        html:`<p><strong>Activa</strong> (quién hace la acción es lo importante): <span class="de-line">Der Koch kocht das Essen.</span> (El cocinero cocina la comida)</p><p style="margin-top:8px;"><strong>Pasiva</strong> (la acción/el objeto es lo importante, no quién la hace): <span class="de-line">Das Essen wird gekocht.</span> (La comida es cocinada)</p>` },
+      { title:"2. Cómo se forma",
+        html:`<p><span class="de-line">werden</span> (conjugado) + Partizip II (al final) — igual patrón que el Perfekt, pero con "werden" en vez de "haben/sein":</p><p>ich werde gekocht · du wirst gekocht · er/sie/es wird gekocht · wir werden gekocht · ihr werdet gekocht · sie/Sie werden gekocht</p>` },
+      { title:"3. Ejemplos comunes (letreros, instrucciones)",
+        html:`<p><span class="de-line">Hier wird nicht geraucht.</span> (Aquí no se fuma)</p><p><span class="de-line">Das Geschäft wird um 20 Uhr geschlossen.</span> (La tienda se cierra a las 20h)</p><p style="margin-top:10px; background:rgba(232,163,61,0.15); border-radius:8px; padding:10px 12px; font-size:13px;">🧒 En palabras simples: es como decir "SE hace algo" en español, sin decir quién — "se fuma", "se cierra". El alemán usa "werden" donde el español usa "se".</p>` },
+      { title:"4. Pasiva en pasado (Perfekt)",
+        html:`<p><span class="de-line">Das Auto wurde repariert.</span> (El auto fue reparado — pasado simple de la pasiva, muy usado)</p>` },
+      { title:"5. Diálogo modelo",
+        html:`<p class="de-line">— Wann wird das Geschäft geöffnet?</p><p class="de-line">— Es wird um neun Uhr geöffnet.</p><p class="de-line">— Und wurde das Auto schon repariert?</p><p class="de-line">— Ja, es wurde gestern repariert.</p>`,
+        audio:"Wann wird das Geschäft geöffnet? Es wird um neun Uhr geöffnet. Und wurde das Auto schon repariert? Ja, es wurde gestern repariert." }
+    ],
+    leccionChecks:[
+      { q:"¿Cómo se forma la voz pasiva?", opts:["haben + Partizip II", "werden + Partizip II", "sein + Infinitiv"], correct:1 },
+      { q:"¿Cómo se dice \"aquí no se fuma\"?", opts:["Hier raucht man nicht", "Hier wird nicht geraucht", "Hier ist nicht geraucht"], correct:1 },
+      { q:"¿Qué frase está en voz pasiva?", opts:["Der Koch kocht das Essen", "Das Essen wird gekocht", "Ich koche das Essen"], correct:1 },
+      { q:"¿Cómo se dice \"el auto fue reparado\"?", opts:["Das Auto hat repariert", "Das Auto wurde repariert", "Das Auto ist repariert"], correct:1 },
+      { q:"Conjuga \"werden\" con \"es\" (pasiva):", opts:["es wird", "es werdet", "es würde"], correct:0 }
+    ],
+    leccionWrite:{ prompt:"Escribe en alemán: \"La tienda se cierra a las 20h.\"", placeholder:"Das Geschäft...", valid:["das geschäft wird um 20 uhr geschlossen", "das geschäft wird um zwanzig uhr geschlossen"] },
+    hoerenText:"Wann wird das Museum geöffnet? — Es wird um zehn Uhr geöffnet und um achtzehn Uhr geschlossen.",
+    hoerenQ:[{ q:"¿A qué hora abre?", opts:["9 Uhr", "10 Uhr", "11 Uhr"], correct:1 }, { q:"¿A qué hora cierra?", opts:["17 Uhr", "18 Uhr", "19 Uhr"], correct:1 }],
+    hoerenText2:"Das Handy wurde repariert. Es wurde gestern von einem Techniker gemacht.",
+    hoerenQ2:[{ q:"¿Qué se reparó?", opts:["Una computadora", "Un celular", "Un auto"], correct:1 }, { q:"¿Cuándo se hizo?", opts:["Hoy", "Ayer", "La próxima semana"], correct:1 }],
+        hoerenText3:"Wann wird das Auto abgeholt? — Es wird morgen früh abgeholt.",
+    hoerenQ3:[{ q:"¿Cuándo se recogerá?", opts:["Hoy", "Mañana temprano", "La próxima semana"], correct:1 }, { q:"¿Qué se recogerá?", opts:["Auto", "Bicicleta", "Paquete"], correct:0 }],
+    hoerenText4:"Das Paket wurde schon verschickt. Es wird in zwei Tagen geliefert.",
+    hoerenQ4:[{ q:"¿Qué se envió?", opts:["Una carta", "Un paquete", "Dinero"], correct:1 }, { q:"¿Cuándo llega?", opts:["Mañana", "En dos días", "En una semana"], correct:1 }],
+lesenText:"In diesem Restaurant wird nur frisches Essen serviert. Die Speisekarte wird jeden Tag geändert. Hier wird auch nicht geraucht.",
+    lesenQ:[{ q:"Die Speisekarte wird jeden Tag geändert.", opts:["Richtig", "Falsch"], correct:0 }, { q:"Man darf hier rauchen.", opts:["Richtig", "Falsch"], correct:1 }],
+    lesenText2:"Das neue Einkaufszentrum wurde letzten Monat eröffnet. Es wird von vielen Menschen besucht. Die Geschäfte werden um 21 Uhr geschlossen.",
+    lesenQ2:[{ q:"Das Einkaufszentrum wurde letzten Monat eröffnet.", opts:["Richtig", "Falsch"], correct:0 }, { q:"Die Geschäfte schließen um 19 Uhr.", opts:["Richtig", "Falsch"], correct:1 }],
+        lesenText3:"Die neue Brücke wird nächstes Jahr gebaut. Sie wird von der Stadt finanziert.",
+    lesenQ3:[{ q:"Die Brücke wird nächstes Jahr gebaut.", opts:["Richtig", "Falsch"], correct:0 }, { q:"Niemand finanziert die Brücke.", opts:["Richtig", "Falsch"], correct:1 }],
+    lesenText4:"Der Vertrag wurde gestern unterschrieben. Er wird ab nächster Woche gültig.",
+    lesenQ4:[{ q:"Der Vertrag wurde gestern unterschrieben.", opts:["Richtig", "Falsch"], correct:0 }, { q:"Der Vertrag ist schon gültig.", opts:["Richtig", "Falsch"], correct:1 }],
+schreibenPracticeBullets:["Describe un lugar usando voz pasiva (se abre, se cierra, se sirve)"],
+    schreibenTeil1Fields:[ {id:"b2_geoeffnet",label:"Es wird um ... geöffnet",placeholder:"Hora de apertura de un lugar"}, {id:"b2_geschlossen",label:"Es wird um ... geschlossen",placeholder:"Hora de cierre"}, {id:"b2_serviert",label:"Was wird serviert?",placeholder:"Qué se sirve/hace ahí"}, {id:"b2_name",label:"Name",placeholder:"Tu nombre"} ],
+    schreibenTeil2Bullets:["Describe un negocio o lugar usando voz pasiva", "A qué hora abre y cierra"],
+    sprechenPracticeBullets:["Describe un lugar o proceso usando voz pasiva"],
+    sprechenExamParts:[
+      { label:"SPRECHEN · Teil 1", instruction:"Tarjeta de tema: \"Öffnungszeiten\" (horarios). Formula una pregunta con voz pasiva y respóndela.", time:40 },
+      { label:"SPRECHEN · Teil 2", instruction:"Describe un lugar (tienda, restaurante) usando voz pasiva: cuándo abre, qué se sirve/vende.", time:60 },
+      { label:"SPRECHEN · Teil 3", instruction:"Responde: ¿qué normas existen en tu ciudad que se expresan con voz pasiva? (ej. no se fuma aquí)", time:30 }
+    ]
+  },
+  {
+    id:"u35", level:"b1_1", number:3, title:"Relativsätze", subtitle:"Cláusulas relativas: describir con más precisión usando der/die/das.",
+    vokabCategory:null,
+    lessonCards: [
+      { title:"1. Qué es una cláusula relativa",
+        html:`<p>Es una frase que describe a un sustantivo, como "que" en español: "el hombre QUE trabaja aquí". En alemán se usa der/die/das (según el género del sustantivo que describes), y el verbo va al FINAL:</p><p><span class="de-line">Der Mann, der hier arbeitet, heißt Tom.</span> (El hombre que trabaja aquí se llama Tom)</p>` },
+      { title:"2. Elegir el pronombre relativo correcto",
+        html:`<p>El pronombre (der/die/das/die-plural) depende del género del sustantivo que describes, NO del verbo:</p><p><span class="de-line">die Frau, die...</span> (femenino) · <span class="de-line">das Kind, das...</span> (neutro) · <span class="de-line">die Leute, die...</span> (plural)</p>` },
+      { title:"3. Cuando el pronombre es objeto (cambia de caso)",
+        html:`<p>Si en la cláusula el pronombre es el objeto (no el sujeto), cambia de caso:</p><p><span class="de-line">Der Film, den ich gesehen habe, war gut.</span> (La película que vi fue buena — "den" porque es Akkusativ, objeto de "sehen")</p>` },
+      { title:"4. Ejemplos con Dativ",
+        html:`<p><span class="de-line">Die Frau, der ich geholfen habe, ist meine Nachbarin.</span> (La mujer a quien ayudé es mi vecina — "der" Dativ porque "helfen" pide Dativ)</p>`,
+        audio:"Der Mann, der hier arbeitet, heißt Tom. Der Film, den ich gesehen habe, war gut. Die Frau, der ich geholfen habe, ist meine Nachbarin." },
+      { title:"5. Diálogo modelo",
+        html:`<p class="de-line">— Kennst du den Mann, der da drüben steht?</p><p class="de-line">— Ja, das ist der Kollege, der mir letzte Woche geholfen hat.</p><p class="de-line">— Ah, das ist der Film, den er empfohlen hat!</p>`,
+        audio:"Kennst du den Mann, der da drüben steht? Ja, das ist der Kollege, der mir letzte Woche geholfen hat. Ah, das ist der Film, den er empfohlen hat!" }
+    ],
+    leccionChecks:[
+      { q:"¿Dónde va el verbo en una cláusula relativa?", opts:["Al final", "Al principio", "En 2ª posición"], correct:0 },
+      { q:"¿Qué pronombre usas para describir \"die Frau\"?", opts:["der", "die", "das"], correct:1 },
+      { q:"\"Der Film, ___ ich gesehen habe...\" (objeto Akkusativ masculino)", opts:["der", "den", "dem"], correct:1 },
+      { q:"¿Qué pronombre usas para un sustantivo plural?", opts:["der", "die", "das"], correct:1 },
+      { q:"¿Cómo se dice \"el hombre que trabaja aquí\"?", opts:["Der Mann, der hier arbeitet", "Der Mann, den hier arbeitet", "Der Mann, dem hier arbeitet"], correct:0 }
+    ],
+    leccionWrite:{ prompt:"Escribe en alemán: \"La mujer que trabaja aquí es simpática.\"", placeholder:"Die Frau,...", valid:["die frau, die hier arbeitet, ist nett"] },
+    hoerenText:"Kennst du die Frau, die dort steht? — Ja, das ist die Kollegin, die mir geholfen hat.",
+    hoerenQ:[{ q:"¿A quién se refieren?", opts:["A un hombre", "A una mujer", "A un niño"], correct:1 }, { q:"¿Qué hizo ella?", opts:["Lo ayudó", "Lo saludó", "No dice"], correct:0 }],
+    hoerenText2:"Das ist das Buch, das ich letzte Woche gekauft habe. Es ist das beste Buch, das ich gelesen habe.",
+    hoerenQ2:[{ q:"¿Qué es?", opts:["Una película", "Un libro", "Una revista"], correct:1 }, { q:"¿Cuándo lo compró?", opts:["Ayer", "La semana pasada", "Hoy"], correct:1 }],
+        hoerenText3:"Kennst du das Restaurant, das neu eröffnet hat? — Ja, das ist das Restaurant, das mein Bruder empfohlen hat.",
+    hoerenQ3:[{ q:"¿Qué es nuevo?", opts:["Una tienda", "Un restaurante", "Un cine"], correct:1 }, { q:"¿Quién lo recomendó?", opts:["Su hermano", "Su amigo", "Nadie"], correct:0 }],
+    hoerenText4:"Das ist der Kollege, mit dem ich das Projekt mache. Er ist der Mann, der mir gestern geholfen hat.",
+    hoerenQ4:[{ q:"¿Quién es?", opts:["Su jefe", "Su colega", "Su vecino"], correct:1 }, { q:"¿Qué hizo ayer?", opts:["Lo ayudó", "Lo ignoró", "No dice"], correct:0 }],
+lesenText:"Der Kollege, der neben mir sitzt, kommt aus Spanien. Das Projekt, das wir zusammen machen, ist sehr interessant.",
+    lesenQ:[{ q:"Der Kollege kommt aus Spanien.", opts:["Richtig", "Falsch"], correct:0 }, { q:"Das Projekt ist langweilig.", opts:["Richtig", "Falsch"], correct:1 }],
+    lesenText2:"Die Stadt, in der ich wohne, ist sehr grün. Die Menschen, die hier leben, sind freundlich.",
+    lesenQ2:[{ q:"Die Stadt ist sehr grün.", opts:["Richtig", "Falsch"], correct:0 }, { q:"Die Menschen sind unfreundlich.", opts:["Richtig", "Falsch"], correct:1 }],
+        lesenText3:"Der Lehrer, der uns Deutsch unterrichtet, kommt aus Österreich. Das Buch, das er empfiehlt, ist sehr nützlich.",
+    lesenQ3:[{ q:"Der Lehrer kommt aus Österreich.", opts:["Richtig", "Falsch"], correct:0 }, { q:"Das Buch ist nutzlos.", opts:["Richtig", "Falsch"], correct:1 }],
+    lesenText4:"Die Wohnung, die ich gemietet habe, liegt im Zentrum. Der Vermieter, der sie verwaltet, ist sehr freundlich.",
+    lesenQ4:[{ q:"Die Wohnung liegt im Zentrum.", opts:["Richtig", "Falsch"], correct:0 }, { q:"Der Vermieter ist unfreundlich.", opts:["Richtig", "Falsch"], correct:1 }],
+schreibenPracticeBullets:["Describe a una persona o cosa usando una cláusula relativa (der/die/das...)"],
+    schreibenTeil1Fields:[ {id:"b3_persona",label:"Der/Die..., der/die...",placeholder:"Describe a alguien con cláusula relativa"}, {id:"b3_cosa",label:"Das..., das...",placeholder:"Describe algo con cláusula relativa"}, {id:"b3_lugar",label:"Die Stadt, in der...",placeholder:"Describe tu ciudad"}, {id:"b3_name",label:"Name",placeholder:"Tu nombre"} ],
+    schreibenTeil2Bullets:["Describe a un colega o amigo usando una cláusula relativa", "Describe tu ciudad usando una cláusula relativa"],
+    sprechenPracticeBullets:["Describe a alguien o algo usando cláusulas relativas (der/die/das que...)"],
+    sprechenExamParts:[
+      { label:"SPRECHEN · Teil 1", instruction:"Tarjeta de tema: \"Person\". Formula una pregunta usando una cláusula relativa y respóndela.", time:40 },
+      { label:"SPRECHEN · Teil 2", instruction:"Describe a 2 personas importantes en tu vida usando cláusulas relativas.", time:60 },
+      { label:"SPRECHEN · Teil 3", instruction:"Responde: describe tu ciudad usando al menos una cláusula relativa.", time:30 }
+    ]
+  },
+  {
+    id:"u36", level:"b1_1", number:4, title:"Der Genitiv", subtitle:"El posesivo formal: des Mannes, der Frau — usado en escritura y contextos formales.",
+    vokabCategory:null,
+    lessonCards: [
+      { title:"1. Para qué sirve el Genitiv",
+        html:`<p>Expresa posesión de forma más formal que "von + Dativ" (que ya conoces y sigue siendo válido en el habla cotidiana):</p><p><span class="de-line">das Auto von meinem Vater</span> (hablado, informal) = <span class="de-line">das Auto meines Vaters</span> (Genitiv, más formal/escrito)</p>` },
+      { title:"2. Los artículos en Genitiv",
+        html:`<p><span class="de-line">der</span> → <span class="de-line">des</span> (+ -s o -es al sustantivo masculino/neutro) · <span class="de-line">die</span> → <span class="de-line">der</span> (femenino, sin cambio al sustantivo)</p><p style="margin-top:8px;"><span class="de-line">das Buch des Mannes</span> (el libro del hombre) · <span class="de-line">die Tasche der Frau</span> (la bolsa de la mujer)</p>` },
+      { title:"3. Ejemplos comunes",
+        html:`<p><span class="de-line">die Farbe des Autos</span> (el color del auto) · <span class="de-line">der Name der Firma</span> (el nombre de la empresa) · <span class="de-line">am Ende des Tages</span> (al final del día)</p><p style="margin-top:10px; background:rgba(232,163,61,0.15); border-radius:8px; padding:10px 12px; font-size:13px;">🧒 En palabras simples: en el habla diaria casi todos usan "von + Dativ" (das Auto von meinem Vater) — el Genitiv aparece más en textos formales y escritos. Reconocerlo es más importante que producirlo perfecto por ahora.</p>` },
+      { title:"4. Diálogo modelo",
+        html:`<p class="de-line">— Wie heißt der Chef der Firma?</p><p class="de-line">— Der Name des Chefs ist Herr Wagner.</p><p class="de-line">— Und wo ist das Büro des Managers?</p><p class="de-line">— Am Ende des Flurs.</p>`,
+        audio:"Wie heißt der Chef der Firma? Der Name des Chefs ist Herr Wagner. Und wo ist das Büro des Managers? Am Ende des Flurs." }
+    ],
+    leccionChecks:[
+      { q:"¿Cómo se dice \"el libro del hombre\" (Genitiv)?", opts:["das Buch der Mannes", "das Buch des Mannes", "das Buch dem Mannes"], correct:1 },
+      { q:"¿Qué le pasa al sustantivo masculino en Genitiv?", opts:["Nada cambia", "Agrega -s o -es", "Pierde una letra"], correct:1 },
+      { q:"¿Cómo se dice \"la bolsa de la mujer\" (Genitiv)?", opts:["die Tasche die Frau", "die Tasche der Frau", "die Tasche des Frau"], correct:1 },
+      { q:"¿Qué forma es más común en el habla cotidiana?", opts:["Genitiv", "von + Dativ", "Akkusativ"], correct:1 },
+      { q:"¿Cómo se dice \"al final del día\"?", opts:["am Ende des Tages", "am Ende der Tages", "am Ende dem Tag"], correct:0 }
+    ],
+    leccionWrite:{ prompt:"Escribe en alemán (Genitiv): \"el color del auto\".", placeholder:"die Farbe...", valid:["die farbe des autos"] },
+    hoerenText:"Wie heißt der Chef der Firma? — Der Name des Chefs ist Herr Wagner.",
+    hoerenQ:[{ q:"¿Qué preguntan?", opts:["El nombre del jefe", "La dirección", "El horario"], correct:0 }, { q:"¿Cómo se llama el jefe?", opts:["Herr Klein", "Herr Wagner", "Herr Müller"], correct:1 }],
+    hoerenText2:"Das ist das Auto meines Bruders. Die Farbe des Autos gefällt mir sehr.",
+    hoerenQ2:[{ q:"¿De quién es el auto?", opts:["De su hermana", "De su hermano", "De su padre"], correct:1 }, { q:"¿Qué le gusta del auto?", opts:["El precio", "El color", "El tamaño"], correct:1 }],
+        hoerenText3:"Wie ist die Adresse des Büros? — Die Adresse des Büros ist auf der Karte.",
+    hoerenQ3:[{ q:"¿Qué preguntan?", opts:["Dirección de oficina", "Teléfono", "Horario"], correct:0 }, { q:"¿Dónde está la información?", opts:["En el mapa", "En el correo", "No dice"], correct:0 }],
+    hoerenText4:"Der Titel des Buches gefällt mir sehr. Der Name des Autors ist mir aber unbekannt.",
+    hoerenQ4:[{ q:"¿Qué le gusta?", opts:["El título", "El autor", "La portada"], correct:0 }, { q:"¿Conoce al autor?", opts:["Sí", "No", "Tal vez"], correct:1 }],
+lesenText:"Der Name der Firma ist bekannt. Das Büro des Direktors ist im dritten Stock. Die Adresse des Gebäudes ist auf der Webseite.",
+    lesenQ:[{ q:"Das Büro ist im dritten Stock.", opts:["Richtig", "Falsch"], correct:0 }, { q:"Die Adresse ist geheim.", opts:["Richtig", "Falsch"], correct:1 }],
+    lesenText2:"Am Ende des Tages bin ich immer müde. Die Farbe des Himmels ist dann sehr schön. Der Name des Parks, den ich besuche, ist Stadtpark.",
+    lesenQ2:[{ q:"Die Person ist am Ende des Tages müde.", opts:["Richtig", "Falsch"], correct:0 }, { q:"Der Park hat keinen Namen.", opts:["Richtig", "Falsch"], correct:1 }],
+        lesenText3:"Das Ergebnis der Prüfung war gut. Die Note des Studenten war eine Eins.",
+    lesenQ3:[{ q:"Das Ergebnis war gut.", opts:["Richtig", "Falsch"], correct:0 }, { q:"Die Note war schlecht.", opts:["Richtig", "Falsch"], correct:1 }],
+    lesenText4:"Der Preis des Autos ist hoch. Die Qualität des Motors ist aber exzellent.",
+    lesenQ4:[{ q:"Der Preis ist hoch.", opts:["Richtig", "Falsch"], correct:0 }, { q:"Die Qualität des Motors ist schlecht.", opts:["Richtig", "Falsch"], correct:1 }],
+schreibenPracticeBullets:["Describe algo usando Genitiv (el color de..., el nombre de...)"],
+    schreibenTeil1Fields:[ {id:"b4_farbe",label:"Die Farbe des/der...",placeholder:"Describe el color de algo"}, {id:"b4_name",label:"Der Name des/der...",placeholder:"Describe el nombre de algo"}, {id:"b4_ende",label:"Am Ende des...",placeholder:"Completa con Genitiv"}, {id:"b4_name2",label:"Name",placeholder:"Tu nombre"} ],
+    schreibenTeil2Bullets:["Describe algo usando estructura Genitiv (el nombre de, el color de)"],
+    sprechenPracticeBullets:["Practica frases con Genitiv describiendo cosas que conoces"],
+    sprechenExamParts:[
+      { label:"SPRECHEN · Teil 1", instruction:"Tarjeta de tema: \"Genitiv\". Formula una pregunta usando Genitiv y respóndela.", time:40 },
+      { label:"SPRECHEN · Teil 2", instruction:"Describe tu lugar de trabajo o estudio usando estructuras con Genitiv.", time:60 },
+      { label:"SPRECHEN · Teil 3", instruction:"Responde: ¿cómo describirías el nombre de tu empresa o escuela en Genitiv?", time:30 }
+    ]
+  },
+  {
+    id:"u37", level:"b1_1", number:5, title:"Plusquamperfekt", subtitle:"El pasado más lejano: algo que ya había pasado antes de otro momento del pasado.",
+    vokabCategory:null,
+    lessonCards: [
+      { title:"1. Para qué sirve",
+        html:`<p>Cuenta algo que YA HABÍA pasado antes de otro momento en el pasado — como "había comido" en español:</p><p><span class="de-line">Als ich ankam, hatte der Film schon angefangen.</span> (Cuando llegué, la película ya había empezado)</p>` },
+      { title:"2. Cómo se forma",
+        html:`<p>Igual que el Perfekt, pero con <span class="de-line">hatte/war</span> (Präteritum) en vez de <span class="de-line">habe/bin</span>:</p><p><span class="de-line">hatte</span> + Partizip II · <span class="de-line">war</span> + Partizip II</p><p style="margin-top:8px;"><span class="de-line">Ich hatte das Buch schon gelesen.</span> (Ya había leído el libro)</p><p><span class="de-line">Ich war schon nach Hause gegangen.</span> (Ya me había ido a casa)</p>` },
+      { title:"3. Usarlo con \"als\" y \"nachdem\"",
+        html:`<p><span class="de-line">Nachdem ich gegessen hatte, bin ich spazieren gegangen.</span> (Después de haber comido, salí a caminar)</p><p style="margin-top:10px; background:rgba(232,163,61,0.15); border-radius:8px; padding:10px 12px; font-size:13px;">🧒 En palabras simples: es "un pasado dentro de otro pasado" — la acción del Plusquamperfekt siempre pasó ANTES que la otra acción pasada que mencionas.</p>` },
+      { title:"4. Diálogo modelo",
+        html:`<p class="de-line">— Warum warst du nicht auf der Party?</p><p class="de-line">— Als ich ankam, war die Party schon zu Ende.</p><p class="de-line">— Was hattest du vorher gemacht?</p><p class="de-line">— Ich hatte zu lange gearbeitet.</p>`,
+        audio:"Warum warst du nicht auf der Party? Als ich ankam, war die Party schon zu Ende. Was hattest du vorher gemacht? Ich hatte zu lange gearbeitet." }
+    ],
+    leccionChecks:[
+      { q:"¿Con qué se forma el Plusquamperfekt?", opts:["habe/bin + Partizip II", "hatte/war + Partizip II", "würde + Infinitiv"], correct:1 },
+      { q:"¿Qué expresa el Plusquamperfekt?", opts:["Algo que pasará", "Algo que ya había pasado antes de otro momento pasado", "El presente"], correct:1 },
+      { q:"¿Cómo se dice \"ya había leído el libro\"?", opts:["Ich habe das Buch gelesen", "Ich hatte das Buch gelesen", "Ich las das Buch"], correct:1 },
+      { q:"\"Als ich ankam, ___ der Film schon angefangen.\" ¿Qué falta?", opts:["hatte", "habe", "war"], correct:0 },
+      { q:"¿Cómo se dice \"ya me había ido\"?", opts:["Ich bin gegangen", "Ich war gegangen", "Ich ging"], correct:1 }
+    ],
+    leccionWrite:{ prompt:"Escribe en alemán: \"Ya había comido cuando llegaste.\"", placeholder:"Ich hatte...", valid:["ich hatte schon gegessen, als du gekommen bist", "ich hatte schon gegessen"] },
+    hoerenText:"Als ich ankam, hatte die Besprechung schon angefangen. Ich hatte zu lange geschlafen.",
+    hoerenQ:[{ q:"¿Qué ya había pasado cuando llegó?", opts:["La reunión ya había empezado", "La reunión no había empezado", "No dice"], correct:0 }, { q:"¿Por qué llegó tarde?", opts:["Había dormido demasiado", "Había trabajado", "No dice"], correct:0 }],
+    hoerenText2:"Nachdem ich gegessen hatte, bin ich ins Bett gegangen. Ich hatte einen langen Tag gehabt.",
+    hoerenQ2:[{ q:"¿Qué hizo después de comer?", opts:["Salió", "Se fue a dormir", "Trabajó"], correct:1 }, { q:"¿Cómo había sido su día?", opts:["Corto", "Largo", "Normal"], correct:1 }],
+        hoerenText3:"Als der Zug ankam, hatte ich schon mein Ticket verloren. Ich hatte es zu Hause vergessen.",
+    hoerenQ3:[{ q:"¿Qué había perdido?", opts:["Su boleto", "Su maleta", "Su teléfono"], correct:0 }, { q:"¿Dónde lo había olvidado?", opts:["En casa", "En el tren", "En el trabajo"], correct:0 }],
+    hoerenText4:"Nachdem wir die Prüfung bestanden hatten, sind wir feiern gegangen. Wir hatten drei Monate dafür gelernt.",
+    hoerenQ4:[{ q:"¿Qué hicieron después?", opts:["Celebraron", "Durmieron", "Trabajaron"], correct:0 }, { q:"¿Cuánto habían estudiado?", opts:["1 mes", "3 meses", "1 año"], correct:1 }],
+lesenText:"Als ich in Berlin ankam, hatte ich schon ein Zimmer gebucht. Ich war noch nie in Deutschland gewesen, deshalb war ich sehr aufgeregt.",
+    lesenQ:[{ q:"Die Person hatte schon ein Zimmer gebucht.", opts:["Richtig", "Falsch"], correct:0 }, { q:"Die Person war schon oft in Deutschland gewesen.", opts:["Richtig", "Falsch"], correct:1 }],
+    lesenText2:"Nachdem wir die Prüfung geschrieben hatten, sind wir essen gegangen. Wir hatten vorher drei Stunden gelernt.",
+    lesenQ2:[{ q:"Sie sind nach der Prüfung essen gegangen.", opts:["Richtig", "Falsch"], correct:0 }, { q:"Sie hatten nicht gelernt.", opts:["Richtig", "Falsch"], correct:1 }],
+        lesenText3:"Als ich die Wohnung besichtigte, hatte sie schon jemand gemietet. Ich war zu spät gekommen.",
+    lesenQ3:[{ q:"Jemand hatte die Wohnung schon gemietet.", opts:["Richtig", "Falsch"], correct:0 }, { q:"Die Person kam pünktlich.", opts:["Richtig", "Falsch"], correct:1 }],
+    lesenText4:"Nachdem ich das Auto gekauft hatte, hatte ich kein Geld mehr für den Urlaub. Ich hatte nicht gut geplant.",
+    lesenQ4:[{ q:"Die Person kaufte zuerst das Auto.", opts:["Richtig", "Falsch"], correct:0 }, { q:"Die Person hatte gut geplant.", opts:["Richtig", "Falsch"], correct:1 }],
+schreibenPracticeBullets:["Cuenta algo que ya había pasado antes de otro evento pasado"],
+    schreibenTeil1Fields:[ {id:"b5_hatte",label:"Ich hatte schon..., als...",placeholder:"Algo que ya había pasado"}, {id:"b5_nachdem",label:"Nachdem ich..., bin ich...",placeholder:"Secuencia de 2 acciones pasadas"}, {id:"b5_name",label:"Name",placeholder:"Tu nombre"}, {id:"b5_extra",label:"Warum?",placeholder:"Explica por qué"} ],
+    schreibenTeil2Bullets:["Cuenta algo que ya había pasado antes de otro evento", "Usa nachdem o als en tu relato"],
+    sprechenPracticeBullets:["Cuenta una historia usando el Plusquamperfekt (algo que ya había pasado)"],
+    sprechenExamParts:[
+      { label:"SPRECHEN · Teil 1", instruction:"Tarjeta de tema: \"Bevor\". Formula una pregunta sobre algo que ya había pasado y respóndela.", time:40 },
+      { label:"SPRECHEN · Teil 2", instruction:"Cuenta una historia donde algo ya había pasado antes de otro evento (usa hatte/war + participio).", time:60 },
+      { label:"SPRECHEN · Teil 3", instruction:"Responde: ¿qué habías hecho antes de aprender alemán?", time:30 }
+    ]
+  },
+  {
+    id:"u38", level:"b1_1", number:6, title:"Erweiterte Konnektoren", subtitle:"obwohl, bevor, nachdem, seitdem — conectando ideas complejas.",
+    vokabCategory:null,
+    lessonCards: [
+      { title:"1. obwohl (aunque)",
+        html:`<p>Manda el verbo al final, como weil/dass/wenn:</p><p><span class="de-line">Ich gehe arbeiten, obwohl ich krank bin.</span> (Voy a trabajar, aunque estoy enfermo)</p>` },
+      { title:"2. bevor (antes de que)",
+        html:`<p><span class="de-line">Bevor ich schlafen gehe, lese ich immer.</span> (Antes de dormir, siempre leo)</p>` },
+      { title:"3. nachdem (después de que)",
+        html:`<p>Casi siempre se combina con Plusquamperfekt en la parte de "nachdem":</p><p><span class="de-line">Nachdem ich gegessen hatte, habe ich aufgeräumt.</span> (Después de haber comido, limpié)</p>` },
+      { title:"4. seitdem (desde que)",
+        html:`<p><span class="de-line">Seitdem ich in Deutschland wohne, spreche ich besser Deutsch.</span> (Desde que vivo en Alemania, hablo mejor alemán)</p><p style="margin-top:10px; background:rgba(232,163,61,0.15); border-radius:8px; padding:10px 12px; font-size:13px;">🧒 En palabras simples: los 4 (obwohl, bevor, nachdem, seitdem) mandan el verbo al final, igual que weil/dass/wenn — ya conoces el patrón, solo son palabras nuevas.</p>`,
+        audio:"Ich gehe arbeiten, obwohl ich krank bin. Bevor ich schlafen gehe, lese ich immer. Nachdem ich gegessen hatte, habe ich aufgeräumt. Seitdem ich in Deutschland wohne, spreche ich besser Deutsch." },
+      { title:"5. Diálogo modelo",
+        html:`<p class="de-line">— Warum bist du hier, obwohl du krank bist?</p><p class="de-line">— Ich musste kommen, bevor die Besprechung anfängt.</p><p class="de-line">— Seitdem du hier arbeitest, bist du immer so fleißig!</p>`,
+        audio:"Warum bist du hier, obwohl du krank bist? Ich musste kommen, bevor die Besprechung anfängt. Seitdem du hier arbeitest, bist du immer so fleißig!" }
+    ],
+    leccionChecks:[
+      { q:"¿Qué significa \"obwohl\"?", opts:["Porque", "Aunque", "Después de que"], correct:1 },
+      { q:"¿Dónde va el verbo con estos 4 conectores?", opts:["Al final", "En 2ª posición", "Al principio"], correct:0 },
+      { q:"¿Qué significa \"bevor\"?", opts:["Antes de que", "Después de que", "Desde que"], correct:0 },
+      { q:"¿Qué significa \"seitdem\"?", opts:["Aunque", "Antes de que", "Desde que"], correct:2 },
+      { q:"¿Con qué tiempo se combina frecuentemente \"nachdem\"?", opts:["Präsens", "Plusquamperfekt", "Futur"], correct:1 }
+    ],
+    leccionWrite:{ prompt:"Escribe en alemán: \"Voy a trabajar, aunque estoy cansado.\"", placeholder:"Ich gehe arbeiten,...", valid:["ich gehe arbeiten, obwohl ich müde bin"] },
+    hoerenText:"Warum arbeitest du, obwohl du Urlaub hast? — Ich muss, bevor mein Chef zurückkommt.",
+    hoerenQ:[{ q:"¿Por qué trabaja?", opts:["No tiene vacaciones", "Debe terminar antes de que vuelva el jefe", "Le gusta trabajar"], correct:1 }, { q:"¿Qué conector se usa primero?", opts:["weil", "obwohl", "seitdem"], correct:1 }],
+    hoerenText2:"Seitdem ich Deutsch lerne, lese ich mehr Bücher. Nachdem ich das erste Buch gelesen hatte, wollte ich mehr lesen.",
+    hoerenQ2:[{ q:"¿Qué cambió desde que aprende alemán?", opts:["Lee menos", "Lee más", "No lee"], correct:1 }, { q:"¿Qué pasó después del primer libro?", opts:["Dejó de leer", "Quiso leer más", "No dice"], correct:1 }],
+        hoerenText3:"Obwohl es spät war, habe ich noch angerufen. Bevor ich schlief, habe ich mit ihr gesprochen.",
+    hoerenQ3:[{ q:"¿Cuándo llamó?", opts:["Temprano", "Tarde", "En la mañana"], correct:1 }, { q:"¿Con quién habló antes de dormir?", opts:["Con ella", "Con él", "Con nadie"], correct:0 }],
+    hoerenText4:"Seitdem ich hier arbeite, bin ich zufriedener. Nachdem ich die Stelle bekommen hatte, hat sich alles geändert.",
+    hoerenQ4:[{ q:"¿Cómo se siente desde que trabaja ahí?", opts:["Triste", "Más satisfecho", "Igual"], correct:1 }, { q:"¿Qué cambió después de conseguir el puesto?", opts:["Todo", "Nada", "Poco"], correct:0 }],
+lesenText:"Obwohl es regnet, gehe ich spazieren. Bevor ich losgehe, ziehe ich eine Jacke an. Seitdem ich hier wohne, mag ich Regen.",
+    lesenQ:[{ q:"Die Person geht trotz Regen spazieren.", opts:["Richtig", "Falsch"], correct:0 }, { q:"Die Person mag keinen Regen.", opts:["Richtig", "Falsch"], correct:1 }],
+    lesenText2:"Nachdem ich die Schule beendet hatte, habe ich angefangen zu arbeiten. Bevor ich diesen Job fand, hatte ich lange gesucht.",
+    lesenQ2:[{ q:"Die Person hat nach der Schule angefangen zu arbeiten.", opts:["Richtig", "Falsch"], correct:0 }, { q:"Die Person fand sofort einen Job.", opts:["Richtig", "Falsch"], correct:1 }],
+        lesenText3:"Obwohl das Wetter schlecht war, sind wir gewandert. Bevor wir losgingen, hatten wir die Route geplant.",
+    lesenQ3:[{ q:"Sie sind trotz schlechtem Wetter gewandert.", opts:["Richtig", "Falsch"], correct:0 }, { q:"Sie hatten die Route nicht geplant.", opts:["Richtig", "Falsch"], correct:1 }],
+    lesenText4:"Seitdem sie umgezogen ist, ruft sie öfter an. Nachdem sie die neue Stadt kennengelernt hatte, war sie glücklicher.",
+    lesenQ4:[{ q:"Sie ruft seit dem Umzug öfter an.", opts:["Richtig", "Falsch"], correct:0 }, { q:"Sie war vorher glücklicher.", opts:["Richtig", "Falsch"], correct:1 }],
+schreibenPracticeBullets:["Usa obwohl, bevor, nachdem y seitdem en frases sobre tu vida"],
+    schreibenTeil1Fields:[ {id:"b6_obwohl",label:"...obwohl...",placeholder:"Completa con obwohl"}, {id:"b6_bevor",label:"Bevor ich..., ...",placeholder:"Completa con bevor"}, {id:"b6_seitdem",label:"Seitdem ich..., ...",placeholder:"Completa con seitdem"}, {id:"b6_name",label:"Name",placeholder:"Tu nombre"} ],
+    schreibenTeil2Bullets:["Escribe usando los 4 conectores nuevos sobre tu vida"],
+    sprechenPracticeBullets:["Da razones y secuencias usando obwohl, bevor, nachdem, seitdem"],
+    sprechenExamParts:[
+      { label:"SPRECHEN · Teil 1", instruction:"Tarjeta de tema: \"Seitdem\". Formula una pregunta con \"seitdem\" y respóndela.", time:40 },
+      { label:"SPRECHEN · Teil 2", instruction:"Habla de tu vida usando obwohl, bevor, nachdem y seitdem.", time:60 },
+      { label:"SPRECHEN · Teil 3", instruction:"Responde: ¿qué haces siempre antes de dormir (bevor)?", time:30 }
+    ]
+  },
+  {
+    id:"u39", level:"b1_1", number:7, title:"Infinitiv mit zu", subtitle:"Verbo + zu + infinitivo — expresar planes, intenciones y consejos.",
+    vokabCategory:null,
+    lessonCards: [
+      { title:"1. La estructura básica",
+        html:`<p>Muchos verbos (vorhaben, versuchen, beschließen...) se combinan con "zu" + un segundo verbo en infinitivo al final:</p><p><span class="de-line">Ich habe vor, nach Deutschland zu ziehen.</span> (Tengo planeado mudarme a Alemania)</p>` },
+      { title:"2. Verbos comunes que piden \"zu\"",
+        html:`<p><span class="de-line">vorhaben</span> (planear) · <span class="de-line">versuchen</span> (intentar) · <span class="de-line">beschließen</span> (decidir) · <span class="de-line">aufhören</span> (dejar de)</p><p style="margin-top:8px;"><span class="de-line">Ich versuche, mehr Sport zu machen.</span> (Intento hacer más deporte)</p><p><span class="de-line">Ich habe aufgehört, Fleisch zu essen.</span> (Dejé de comer carne)</p>` },
+      { title:"3. um...zu (para + infinitivo)",
+        html:`<p>Expresa PROPÓSITO — "para hacer algo":</p><p><span class="de-line">Ich lerne Deutsch, um in Deutschland zu arbeiten.</span> (Aprendo alemán para trabajar en Alemania)</p><p style="margin-top:10px; background:rgba(232,163,61,0.15); border-radius:8px; padding:10px 12px; font-size:13px;">🧒 En palabras simples: "zu" antes del segundo verbo es como el "a/de" en español ("intento DE hacer", "planeo hacer") — casi siempre aparece cuando hay 2 verbos seguidos con distinto sujeto implícito.</p>` },
+      { title:"4. Diálogo modelo",
+        html:`<p class="de-line">— Was hast du vor, dieses Jahr zu machen?</p><p class="de-line">— Ich versuche, mehr zu sparen, um eine Wohnung zu kaufen.</p><p class="de-line">— Das ist ein gutes Ziel!</p>`,
+        audio:"Was hast du vor, dieses Jahr zu machen? Ich versuche, mehr zu sparen, um eine Wohnung zu kaufen. Das ist ein gutes Ziel!" }
+    ],
+    leccionChecks:[
+      { q:"¿Dónde va \"zu\" con un segundo verbo?", opts:["Antes del segundo verbo, al final", "Al principio de la frase", "No se usa"], correct:0 },
+      { q:"¿Cómo se dice \"tengo planeado mudarme\"?", opts:["Ich habe vor, zu ziehen", "Ich habe vor, zu ziehen umzuziehen", "Ich habe vor, umzuziehen"], correct:2 },
+      { q:"¿Qué expresa \"um...zu\"?", opts:["Causa", "Propósito (para)", "Tiempo"], correct:1 },
+      { q:"¿Cómo se dice \"dejé de comer carne\"?", opts:["Ich habe aufgehört, Fleisch zu essen", "Ich habe aufgehört Fleisch essen", "Ich hörte auf Fleisch essen"], correct:0 },
+      { q:"¿Qué significa \"versuchen\"?", opts:["Decidir", "Intentar", "Planear"], correct:1 }
+    ],
+    leccionWrite:{ prompt:"Escribe en alemán: \"Intento hacer más deporte.\"", placeholder:"Ich versuche,...", valid:["ich versuche, mehr sport zu machen"] },
+    hoerenText:"Was hast du vor, dieses Jahr zu machen? — Ich versuche, eine neue Sprache zu lernen.",
+    hoerenQ:[{ q:"¿Qué intenta hacer?", opts:["Viajar más", "Aprender un idioma", "Cambiar de trabajo"], correct:1 }, { q:"¿Cuándo lo planea?", opts:["El próximo mes", "Este año", "No dice"], correct:1 }],
+    hoerenText2:"Ich habe aufgehört, spät ins Bett zu gehen. Ich versuche, mehr zu schlafen, um gesünder zu leben.",
+    hoerenQ2:[{ q:"¿Qué dejó de hacer?", opts:["Trabajar tarde", "Dormirse tarde", "Comer tarde"], correct:1 }, { q:"¿Para qué lo hace?", opts:["Para vivir más sano", "Para ahorrar dinero", "Para trabajar más"], correct:0 }],
+        hoerenText3:"Ich habe vor, ein Buch zu schreiben. Ich versuche, jeden Tag etwas zu schreiben.",
+    hoerenQ3:[{ q:"¿Qué planea?", opts:["Escribir un libro", "Leer más", "Viajar"], correct:0 }, { q:"¿Qué intenta hacer a diario?", opts:["Escribir algo", "Leer algo", "Correr"], correct:0 }],
+    hoerenText4:"Ich habe beschlossen, weniger zu arbeiten, um mehr Zeit für die Familie zu haben.",
+    hoerenQ4:[{ q:"¿Qué decidió?", opts:["Trabajar menos", "Trabajar más", "Cambiar de trabajo"], correct:0 }, { q:"¿Para qué?", opts:["Para la familia", "Para dinero", "Para viajar"], correct:0 }],
+lesenText:"Ich habe vor, nächstes Jahr umzuziehen. Ich versuche, jeden Monat zu sparen, um genug Geld zu haben. Ich habe beschlossen, in eine größere Stadt zu ziehen.",
+    lesenQ:[{ q:"Die Person plant umzuziehen.", opts:["Richtig", "Falsch"], correct:0 }, { q:"Die Person spart kein Geld.", opts:["Richtig", "Falsch"], correct:1 }],
+    lesenText2:"Ich versuche, weniger Zucker zu essen, um gesünder zu leben. Ich habe aufgehört, Limonade zu trinken. Das war nicht einfach.",
+    lesenQ2:[{ q:"Die Person versucht, gesünder zu leben.", opts:["Richtig", "Falsch"], correct:0 }, { q:"Es war einfach für die Person.", opts:["Richtig", "Falsch"], correct:1 }],
+        lesenText3:"Ich versuche, gesünder zu essen, um mehr Energie zu haben. Ich habe aufgehört, Fast Food zu essen.",
+    lesenQ3:[{ q:"Die Person versucht, gesünder zu essen.", opts:["Richtig", "Falsch"], correct:0 }, { q:"Die Person isst noch Fast Food.", opts:["Richtig", "Falsch"], correct:1 }],
+    lesenText4:"Sie hat vor, ein eigenes Geschäft zu eröffnen. Sie versucht, genug Geld zu sparen, um das zu schaffen.",
+    lesenQ4:[{ q:"Sie plant, ein Geschäft zu eröffnen.", opts:["Richtig", "Falsch"], correct:0 }, { q:"Sie hat schon genug Geld.", opts:["Richtig", "Falsch"], correct:1 }],
+schreibenPracticeBullets:["Un plan que tienes (vorhaben)", "Algo que intentas hacer (versuchen)", "El propósito (um...zu)"],
+    schreibenTeil1Fields:[ {id:"b7_vorhaben",label:"Ich habe vor, ... zu...",placeholder:"Un plan"}, {id:"b7_versuchen",label:"Ich versuche, ... zu...",placeholder:"Algo que intentas"}, {id:"b7_umzu",label:"..., um ... zu...",placeholder:"Un propósito"}, {id:"b7_name",label:"Name",placeholder:"Tu nombre"} ],
+    schreibenTeil2Bullets:["Un plan que tienes para este año", "Algo que intentas mejorar", "El propósito detrás de ese esfuerzo (um...zu)"],
+    sprechenPracticeBullets:["Habla de tus planes e intenciones usando vorhaben/versuchen + zu"],
+    sprechenExamParts:[
+      { label:"SPRECHEN · Teil 1", instruction:"Tarjeta de tema: \"Vorhaben\". Formula una pregunta y respóndela.", time:40 },
+      { label:"SPRECHEN · Teil 2", instruction:"Habla de un plan y algo que intentas lograr, explicando el propósito con um...zu.", time:60 },
+      { label:"SPRECHEN · Teil 3", instruction:"Responde: ¿qué has dejado de hacer (aufgehört, zu...) recientemente?", time:30 }
+    ]
+  },
+  {
+    id:"u40", level:"b1_1", number:8, title:"Wiederholung B1.1", subtitle:"Repaso integrador — el simulacro mezcla toda la gramática de B1.1.",
+    vokabCategory:null,
+    lessonCards: [
+      { title:"Repaso — lo esencial de B1.1",
+        html:`<p><strong>1. Konjunktiv II:</strong> würde/hätte/wäre para cortesía e hipótesis.</p><p><strong>2. Passiv:</strong> werden + Partizip II.</p><p><strong>3. Relativsätze:</strong> der/die/das describiendo, verbo al final.</p><p><strong>4. Genitiv:</strong> des/der + sustantivo (+s/es en masculino/neutro).</p><p><strong>5. Plusquamperfekt:</strong> hatte/war + Partizip II, un pasado antes de otro pasado.</p><p><strong>6. Konnektoren:</strong> obwohl, bevor, nachdem, seitdem — verbo al final.</p><p><strong>7. Infinitiv mit zu:</strong> vorhaben/versuchen + zu + infinitivo, y um...zu (propósito).</p>` },
+      { title:"Recordatorio importante sobre el examen B1",
+        html:`<p>A diferencia de A1/A2, en B1 <strong>no basta con 60 puntos en total</strong> — necesitas al menos 15/25 (60%) en CADA sección (Hören, Lesen, Schreiben, Sprechen). Repasa tu punto más débil antes del simulacro.</p>` },
+      { title:"Este simulacro mezcla toda B1.1",
+        html:`<p>Al aprobarlo, avanzas a la siguiente unidad. El examen FINAL de B1.1 (al terminar las 8 unidades) es distinto y necesario para desbloquear B1.2.</p>` }
+    ],
+    leccionChecks:[
+      { q:"¿Con qué se forma la voz pasiva?", opts:["haben + Partizip II", "werden + Partizip II", "sein + Infinitiv"], correct:1 },
+      { q:"¿Dónde va el verbo en una cláusula relativa?", opts:["Al final", "Al principio", "En 2ª posición"], correct:0 },
+      { q:"¿Con qué se forma el Plusquamperfekt?", opts:["habe/bin + Partizip II", "hatte/war + Partizip II", "würde + Infinitiv"], correct:1 },
+      { q:"¿Cuánto necesitas por sección para aprobar el examen B1?", opts:["No hay mínimo por sección", "Al menos 60%", "Al menos 90%"], correct:1 },
+      { q:"¿Qué expresa \"um...zu\"?", opts:["Causa", "Propósito", "Tiempo"], correct:1 }
+    ],
+    leccionWrite:{ prompt:"Escribe en alemán una frase usando Konjunktiv II (würde/hätte/wäre).", placeholder:"Ich würde...", valid:["ich würde"] },
+    hoerenText:"Ich hätte gern mehr Zeit, um zu reisen. Nachdem ich die Uni beendet hatte, habe ich beschlossen, ins Ausland zu ziehen, obwohl meine Familie dagegen war.",
+    hoerenQ:[{ q:"¿Qué le gustaría tener?", opts:["Más dinero", "Más tiempo", "Más amigos"], correct:1 }, { q:"¿Qué decidió hacer?", opts:["Quedarse", "Mudarse al extranjero", "Seguir estudiando"], correct:1 }],
+    hoerenText2:"Der Job, den ich jetzt habe, wurde mir von einem Freund empfohlen. Bevor ich diesen Job fand, hatte ich lange gesucht.",
+    hoerenQ2:[{ q:"¿Cómo consiguió el trabajo?", opts:["Por internet", "Se lo recomendó un amigo", "Por casualidad"], correct:1 }, { q:"¿Buscó mucho antes de encontrarlo?", opts:["Sí", "No", "No dice"], correct:0 }],
+        hoerenText3:"Ich würde gern das Haus kaufen, das renoviert wurde. Nachdem ich es besichtigt hatte, war ich sicher.",
+    hoerenQ3:[{ q:"¿Qué compraría?", opts:["Una casa renovada", "Un auto", "Un terreno"], correct:0 }, { q:"¿Cuándo se decidió?", opts:["Antes de verla", "Después de verla"], correct:1 }],
+    hoerenText4:"Obwohl die Miete des Zimmers hoch ist, würde ich einziehen. Es wurde letzte Woche renoviert.",
+    hoerenQ4:[{ q:"¿Se mudaría a pesar de qué?", opts:["El alto alquiler", "El ruido", "La distancia"], correct:0 }, { q:"¿Cuándo se renovó?", opts:["Hace un mes", "La semana pasada", "Hace un año"], correct:1 }],
+lesenText:"Die Stadt, in der ich wohne, wurde vor 800 Jahren gegründet. Obwohl sie klein ist, hat sie viel Geschichte. Nachdem ich hierher gezogen war, hatte ich schnell neue Freunde gefunden.",
+    lesenQ:[{ q:"Die Stadt wurde vor 800 Jahren gegründet.", opts:["Richtig", "Falsch"], correct:0 }, { q:"Die Person hat keine Freunde gefunden.", opts:["Richtig", "Falsch"], correct:1 }],
+    lesenText2:"Ich würde gern das Haus kaufen, das meine Großeltern gebaut hatten. Es wurde vor fünfzig Jahren gebaut und wird von meiner Tante gepflegt.",
+    lesenQ2:[{ q:"Das Haus wurde vor fünfzig Jahren gebaut.", opts:["Richtig", "Falsch"], correct:0 }, { q:"Niemand kümmert sich um das Haus.", opts:["Richtig", "Falsch"], correct:1 }],
+        lesenText3:"Die Firma, die mein Vater gegründet hatte, wurde letztes Jahr verkauft. Ich würde gern wissen, was mit ihr passiert.",
+    lesenQ3:[{ q:"Die Firma wurde letztes Jahr verkauft.", opts:["Richtig", "Falsch"], correct:0 }, { q:"Es ist der Person egal, was passiert ist.", opts:["Richtig", "Falsch"], correct:1 }],
+    lesenText4:"Obwohl ich die Prüfung, die ich letzte Woche geschrieben hatte, nicht bestanden habe, würde ich es wieder versuchen.",
+    lesenQ4:[{ q:"Die Person hat die Prüfung nicht bestanden.", opts:["Richtig", "Falsch"], correct:0 }, { q:"Die Person will es nicht wieder versuchen.", opts:["Richtig", "Falsch"], correct:1 }],
+schreibenPracticeBullets:["Integra: una condición hipotética, algo pasivo, y una cláusula relativa"],
+    schreibenTeil1Fields:[ {id:"b8_wuerde",label:"Ich würde gern..., wenn...",placeholder:"Condición hipotética"}, {id:"b8_relativ",label:"Die Stadt/Person, die...",placeholder:"Cláusula relativa"}, {id:"b8_name",label:"Name",placeholder:"Tu nombre"}, {id:"b8_plan",label:"Ich habe vor, ... zu...",placeholder:"Un plan"} ],
+    schreibenTeil2Bullets:["Una condición hipotética (würde/hätte/wäre)", "Describe algo con cláusula relativa", "Un plan con zu"],
+    sprechenPracticeBullets:["Integra Konjunktiv II, voz pasiva, cláusulas relativas en una sola respuesta"],
+    sprechenExamParts:[
+      { label:"SPRECHEN · Teil 1", instruction:"Tarjeta de tema: \"Mein Leben\". Formula una pregunta y respóndela.", time:40 },
+      { label:"SPRECHEN · Teil 2", instruction:"Presenta brevemente algo de tu vida integrando al menos 3 estructuras de B1.1.", time:90 },
+      { label:"SPRECHEN · Teil 3", instruction:"Responde con una opinión sobre lo que presentaste.", time:40 }
+    ]
+  },
+  {
+    id:"u41", level:"b1_2", number:1, title:"Indirekte Rede", subtitle:"Contar lo que dijo otra persona sin citarla textualmente.",
+    vokabCategory:null,
+    lessonCards: [
+      { title:"1. Discurso directo vs. indirecto",
+        html:`<p><strong>Directo</strong> (cita textual): <span class="de-line">Sie sagt: "Ich bin müde."</span> (Ella dice: "Estoy cansada")</p><p style="margin-top:8px;"><strong>Indirecto</strong> (contado por ti): <span class="de-line">Sie sagt, dass sie müde ist.</span> (Ella dice que está cansada)</p>` },
+      { title:"2. La forma simple con \"dass\"",
+        html:`<p>Para B1, la forma más práctica es usar <span class="de-line">dass</span> + el mismo verbo que ya conoces (sin necesidad del Konjunktiv I formal, que es más de nivel C1):</p><p><span class="de-line">Er hat gesagt, dass er kommt.</span> (Dijo que viene)</p><p><span class="de-line">Sie hat gefragt, ob ich Zeit habe.</span> (Preguntó si tengo tiempo — con "ob" para preguntas sí/no)</p>` },
+      { title:"3. Verbos comunes para reportar",
+        html:`<p><span class="de-line">sagen</span> (decir) · <span class="de-line">fragen</span> (preguntar) · <span class="de-line">erzählen</span> (contar) · <span class="de-line">antworten</span> (responder)</p>` },
+      { title:"4. Diálogo modelo",
+        html:`<p class="de-line">— Was hat der Chef gesagt?</p><p class="de-line">— Er hat gesagt, dass die Besprechung verschoben wird.</p><p class="de-line">— Hat er gefragt, ob wir Zeit haben?</p><p class="de-line">— Ja, das hat er gefragt.</p>`,
+        audio:"Was hat der Chef gesagt? Er hat gesagt, dass die Besprechung verschoben wird. Hat er gefragt, ob wir Zeit haben? Ja, das hat er gefragt." }
+    ],
+    leccionChecks:[
+      { q:"¿Cómo cuentas lo que alguien dijo (forma simple B1)?", opts:["dass + verbo", "weil + verbo", "und + verbo"], correct:0 },
+      { q:"¿Qué usas para reportar una pregunta de sí/no?", opts:["dass", "ob", "wenn"], correct:1 },
+      { q:"¿Cómo se dice \"dijo que viene\"?", opts:["Er hat gesagt, dass er kommt", "Er hat gesagt, er kommt dass", "Er sagt dass kommt er"], correct:0 },
+      { q:"¿Qué significa \"erzählen\"?", opts:["Preguntar", "Contar", "Responder"], correct:1 },
+      { q:"¿Cómo se dice \"preguntó si tengo tiempo\"?", opts:["Sie hat gefragt, dass ich Zeit habe", "Sie hat gefragt, ob ich Zeit habe", "Sie hat gesagt, ob ich Zeit habe"], correct:1 }
+    ],
+    leccionWrite:{ prompt:"Escribe en alemán: \"Dijo que está cansada.\"", placeholder:"Sie hat gesagt,...", valid:["sie hat gesagt, dass sie müde ist"] },
+    hoerenText:"Was hat sie gesagt? — Sie hat gesagt, dass sie morgen nicht kommen kann.",
+    hoerenQ:[{ q:"¿Qué dijo?", opts:["Que vendrá", "Que no puede venir mañana", "Que está enferma"], correct:1 }, { q:"¿Qué conector se usa?", opts:["weil", "dass", "ob"], correct:1 }],
+    hoerenText2:"Er hat gefragt, ob wir am Wochenende Zeit haben. Ich habe geantwortet, dass ich frei bin.",
+    hoerenQ2:[{ q:"¿Qué preguntó?", opts:["Si tenemos tiempo el fin de semana", "Si tenemos dinero", "Si estamos ocupados"], correct:0 }, { q:"¿Qué respondió la persona?", opts:["Que está ocupada", "Que está libre", "No respondió"], correct:1 }],
+        hoerenText3:"Meine Freundin hat gesagt, dass sie den Job bekommen hat. Sie hat gefragt, ob wir feiern wollen.",
+    hoerenQ3:[{ q:"¿Qué dijo?", opts:["Que consiguió el trabajo", "Que lo perdió", "No dice"], correct:0 }, { q:"¿Qué preguntó?", opts:["Si queremos celebrar", "Si tenemos dinero", "Nada"], correct:0 }],
+    hoerenText4:"Er hat erzählt, dass er nach Berlin zieht. Ich habe gefragt, ob er schon eine Wohnung gefunden hat.",
+    hoerenQ4:[{ q:"¿Qué contó?", opts:["Que se muda a Berlín", "Que viaja", "Que trabaja"], correct:0 }, { q:"¿Qué le preguntaron?", opts:["Si encontró vivienda", "Si tiene trabajo", "Nada"], correct:0 }],
+lesenText:"Meine Kollegin hat erzählt, dass sie bald umzieht. Sie hat gesagt, dass sie eine neue Wohnung in Berlin gefunden hat. Ich habe gefragt, ob sie Hilfe braucht.",
+    lesenQ:[{ q:"Die Kollegin zieht bald um.", opts:["Richtig", "Falsch"], correct:0 }, { q:"Die Person hat nicht gefragt, ob sie Hilfe braucht.", opts:["Richtig", "Falsch"], correct:1 }],
+    lesenText2:"Mein Freund hat gesagt, dass er den Job gewechselt hat. Er hat erzählt, dass er jetzt in einer größeren Firma arbeitet. Ich habe gefragt, ob er zufrieden ist.",
+    lesenQ2:[{ q:"Der Freund hat den Job gewechselt.", opts:["Richtig", "Falsch"], correct:0 }, { q:"Er arbeitet jetzt in einer kleineren Firma.", opts:["Richtig", "Falsch"], correct:1 }],
+        lesenText3:"Mein Chef hat gesagt, dass das Projekt verschoben wird. Er hat gefragt, ob ich mehr Zeit brauche.",
+    lesenQ3:[{ q:"Der Chef sagte, das Projekt wird verschoben.", opts:["Richtig", "Falsch"], correct:0 }, { q:"Er hat nichts gefragt.", opts:["Richtig", "Falsch"], correct:1 }],
+    lesenText4:"Meine Nachbarin hat erzählt, dass sie bald in Rente geht. Sie hat gefragt, ob ich ihre Pflanzen gießen kann.",
+    lesenQ4:[{ q:"Die Nachbarin geht bald in Rente.", opts:["Richtig", "Falsch"], correct:0 }, { q:"Sie hat um keinen Gefallen gebeten.", opts:["Richtig", "Falsch"], correct:1 }],
+schreibenPracticeBullets:["Cuenta algo que alguien te dijo (dass) y algo que te preguntó (ob)"],
+    schreibenTeil1Fields:[ {id:"b9_gesagt",label:"Er/Sie hat gesagt, dass...",placeholder:"Algo que te dijeron"}, {id:"b9_gefragt",label:"Er/Sie hat gefragt, ob...",placeholder:"Algo que te preguntaron"}, {id:"b9_name",label:"Name",placeholder:"Tu nombre"}, {id:"b9_antwort",label:"Ich habe geantwortet, dass...",placeholder:"Tu respuesta"} ],
+    schreibenTeil2Bullets:["Cuenta algo que alguien te dijo (dass)", "Cuenta algo que te preguntaron (ob)", "Qué respondiste"],
+    sprechenPracticeBullets:["Cuenta una conversación reciente usando discurso indirecto (dass/ob)"],
+    sprechenExamParts:[
+      { label:"SPRECHEN · Teil 1", instruction:"Tarjeta de tema: \"Gespräch\" (conversación). Formula una pregunta y respóndela.", time:40 },
+      { label:"SPRECHEN · Teil 2", instruction:"Cuenta una conversación reciente usando discurso indirecto.", time:60 },
+      { label:"SPRECHEN · Teil 3", instruction:"Responde: ¿qué te preguntó alguien la última vez que hablaron?", time:30 }
+    ]
+  },
+  {
+    id:"u42", level:"b1_2", number:2, title:"Zweiteilige Konnektoren", subtitle:"entweder...oder, sowohl...als auch, weder...noch — conectores en dos partes.",
+    vokabCategory:null,
+    lessonCards: [
+      { title:"1. entweder...oder (o...o / o bien...o bien)",
+        html:`<p><span class="de-line">Entweder gehen wir ins Kino, oder wir bleiben zu Hause.</span> (O vamos al cine, o nos quedamos en casa)</p>` },
+      { title:"2. sowohl...als auch (tanto...como)",
+        html:`<p><span class="de-line">Ich mag sowohl Kaffee als auch Tee.</span> (Me gusta tanto el café como el té)</p>` },
+      { title:"3. weder...noch (ni...ni)",
+        html:`<p><span class="de-line">Ich mag weder Kaffee noch Tee.</span> (No me gusta ni el café ni el té)</p><p style="margin-top:10px; background:rgba(232,163,61,0.15); border-radius:8px; padding:10px 12px; font-size:13px;">🧒 En palabras simples: son "combos" de 2 palabras que siempre van juntas — como en español "ni...ni" o "tanto...como". Solo tienes que recordar la pareja completa.</p>` },
+      { title:"4. nicht nur...sondern auch (no solo...sino también)",
+        html:`<p><span class="de-line">Sie spricht nicht nur Deutsch, sondern auch Französisch.</span> (Ella no solo habla alemán, sino también francés)</p>`,
+        audio:"Entweder gehen wir ins Kino, oder wir bleiben zu Hause. Ich mag sowohl Kaffee als auch Tee. Ich mag weder Kaffee noch Tee. Sie spricht nicht nur Deutsch, sondern auch Französisch." }
+    ],
+    leccionChecks:[
+      { q:"¿Qué significa \"weder...noch\"?", opts:["Tanto...como", "Ni...ni", "O...o"], correct:1 },
+      { q:"¿Qué significa \"sowohl...als auch\"?", opts:["Ni...ni", "Tanto...como", "No solo...sino también"], correct:1 },
+      { q:"¿Cómo se dice \"o vamos al cine o nos quedamos\"?", opts:["Sowohl gehen wir ins Kino, als auch bleiben wir", "Entweder gehen wir ins Kino, oder wir bleiben", "Weder gehen wir ins Kino, noch bleiben wir"], correct:1 },
+      { q:"¿Cómo se dice \"no me gusta ni el café ni el té\"?", opts:["Ich mag entweder Kaffee oder Tee nicht", "Ich mag weder Kaffee noch Tee", "Ich mag sowohl Kaffee als auch Tee nicht"], correct:1 },
+      { q:"¿Qué significa \"nicht nur...sondern auch\"?", opts:["Ni...ni", "No solo...sino también", "O...o"], correct:1 }
+    ],
+    leccionWrite:{ prompt:"Escribe en alemán: \"Me gusta tanto el café como el té.\"", placeholder:"Ich mag...", valid:["ich mag sowohl kaffee als auch tee"] },
+    hoerenText:"Ich mag sowohl Fußball als auch Basketball. Aber ich spiele weder Tennis noch Golf.",
+    hoerenQ:[{ q:"¿Qué deportes le gustan?", opts:["Fútbol y baloncesto", "Solo fútbol", "Tenis y golf"], correct:0 }, { q:"¿Qué NO practica?", opts:["Fútbol y baloncesto", "Tenis y golf", "Ninguno"], correct:1 }],
+    hoerenText2:"Entweder gehen wir wandern, oder wir bleiben zu Hause. Das Wetter ist nicht nur kalt, sondern auch windig.",
+    hoerenQ2:[{ q:"¿Qué opciones se plantean?", opts:["Ir a caminar o quedarse en casa", "Ir al cine o al parque", "Trabajar o descansar"], correct:0 }, { q:"¿Cómo está el clima?", opts:["Solo frío", "Frío y ventoso", "Solo ventoso"], correct:1 }],
+        hoerenText3:"Ich möchte entweder Ingenieur oder Architekt werden. Ich mag sowohl Mathematik als auch Kunst.",
+    hoerenQ3:[{ q:"¿Qué opciones considera?", opts:["Ingeniero o arquitecto", "Médico o abogado", "Nada"], correct:0 }, { q:"¿Qué le gusta?", opts:["Solo matemáticas", "Ambas: matemáticas y arte", "Solo arte"], correct:1 }],
+    hoerenText4:"Weder mein Bruder noch meine Schwester mögen Fußball. Sie spielen nicht nur Tennis, sondern auch Basketball.",
+    hoerenQ4:[{ q:"¿Qué NO les gusta?", opts:["Fútbol", "Tenis", "Baloncesto"], correct:0 }, { q:"¿Qué deportes practican?", opts:["Tenis y baloncesto", "Solo fútbol", "Solo tenis"], correct:0 }],
+lesenText:"Ich möchte entweder nach Spanien oder nach Italien reisen. Ich mag sowohl das Essen als auch die Kultur beider Länder. Ich habe weder Zeit noch Geld für beide Reisen.",
+    lesenQ:[{ q:"Die Person will nach Spanien oder Italien reisen.", opts:["Richtig", "Falsch"], correct:0 }, { q:"Die Person hat genug Zeit und Geld für beide Reisen.", opts:["Richtig", "Falsch"], correct:1 }],
+    lesenText2:"Meine Schwester spricht nicht nur Deutsch, sondern auch Englisch und Französisch. Sie mag sowohl Bücher als auch Filme. Sie hat weder ein Auto noch ein Fahrrad.",
+    lesenQ2:[{ q:"Die Schwester spricht drei Sprachen.", opts:["Richtig", "Falsch"], correct:0 }, { q:"Die Schwester hat ein Auto.", opts:["Richtig", "Falsch"], correct:1 }],
+        lesenText3:"Ich würde gern entweder nach Kanada oder nach Australien auswandern. Beide Länder haben sowohl gute Jobs als auch schöne Natur.",
+    lesenQ3:[{ q:"Die Person überlegt Kanada oder Australien.", opts:["Richtig", "Falsch"], correct:0 }, { q:"Die Person denkt nur an ein Land.", opts:["Richtig", "Falsch"], correct:1 }],
+    lesenText4:"Weder das Hotel noch die Lage haben mir gefallen. Der Service war nicht nur langsam, sondern auch unfreundlich.",
+    lesenQ4:[{ q:"Weder Hotel noch Lage gefielen der Person.", opts:["Richtig", "Falsch"], correct:0 }, { q:"Der Service war schnell und freundlich.", opts:["Richtig", "Falsch"], correct:1 }],
+schreibenPracticeBullets:["Usa entweder...oder, sowohl...als auch, y weder...noch en frases sobre ti"],
+    schreibenTeil1Fields:[ {id:"b10_entweder",label:"Entweder..., oder...",placeholder:"Completa"}, {id:"b10_sowohl",label:"Ich mag sowohl..., als auch...",placeholder:"Completa"}, {id:"b10_weder",label:"Ich mag weder..., noch...",placeholder:"Completa"}, {id:"b10_name",label:"Name",placeholder:"Tu nombre"} ],
+    schreibenTeil2Bullets:["Escribe usando los 4 conectores dobles sobre tus gustos"],
+    sprechenPracticeBullets:["Practica los 4 conectores dobles hablando de tus preferencias"],
+    sprechenExamParts:[
+      { label:"SPRECHEN · Teil 1", instruction:"Tarjeta de tema: \"Vorlieben\" (preferencias). Formula una pregunta y respóndela usando un conector doble.", time:40 },
+      { label:"SPRECHEN · Teil 2", instruction:"Habla de tus gustos usando sowohl...als auch, weder...noch, entweder...oder.", time:60 },
+      { label:"SPRECHEN · Teil 3", instruction:"Responde: ¿qué NO te gusta ni una cosa ni la otra (weder...noch)?", time:30 }
+    ]
+  },
+  {
+    id:"u43", level:"b1_2", number:3, title:"Eine Präsentation halten", subtitle:"Estructurar y dar una presentación corta — el corazón de Sprechen Teil 2 en B1.",
+    vokabCategory:null,
+    lessonCards: [
+      { title:"1. La estructura estándar de una presentación B1",
+        html:`<p>El examen real pide 4 partes: introducción del tema, ventajas, desventajas, tu experiencia/opinión personal. Aprenderla de memoria te ahorra mucho estrés el día del examen.</p>` },
+      { title:"2. Frases para empezar",
+        html:`<p><span class="de-line">Ich möchte über das Thema... sprechen.</span> (Quiero hablar sobre el tema...)</p><p><span class="de-line">Zuerst möchte ich sagen, dass...</span> (Primero quiero decir que...)</p>` },
+      { title:"3. Ventajas y desventajas",
+        html:`<p><span class="de-line">Ein Vorteil ist, dass...</span> (Una ventaja es que...)</p><p><span class="de-line">Ein Nachteil ist, dass...</span> (Una desventaja es que...)</p><p><span class="de-line">Auf der einen Seite..., auf der anderen Seite...</span> (Por un lado..., por otro lado...)</p>` },
+      { title:"4. Cerrar con tu opinión",
+        html:`<p><span class="de-line">Meiner Meinung nach...</span> (En mi opinión...) — ya lo conoces de A2, ahora lo usas para cerrar una presentación completa.</p><p><span class="de-line">Zusammenfassend kann ich sagen, dass...</span> (En resumen, puedo decir que...)</p>`,
+        audio:"Ich möchte über das Thema Homeoffice sprechen. Ein Vorteil ist, dass man Zeit spart. Ein Nachteil ist, dass man weniger Kontakt mit Kollegen hat. Zusammenfassend kann ich sagen, dass Homeoffice für mich positiv ist." },
+      { title:"5. Ejemplo de presentación completa (tema: Homeoffice)",
+        html:`<p class="de-line">Ich möchte über das Thema Homeoffice sprechen. Ein Vorteil ist, dass man Zeit spart. Ein Nachteil ist, dass man weniger Kontakt mit Kollegen hat. Meiner Meinung nach ist Homeoffice positiv, weil ich flexibler arbeiten kann. Zusammenfassend kann ich sagen, dass ich Homeoffice mag.</p><p style="margin-top:12px; font-size:12.5px; color:rgba(20,20,20,0.55);">Traducción: "Quiero hablar del tema del trabajo remoto. Una ventaja es que se ahorra tiempo. Una desventaja es que hay menos contacto con colegas. En mi opinión es positivo, porque puedo trabajar más flexible. En resumen, me gusta el trabajo remoto."</p>` }
+    ],
+    leccionChecks:[
+      { q:"¿Cuántas partes tiene la estructura estándar de una presentación B1?", opts:["2", "4", "6"], correct:1 },
+      { q:"¿Cómo introduces una ventaja?", opts:["Ein Nachteil ist, dass...", "Ein Vorteil ist, dass...", "Zusammenfassend..."], correct:1 },
+      { q:"¿Cómo cierras con un resumen?", opts:["Zuerst...", "Zusammenfassend kann ich sagen, dass...", "Ein Vorteil ist..."], correct:1 },
+      { q:"¿Qué significa \"auf der einen Seite\"?", opts:["Por un lado", "Por eso", "Finalmente"], correct:0 },
+      { q:"¿Cómo empiezas a presentar un tema?", opts:["Ich möchte über das Thema... sprechen", "Ich habe vor zu...", "Ich würde gern..."], correct:0 }
+    ],
+    leccionWrite:{ prompt:"Escribe en alemán cómo cerrarías una presentación con un resumen.", placeholder:"Zusammenfassend...", valid:["zusammenfassend kann ich sagen"] },
+    hoerenText:"Ich möchte über das Thema soziale Medien sprechen. Ein Vorteil ist, dass man leicht Kontakt hält. Ein Nachteil ist, dass man viel Zeit verliert.",
+    hoerenQ:[{ q:"¿De qué tema habla?", opts:["Trabajo remoto", "Redes sociales", "Viajes"], correct:1 }, { q:"¿Cuál es la desventaja mencionada?", opts:["Es caro", "Se pierde mucho tiempo", "Es difícil de usar"], correct:1 }],
+    hoerenText2:"Zusammenfassend kann ich sagen, dass ich beide Seiten sehe. Auf der einen Seite ist es praktisch, auf der anderen Seite kann es stressig sein.",
+    hoerenQ2:[{ q:"¿Qué frase de cierre usa?", opts:["Zuerst...", "Zusammenfassend...", "Ein Vorteil..."], correct:1 }, { q:"¿Qué dice del tema?", opts:["Solo ventajas", "Ambos lados", "Solo desventajas"], correct:1 }],
+        hoerenText3:"Ich möchte über das Thema Recycling sprechen. Ein Vorteil ist, dass es die Umwelt schützt.",
+    hoerenQ3:[{ q:"¿De qué tema habla?", opts:["Reciclaje", "Transporte", "Comida"], correct:0 }, { q:"¿Qué ventaja menciona?", opts:["Protege el medio ambiente", "Ahorra dinero", "Es rápido"], correct:0 }],
+    hoerenText4:"Zusammenfassend denke ich, dass öffentliche Verkehrsmittel wichtig sind. Ein Nachteil ist, dass sie manchmal unpünktlich sind.",
+    hoerenQ4:[{ q:"¿De qué habla implícitamente?", opts:["Transporte público", "Comida", "Trabajo"], correct:0 }, { q:"¿Qué desventaja menciona?", opts:["Son impuntuales", "Son caros", "Son peligrosos"], correct:0 }],
+lesenText:"Ich möchte über das Thema Online-Lernen sprechen. Ein Vorteil ist, dass man flexibel lernen kann. Ein Nachteil ist, dass man weniger direkten Kontakt mit dem Lehrer hat. Zusammenfassend finde ich Online-Lernen nützlich.",
+    lesenQ:[{ q:"Der Vorteil ist Flexibilität.", opts:["Richtig", "Falsch"], correct:0 }, { q:"Die Person findet Online-Lernen nutzlos.", opts:["Richtig", "Falsch"], correct:1 }],
+    lesenText2:"Ich möchte über das Thema Elektroautos sprechen. Ein Vorteil ist, dass sie umweltfreundlicher sind. Ein Nachteil ist, dass sie oft teurer sind. Zusammenfassend denke ich, dass die Zukunft elektrisch ist.",
+    lesenQ2:[{ q:"Elektroautos sind umweltfreundlicher.", opts:["Richtig", "Falsch"], correct:0 }, { q:"Elektroautos sind immer billiger.", opts:["Richtig", "Falsch"], correct:1 }],
+        lesenText3:"Ich möchte über das Thema vegetarische Ernährung sprechen. Ein Vorteil ist die Gesundheit, ein Nachteil ist manchmal der Preis. Zusammenfassend finde ich es positiv.",
+    lesenQ3:[{ q:"Die Person spricht über vegetarische Ernährung.", opts:["Richtig", "Falsch"], correct:0 }, { q:"Die Person sieht keine Vorteile.", opts:["Richtig", "Falsch"], correct:1 }],
+    lesenText4:"Ich möchte über das Thema Videospiele sprechen. Ein Vorteil ist die Kreativität, ein Nachteil ist der Zeitverlust. Zusammenfassend sehe ich beide Seiten.",
+    lesenQ4:[{ q:"Die Person spricht über Videospiele.", opts:["Richtig", "Falsch"], correct:0 }, { q:"Die Person sieht nur die negative Seite.", opts:["Richtig", "Falsch"], correct:1 }],
+schreibenPracticeBullets:["Estructura una mini-presentación: tema, ventaja, desventaja, opinión, resumen"],
+    schreibenTeil1Fields:[ {id:"b11_thema",label:"Ich möchte über das Thema... sprechen",placeholder:"Un tema"}, {id:"b11_vorteil",label:"Ein Vorteil ist, dass...",placeholder:"Una ventaja"}, {id:"b11_nachteil",label:"Ein Nachteil ist, dass...",placeholder:"Una desventaja"}, {id:"b11_zusammenfassend",label:"Zusammenfassend...",placeholder:"Tu conclusión"} ],
+    schreibenTeil2Bullets:["Presenta un tema con su ventaja y desventaja", "Cierra con tu opinión y un resumen"],
+    sprechenPracticeBullets:["Practica la estructura completa de una presentación B1: tema, ventaja, desventaja, opinión, resumen"],
+    sprechenExamParts:[
+      { label:"SPRECHEN · Teil 1", instruction:"Tarjeta de tema: \"Präsentation\". Formula una pregunta sobre cómo estructurar una presentación.", time:40 },
+      { label:"SPRECHEN · Teil 2", instruction:"Da una mini-presentación completa sobre un tema de tu elección: introducción, ventaja, desventaja, opinión, resumen.", time:90 },
+      { label:"SPRECHEN · Teil 3", instruction:"Responde 2 preguntas de seguimiento sobre lo que presentaste.", time:40 }
+    ]
+  },
+  {
+    id:"u44", level:"b1_2", number:4, title:"Seine Meinung schreiben", subtitle:"Escribir una publicación de opinión — el formato real de Schreiben en B1.",
+    vokabCategory:null,
+    lessonCards: [
+      { title:"1. Estructura de una publicación de opinión (Forum-Beitrag)",
+        html:`<p>El examen B1 pide reaccionar a una publicación de foro/blog con tu propia opinión, en ~80 palabras. Estructura recomendada: 1) tu posición, 2) un argumento a favor, 3) reconocer el otro lado, 4) tu conclusión.</p>` },
+      { title:"2. Dar tu posición claramente",
+        html:`<p><span class="de-line">Ich bin der Meinung, dass...</span> (Soy de la opinión de que...)</p><p><span class="de-line">Ich stimme zu, dass...</span> (Estoy de acuerdo en que...)</p><p><span class="de-line">Ich bin nicht einverstanden, weil...</span> (No estoy de acuerdo porque...)</p>` },
+      { title:"3. Argumentar y reconocer otra postura",
+        html:`<p><span class="de-line">Ein wichtiger Grund dafür ist, dass...</span> (Una razón importante es que...)</p><p><span class="de-line">Natürlich gibt es auch Nachteile, aber...</span> (Claro que también hay desventajas, pero...)</p>` },
+      { title:"4. Ejemplo completo",
+        html:`<p class="de-line">Ich bin der Meinung, dass Homeoffice eine gute Sache ist. Ein wichtiger Grund dafür ist, dass man Zeit beim Pendeln spart. Natürlich gibt es auch Nachteile, wie weniger sozialen Kontakt, aber ich finde, die Vorteile überwiegen.</p><p style="margin-top:12px; font-size:12.5px; color:rgba(20,20,20,0.55);">Traducción: "Soy de la opinión de que el trabajo remoto es algo bueno. Una razón importante es que se ahorra tiempo de traslado. Claro que también hay desventajas, como menos contacto social, pero creo que las ventajas superan."</p>`,
+        audio:"Ich bin der Meinung, dass Homeoffice eine gute Sache ist. Ein wichtiger Grund dafür ist, dass man Zeit beim Pendeln spart. Natürlich gibt es auch Nachteile, aber ich finde, die Vorteile überwiegen." }
+    ],
+    leccionChecks:[
+      { q:"¿Cómo das tu opinión formalmente?", opts:["Ich bin der Meinung, dass...", "Ich habe vor, dass...", "Ich würde, dass..."], correct:0 },
+      { q:"¿Cómo reconoces el otro lado del argumento?", opts:["Zusammenfassend...", "Natürlich gibt es auch Nachteile, aber...", "Ich stimme zu"], correct:1 },
+      { q:"¿Cómo dices \"no estoy de acuerdo\"?", opts:["Ich stimme zu", "Ich bin nicht einverstanden", "Ich bin der Meinung"], correct:1 },
+      { q:"¿Cuántas palabras pide el examen real para esta tarea?", opts:["~20", "~80", "~200"], correct:1 },
+      { q:"¿Cómo introduces una razón?", opts:["Ein wichtiger Grund dafür ist, dass...", "Zusammenfassend...", "Ich hätte gern..."], correct:0 }
+    ],
+    leccionWrite:{ prompt:"Escribe en alemán: \"Soy de la opinión de que es importante.\"", placeholder:"Ich bin der Meinung,...", valid:["ich bin der meinung, dass es wichtig ist"] },
+    hoerenText:"Ich bin der Meinung, dass wir mehr Fahrräder statt Autos benutzen sollten. Ein wichtiger Grund ist, dass es umweltfreundlicher ist.",
+    hoerenQ:[{ q:"¿Cuál es su opinión?", opts:["Usar más bicicletas", "Usar más autos", "No usar transporte"], correct:0 }, { q:"¿Cuál es la razón?", opts:["Es más rápido", "Es más ecológico", "Es más barato"], correct:1 }],
+    hoerenText2:"Ich stimme nicht zu, dass Homeoffice immer besser ist. Natürlich gibt es Vorteile, aber der direkte Kontakt fehlt mir.",
+    hoerenQ2:[{ q:"¿Está de acuerdo con el trabajo remoto siempre?", opts:["Sí", "No", "No dice"], correct:1 }, { q:"¿Qué extraña?", opts:["El dinero", "El contacto directo", "El horario"], correct:1 }],
+        hoerenText3:"Ich bin der Meinung, dass wir mehr Bäume pflanzen sollten. Ein wichtiger Grund ist die Luftqualität.",
+    hoerenQ3:[{ q:"¿Cuál es su opinión?", opts:["Plantar más árboles", "Cortar árboles", "Nada"], correct:0 }, { q:"¿Qué razón da?", opts:["La calidad del aire", "El dinero", "El tiempo"], correct:0 }],
+    hoerenText4:"Ich stimme nicht zu, dass soziale Medien schlecht sind. Natürlich gibt es Risiken, aber sie verbinden auch Menschen.",
+    hoerenQ4:[{ q:"¿Está de acuerdo con que las redes son malas?", opts:["Sí", "No", "No dice"], correct:1 }, { q:"¿Qué reconoce?", opts:["Riesgos", "Beneficios", "Nada"], correct:0 }],
+lesenText:"Ich bin der Meinung, dass Schulen mehr Sport anbieten sollten. Ein wichtiger Grund ist, dass Bewegung die Konzentration verbessert. Natürlich kostet das Geld, aber ich finde es notwendig.",
+    lesenQ:[{ q:"Die Person will mehr Sport in Schulen.", opts:["Richtig", "Falsch"], correct:0 }, { q:"Die Person denkt, es ist unwichtig.", opts:["Richtig", "Falsch"], correct:1 }],
+    lesenText2:"Ich stimme zu, dass wir weniger Plastik benutzen sollten. Ein wichtiger Grund dafür ist der Umweltschutz. Natürlich ist es manchmal unpraktisch, aber es lohnt sich.",
+    lesenQ2:[{ q:"Die Person ist für weniger Plastik.", opts:["Richtig", "Falsch"], correct:0 }, { q:"Die Person findet es nie unpraktisch.", opts:["Richtig", "Falsch"], correct:1 }],
+        lesenText3:"Ich bin der Meinung, dass Homeschooling für manche Familien gut ist. Ein wichtiger Grund ist die Flexibilität. Natürlich fehlt der soziale Kontakt, aber es lohnt sich für manche.",
+    lesenQ3:[{ q:"Die Person findet Homeschooling für manche gut.", opts:["Richtig", "Falsch"], correct:0 }, { q:"Die Person denkt, es funktioniert nie.", opts:["Richtig", "Falsch"], correct:1 }],
+    lesenText4:"Ich stimme zu, dass wir weniger fliegen sollten. Ein wichtiger Grund ist der Klimawandel. Natürlich ist das manchmal unpraktisch, aber notwendig.",
+    lesenQ4:[{ q:"Die Person ist dafür, weniger zu fliegen.", opts:["Richtig", "Falsch"], correct:0 }, { q:"Der Person ist das Klima egal.", opts:["Richtig", "Falsch"], correct:1 }],
+schreibenPracticeBullets:["Da tu opinión sobre un tema con un argumento y reconociendo el otro lado"],
+    schreibenTeil1Fields:[ {id:"b12_meinung",label:"Ich bin der Meinung, dass...",placeholder:"Tu opinión"}, {id:"b12_grund",label:"Ein wichtiger Grund ist, dass...",placeholder:"Tu razón"}, {id:"b12_nachteil",label:"Natürlich gibt es auch..., aber...",placeholder:"El otro lado"}, {id:"b12_name",label:"Name",placeholder:"Tu nombre"} ],
+    schreibenTeil2Bullets:["Tu opinión sobre un tema actual", "Una razón que la respalde", "Reconoce el otro lado del argumento"],
+    sprechenPracticeBullets:["Da tu opinión sobre un tema con argumentos, reconociendo el otro lado"],
+    sprechenExamParts:[
+      { label:"SPRECHEN · Teil 1", instruction:"Tarjeta de tema: \"Meinung\". Formula una pregunta de opinión y respóndela.", time:40 },
+      { label:"SPRECHEN · Teil 2", instruction:"Da tu opinión sobre un tema actual con un argumento y reconociendo el otro lado.", time:60 },
+      { label:"SPRECHEN · Teil 3", instruction:"Responde a una opinión contraria a la tuya sobre el mismo tema.", time:30 }
+    ]
+  },
+  {
+    id:"u45", level:"b1_2", number:5, title:"Arbeit und Gesellschaft", subtitle:"Vocabulario temático de trabajo/sociedad y nominalización simple.",
+    vokabCategory:"trabajo",
+    lessonCards: [
+      { title:"1. Nominalización simple — convertir verbos en sustantivos",
+        html:`<p>Muchos verbos se convierten en sustantivos agregando <span class="de-line">-ung</span> (casi siempre femenino):</p><p><span class="de-line">lösen</span> (resolver) → <span class="de-line">die Lösung</span> (la solución)</p><p><span class="de-line">entscheiden</span> (decidir) → <span class="de-line">die Entscheidung</span> (la decisión)</p>` },
+      { title:"2. Más ejemplos de nominalización",
+        html:`<p><span class="de-line">bilden</span> (formar) → <span class="de-line">die Bildung</span> (la educación/formación)</p><p><span class="de-line">meinen</span> (opinar) → <span class="de-line">die Meinung</span> (la opinión — ¡ya la conocías sin saber el patrón!)</p><p style="margin-top:10px; background:rgba(232,163,61,0.15); border-radius:8px; padding:10px 12px; font-size:13px;">🧒 En palabras simples: si ves una palabra que termina en "-ung", casi seguro es un sustantivo femenino (die) que viene de un verbo — te ayuda a reconocer palabras nuevas más rápido.</p>` },
+      { title:"3. Vocabulario: trabajo y sociedad",
+        html:`<p style="font-size:13.5px; line-height:1.9;"><span class="de-line">die Gesellschaft</span> sociedad · <span class="de-line">die Arbeitslosigkeit</span> desempleo · <span class="de-line">die Karriere</span> carrera profesional · <span class="de-line">die Erfahrung</span> experiencia · <span class="de-line">die Verantwortung</span> responsabilidad</p>`,
+        audio:"die Gesellschaft, die Arbeitslosigkeit, die Karriere, die Erfahrung, die Verantwortung", vokabCategory:"trabajo" },
+      { title:"4. Diálogo modelo",
+        html:`<p class="de-line">— Was ist deine größte Erfahrung im Berufsleben?</p><p class="de-line">— Ich habe viel Verantwortung übernommen und wichtige Entscheidungen getroffen.</p><p class="de-line">— Das ist wichtig für deine Karriere!</p>`,
+        audio:"Was ist deine größte Erfahrung im Berufsleben? Ich habe viel Verantwortung übernommen und wichtige Entscheidungen getroffen. Das ist wichtig für deine Karriere!" }
+    ],
+    leccionChecks:[
+      { q:"¿Qué terminación forma sustantivos de verbos?", opts:["-heit", "-ung", "-keit"], correct:1 },
+      { q:"¿Cuál es el sustantivo de \"entscheiden\" (decidir)?", opts:["die Entscheidung", "der Entscheid", "das Entscheiden"], correct:0 },
+      { q:"¿Qué significa \"die Verantwortung\"?", opts:["Experiencia", "Responsabilidad", "Carrera"], correct:1 },
+      { q:"¿Qué género tienen casi todos los sustantivos en -ung?", opts:["der", "die", "das"], correct:1 },
+      { q:"¿Qué significa \"die Arbeitslosigkeit\"?", opts:["El empleo", "El desempleo", "El salario"], correct:1 }
+    ],
+    leccionWrite:{ prompt:"Escribe en alemán el sustantivo de \"lösen\" (resolver).", placeholder:"die...", valid:["die lösung"] },
+    hoerenText:"Was ist deine größte Erfahrung im Berufsleben? — Ich habe viel Verantwortung übernommen.",
+    hoerenQ:[{ q:"¿Qué le preguntan?", opts:["Su experiencia laboral", "Su salario", "Su horario"], correct:0 }, { q:"¿Qué asumió?", opts:["Poca responsabilidad", "Mucha responsabilidad", "Ninguna"], correct:1 }],
+    hoerenText2:"Die Arbeitslosigkeit ist in dieser Stadt gestiegen. Viele Menschen suchen eine neue Karriere.",
+    hoerenQ2:[{ q:"¿Qué aumentó?", opts:["El empleo", "El desempleo", "Los salarios"], correct:1 }, { q:"¿Qué buscan muchas personas?", opts:["Vacaciones", "Una nueva carrera", "Más dinero"], correct:1 }],
+        hoerenText3:"Meine Entscheidung, die Karriere zu wechseln, war schwer. Ich habe viel Erfahrung in der alten Branche gesammelt.",
+    hoerenQ3:[{ q:"¿Qué decisión tomó?", opts:["Cambiar de carrera", "Renunciar", "Jubilarse"], correct:0 }, { q:"¿Qué tiene de su antiguo campo?", opts:["Mucha experiencia", "Poca experiencia", "Ninguna"], correct:0 }],
+    hoerenText4:"Die Gesellschaft braucht bessere Lösungen für die Arbeitslosigkeit. Bildung spielt dabei eine wichtige Rolle.",
+    hoerenQ4:[{ q:"¿Qué necesita la sociedad?", opts:["Mejores soluciones para el desempleo", "Más impuestos", "Nada"], correct:0 }, { q:"¿Qué juega un rol importante?", opts:["La educación", "El dinero", "El clima"], correct:0 }],
+lesenText:"Meine Entscheidung war schwer, aber wichtig für meine Karriere. Ich habe viel Erfahrung gesammelt und mehr Verantwortung übernommen.",
+    lesenQ:[{ q:"Die Entscheidung war einfach.", opts:["Richtig", "Falsch"], correct:1 }, { q:"Die Person hat Erfahrung gesammelt.", opts:["Richtig", "Falsch"], correct:0 }],
+    lesenText2:"In unserer Gesellschaft ist Bildung sehr wichtig. Die Arbeitslosigkeit betrifft viele Familien. Wir brauchen bessere Lösungen für dieses Problem.",
+    lesenQ2:[{ q:"Bildung ist wichtig in der Gesellschaft.", opts:["Richtig", "Falsch"], correct:0 }, { q:"Arbeitslosigkeit betrifft niemanden.", opts:["Richtig", "Falsch"], correct:1 }],
+        lesenText3:"Meine Verantwortung im neuen Job ist größer als vorher. Ich habe viel Erfahrung gesammelt, aber die Entscheidung war nicht einfach.",
+    lesenQ3:[{ q:"Die Verantwortung ist jetzt größer.", opts:["Richtig", "Falsch"], correct:0 }, { q:"Die Entscheidung war einfach.", opts:["Richtig", "Falsch"], correct:1 }],
+    lesenText4:"Die Arbeitslosigkeit in unserer Gesellschaft betrifft viele junge Menschen. Bildung und Erfahrung sind wichtige Lösungen für dieses Problem.",
+    lesenQ4:[{ q:"Arbeitslosigkeit betrifft viele junge Menschen.", opts:["Richtig", "Falsch"], correct:0 }, { q:"Es gibt keine Lösungen.", opts:["Richtig", "Falsch"], correct:1 }],
+schreibenPracticeBullets:["Habla de una decisión importante y tu experiencia laboral"],
+    schreibenTeil1Fields:[ {id:"b13_entscheidung",label:"Meine Entscheidung war...",placeholder:"Una decisión importante"}, {id:"b13_erfahrung",label:"Meine Erfahrung ist...",placeholder:"Tu experiencia"}, {id:"b13_verantwortung",label:"Ich habe Verantwortung für...",placeholder:"Una responsabilidad"}, {id:"b13_name",label:"Name",placeholder:"Tu nombre"} ],
+    schreibenTeil2Bullets:["Una decisión importante que tomaste", "Tu experiencia laboral o de estudios", "Una responsabilidad que tienes"],
+    sprechenPracticeBullets:["Habla de tu carrera, experiencia y responsabilidades usando el vocabulario nuevo"],
+    sprechenExamParts:[
+      { label:"SPRECHEN · Teil 1", instruction:"Tarjeta de tema: \"Karriere\". Formula una pregunta y respóndela.", time:40 },
+      { label:"SPRECHEN · Teil 2", instruction:"Habla de tu experiencia laboral, decisiones importantes y responsabilidades.", time:60 },
+      { label:"SPRECHEN · Teil 3", instruction:"Responde: ¿qué opinas sobre la Arbeitslosigkeit en tu país?", time:30 }
+    ]
+  },
+  {
+    id:"u46", level:"b1_2", number:6, title:"Zusammen verhandeln und planen", subtitle:"Negociar, ceder y proponer — el foco de Sprechen Teil 1 en B1.",
+    vokabCategory:null,
+    lessonCards: [
+      { title:"1. Cómo es realmente Sprechen Teil 1 en B1",
+        html:`<p>A diferencia de A2 (donde solo proponías y aceptabas), en B1 se espera que NEGOCIES de verdad — que cedas en algo, propongas alternativas, y lleguen a un acuerdo con más de un intercambio.</p>` },
+      { title:"2. Proponer con más matices",
+        html:`<p><span class="de-line">Wie wäre es, wenn wir...?</span> (¿Qué tal si...? — más suave que "Wollen wir")</p><p><span class="de-line">Ich schlage vor, dass wir zuerst... und dann...</span> (Propongo que primero... y luego...)</p>` },
+      { title:"3. Ceder y negociar",
+        html:`<p><span class="de-line">Das ist eine gute Idee, aber vielleicht könnten wir auch...</span> (Es una buena idea, pero quizás también podríamos...)</p><p><span class="de-line">Ich bin einverstanden, wenn wir auch...</span> (Estoy de acuerdo si también...)</p>` },
+      { title:"4. Diálogo modelo — negociación completa",
+        html:`<p class="de-line">— Wie wäre es, wenn wir am Samstag wandern gehen?</p><p class="de-line">— Das ist eine gute Idee, aber vielleicht könnten wir früher anfangen?</p><p class="de-line">— Ich bin einverstanden, wenn wir um acht Uhr losgehen.</p><p class="de-line">— Perfekt, das passt mir gut!</p>`,
+        audio:"Wie wäre es, wenn wir am Samstag wandern gehen? Das ist eine gute Idee, aber vielleicht könnten wir früher anfangen? Ich bin einverstanden, wenn wir um acht Uhr losgehen. Perfekt, das passt mir gut!" }
+    ],
+    leccionChecks:[
+      { q:"¿Cómo propones algo de forma suave?", opts:["Wollen wir...?", "Wie wäre es, wenn wir...?", "Ich will..."], correct:1 },
+      { q:"¿Cómo cedes parcialmente en una negociación?", opts:["Nein, das geht nicht", "Das ist eine gute Idee, aber vielleicht...", "Ich mag das nicht"], correct:1 },
+      { q:"¿Cómo aceptas con una condición?", opts:["Ich bin einverstanden, wenn...", "Nein danke", "Vielleicht nicht"], correct:0 },
+      { q:"¿Qué se espera más en B1 que en A2 al negociar?", opts:["Solo aceptar o rechazar", "Ceder y llegar a un acuerdo con más de un intercambio", "Nada distinto"], correct:1 },
+      { q:"¿Cómo propones una secuencia de actividades?", opts:["Ich schlage vor, dass wir zuerst... und dann...", "Ich würde...", "Ich habe vor..."], correct:0 }
+    ],
+    leccionWrite:{ prompt:"Escribe en alemán: \"¿Qué tal si vamos el sábado?\"", placeholder:"Wie wäre es,...", valid:["wie wäre es, wenn wir am samstag gehen"] },
+    hoerenText:"Wie wäre es, wenn wir zusammen kochen? — Das ist eine gute Idee, aber vielleicht könnten wir auch etwas bestellen?",
+    hoerenQ:[{ q:"¿Qué proponen primero?", opts:["Cocinar juntos", "Salir a comer", "Pedir comida"], correct:0 }, { q:"¿Qué propone la otra persona?", opts:["Rechaza todo", "Pedir comida en vez de cocinar", "Nada"], correct:1 }],
+    hoerenText2:"Ich schlage vor, dass wir zuerst einkaufen und dann kochen. — Ich bin einverstanden, wenn wir zusammen einkaufen gehen.",
+    hoerenQ2:[{ q:"¿Qué propone primero?", opts:["Cocinar y luego comprar", "Comprar y luego cocinar", "Solo cocinar"], correct:1 }, { q:"¿Con qué condición acepta?", opts:["Ir de compras juntos", "Cocinar solo", "No dice"], correct:0 }],
+        hoerenText3:"Wie wäre es, wenn wir das Meeting verschieben? — Das ist eine gute Idee, aber vielleicht könnten wir es nur um eine Stunde verschieben?",
+    hoerenQ3:[{ q:"¿Qué proponen?", opts:["Posponer la reunión", "Cancelarla", "Adelantarla"], correct:0 }, { q:"¿Qué propone la otra persona?", opts:["Posponerla solo una hora", "Cancelarla", "Nada"], correct:0 }],
+    hoerenText4:"Ich schlage vor, dass wir das Budget teilen. — Ich bin einverstanden, wenn wir auch die Verantwortung teilen.",
+    hoerenQ4:[{ q:"¿Qué propone?", opts:["Dividir el presupuesto", "Aumentarlo", "Eliminarlo"], correct:0 }, { q:"¿Con qué condición acepta?", opts:["Compartir también la responsabilidad", "Sin condición", "Rechaza"], correct:0 }],
+lesenText:"Wir haben lange verhandelt. Zuerst wollte ich ins Kino gehen, aber mein Freund schlug vor, wandern zu gehen. Am Ende waren wir einverstanden, zuerst zu wandern und danach ins Kino zu gehen.",
+    lesenQ:[{ q:"Sie sind zu einer Einigung gekommen.", opts:["Richtig", "Falsch"], correct:0 }, { q:"Sie sind nur ins Kino gegangen.", opts:["Richtig", "Falsch"], correct:1 }],
+    lesenText2:"Meine Schwester schlug vor, zusammen zu kochen. Ich war einverstanden, aber ich wollte auch Musik hören. Am Ende haben wir beides gemacht.",
+    lesenQ2:[{ q:"Sie haben beides gemacht.", opts:["Richtig", "Falsch"], correct:0 }, { q:"Die Person wollte nicht kochen.", opts:["Richtig", "Falsch"], correct:1 }],
+        lesenText3:"Wir haben verhandelt, bis wir eine Lösung fanden. Ich wollte zuerst mehr Geld, aber am Ende waren wir einverstanden, das Projekt zu teilen.",
+    lesenQ3:[{ q:"Sie fanden eine Lösung.", opts:["Richtig", "Falsch"], correct:0 }, { q:"Sie kamen zu keiner Einigung.", opts:["Richtig", "Falsch"], correct:1 }],
+    lesenText4:"Mein Partner schlug vor, das Geschäft gemeinsam zu führen. Ich war einverstanden, wenn wir gleiche Anteile hätten.",
+    lesenQ4:[{ q:"Die Person akzeptierte mit der Bedingung gleicher Anteile.", opts:["Richtig", "Falsch"], correct:0 }, { q:"Die Person lehnte den Vorschlag ab.", opts:["Richtig", "Falsch"], correct:1 }],
+schreibenPracticeBullets:["Escribe una negociación: propón, cede, y lleguen a un acuerdo"],
+    schreibenTeil1Fields:[ {id:"b14_propuesta",label:"Wie wäre es, wenn wir...?",placeholder:"Una propuesta"}, {id:"b14_ceder",label:"Das ist eine gute Idee, aber...",placeholder:"Cede parcialmente"}, {id:"b14_acuerdo",label:"Ich bin einverstanden, wenn...",placeholder:"El acuerdo final"}, {id:"b14_name",label:"Name",placeholder:"Tu nombre"} ],
+    schreibenTeil2Bullets:["Propón un plan con matices", "Cede en algo y propone una alternativa", "El acuerdo final al que llegaron"],
+    sprechenPracticeBullets:["Practica una negociación completa: proponer, ceder, llegar a un acuerdo"],
+    sprechenExamParts:[
+      { label:"SPRECHEN · Teil 1", instruction:"Planea algo con un compañero: propone una actividad, cede en un detalle, y lleguen a un acuerdo con al menos 2 intercambios.", time:60 },
+      { label:"SPRECHEN · Teil 2", instruction:"Tarjeta de tema: \"Verhandeln\". Formula una pregunta y respóndela.", time:40 },
+      { label:"SPRECHEN · Teil 3", instruction:"Responde: ¿en qué estarías dispuesto a ceder para llegar a un acuerdo?", time:30 }
+    ]
+  },
+  {
+    id:"u47", level:"b1_2", number:7, title:"Alles zusammen anwenden", subtitle:"Repaso integrador: presentación + opinión + negociación, todo junto.",
+    vokabCategory:null,
+    lessonCards: [
+      { title:"1. Por qué esta unidad es distinta",
+        html:`<p>No hay gramática nueva — esta unidad integra las 3 destrezas más específicas del examen B1 real: dar una presentación (U11), opinar por escrito (U12), y negociar (U14). El examen real de B1 combina estas 3 constantemente.</p>` },
+      { title:"2. Combinando presentación + opinión",
+        html:`<p>Una buena presentación B1 SIEMPRE termina con tu opinión personal, usando las frases que ya conoces:</p><p><span class="de-line">Zusammenfassend bin ich der Meinung, dass...</span> (En resumen, soy de la opinión de que...)</p>` },
+      { title:"3. Combinando negociación + presentación de argumentos",
+        html:`<p>Al negociar, también argumentas por qué prefieres una opción:</p><p><span class="de-line">Ich schlage vor, X zu machen, weil ein Vorteil davon ist, dass...</span> (Propongo hacer X, porque una ventaja de eso es que...)</p>` },
+      { title:"4. Ejemplo integrado completo",
+        html:`<p class="de-line">Ich schlage vor, dass wir am Wochenende zusammen kochen, weil ein Vorteil davon ist, dass es günstiger ist als essen zu gehen. Natürlich könnten wir auch ins Restaurant gehen, aber zusammenfassend bin ich der Meinung, dass Kochen mehr Spaß macht.</p><p style="margin-top:12px; font-size:12.5px; color:rgba(20,20,20,0.55);">Traducción: "Propongo que cocinemos juntos el fin de semana, porque una ventaja es que es más barato que salir a comer. Claro que también podríamos ir a un restaurante, pero en resumen, creo que cocinar es más divertido."</p>`,
+        audio:"Ich schlage vor, dass wir am Wochenende zusammen kochen, weil ein Vorteil davon ist, dass es günstiger ist als essen zu gehen. Natürlich könnten wir auch ins Restaurant gehen, aber zusammenfassend bin ich der Meinung, dass Kochen mehr Spaß macht." }
+    ],
+    leccionChecks:[
+      { q:"¿Con qué termina siempre una buena presentación B1?", opts:["Con más preguntas", "Con tu opinión personal", "Con un saludo"], correct:1 },
+      { q:"¿Cómo combinas negociación con argumento?", opts:["Ich schlage vor, X, weil ein Vorteil ist, dass...", "Ich habe vor...", "Ich würde gern..."], correct:0 },
+      { q:"¿Qué 3 destrezas integra esta unidad?", opts:["Presentar, opinar, negociar", "Cantar, bailar, cocinar", "Leer, escribir, dormir"], correct:0 },
+      { q:"¿Cómo cierras integrando opinión y resumen?", opts:["Zusammenfassend bin ich der Meinung, dass...", "Ich hätte gern...", "Wie wäre es..."], correct:0 },
+      { q:"¿Este repaso agrega gramática nueva?", opts:["Sí, mucha", "No, integra lo ya aprendido", "Solo un poco"], correct:1 }
+    ],
+    leccionWrite:{ prompt:"Escribe en alemán una propuesta con razón integrada (schlage vor... weil...).", placeholder:"Ich schlage vor,...", valid:["ich schlage vor"] },
+    hoerenText:"Ich schlage vor, dass wir das Auto verkaufen, weil ein Vorteil davon ist, dass wir Geld sparen. Zusammenfassend bin ich der Meinung, dass es die beste Lösung ist.",
+    hoerenQ:[{ q:"¿Qué propone?", opts:["Comprar un auto", "Vender el auto", "Alquilar un auto"], correct:1 }, { q:"¿Cuál es la ventaja mencionada?", opts:["Ahorrar dinero", "Más comodidad", "Más rapidez"], correct:0 }],
+    hoerenText2:"Wie wäre es, wenn wir zusammen eine Präsentation vorbereiten? Ein Vorteil ist, dass wir Ideen teilen können. Ich bin einverstanden, wenn wir uns morgen treffen.",
+    hoerenQ2:[{ q:"¿Qué proponen?", opts:["Preparar una presentación juntos", "Ir de viaje", "Estudiar solos"], correct:0 }, { q:"¿Cuándo se reunirán?", opts:["Hoy", "Mañana", "La próxima semana"], correct:1 }],
+        hoerenText3:"Ich schlage vor, dass wir zusammen Sport machen, weil ein Vorteil davon ist, dass wir gesünder leben. Zusammenfassend bin ich der Meinung, dass es sich lohnt.",
+    hoerenQ3:[{ q:"¿Qué propone?", opts:["Hacer deporte juntos", "Comer juntos", "Viajar juntos"], correct:0 }, { q:"¿Qué ventaja menciona?", opts:["Vivir más sano", "Ahorrar dinero", "Divertirse"], correct:0 }],
+    hoerenText4:"Wie wäre es, wenn wir gemeinsam lernen? Ein Vorteil ist, dass wir uns gegenseitig helfen können. Ich bin einverstanden, wenn wir einen festen Zeitplan machen.",
+    hoerenQ4:[{ q:"¿Qué proponen?", opts:["Estudiar juntos", "Trabajar juntos", "Viajar"], correct:0 }, { q:"¿Con qué condición acepta?", opts:["Un horario fijo", "Sin condición", "Rechaza"], correct:0 }],
+lesenText:"Ich möchte über das Thema Teamarbeit sprechen. Ich bin der Meinung, dass Teamarbeit meistens positiv ist. Ich schlage vor, dass wir öfter zusammenarbeiten, weil ein Vorteil davon ist, dass wir mehr voneinander lernen. Zusammenfassend denke ich, dass Zusammenarbeit wichtig ist.",
+    lesenQ:[{ q:"Die Person findet Teamarbeit positiv.", opts:["Richtig", "Falsch"], correct:0 }, { q:"Die Person schlägt weniger Zusammenarbeit vor.", opts:["Richtig", "Falsch"], correct:1 }],
+    lesenText2:"Wie wäre es, wenn wir gemeinsam ein Projekt starten? Ein Vorteil ist, dass wir Verantwortung teilen können. Natürlich gibt es auch Herausforderungen, aber zusammenfassend bin ich der Meinung, dass es sich lohnt.",
+    lesenQ2:[{ q:"Es wird ein gemeinsames Projekt vorgeschlagen.", opts:["Richtig", "Falsch"], correct:0 }, { q:"Die Person sieht keine Herausforderungen.", opts:["Richtig", "Falsch"], correct:1 }],
+        lesenText3:"Ich möchte über das Thema Teamarbeit im Büro sprechen. Ich schlage vor, dass wir öfter zusammenarbeiten, weil ein Vorteil davon ist, dass wir effizienter sind. Zusammenfassend denke ich, es lohnt sich.",
+    lesenQ3:[{ q:"Die Person schlägt mehr Teamarbeit vor.", opts:["Richtig", "Falsch"], correct:0 }, { q:"Die Person denkt, es lohnt sich nicht.", opts:["Richtig", "Falsch"], correct:1 }],
+    lesenText4:"Wie wäre es, wenn wir ein gemeinsames Budget planen? Ein Vorteil ist, dass wir Geld sparen können. Zusammenfassend bin ich einverstanden, wenn wir transparent bleiben.",
+    lesenQ4:[{ q:"Es wird ein gemeinsames Budget vorgeschlagen.", opts:["Richtig", "Falsch"], correct:0 }, { q:"Die Person lehnt die Idee ab.", opts:["Richtig", "Falsch"], correct:1 }],
+schreibenPracticeBullets:["Integra una propuesta, una ventaja, y tu opinión final en un solo texto"],
+    schreibenTeil1Fields:[ {id:"b15_propuesta",label:"Ich schlage vor, dass wir...",placeholder:"Una propuesta"}, {id:"b15_vorteil",label:"..., weil ein Vorteil davon ist, dass...",placeholder:"Razón/ventaja"}, {id:"b15_meinung",label:"Zusammenfassend bin ich der Meinung, dass...",placeholder:"Tu opinión final"}, {id:"b15_name",label:"Name",placeholder:"Tu nombre"} ],
+    schreibenTeil2Bullets:["Una propuesta con su razón/ventaja", "Tu opinión final resumida"],
+    sprechenPracticeBullets:["Integra presentación, opinión y negociación en una sola respuesta"],
+    sprechenExamParts:[
+      { label:"SPRECHEN · Teil 1", instruction:"Planea algo con un compañero, dando al menos una razón/ventaja de tu propuesta.", time:60 },
+      { label:"SPRECHEN · Teil 2", instruction:"Da una mini-presentación de un tema, cerrando con tu opinión resumida.", time:60 },
+      { label:"SPRECHEN · Teil 3", instruction:"Responde con una opinión que integre lo anterior.", time:30 }
+    ]
+  },
+  {
+    id:"u48", level:"b1_2", number:8, title:"Wiederholung B1.2", subtitle:"Repaso integrador final — al aprobar, completas todo B1.",
+    vokabCategory:null,
+    lessonCards: [
+      { title:"Repaso — lo esencial de B1.2",
+        html:`<p><strong>1. Discurso indirecto:</strong> dass/ob + el mismo verbo.</p><p><strong>2. Conectores dobles:</strong> entweder...oder, sowohl...als auch, weder...noch, nicht nur...sondern auch.</p><p><strong>3. Estructura de presentación:</strong> tema → ventaja → desventaja → opinión → resumen.</p><p><strong>4. Opinión escrita:</strong> Ich bin der Meinung, dass... + razón + reconocer el otro lado.</p><p><strong>5. Nominalización:</strong> verbo + -ung = sustantivo femenino.</p><p><strong>6. Negociar de verdad:</strong> proponer, ceder, llegar a un acuerdo.</p>` },
+      { title:"Frases que debes poder decir sin pensar",
+        html:`<p class="de-line">Er/Sie hat gesagt, dass... / gefragt, ob...</p><p class="de-line">Ich mag sowohl X als auch Y. / weder X noch Y.</p><p class="de-line">Ein Vorteil/Nachteil ist, dass... Zusammenfassend...</p><p class="de-line">Ich bin der Meinung, dass... Ein wichtiger Grund ist, dass...</p><p class="de-line">Wie wäre es, wenn wir...? Ich bin einverstanden, wenn...</p>` },
+      { title:"Este es el cierre de todo B1",
+        html:`<p>El simulacro de esta unidad mezcla contenido de las 8 unidades de B1.2 — y recuerda: necesitas 60 puntos en total Y al menos 15/25 en cada sección. Al aprobarlo, habrás completado B1 completo (B1.1 + B1.2), el nivel donde el alemán deja de ser "básico" y te vuelves un usuario independiente del idioma.</p>` }
+    ],
+    leccionChecks:[
+      { q:"¿Cómo cuentas lo que alguien dijo?", opts:["dass + verbo", "weil + verbo", "und + verbo"], correct:0 },
+      { q:"¿Qué significa \"weder...noch\"?", opts:["Tanto...como", "Ni...ni", "O...o"], correct:1 },
+      { q:"¿Con qué termina una presentación B1?", opts:["Con más preguntas", "Con tu opinión y un resumen", "Con un saludo"], correct:1 },
+      { q:"¿Qué terminación forma sustantivos de verbos?", opts:["-heit", "-ung", "-los"], correct:1 },
+      { q:"¿Cuánto necesitas por sección para aprobar B1?", opts:["No hay mínimo", "Al menos 15/25 (60%)", "Al menos 20/25"], correct:1 },
+      { q:"¿Qué se espera en la negociación de B1 (a diferencia de A2)?", opts:["Solo aceptar/rechazar", "Ceder y llegar a un acuerdo real", "Nada distinto"], correct:1 }
+    ],
+    leccionWrite:{ prompt:"Escribe en alemán una opinión breve integrando dass y un conector doble.", placeholder:"Ich bin der Meinung,...", valid:["ich bin der meinung"] },
+    hoerenText:"Mein Kollege hat gesagt, dass er sowohl das Projekt als auch die Präsentation übernehmen möchte. Ich bin der Meinung, dass das eine gute Idee ist.",
+    hoerenQ:[{ q:"¿Qué dijo el colega?", opts:["Que no quiere nada", "Que quiere el proyecto y la presentación", "Que solo quiere el proyecto"], correct:1 }, { q:"¿Qué opina la persona?", opts:["Que es mala idea", "Que es buena idea", "No opina"], correct:1 }],
+    hoerenText2:"Wie wäre es, wenn wir zusammen eine Lösung finden? Weder ich noch du haben genug Erfahrung allein. Zusammenfassend denke ich, dass Teamarbeit die beste Option ist.",
+    hoerenQ2:[{ q:"¿Qué proponen?", opts:["Trabajar solos", "Buscar una solución juntos", "No hacer nada"], correct:1 }, { q:"¿Qué concluye?", opts:["Que el trabajo en equipo es mejor", "Que trabajar solo es mejor", "No concluye nada"], correct:0 }],
+        hoerenText3:"Mein Kollege hat gesagt, dass er weder Zeit noch Lust hat, das Projekt zu übernehmen. Ich schlage vor, dass wir es zusammen machen.",
+    hoerenQ3:[{ q:"¿Qué dijo el colega?", opts:["Que no tiene tiempo ni ganas", "Que sí quiere", "Nada"], correct:0 }, { q:"¿Qué propone la persona?", opts:["Hacerlo juntos", "Cancelarlo", "Nada"], correct:0 }],
+    hoerenText4:"Wie wäre es, wenn wir sowohl das Budget als auch den Zeitplan überprüfen? Zusammenfassend denke ich, dass Vorbereitung wichtig ist.",
+    hoerenQ4:[{ q:"¿Qué proponen revisar?", opts:["Presupuesto y cronograma", "Solo presupuesto", "Nada"], correct:0 }, { q:"¿Qué concluye?", opts:["Que la preparación es importante", "Que no importa", "Nada"], correct:0 }],
+lesenText:"Meine Chefin hat gefragt, ob ich Verantwortung für das neue Projekt übernehmen möchte. Ich bin der Meinung, dass es eine gute Gelegenheit ist, obwohl ich wenig Erfahrung in diesem Bereich habe. Zusammenfassend habe ich beschlossen, ja zu sagen.",
+    lesenQ:[{ q:"Die Chefin hat etwas gefragt.", opts:["Richtig", "Falsch"], correct:0 }, { q:"Die Person hat beschlossen, nein zu sagen.", opts:["Richtig", "Falsch"], correct:1 }, { q:"Die Person hat viel Erfahrung in diesem Bereich.", opts:["Richtig", "Falsch"], correct:1 }],
+    lesenText2:"Ich möchte über das Thema Fernarbeit sprechen. Sowohl Arbeitgeber als auch Arbeitnehmer profitieren davon. Natürlich gibt es auch Nachteile, aber zusammenfassend bin ich der Meinung, dass die Zukunft flexibel sein wird.",
+    lesenQ2:[{ q:"Beide Seiten profitieren von Fernarbeit.", opts:["Richtig", "Falsch"], correct:0 }, { q:"Die Person sieht keine Nachteile.", opts:["Richtig", "Falsch"], correct:1 }, { q:"Die Person denkt, die Zukunft wird flexibel sein.", opts:["Richtig", "Falsch"], correct:0 }],
+        lesenText3:"Meine Schwester hat gefragt, ob ich ihr beim Umzug helfen kann. Ich bin der Meinung, dass Familie immer Priorität hat. Zusammenfassend habe ich ja gesagt.",
+    lesenQ3:[{ q:"Die Schwester bat um Hilfe beim Umzug.", opts:["Richtig", "Falsch"], correct:0 }, { q:"Die Person hat nein gesagt.", opts:["Richtig", "Falsch"], correct:1 }],
+    lesenText4:"Ich möchte über das Thema Work-Life-Balance sprechen. Sowohl die Arbeit als auch die Freizeit sind wichtig. Zusammenfassend bin ich der Meinung, dass beides im Gleichgewicht sein muss.",
+    lesenQ4:[{ q:"Die Person spricht über Work-Life-Balance.", opts:["Richtig", "Falsch"], correct:0 }, { q:"Die Person denkt, nur die Arbeit zählt.", opts:["Richtig", "Falsch"], correct:1 }],
+schreibenPracticeBullets:["Integra discurso indirecto, un conector doble, y una opinión con resumen"],
+    schreibenTeil1Fields:[ {id:"b16_name",label:"Name",placeholder:"Tu nombre"}, {id:"b16_gesagt",label:"Jemand hat gesagt, dass...",placeholder:"Discurso indirecto"}, {id:"b16_konnektor",label:"Sowohl..., als auch... / Weder..., noch...",placeholder:"Un conector doble"}, {id:"b16_meinung",label:"Zusammenfassend bin ich der Meinung, dass...",placeholder:"Tu opinión final"} ],
+    schreibenTeil2Bullets:["Cuenta algo que alguien te dijo", "Usa un conector doble", "Cierra con tu opinión resumida"],
+    sprechenPracticeBullets:["Integra discurso indirecto, presentación, opinión y negociación — el repaso más completo"],
+    sprechenExamParts:[
+      { label:"SPRECHEN · Teil 1", instruction:"Planea algo con un compañero, negociando de verdad (proponer, ceder, acordar).", time:60 },
+      { label:"SPRECHEN · Teil 2", instruction:"Da una presentación completa sobre un tema de tu elección, integrando todo B1.", time:90 },
+      { label:"SPRECHEN · Teil 3", instruction:"Responde preguntas de seguimiento dando tu opinión.", time:40 }
+    ]
   }
 ];
 
@@ -2329,6 +3110,68 @@ schreibenTeil1Fields:[ {id:"g2_name",label:"Name",placeholder:"Tu nombre"}, {id:
       { label:"SPRECHEN · Teil 1", instruction:"Tarjeta de tema: \"Zukunft\". Formula una pregunta y respóndela.", time:40 },
       { label:"SPRECHEN · Teil 2", instruction:"Habla de tus planes futuros y algo que no pudiste hacer antes (konnte/musste).", time:60 },
       { label:"SPRECHEN · Teil 3", instruction:"Planea una actividad completa con un compañero: propone, negocia, y acuerden.", time:40 }
+    ]
+  },
+  b1_1: {
+    id:"final:b1_1", title:"Examen final de B1.1", level:"b1_1",
+    hoerenText:"Wenn ich mehr Zeit hätte, würde ich das Buch lesen, das mir mein Kollege empfohlen hat. Es wurde letztes Jahr veröffentlicht, nachdem der Autor jahrelang daran gearbeitet hatte.",
+    hoerenQ:[
+      { q:"¿Qué haría con más tiempo?", opts:["Viajaría","Leería un libro","Trabajaría"], correct:1 },
+      { q:"¿Quién le recomendó el libro?", opts:["Un amigo","Su colega","Su familia"], correct:1 },
+      { q:"¿Cuándo se publicó?", opts:["Este año","El año pasado","Hace mucho"], correct:1 }
+    ],
+        hoerenText3:"Wenn ich mehr Geld hätte, würde ich in eine bessere Wohnung ziehen, die näher am Zentrum liegt.",
+    hoerenQ3:[{ q:"¿Qué haría con más dinero?", opts:["Mudarse a mejor vivienda", "Viajar", "Ahorrar todo"], correct:0 }, { q:"¿Dónde estaría la vivienda?", opts:["Más cerca del centro", "Más lejos", "Igual"], correct:0 }],
+    hoerenText4:"Das Haus, das renoviert wurde, gehört jetzt meiner Schwester. Sie hätte es gern schon letztes Jahr gekauft.",
+    hoerenQ4:[{ q:"¿De quién es la casa ahora?", opts:["De su hermana", "De su hermano", "De sus padres"], correct:0 }, { q:"¿Cuándo le hubiera gustado comprarla?", opts:["Este año", "El año pasado", "El próximo año"], correct:1 }],
+lesenText:"Die Stadt, in der ich geboren wurde, hat sich sehr verändert. Obwohl ich lange weg war, erkenne ich noch viele Straßen. Nachdem ich zurückgekommen war, hatte ich das Gefühl, nach Hause zu kommen.",
+    lesenQ:[
+      { q:"Die Stadt hat sich verändert.", opts:["Richtig","Falsch"], correct:0 },
+      { q:"Die Person erkennt nichts mehr.", opts:["Richtig","Falsch"], correct:1 },
+      { q:"Die Person fühlte sich fremd.", opts:["Richtig","Falsch"], correct:1 }
+    ],
+    schreibenPracticeBullets:["Una situación hipotética (würde/hätte/wäre)","Algo descrito con voz pasiva","Una cláusula relativa"],
+        lesenText3:"Wenn ich könnte, würde ich das alte Haus kaufen, das meine Großmutter verkauft hatte. Es wurde vor Jahren renoviert.",
+    lesenQ3:[{ q:"Die Person würde das Haus gern kaufen.", opts:["Richtig", "Falsch"], correct:0 }, { q:"Das Haus wurde nie renoviert.", opts:["Richtig", "Falsch"], correct:1 }],
+    lesenText4:"Die Firma, die mein Onkel gegründet hatte, wurde letztes Jahr verkauft. Ich hätte gern gewusst, was daraus wurde.",
+    lesenQ4:[{ q:"Die Firma wurde verkauft.", opts:["Richtig", "Falsch"], correct:0 }, { q:"Es interessiert die Person nicht.", opts:["Richtig", "Falsch"], correct:1 }],
+schreibenTeil1Fields:[ {id:"h1_wuerde",label:"Wenn ich..., würde ich...",placeholder:"Una condición hipotética"}, {id:"h1_relativ",label:"Die Person/Stadt, die...",placeholder:"Cláusula relativa"}, {id:"h1_name",label:"Name",placeholder:"Tu nombre"}, {id:"h1_plan",label:"Ich habe vor, ... zu...",placeholder:"Un plan"} ],
+    schreibenTeil2Bullets:["Una situación hipotética completa (wenn...würde...)","Describe algo o alguien con una cláusula relativa","Un plan con zu"],
+    sprechenExamParts:[
+      { label:"SPRECHEN · Teil 1", instruction:"Tarjeta de tema: \"Wenn ich könnte...\". Formula una pregunta hipotética y respóndela.", time:40 },
+      { label:"SPRECHEN · Teil 2", instruction:"Habla de tu vida integrando Konjunktiv II, voz pasiva y una cláusula relativa.", time:90 },
+      { label:"SPRECHEN · Teil 3", instruction:"Responde con una opinión sobre lo que presentaste.", time:40 }
+    ]
+  },
+  b1_2: {
+    id:"final:b1_2", title:"Examen final de B1.2", level:"b1_2",
+    hoerenText:"Meine Chefin hat gesagt, dass sie sowohl mehr Personal als auch mehr Budget braucht. Ich schlage vor, dass wir zuerst eine Lösung finden, weil ein Vorteil davon ist, dass wir Zeit sparen.",
+    hoerenQ:[
+      { q:"¿Qué dijo la jefa que necesita?", opts:["Solo personal","Personal y presupuesto","Solo presupuesto"], correct:1 },
+      { q:"¿Qué propone la persona?", opts:["Esperar","Buscar una solución primero","No hacer nada"], correct:1 },
+      { q:"¿Cuál es la ventaja mencionada?", opts:["Ahorrar dinero","Ahorrar tiempo","Ahorrar personal"], correct:1 }
+    ],
+        hoerenText3:"Mein Chef hat gesagt, dass er weder mehr Personal noch mehr Zeit hat. Ich schlage vor, dass wir Prioritäten setzen.",
+    hoerenQ3:[{ q:"¿Qué dijo el jefe?", opts:["Que no tiene más personal ni tiempo", "Que tiene todo", "Nada"], correct:0 }, { q:"¿Qué propone la persona?", opts:["Establecer prioridades", "Renunciar", "Nada"], correct:0 }],
+    hoerenText4:"Wie wäre es, wenn wir sowohl die Kosten als auch den Zeitplan überprüfen? Zusammenfassend denke ich, dass wir vorbereitet sein müssen.",
+    hoerenQ4:[{ q:"¿Qué proponen revisar?", opts:["Costos y cronograma", "Solo costos", "Nada"], correct:0 }, { q:"¿Qué concluye?", opts:["Que deben estar preparados", "Que no importa", "Nada"], correct:0 }],
+lesenText:"Ich möchte über das Thema Fernarbeit sprechen. Ich bin der Meinung, dass sowohl Arbeitgeber als auch Arbeitnehmer davon profitieren. Natürlich gibt es auch Nachteile, aber zusammenfassend denke ich, dass die Vorteile überwiegen.",
+    lesenQ:[
+      { q:"Beide Seiten profitieren laut der Person.", opts:["Richtig","Falsch"], correct:0 },
+      { q:"Die Person sieht keine Nachteile.", opts:["Richtig","Falsch"], correct:1 },
+      { q:"Die Person denkt, die Nachteile überwiegen.", opts:["Richtig","Falsch"], correct:1 }
+    ],
+    schreibenPracticeBullets:["Algo que alguien te dijo (discurso indirecto)","Un conector doble","Tu opinión con resumen"],
+        lesenText3:"Mein Kollege hat gefragt, ob ich ihm bei der Präsentation helfen kann. Ich bin der Meinung, dass Zusammenarbeit wichtig ist. Zusammenfassend habe ich zugestimmt.",
+    lesenQ3:[{ q:"Der Kollege bat um Hilfe.", opts:["Richtig", "Falsch"], correct:0 }, { q:"Die Person hat abgelehnt.", opts:["Richtig", "Falsch"], correct:1 }],
+    lesenText4:"Ich möchte über das Thema Digitalisierung sprechen. Sowohl Chancen als auch Risiken sind vorhanden. Zusammenfassend bin ich optimistisch.",
+    lesenQ4:[{ q:"Die Person spricht über Digitalisierung.", opts:["Richtig", "Falsch"], correct:0 }, { q:"Die Person sieht nur Risiken.", opts:["Richtig", "Falsch"], correct:1 }],
+schreibenTeil1Fields:[ {id:"h2_name",label:"Name",placeholder:"Tu nombre"}, {id:"h2_gesagt",label:"Jemand hat gesagt, dass...",placeholder:"Discurso indirecto"}, {id:"h2_konnektor",label:"Sowohl..., als auch... / Weder..., noch...",placeholder:"Un conector doble"}, {id:"h2_meinung",label:"Zusammenfassend bin ich der Meinung, dass...",placeholder:"Tu opinión final"} ],
+    schreibenTeil2Bullets:["Cuenta algo que alguien te dijo","Usa un conector doble","Cierra con tu opinión resumida"],
+    sprechenExamParts:[
+      { label:"SPRECHEN · Teil 1", instruction:"Planea algo con un compañero, negociando de verdad (proponer, ceder, acordar).", time:60 },
+      { label:"SPRECHEN · Teil 2", instruction:"Da una presentación completa sobre un tema de tu elección, integrando todo B1.", time:90 },
+      { label:"SPRECHEN · Teil 3", instruction:"Responde preguntas de seguimiento dando tu opinión.", time:40 }
     ]
   }
 };
@@ -2863,10 +3706,12 @@ function finishExamLesen(){
   let correct = 0;
   document.querySelectorAll("#examLesenQ > div[data-qi]").forEach(block => { if(parseInt(block.dataset.selected) === exam.activeLesen.questions[parseInt(block.dataset.qi)].correct) correct++; });
   exam.scores.lesen = Math.round((correct / exam.activeLesen.questions.length) * 25);
-  if(isA2Unit(getUnit(exam.unitId))) renderExamSchreibenA2Aufgabe1();
+  if(usesFreeTextSchreiben(getUnit(exam.unitId))) renderExamSchreibenA2Aufgabe1();
   else renderExamSchreibenTeil1();
 }
 function isA2Unit(unit){ return !!(unit && unit.level && unit.level.indexOf("a2") === 0); }
+function isB1Unit(unit){ return !!(unit && unit.level && unit.level.indexOf("b1") === 0); }
+function usesFreeTextSchreiben(unit){ return isA2Unit(unit) || isB1Unit(unit); }
 
 /* --- Schreiben formato A2: mensaje informal + correo formal, ambos evaluados por Claude --- */
 function renderExamSchreibenA2Aufgabe1(){
@@ -3027,17 +3872,29 @@ async function finishExamSprechen(){
 function renderExamResults(){
   const s = exam.scores;
   const total = s.hoeren + s.lesen + s.schreiben + s.sprechen;
-  const passed = total >= 60;
+  const unit = getUnit(exam.unitId);
+  const isB1 = isB1Unit(unit);
+  const sectionMin = 15; // 60% de 25
+  const sectionsOk = !isB1 || (s.hoeren>=sectionMin && s.lesen>=sectionMin && s.schreiben>=sectionMin && s.sprechen>=sectionMin);
+  const passed = total >= 60 && sectionsOk;
   const isFinal = isExamFinal();
+  const rowCls = (score) => (isB1 && score < sectionMin) ? 'breakdown-row low-section' : 'breakdown-row';
+  let statusText = passed ? (isFinal ? '✓ Aprobado — ¡nivel completo!' : '✓ Aprobado') : 'No aprobado';
+  if(!passed && isB1){
+    statusText = total < 60 ? 'No aprobado — se necesitan 60 en total' : 'No aprobado — cada sección necesita al menos 15/25 (60%)';
+  } else if(!passed){
+    statusText = 'No aprobado — se necesitan 60';
+  }
   app.innerHTML = `<div class="card">
-    ${isFinal ? '<p style="font-family:var(--display); font-weight:700; font-size:16px;">'+getUnit(exam.unitId).title+'</p>' : ''}
+    ${isFinal ? '<p style="font-family:var(--display); font-weight:700; font-size:16px;">'+unit.title+'</p>' : ''}
+    ${isB1 ? '<p style="font-size:12px; color:rgba(20,20,20,0.55); margin-bottom:8px;">Formato B1: se necesita 60 en total Y al menos 15/25 (60%) en cada sección.</p>' : ''}
     <div class="result-score"><div class="result-number">${total}</div><div style="font-size:12px; color:rgba(20,20,20,0.5);">de 100 puntos</div>
-    <div class="result-status ${passed?'pass':'fail'}">${passed ? (isFinal ? '✓ Aprobado — ¡nivel completo!' : '✓ Aprobado') : 'No aprobado — se necesitan 60'}</div></div>
+    <div class="result-status ${passed?'pass':'fail'}">${statusText}</div></div>
     <div style="margin-top:18px;">
-      <div class="breakdown-row"><span>Hören</span><span>${s.hoeren} / 25</span></div>
-      <div class="breakdown-row"><span>Lesen</span><span>${s.lesen} / 25</span></div>
-      <div class="breakdown-row"><span>Schreiben</span><span>${s.schreiben} / 25</span></div>
-      <div class="breakdown-row"><span>Sprechen</span><span>${s.sprechen} / 25</span></div>
+      <div class="${rowCls(s.hoeren)}"><span>Hören</span><span>${s.hoeren} / 25</span></div>
+      <div class="${rowCls(s.lesen)}"><span>Lesen</span><span>${s.lesen} / 25</span></div>
+      <div class="${rowCls(s.schreiben)}"><span>Schreiben</span><span>${s.schreiben} / 25</span></div>
+      <div class="${rowCls(s.sprechen)}"><span>Sprechen</span><span>${s.sprechen} / 25</span></div>
     </div>
     ${exam.schreibenFeedback ? '<div class="feedback-box" style="margin-top:16px;"><strong>Schreiben:</strong> '+exam.schreibenFeedback+'</div>' : ''}
     ${exam.sprechenFeedback ? '<div class="feedback-box"><strong>Sprechen:</strong> '+exam.sprechenFeedback+'</div>' : ''}
