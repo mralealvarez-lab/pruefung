@@ -3376,7 +3376,8 @@ function renderLeccion(unit, header){
 }
 function renderLeccionChecks(unit){
   const el = document.getElementById("leccionChecks");
-  unit.leccionChecks.forEach((item, qi) => {
+  const shuffled = unit.leccionChecks.map(shuffleQuestionOptions);
+  shuffled.forEach((item, qi) => {
     const block = document.createElement("div");
     block.style.marginTop = "16px";
     block.innerHTML = `<p style="font-weight:600;">${item.q}</p>`;
