@@ -192,6 +192,12 @@
   .modal h2{ font-family: var(--display); font-size: 19px; margin: 0 0 10px; }
   .modal p{ font-size: 13px; line-height:1.55; color: rgba(20,20,20,0.7); margin: 0 0 14px; }
   .modal a{ color: var(--amber-deep); }
+
+  .chat-bubble{ max-width: 85%; padding: 12px 14px; border-radius: 14px; margin-bottom: 10px; font-size: 14px; line-height:1.5; }
+  .chat-bubble.user{ background: var(--amber); color: var(--ink); margin-left:auto; border-bottom-right-radius:4px; }
+  .chat-bubble.assistant{ background: var(--paper-hi); color: var(--ink); margin-right:auto; border-bottom-left-radius:4px; box-shadow: var(--shadow-card); }
+  .chat-bubble .correction{ margin-top:8px; padding-top:8px; border-top:1px dashed rgba(20,20,20,0.2); font-size:12px; color: rgba(20,20,20,0.65); font-style:italic; }
+  .chat-empty{ text-align:center; padding: 30px 10px; color: rgba(243,233,210,0.5); font-size: 13.5px; }
 </style>
 </head>
 <body>
@@ -211,7 +217,11 @@
       <p><strong>1.</strong> Los niveles se desbloquean en orden: empiezas en A1.1, y cada nivel siguiente (A1.2, y más adelante A2, B1, B2...) se desbloquea al aprobar las 8 unidades del anterior.</p>
       <p><strong>2.</strong> Cada nivel tiene 8 unidades, y también se desbloquean en orden dentro del nivel — necesitas aprobar el examen de una para pasar a la siguiente.</p>
       <p><strong>3.</strong> Cada unidad tiene 5 partes: <strong>Lección</strong> (aprendes la gramática), luego <strong>Hören, Lesen, Schreiben, Sprechen</strong> (practicas sin presión), y al final un <strong>simulacro de examen</strong> real con tiempo limitado.</p>
-      <p><strong>4.</strong> Tu progreso se guarda solo, en este navegador. Si quieres explorar todo sin restricciones, usa "Modo revisión" en la pantalla de inicio.</p>
+      <p><strong>4.</strong> Además, hay una <strong>Conversación libre</strong> con tu profesor (accesible desde el inicio o dentro de cada unidad): hablas en alemán, te responde según tu nivel actual y te corrige si hace falta.</p>
+      <p><strong>5.</strong> Tu progreso se guarda solo, en este navegador. Si quieres explorar todo sin restricciones, usa "Modo revisión" en la pantalla de inicio.</p>
+      <div class="form-field" style="margin-top:14px;"><label>¿Quién eres?</label>
+        <input type="text" id="welcomeNameInput" placeholder="Tu nombre">
+      </div>
       <button class="primary-btn" onclick="closeWelcome()">Entendido, empezar</button>
     </div>
   </div>
@@ -3222,18 +3232,30 @@ function render(){
   if(nav.view === "level") return renderLevelView(nav.levelId);
   if(nav.view === "unit") return renderUnitView(nav.unitId);
   if(nav.view === "exercise") return renderExerciseView(nav.unitId, nav.name);
+  if(nav.view === "conversation") return renderConversation();
+  if(nav.view === "analytics") return renderAnalytics();
   if(nav.view === "exam") return; // el motor de examen controla su propio innerHTML
 }
 
 const WELCOME_KEY = "pruefung-a1-seen-welcome";
 function maybeShowWelcome(){
-  if(!localStorage.getItem(WELCOME_KEY)) document.getElementById("welcomeModal").style.display = "flex";
+  if(!localStorage.getItem(WELCOME_KEY)){
+    const inp = document.getElementById("welcomeNameInput");
+    if(inp) inp.value = analytics.profileName || "";
+    document.getElementById("welcomeModal").style.display = "flex";
+  }
 }
 function closeWelcome(){
+  const inp = document.getElementById("welcomeNameInput");
+  if(inp){ analytics.profileName = inp.value.trim(); saveAnalytics(); }
   localStorage.setItem(WELCOME_KEY, "1");
   document.getElementById("welcomeModal").style.display = "none";
 }
-function showWelcome(){ document.getElementById("welcomeModal").style.display = "flex"; }
+function showWelcome(){
+  const inp = document.getElementById("welcomeNameInput");
+  if(inp) inp.value = analytics.profileName || "";
+  document.getElementById("welcomeModal").style.display = "flex";
+}
 
 /* --- Home --- */
 function renderHome(){
@@ -3261,9 +3283,186 @@ function renderHome(){
     }
   });
   html += `</div>`;
+  html += `<button class="exam-cta" onclick="go('conversation')">
+    <div class="exam-cta-title">🗣️ Conversación libre con tu profesor</div>
+    <div class="exam-cta-desc">Habla en alemán, tu profesor responde y corrige — ajustado a tu nivel actual</div>
+  </button>`;
   html += `<button class="primary-btn secondary-btn" style="margin-top:10px;" onclick="showWelcome()">❓ ¿Cómo funciona esta herramienta?</button>`;
   html += `<button class="primary-btn secondary-btn" style="margin-top:10px;" onclick="toggleReviewMode()">${progress.reviewMode ? '🔒 Desactivar modo revisión' : '🔓 Modo revisión (desbloquear todo para revisar)'}</button>`;
+  html += `<button class="primary-btn secondary-btn" style="margin-top:10px;" onclick="go('analytics')">📊 Analítica y uso de tokens</button>`;
   app.innerHTML = html;
+}
+
+/* --- Analítica: tokens, sesiones, intentos de examen (solo este dispositivo) --- */
+function renderAnalytics(){
+  const totalIn = analytics.apiCalls.reduce((a,c)=>a+c.inTok,0);
+  const totalOut = analytics.apiCalls.reduce((a,c)=>a+c.outTok,0);
+  const totalCalls = analytics.apiCalls.length;
+  const totalSessionMin = analytics.sessions.reduce((a,s)=>a+s.minutes,0);
+  const avgSessionMin = analytics.sessions.length ? Math.round(totalSessionMin/analytics.sessions.length) : 0;
+  const liveMin = Math.round((Date.now()-__sessionStart)/60000);
+
+  // Agrupar intentos de examen por examId
+  const byExam = {};
+  analytics.examAttempts.forEach(a => {
+    if(!byExam[a.examId]) byExam[a.examId] = { title:a.title, level:a.level, attempts:0, lastScore:0, lastPassed:false, lastTs:0 };
+    const g = byExam[a.examId];
+    g.attempts++;
+    if(a.ts >= g.lastTs){ g.lastTs = a.ts; g.lastScore = a.score; g.lastPassed = a.passed; }
+  });
+  const examRows = Object.values(byExam).sort((a,b)=>b.lastTs-a.lastTs);
+
+  let html = `<div class="view-header"><button class="back-btn" onclick="go('home')">←</button><div class="view-title">Analítica y uso de tokens</div></div>
+  <div class="card">
+    <p style="font-size:12px; color:rgba(20,20,20,0.6);">Estos datos viven solo en este navegador/dispositivo — no se comparten con otros dispositivos ni con nadie más.</p>
+    <div class="form-field" style="margin-top:12px;"><label>¿Quién eres? (para identificar estos datos)</label>
+      <input type="text" id="profileNameInput" value="${analytics.profileName || ''}" placeholder="Tu nombre">
+    </div>
+    <button class="primary-btn" onclick="saveProfileName()">Guardar</button>
+  </div>
+
+  <div class="card">
+    <p style="font-family:var(--display); font-weight:700; font-size:16px;">Tokens usados (API de Anthropic)</p>
+    <div class="breakdown-row"><span>Llamadas totales a la API</span><span>${totalCalls}</span></div>
+    <div class="breakdown-row"><span>Tokens de entrada</span><span>${totalIn.toLocaleString()}</span></div>
+    <div class="breakdown-row"><span>Tokens de salida</span><span>${totalOut.toLocaleString()}</span></div>
+    <div class="breakdown-row"><span>Total</span><span>${(totalIn+totalOut).toLocaleString()}</span></div>
+    <p style="font-size:11.5px; color:rgba(20,20,20,0.5); margin-top:10px;">Para convertir esto a costo en dólares, revisa el precio actual por token del modelo en la página de precios de Anthropic — cambia con el tiempo, así que no lo calculamos aquí.</p>
+  </div>
+
+  <div class="card">
+    <p style="font-family:var(--display); font-weight:700; font-size:16px;">Tiempo en sesión</p>
+    <div class="breakdown-row"><span>Sesiones registradas</span><span>${analytics.sessions.length}</span></div>
+    <div class="breakdown-row"><span>Tiempo total</span><span>${Math.floor(totalSessionMin/60)}h ${totalSessionMin%60}min</span></div>
+    <div class="breakdown-row"><span>Promedio por sesión</span><span>${avgSessionMin} min</span></div>
+    <div class="breakdown-row"><span>Sesión actual (en curso)</span><span>${liveMin} min</span></div>
+  </div>
+
+  <div class="card">
+    <p style="font-family:var(--display); font-weight:700; font-size:16px;">Exámenes presentados</p>
+    ${examRows.length === 0 ? '<p style="font-size:13px; color:rgba(20,20,20,0.55);">Aún no has presentado ningún examen.</p>' : examRows.map(g => `
+      <div class="breakdown-row"><span>${g.title}</span><span>${g.attempts}× · última: ${g.lastScore}/100 ${g.lastPassed ? '✓' : ''}</span></div>
+    `).join('')}
+  </div>
+
+  <div class="card">
+    <p style="font-family:var(--display); font-weight:700; font-size:16px;">Actividad reciente (últimas 10 llamadas)</p>
+    ${analytics.apiCalls.slice(-10).reverse().map(c => `
+      <div class="breakdown-row" style="font-size:12px;"><span>${c.context}</span><span>${c.inTok}+${c.outTok} tok</span></div>
+    `).join('') || '<p style="font-size:13px; color:rgba(20,20,20,0.55);">Sin actividad todavía.</p>'}
+  </div>
+
+  <button class="primary-btn secondary-btn" onclick="resetAnalytics()">🗑️ Borrar datos de analítica de este dispositivo</button>
+  `;
+  app.innerHTML = html;
+}
+function saveProfileName(){
+  analytics.profileName = document.getElementById("profileNameInput").value.trim();
+  saveAnalytics();
+}
+function resetAnalytics(){
+  analytics = { profileName: analytics.profileName, apiCalls:[], sessions:[], examAttempts:[] };
+  saveAnalytics();
+  renderAnalytics();
+}
+
+/* ================================================================
+   CONVERSACIÓN LIBRE — profesor de alemán consciente del nivel
+   ================================================================ */
+let convMessages = []; // {role:'user'|'assistant', content, correction?}
+function currentLevelInfo(){
+  let current = LEVELS[0];
+  for(let i=0;i<LEVELS.length;i++){
+    const lvl = LEVELS[i];
+    const prev = i>0 ? LEVELS[i-1] : null;
+    const unlocked = !prev || isLevelComplete(prev.id) || progress.reviewMode;
+    if(unlocked) current = lvl; else break;
+  }
+  return current;
+}
+function renderConversation(){
+  const level = currentLevelInfo();
+  const backTarget = (nav.returnTo && nav.returnTo.view === 'unit') ? `go('unit',{unitId:'${nav.returnTo.unitId}'})` : `go('home')`;
+  let html = `<div class="view-header"><button class="back-btn" onclick="${backTarget}">←</button><div><span class="eyebrow">${level.label}</span><div class="view-title">Conversación libre</div></div></div>
+  <div class="sub" style="margin-bottom:14px;">Tu profesor habla según tu nivel actual (${level.label} · ${level.title}). Cada turno tuyo consume tokens de tu clave de Anthropic — puedes revisar el uso en Analítica.</div>
+  <div id="chatLog">`;
+  if(convMessages.length === 0){
+    html += `<div class="chat-empty">Toca el micrófono y empieza a hablar en alemán.<br>Tu profesor responderá y te corregirá si hace falta.</div>`;
+  } else {
+    convMessages.forEach((m, i) => {
+      html += `<div class="chat-bubble ${m.role}">${m.content}${m.correction ? '<div class="correction">'+m.correction+'</div>' : ''}${m.role==='assistant' ? '<button class="play-btn" style="margin-top:8px; margin-bottom:0; padding:8px 14px; font-size:12.5px;" onclick="playAudio('+htmlAttrJson(m.content)+', this)">▶ Escuchar</button>' : ''}</div>`;
+    });
+  }
+  html += `</div>
+  <div id="convTranscriptBox" class="transcript-box" style="display:none; margin-bottom:10px;"></div>
+  <button class="primary-btn" id="convRecordBtn" onclick="toggleConvRecording()">🎙️ Hablar</button>
+  <button class="primary-btn secondary-btn" onclick="resetConversation()">🔄 Nueva conversación</button>`;
+  app.innerHTML = html;
+}
+let convRecognition = null, convRecognizing = false, convLastTranscript = "";
+function toggleConvRecording(){
+  const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
+  if(!SpeechRec){ alert("Tu navegador no soporta reconocimiento de voz. Prueba en Chrome."); return; }
+  const btn = document.getElementById("convRecordBtn");
+  const box = document.getElementById("convTranscriptBox");
+  if(convRecognizing){ convRecognition.stop(); return; }
+  stopAllAudio();
+  convRecognition = new SpeechRec();
+  convRecognition.lang = "de-DE"; convRecognition.interimResults = true; convRecognition.continuous = true;
+  convRecognition.onstart = () => {
+    convRecognizing = true; btn.textContent = "⏹ Detener"; btn.classList.add("recording");
+    box.style.display = "block"; box.textContent = "Escuchando...";
+  };
+  convRecognition.onresult = (event) => {
+    let t = ""; for(let i=0;i<event.results.length;i++) t += event.results[i][0].transcript;
+    convLastTranscript = t; box.textContent = t;
+  };
+  convRecognition.onerror = (event) => { box.textContent = "Error de reconocimiento: " + event.error; };
+  convRecognition.onend = () => {
+    convRecognizing = false; btn.textContent = "🎙️ Hablar"; btn.classList.remove("recording");
+    if(convLastTranscript.trim()) sendConversationTurn(convLastTranscript.trim());
+    convLastTranscript = "";
+  };
+  convRecognition.start();
+}
+async function sendConversationTurn(text){
+  if(!ensureApiKey(() => sendConversationTurn(text))) return;
+  convMessages.push({ role:"user", content: text });
+  renderConversation();
+  const box = document.getElementById("chatLog");
+  box.innerHTML += '<div class="chat-bubble assistant"><span class="loading">Tu profesor está escribiendo...</span></div>';
+  const level = currentLevelInfo();
+  const system = "Eres un profesor de alemán amigable y paciente, hablando en vivo con un estudiante de nivel " + level.label + " (" + level.title + "). Responde SIEMPRE en alemán, con oraciones cortas y simples apropiadas a ese nivel — no uses gramática de niveles superiores. Si el estudiante cometió un error de gramática o vocabulario, indícalo brevemente en una línea aparte al final, en español, entre corchetes, ej: [Corrección: dijiste X, la forma correcta es Y]. Si no hay errores, no agregues esa línea. Termina siempre con una pregunta corta para que la conversación continúe. Máximo 3-4 oraciones en alemán.";
+  try{
+    const apiMessages = convMessages.map(m => ({ role: m.role, content: m.content }));
+    const reply = await callClaudeChat(system, apiMessages, "Conversación libre · " + level.label);
+    const corrMatch = reply.match(/\[([^\]]*)\]\s*$/);
+    const correction = corrMatch ? corrMatch[1] : null;
+    const mainText = corrMatch ? reply.slice(0, corrMatch.index).trim() : reply.trim();
+    convMessages.push({ role:"assistant", content: mainText, correction });
+    renderConversation();
+    setTimeout(() => {
+      const lastBtn = document.querySelector("#chatLog .chat-bubble.assistant:last-child .play-btn");
+      if(lastBtn) playAudio(mainText, lastBtn);
+    }, 100);
+  }catch(err){
+    box.innerHTML = box.innerHTML.replace('<div class="chat-bubble assistant"><span class="loading">Tu profesor está escribiendo...</span></div>', '');
+    convMessages.push({ role:"assistant", content: "⚠️ " + err.message });
+    renderConversation();
+  }
+}
+function resetConversation(){ convMessages = []; stopAllAudio(); renderConversation(); }
+async function callClaudeChat(systemPrompt, messages, context){
+  const key = getApiKey();
+  const res = await fetch("https://api.anthropic.com/v1/messages", {
+    method:"POST",
+    headers:{ "Content-Type":"application/json", "x-api-key":key, "anthropic-version":"2023-06-01", "anthropic-dangerous-direct-browser-access":"true" },
+    body: JSON.stringify({ model:"claude-sonnet-4-6", max_tokens:300, system:systemPrompt, messages })
+  });
+  if(!res.ok){ const errText = await res.text(); throw new Error("Error de API (" + res.status + "): " + errText.slice(0,200)); }
+  const data = await res.json();
+  logApiCall(context, data.usage);
+  return data.content.map(b => b.text || "").join("\n");
 }
 
 /* --- Level view: lista de unidades --- */
@@ -3333,6 +3532,10 @@ function renderUnitView(unitId){
   html += `<button class="exam-cta" onclick="startExam('${unit.id}')">
     <div class="exam-cta-title">📋 Simular examen completo</div>
     <div class="exam-cta-desc">Formato Start Deutsch A1 · tiempo limitado · sin volver atrás · puntaje sobre 100</div>
+  </button>`;
+  html += `<button class="exam-cta" onclick="go('conversation',{returnTo:{view:'unit',unitId:'${unit.id}'}})" style="margin-top:12px;">
+    <div class="exam-cta-title">🗣️ Practicar en conversación libre</div>
+    <div class="exam-cta-desc">Habla con tu profesor sobre lo que acabas de aprender en esta unidad</div>
   </button>`;
   app.innerHTML = html;
 }
@@ -3440,6 +3643,17 @@ function stopAllAudio(){
   if("speechSynthesis" in window) speechSynthesis.cancel();
   if(currentPlayBtn){ currentPlayBtn.textContent = currentPlayBtn.dataset.playLabel || "▶ Escuchar"; currentPlayBtn = null; }
 }
+function pickGermanVoice(){
+  if(!("speechSynthesis" in window)) return null;
+  const voices = speechSynthesis.getVoices() || [];
+  const deVoices = voices.filter(v => v.lang && v.lang.toLowerCase().startsWith("de"));
+  if(deVoices.length === 0) return null;
+  const qualityHint = /google|natural|neural|premium|enhanced|online|wavenet/i;
+  return deVoices.find(v => qualityHint.test(v.name)) || deVoices.find(v => v.lang.toLowerCase() === "de-de") || deVoices[0];
+}
+if("speechSynthesis" in window){
+  speechSynthesis.onvoiceschanged = () => {}; // fuerza a que el navegador cargue la lista de voces temprano
+}
 function playAudio(text, btn){
   if(!("speechSynthesis" in window)){ alert("Tu navegador no soporta síntesis de voz."); return; }
   // Si se toca el mismo botón mientras suena, actúa como STOP
@@ -3449,6 +3663,8 @@ function playAudio(text, btn){
   if(wasPlayingOtherBtn){ wasPlayingOtherBtn.textContent = wasPlayingOtherBtn.dataset.playLabel || "▶ Escuchar"; }
   const u = new SpeechSynthesisUtterance(text.replace(/—/g,"."));
   u.lang = "de-DE"; u.rate = 0.92;
+  const bestVoice = pickGermanVoice();
+  if(bestVoice) u.voice = bestVoice;
   if(btn){
     if(!btn.dataset.playLabel) btn.dataset.playLabel = btn.textContent;
     currentPlayBtn = btn;
@@ -3513,7 +3729,7 @@ async function evaluateSchreiben(unitId){
   btn.disabled = true; feedbackEl.innerHTML = '<div class="loading">Evaluando tu texto...</div>';
   try{
     const system = "Eres un evaluador de alemán nivel A1 (examen de certificación). Da feedback breve en español: 1) 2-3 puntos de mejora concretos, 2) una versión modelo corregida en alemán. Máximo 120 palabras.";
-    const reply = await callClaude(system, text);
+    const reply = await callClaude(system, text, "Schreiben práctica · " + unitId);
     feedbackEl.innerHTML = '<div class="feedback-box"></div>';
     feedbackEl.querySelector(".feedback-box").textContent = reply;
     markDone(unitId, "schreiben");
@@ -3555,7 +3771,7 @@ async function evaluateSprechen(unitId){
   btn.disabled = true; feedbackEl.innerHTML = '<div class="loading">Evaluando tu respuesta...</div>';
   try{
     const system = "Eres un evaluador de alemán nivel A1 (examen oral). La transcripción viene de reconocimiento de voz automático (puede tener errores). Da feedback breve en español: 1) qué cubrió bien, 2) 2-3 puntos de mejora, 3) una versión modelo en alemán. Máximo 120 palabras.";
-    const reply = await callClaude(system, "Transcripción: " + lastTranscript);
+    const reply = await callClaude(system, "Transcripción: " + lastTranscript, "Sprechen práctica");
     feedbackEl.innerHTML = '<div class="feedback-box"></div>';
     feedbackEl.querySelector(".feedback-box").textContent = reply;
     markDone(unitId, "sprechen");
@@ -3587,17 +3803,50 @@ function ensureApiKey(onReady){
   }
   return true;
 }
-async function callClaude(systemPrompt, userMessage){
+async function callClaude(systemPrompt, userMessage, context, maxTokens){
   const key = getApiKey();
   const res = await fetch("https://api.anthropic.com/v1/messages", {
     method:"POST",
     headers:{ "Content-Type":"application/json", "x-api-key":key, "anthropic-version":"2023-06-01", "anthropic-dangerous-direct-browser-access":"true" },
-    body: JSON.stringify({ model:"claude-sonnet-4-6", max_tokens:500, system:systemPrompt, messages:[{role:"user", content:userMessage}] })
+    body: JSON.stringify({ model:"claude-sonnet-4-6", max_tokens:maxTokens||500, system:systemPrompt, messages:[{role:"user", content:userMessage}] })
   });
   if(!res.ok){ const errText = await res.text(); throw new Error("Error de API (" + res.status + "): " + errText.slice(0,200)); }
   const data = await res.json();
+  logApiCall(context || "Sin contexto", data.usage);
   return data.content.map(b => b.text || "").join("\n");
 }
+
+/* ================================================================
+   ANALÍTICA: tokens, sesiones, intentos de examen (solo este navegador)
+   ================================================================ */
+const ANALYTICS_KEY = "pruefung-a1-analytics";
+function loadAnalytics(){
+  try{ const d = JSON.parse(localStorage.getItem(ANALYTICS_KEY)); if(d) return d; }catch(e){}
+  return { profileName:"", apiCalls:[], sessions:[], examAttempts:[] };
+}
+let analytics = loadAnalytics();
+function saveAnalytics(){ localStorage.setItem(ANALYTICS_KEY, JSON.stringify(analytics)); }
+function logApiCall(context, usage){
+  analytics.apiCalls.push({ ts: Date.now(), context, inTok: (usage && usage.input_tokens) || 0, outTok: (usage && usage.output_tokens) || 0 });
+  if(analytics.apiCalls.length > 400) analytics.apiCalls.shift();
+  saveAnalytics();
+}
+function logExamAttempt(unit, total, passed){
+  analytics.examAttempts.push({ ts: Date.now(), examId: unit.id, title: unit.title, level: unit.level || "", score: total, passed: !!passed });
+  if(analytics.examAttempts.length > 300) analytics.examAttempts.shift();
+  saveAnalytics();
+}
+const __sessionStart = Date.now();
+function closeSessionLog(){
+  const mins = Math.round((Date.now() - __sessionStart) / 60000);
+  if(mins >= 1){
+    analytics.sessions.push({ date: new Date(__sessionStart).toISOString().slice(0,10), minutes: mins });
+    if(analytics.sessions.length > 200) analytics.sessions.shift();
+    saveAnalytics();
+  }
+}
+window.addEventListener("pagehide", closeSessionLog);
+window.addEventListener("beforeunload", closeSessionLog);
 
 /* ================================================================
    MODO EXAMEN (formato Start Deutsch A1) — genérico por unidad
@@ -3734,7 +3983,7 @@ async function finishExamSchreibenA2Aufgabe1(){
   if(text){
     try{
       const system = "Eres un evaluador oficial del examen Goethe A2, sección Schreiben Aufgabe 1 (mensaje informal, tú/du). Responde SOLO con JSON válido: {\"score\": <0-10>, \"feedback\": \"<máximo 50 palabras en español>\"}. Evalúa longitud apropiada (20-30 palabras), registro informal correcto, y si cubrió los puntos pedidos.";
-      const reply = await callClaude(system, text);
+      const reply = await callClaude(system, text, "Examen Schreiben Aufgabe1 · " + exam.unitId);
       const match = reply.match(/\{[\s\S]*\}/);
       const parsed = JSON.parse(match ? match[0] : reply);
       score = Math.max(0, Math.min(10, parsed.score || 0));
@@ -3763,7 +4012,7 @@ async function finishExamSchreibenA2Aufgabe2(){
   if(text){
     try{
       const system = "Eres un evaluador oficial del examen Goethe A2, sección Schreiben Aufgabe 2 (correo formal, usted/Sie). Responde SOLO con JSON válido: {\"score\": <0-15>, \"feedback\": \"<máximo 60 palabras en español>\"}. Evalúa longitud apropiada (30-40 palabras), registro formal correcto (saludo y despedida), y si cubrió los puntos pedidos.";
-      const reply = await callClaude(system, text);
+      const reply = await callClaude(system, text, "Examen Schreiben Aufgabe2 · " + exam.unitId);
       const match = reply.match(/\{[\s\S]*\}/);
       const parsed = JSON.parse(match ? match[0] : reply);
       score = Math.max(0, Math.min(15, parsed.score || 0));
@@ -3808,7 +4057,7 @@ async function finishExamSchreiben(){
   if(text){
     try{
       const system = "Eres un evaluador oficial del examen Start Deutsch A1, sección Schreiben Teil 2. Responde SOLO con un JSON válido, sin texto adicional: {\"score\": <0-17>, \"feedback\": \"<máximo 60 palabras en español>\"}. El puntaje máximo es 17. Evalúa si cubrió los puntos pedidos, longitud apropiada (25-35 palabras) y corrección gramatical básica de A1.";
-      const reply = await callClaude(system, text);
+      const reply = await callClaude(system, text, "Examen Schreiben Teil2 · " + exam.unitId);
       const match = reply.match(/\{[\s\S]*\}/);
       const parsed = JSON.parse(match ? match[0] : reply);
       teil2Score = Math.max(0, Math.min(17, parsed.score || 0));
@@ -3862,7 +4111,7 @@ async function finishExamSprechen(){
   try{
     const system = "Eres un evaluador oficial del examen oral Start Deutsch A1. Recibirás varias transcripciones generadas por reconocimiento de voz automático (pueden tener errores). Responde SOLO con JSON válido: {\"score\": <0-25>, \"feedback\": \"<máximo 80 palabras en español, con 2-3 puntos de mejora>\"}.";
     const userMsg = exam.sprechenTranscripts.map((t,i) => "Teil " + (i+1) + ": " + t).join("\n");
-    const reply = await callClaude(system, userMsg);
+    const reply = await callClaude(system, userMsg, "Examen Sprechen · " + exam.unitId);
     const match = reply.match(/\{[\s\S]*\}/);
     const parsed = JSON.parse(match ? match[0] : reply);
     exam.scores.sprechen = Math.max(0, Math.min(25, parsed.score || 0));
@@ -3911,6 +4160,7 @@ function renderExamResults(){
     up.examScore = total;
     if(passed){ up.leccion=true; up.hoeren=true; up.lesen=true; up.schreiben=true; up.sprechen=true; up.examPassed = true; }
   }
+  logExamAttempt(unit, total, passed);
   saveProgress();
 }
 
