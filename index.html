@@ -774,7 +774,7 @@ const UNITS = [
       { q:"¿Dónde vive la persona?", opts:["Berlin","München","Hamburg"], correct:1 },
       { q:"¿Por qué aprende alemán?", opts:["Para viajar","Es importante para su trabajo","No dice"], correct:1 }
     ],
-    hoerenText2:"Wo wohnst du? — Ich wohne in Hamburg. Warum lernst du Deutsch? — Ich möchte nach Deutschland reisen.",
+    hoerenText2:"Wo wohnst du? — Ich wohne in Hamburg. Warum lernst du Deutsch? — Ich reise gern nach Deutschland.",
     hoerenQ2:[{ q:"¿Dónde vive la persona?", opts:["Berlin","Hamburg","München"], correct:1 }, { q:"¿Por qué aprende alemán?", opts:["Para su trabajo","Para viajar","No dice"], correct:1 }],
     hoerenText3:"Wo wohnst du? — Ich wohne in Frankfurt. Warum lernst du Deutsch? — Ich habe deutsche Freunde.",
     hoerenQ3:[{ q:"¿Dónde vive la persona?", opts:["Berlin","Frankfurt","München"], correct:1 }, { q:"¿Por qué aprende alemán?", opts:["Trabajo","Tiene amigos alemanes","Viajar"], correct:1 }],
@@ -1751,7 +1751,7 @@ lesenText:"Heute fühle ich mich müde, weil ich schlecht geschlafen habe. Aber 
     lesenQ2:[{ q:"Die Person war wütend.", opts:["Richtig", "Falsch"], correct:0 }, { q:"Die Person fühlt sich jetzt schlechter.", opts:["Richtig", "Falsch"], correct:1 }],
         lesenText3:"Ich fühle mich heute traurig, weil mein bester Freund umgezogen ist. Aber ich glaube, dass wir uns bald wiedersehen.",
     lesenQ3:[{ q:"Die Person ist traurig.", opts:["Richtig", "Falsch"], correct:0 }, { q:"Der Freund ist noch da.", opts:["Richtig", "Falsch"], correct:1 }],
-    lesenText4:"Ich bin heute nervös, weil ich morgen ein wichtiges Gespräch habe. Trotzdem versuche ich, ruhig zu bleiben.",
+    lesenText4:"Ich bin heute nervös, weil ich morgen ein wichtiges Gespräch habe. Ich versuche, ruhig zu bleiben.",
     lesenQ4:[{ q:"Die Person ist nervös.", opts:["Richtig", "Falsch"], correct:0 }, { q:"Die Person hat kein wichtiges Gespräch.", opts:["Richtig", "Falsch"], correct:1 }],
 schreibenPracticeBullets:["Cómo te sientes hoy y por qué"],
     schreibenTeil1Fields:[ {id:"f8_fuehlen",label:"Ich fühle mich...",placeholder:"Cómo te sientes"}, {id:"f8_warum",label:"...weil...",placeholder:"Por qué"}, {id:"f8_wann",label:"Heute/Gestern",placeholder:"Cuándo"}, {id:"f8_name",label:"Name",placeholder:"Tu nombre"} ],
@@ -3574,6 +3574,7 @@ function renderLeccion(unit, header){
     html += `</div>`;
   });
   html += `<div class="card"><p style="font-family:var(--display); font-weight:700; font-size:16px;">Comprueba lo que aprendiste</p><div id="leccionChecks"></div></div>`;
+  html += `<button onclick="window.scrollTo({top:0,behavior:'smooth'})" style="position:fixed; bottom:18px; right:18px; width:46px; height:46px; border-radius:50%; background:var(--amber); color:var(--ink); border:none; box-shadow:0 4px 14px rgba(0,0,0,0.35); font-size:18px; z-index:40; cursor:pointer;" aria-label="Volver arriba">⬆</button>`;
   app.innerHTML = html;
   renderLeccionChecks(unit);
 }
@@ -3662,7 +3663,7 @@ function playAudio(text, btn){
   speechSynthesis.cancel();
   if(wasPlayingOtherBtn){ wasPlayingOtherBtn.textContent = wasPlayingOtherBtn.dataset.playLabel || "▶ Escuchar"; }
   const u = new SpeechSynthesisUtterance(text.replace(/—/g,"."));
-  u.lang = "de-DE"; u.rate = 0.92;
+  u.lang = "de-DE"; u.rate = 0.78;
   const bestVoice = pickGermanVoice();
   if(bestVoice) u.voice = bestVoice;
   if(btn){
