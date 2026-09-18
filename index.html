@@ -223,6 +223,7 @@
         <input type="text" id="welcomeNameInput" placeholder="Tu nombre">
       </div>
       <button class="primary-btn" onclick="closeWelcome()">Entendido, empezar</button>
+      <button class="primary-btn secondary-btn" style="margin-top:8px;" onclick="startPlacementFromWelcome()">🎯 ¿Quieres ver en qué nivel estás?</button>
     </div>
   </div>
 
@@ -3212,6 +3213,108 @@ function isUnitUnlocked(unit){
   const prev = UNITS.find(u => u.level === unit.level && u.number === unit.number - 1);
   return prev ? unitProgress(prev.id).examPassed : false;
 }
+
+/* ================================================================
+   TEST DE NIVELACIÓN (Einstufungstest)
+   Reutiliza los chequeos de las unidades de repaso (número 8) de cada nivel.
+   ================================================================ */
+function getReviewUnit(levelId){ return UNITS.find(u => u.level === levelId && u.number === 8); }
+function buildPlacementBlocks(){
+  return LEVELS.map(l => {
+    const ru = getReviewUnit(l.id);
+    return { level: l, questions: (ru ? ru.leccionChecks.slice(0,4) : []).map(shuffleQuestionOptions) };
+  }).filter(b => b.questions.length > 0);
+}
+let placement = { blocks:[], blockIndex:0, selected:[], recommendedIdx:-1 };
+
+function renderPlacementIntro(){
+  let html = `<div class="view-header"><button class="back-btn" onclick="go('home')">←</button><div class="view-title">Test de nivelación</div></div>
+  <div class="card">
+    <p>Vas a responder preguntas de repaso de cada nivel, empezando por A1.1. Mientras sigas respondiendo bien, subimos de nivel; en cuanto un nivel te resulte difícil, paramos ahí — ese es tu punto de partida recomendado.</p>
+    <p style="margin-top:8px; font-size:12.5px; color:rgba(20,20,20,0.6);">Si al final resulta que dominas varios niveles, se desbloquean automáticamente — sin tener que aprobar sus exámenes uno por uno.</p>
+    <button class="primary-btn" onclick="startPlacementTest()">Comenzar test</button>
+  </div>`;
+  app.innerHTML = html;
+}
+function startPlacementTest(){
+  placement = { blocks: buildPlacementBlocks(), blockIndex: 0, selected: [], recommendedIdx: -1 };
+  renderPlacementBlock();
+}
+function renderPlacementBlock(){
+  const block = placement.blocks[placement.blockIndex];
+  placement.selected = new Array(block.questions.length).fill(null);
+  let html = `<div class="view-header"><div class="view-title">Nivel ${block.level.label}</div></div>
+  <div class="progress-meta"><span>Bloque ${placement.blockIndex+1} de ${placement.blocks.length}</span><span>${block.level.title}</span></div>
+  <div class="progress-bar"><div class="progress-fill" style="width:${(placement.blockIndex/placement.blocks.length)*100}%"></div></div>
+  <div class="card" style="margin-top:16px;"><div id="placementQ"></div>
+  <button class="primary-btn" onclick="finishPlacementBlock()">Siguiente →</button>
+  <button class="primary-btn secondary-btn" style="margin-top:8px;" onclick="go('home')">Cancelar test</button></div>`;
+  app.innerHTML = html;
+  const qEl = document.getElementById("placementQ");
+  block.questions.forEach((item, qi) => {
+    const div = document.createElement("div");
+    div.style.marginTop = qi===0 ? "0" : "18px";
+    div.innerHTML = `<p style="font-weight:600;">${item.q}</p>`;
+    item.opts.forEach((opt, oi) => {
+      const btn = document.createElement("button");
+      btn.className = "opt"; btn.textContent = opt;
+      btn.onclick = () => {
+        placement.selected[qi] = oi;
+        div.querySelectorAll(".opt").forEach((b,i) => b.style.outline = i===oi ? "2px solid var(--amber-deep)" : "none");
+      };
+      div.appendChild(btn);
+    });
+    qEl.appendChild(div);
+  });
+}
+function finishPlacementBlock(){
+  const block = placement.blocks[placement.blockIndex];
+  let correct = 0;
+  block.questions.forEach((item, qi) => { if(placement.selected[qi] === item.correct) correct++; });
+  const passedBlock = correct >= Math.ceil(block.questions.length * 0.6);
+  if(passedBlock){
+    placement.recommendedIdx = placement.blockIndex;
+    if(placement.blockIndex < placement.blocks.length - 1){
+      placement.blockIndex++;
+      renderPlacementBlock();
+      return;
+    }
+  }
+  renderPlacementResult();
+}
+function renderPlacementResult(){
+  const idx = placement.recommendedIdx;
+  let html = `<div class="view-header"><div class="view-title">Resultado del test</div></div><div class="card">`;
+  if(idx === -1){
+    html += `<p style="font-family:var(--display); font-weight:700; font-size:18px;">Recomendación: empezar en A1.1</p>
+    <p>No pasa nada — A1.1 es la mejor base para construir sobre algo sólido. Sigue el camino normal desde ahí.</p>
+    <button class="primary-btn" onclick="go('home')">Volver al inicio</button>`;
+  } else {
+    const recLevel = placement.blocks[idx].level;
+    const nextLevel = LEVELS[LEVELS.findIndex(l=>l.id===recLevel.id)+1];
+    html += `<p style="font-family:var(--display); font-weight:700; font-size:18px;">Dominas hasta ${recLevel.label}</p>
+    <p>Te recomendamos empezar directamente en <strong>${nextLevel ? nextLevel.label : recLevel.label}</strong>. Podemos desbloquear automáticamente ${recLevel.label} y todo lo anterior, sin que tengas que aprobar esos exámenes uno por uno.</p>
+    <button class="primary-btn" onclick="applyPlacementResult('${recLevel.id}')">Desbloquear hasta ${recLevel.label}</button>
+    <button class="primary-btn secondary-btn" style="margin-top:8px;" onclick="go('home')">No, prefiero empezar desde el principio</button>`;
+  }
+  html += `</div>`;
+  app.innerHTML = html;
+}
+function applyPlacementResult(upToLevelId){
+  const upToIdx = LEVELS.findIndex(l => l.id === upToLevelId);
+  for(let i=0; i<=upToIdx; i++){
+    const lvl = LEVELS[i];
+    unitsForLevel(lvl.id).forEach(u => {
+      const up = unitProgress(u.id);
+      up.leccion=true; up.hoeren=true; up.lesen=true; up.schreiben=true; up.sprechen=true;
+      up.examPassed = true; up.examScore = 100;
+    });
+    const fs = levelFinalStatus(lvl.id);
+    fs.passed = true; fs.score = 100;
+  }
+  saveProgress();
+  go("home");
+}
 function toggleReviewMode(){
   progress.reviewMode = !progress.reviewMode;
   saveProgress();
@@ -3233,6 +3336,7 @@ function render(){
   if(nav.view === "unit") return renderUnitView(nav.unitId);
   if(nav.view === "exercise") return renderExerciseView(nav.unitId, nav.name);
   if(nav.view === "conversation") return renderConversation();
+  if(nav.view === "placement") return renderPlacementIntro();
   if(nav.view === "analytics") return renderAnalytics();
   if(nav.view === "exam") return; // el motor de examen controla su propio innerHTML
 }
@@ -3256,11 +3360,17 @@ function showWelcome(){
   if(inp) inp.value = analytics.profileName || "";
   document.getElementById("welcomeModal").style.display = "flex";
 }
+function startPlacementFromWelcome(){ closeWelcome(); go("placement"); }
 
 /* --- Home --- */
 function renderHome(){
   maybeShowWelcome();
-  let html = `<span class="eyebrow">Prüfung</span><h1>Preparación de examen</h1><div class="sub">Elige el nivel en el que estás trabajando.</div><div style="margin-top:22px;">`;
+  let html = `<span class="eyebrow">Prüfung</span><h1>Preparación de examen</h1><div class="sub">Elige el nivel en el que estás trabajando.</div>`;
+  html += `<button class="exam-cta" style="margin-top:16px;" onclick="go('placement')">
+    <div class="exam-cta-title">🎯 ¿No sabes en qué nivel estás?</div>
+    <div class="exam-cta-desc">Haz el test de nivelación (Einstufungstest) y desbloquea automáticamente hasta tu nivel real</div>
+  </button>`;
+  html += `<div style="margin-top:22px;">`;
   LEVELS.forEach((level, idx) => {
     const built = unitsForLevel(level.id);
     const passedCount = built.filter(u => unitProgress(u.id).examPassed).length;
